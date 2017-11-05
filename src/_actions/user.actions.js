@@ -16,12 +16,22 @@ function getKws(user) {
         dispatch(request(user));
         userService.getKws(user)
             .then(
-                kws => {
-                    dispatch(success(kws))
+                ans => {
+                    //dispatch(success(kws))
+                    if(ans.status) {
+                        dispatch(success(ans.keyword))
+                    } else {
+                        dispatch(failure(ans.reason));
+                        dispatch(alertActions.error(ans.reason));
+                        alert(ans.reason);
+                        history.push("/login");
+                    }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
                 }
             )
         ;
@@ -39,12 +49,18 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => {
-                    dispatch(success(user));
-                    history.push('/');
+                    if (user && user.token) {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        dispatch(success(user));
+                        history.push('/');
+                    } else {
+                        alert("账号或密码输入错误！");
+                    }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
                 }
             );
     };
