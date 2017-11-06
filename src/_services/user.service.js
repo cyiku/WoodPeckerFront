@@ -61,7 +61,7 @@ function getKws(user) {
         }).then(kws => {
             console.log(kws);
             return kws;
-        });
+        })
 }
 
 /*

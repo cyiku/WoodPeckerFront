@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { history } from '../_helpers';
+import { Link } from 'react-router-dom';
+
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -6,16 +10,74 @@ import '../_helpers/sb-admin.css';
 
 class MonitoringPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            keyword: [],
+        }
+    }
+
+    getKws = user => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 'id': user.id, 'token': user.token })
+        };
+        return fetch('http://localhost:8080/getKws', requestOptions).then(response => {
+            if (!response.ok) {
+                return Promise.reject(response.statusText);
+            }
+            return response.json();
+        }).then(
+            ans => {
+                if(!ans.status) {
+                    alert(ans.reason);
+                    history.push("/login");
+                }
+                this.setState({...this.state, keyword:ans.keyword});
+            },
+            error => {
+                alert("服务器内部错误,请联系管理员,抱歉！");
+                history.push("/login");
+            }
+        );
+    };
+
+    componentDidMount(){
+        const { user } = this.props;
+
+        // websocket
+        this.getKws(user);
+
+        this.connection = new WebSocket('ws://localhost:8080/websocket.ws');
+
+        this.connection.onmessage = evt => {
+            console.log(evt.data)
+        };
+
+        /* 前端向后端发送定时请求
+        this.interval = setInterval(_ => {
+            this.connection.send(JSON.stringify({'token': user.token}))
+        }, 2000 )
+        */
+    }
+
+    componentWillUnmount(){
+        // clearInterval(this.interval);
+        this.connection.close();
+    }
 
     render() {
         return (
             <div className="content-wrapper" style={{marginLeft:0}}>
                 <div className="container-fluid">
                     <div>
-                        <button type="button" className="btn btn-primary" style={{marginLeft:10}}>成考</button>
-                        <button type="button" className="btn btn-primary" style={{marginLeft:10}}>作弊</button>
-                        <button type="button" className="btn btn-primary" style={{marginLeft:10}}>答案</button>
-                        <button type="button" className="btn btn-danger"  style={{marginLeft:10}}><a href="keywords.html" style={{color:"white"}}>管理关键字</a></button>
+                        {
+                            this.state.keyword.map( keyword=>
+                                <button type="button" className="btn btn-primary" style={{marginLeft:10}}>{keyword}</button>
+                            )
+                        }
+                        <button type="button" className="btn btn-danger"  style={{marginLeft:10}}><Link to="/keywords" style={{color:"white"}}>管理关键字</Link></button>
                     </div>
 
                     <div className="row">
@@ -24,7 +86,7 @@ class MonitoringPage extends React.Component {
                                 {/*Card Columns Example Social Feed*/}
                                 <div className="mb-0 mt-4">
                                     <i className="fa fa-newspaper-o">成考</i>
-                                    <a href="navbar.html" style={{float: 'right'}}>话题分析</a>
+                                    <Link to="/kwAnalysis" style={{float: 'right'}}>话题分析</Link>
                                 </div>
                                 <hr className="mt-2" />
                                     <div>
@@ -83,4 +145,13 @@ class MonitoringPage extends React.Component {
     }
 }
 
-export { MonitoringPage };
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedMonitoringPage= connect(mapStateToProps)(MonitoringPage);
+export { connectedMonitoringPage as MonitoringPage };

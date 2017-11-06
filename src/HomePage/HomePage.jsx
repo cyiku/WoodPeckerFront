@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
-import { userActions } from '../_actions';
+
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -22,23 +22,14 @@ const { Sider } = Layout;
 
 class HomePage extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            keywords: {},
-        }
+    /*
+    handleData = (data) => {
+        let result = JSON.parse(data);
+        this.setState({keywords: data
+        });
+        console.log(data);
     }
-
-    componentDidMount(){
-        //this.props.dispatch(userActions.getAll());
-        const { user } = this.props;
-        this.props.dispatch(userActions.getKws(user));
-        /*
-        alert(kws);
-        this.setState({keywords:kws});
-        */
-
-    }
+    */
 
     /*
     handleDeleteUser(id) {
@@ -69,6 +60,12 @@ class HomePage extends React.Component {
                         </div>
                     </Menu>
                 </Header>
+                */}
+                {/*websocket 官网demo
+                <div>
+                    <Websocket url='ws://localhost:8080/websocket.ws'
+                               onMessage={this.handleData}/>
+                </div>
                 */}
                 <div style={{backgroundColor:"#404040"}}>
                     <div style={{float:"left"}}>
@@ -128,11 +125,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
+    const { authentication } = state;
     const { user } = authentication;
     return {
-        user,
-        users
+        user
     };
 }
 

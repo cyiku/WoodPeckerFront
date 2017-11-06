@@ -7,9 +7,9 @@ export const userActions = {
     login,
     logout,
     register,
-    getKws,
 };
 
+/*
 function getKws(user) {
 
     return dispatch => {
@@ -17,9 +17,8 @@ function getKws(user) {
         userService.getKws(user)
             .then(
                 ans => {
-                    //dispatch(success(kws))
                     if(ans.status) {
-                        dispatch(success(ans.keyword))
+                        dispatch(success(ans.keyword));
                     } else {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
@@ -41,6 +40,7 @@ function getKws(user) {
     function success(kws) { return {type: userConstants.GETKWS_SUCCESS, kws} }
     function failure(error) { return { type: userConstants.GETKWS_FAILURE, error } }
 }
+*/
 
 function login(username, password) {
     return dispatch => {
