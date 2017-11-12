@@ -1,0 +1,139 @@
+import {keywordConstants} from "../_constants/";
+import {keywordService} from "../_services/";
+import { alertActions } from './';
+import { history } from '../_helpers';
+
+export const keywordActions = {
+    getKws,
+    addKws,
+    delKws,
+    updKws,
+};
+
+function getKws(user) {
+
+    return dispatch => {
+        dispatch(request(user));
+        keywordService.getKws(user)
+            .then(
+                ans => {
+                    if(ans.status) {
+                        dispatch(success(ans.keyword));
+                    } else {
+                        dispatch(failure(ans.reason));
+                        dispatch(alertActions.error(ans.reason));
+                        alert(ans.reason);
+                        history.push("/login");
+                    }
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            )
+        ;
+    };
+
+
+    function request(user) { return { type: keywordConstants.GETKWS_REQUEST, user } }
+    function success(keyword) { return {type: keywordConstants.GETKWS_SUCCESS, keyword} }
+    function failure(error) { return { type: keywordConstants.GETKWS_FAILURE, error } }
+}
+
+function addKws(user, newkeyword) {
+
+    return dispatch => {
+        dispatch(request(user));
+        keywordService.addKws(user, newkeyword)
+            .then(
+                ans => {
+                    if(ans.status) {
+                        console.log(ans);
+                        newkeyword.keywordid = ans.keywordid;
+                        new
+                        dispatch(success(newkeyword));
+                    } else {
+                        dispatch(failure(ans.reason));
+                        dispatch(alertActions.error(ans.reason));
+                        alert(ans.reason);
+                        history.push("/login");
+                    }
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            );
+    };
+
+
+    function request(user) { return { type: keywordConstants.ADDKWS_REQUEST, user } }
+    function success(newword) { return {type: keywordConstants.ADDKWS_SUCCESS, newword} }
+    function failure(error) { return { type: keywordConstants.ADDKWS_FAILURE, error } }
+}
+
+function delKws(user, keyword, index) {
+
+    return dispatch => {
+        dispatch(request(user));
+        keywordService.delKws(user, keyword, index)
+            .then(
+                ans => {
+                    if(ans.status) {
+                        dispatch(success(keyword, index));
+                        history.push("/keywords");
+                    } else {
+                        dispatch(failure(ans.reason));
+                        dispatch(alertActions.error(ans.reason));
+                        alert(ans.reason);
+                        history.push("/login");
+                    }
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            );
+    };
+
+    function request(user) { return { type: keywordConstants.DELKWS_REQUEST, user } }
+    function success(keyword, index) { return {type: keywordConstants.DELKWS_SUCCESS, keyword, index} }
+    function failure(error) { return { type: keywordConstants.DELKWS_FAILURE, error } }
+}
+
+function updKws(user, newkeyword, index, keywordid) {
+
+    return dispatch => {
+        dispatch(request(user));
+        keywordService.updKws(user, newkeyword, keywordid)
+            .then(
+                ans => {
+                    if(ans.status) {
+                        dispatch(success(newkeyword, index));
+                        history.push("/keywords");
+                    } else {
+                        dispatch(failure(ans.reason));
+                        dispatch(alertActions.error(ans.reason));
+                        alert(ans.reason);
+                        history.push("/login");
+                    }
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            );
+    };
+
+    function request(user) { return { type: keywordConstants.UPDKWS_REQUEST, user } }
+    function success(keyword, index) { return {type: keywordConstants.UPDKWS_SUCCESS, keyword, index} }
+    function failure(error) { return { type: keywordConstants.UPDKWS_FAILURE, error } }
+}

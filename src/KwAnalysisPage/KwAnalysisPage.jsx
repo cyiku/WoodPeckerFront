@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'antd';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -14,10 +15,42 @@ const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" *
 const PieReact = asyncComponent(() => import(/* webpackChunkName: "PieReact" */'../Echarts/PieReact'));  //饼图组件
 const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
 
-
+/*
+<th>发布者</th>
+<th>正文</th>
+<th>点赞量</th>
+<th>评论量</th>
+<th>转发量</th>
+<th>发表时间</th>
+<th>关键字</th>
+<th>源地址</th>
+<th>正负面</th>
+<th>操作</th>
+*/
 
 class KwAnalysisPage extends React.Component {
 
+
+    state = {
+        weiboColumns: [
+            {title: '发布者', dataIndex: 'publisher', sorter: (a, b) => a.publisher.length - b.publisher.length,},
+            {title: '正文', dataIndex: 'content', sorter: (a, b) => a.content.length - b.content.length,},
+            {title: '点赞量', dataIndex: 'likeNum', sorter: (a, b) => a.likeNum - b.likeNum,},
+            {title: '评论量', dataIndex: 'commentNum', sorter: (a, b) => a.commentNum - b.commentNum,},
+            {title: '转发量', dataIndex: 'transferNum', sorter: (a, b) => a.transferNum - b.transferNum,},
+            {title: '发表时间', dataIndex: 'publishTime', sorter: (a, b) => a.publishTime.length - b.publishTime.length,},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '源地址', dataIndex: 'source'},
+            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '操作', dataIndex: 'action'},
+
+        ],
+        weiboData: [
+            {'publisher': 'oyyw', 'content': '哈哈哈', 'likeNum': 20, 'commentNum': 30, 'transferNum': 40, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com','sentiment':'正', 'action':'None'},
+            {'publisher': 'oyyyw', 'content': '哈哈哈哈', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负', 'action':'None'}
+        ]
+
+    };
 
     render() {
         return (
@@ -165,7 +198,7 @@ class KwAnalysisPage extends React.Component {
                             <i className="fa fa-table"/>相关微博</div>
                         <div className="card-body">
                             <div className="table-responsive">
-                                <table className="table table-bordered" id="dataTable" style={{width: "100%"}}>
+                                {/*<table className="table table-bordered" id="dataTable" style={{width: "100%"}}>
                                     <thead>
                                     <tr>
                                         <th>发布者</th>
@@ -260,7 +293,8 @@ class KwAnalysisPage extends React.Component {
                                         </td>
                                     </tr>
                                     </tbody>
-                                </table>
+                                </table>*/}
+                                <Table columns={this.state.weiboColumns} dataSource={this.state.weiboData} />
                             </div>
                         </div>
                         <div className="card-body py-2 small">

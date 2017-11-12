@@ -1,22 +1,213 @@
 import React from 'react';
-
+import { Modal, Button } from 'antd';
+import { Checkbox } from 'antd';
+import { connect } from 'react-redux';
+import { keywordActions } from '../_actions';
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
+const CheckboxGroup = Checkbox.Group;
+
+function type(name, subsites) {
+    const type = {};
+    type.name = name;
+    type.subsites = subsites;
+    type.indeterminate = true;
+    type.checkAll = false;
+    type.checkedList = [];
+    return type;
+}
+
 class KeywordsPage extends React.Component {
+
+    state = {
+        // modal是否显示
+        updateVisible: false,
+        // modal输入框中默认显示
+        modelKw: '关键字名称',
+        // modal是否为updated
+        isUpdated: false,
+        updatedIndex: null,
+        title: '',
+        // checkbox, 从服务器读
+        types: [
+            type('贴吧', ['百度贴吧', '千度贴吧']),
+            type('新闻', ['搜狐新闻', '腾讯新闻'])
+        ],
+    };
+
+
+    componentDidMount(){
+        const { user, dispatch } = this.props;
+        dispatch(keywordActions.getKws(user));
+    }
+
+    // 删除
+    showConfirm = (event, index) => {
+        const {user, dispatch, keyword} = this.props;
+        dispatch(keywordActions.delKws(user, keyword, index.index));
+    };
+
+
+    // 管理关键字对话框
+    showUpdateModal = (isUpdated, event) => {
+
+        // 用于更新this.state.sites
+        const newTypes = this.state.types;
+        // 用于更新this.modelKw
+        let modelKw = "关键字名称";
+
+        let title = '';
+
+        var updatedIndex = null;
+
+        if (isUpdated) {
+            // 如果是修改关键字操作
+            title = '修改关键字';
+
+            // 根据点击的index得到要跟新的keyword
+            const index = event.target.getAttribute("value");
+            const keyword = this.props.keyword[index];
+            updatedIndex = index;
+
+            modelKw = keyword.name;
+
+            for (let i = 0; i < newTypes.length; ++i) {
+                newTypes[i].indeterminate = true;
+                newTypes[i].checkAll = false;
+                // checkedList是所有站点与用户原先选的站点的交集
+                newTypes[i].checkedList = this.state.types[i].subsites.filter(v=>keyword.sites.includes(v))
+            }
+
+        } else {
+            title = '新加关键字';
+            for (let i = 0; i < newTypes.length; ++i) {
+                newTypes[i].indeterminate = true;
+                newTypes[i].checkAll = false;
+                newTypes[i].checkedList = [];
+            }
+        }
+
+        this.setState(preState => ({
+            ...preState,
+            updatedIndex: updatedIndex,
+            isUpdated: isUpdated,
+            title: title,
+            modelKw: modelKw,
+            updateVisible: true,
+            types: newTypes
+        }));
+    };
+
+    // ok按钮
+    handleOk = () => {
+        this.setState({
+            confirmLoading: true,
+        });
+        const {user, dispatch, keyword} = this.props;
+
+        // 获取新的keyword
+        let postKw = this.state.modelKw;
+
+        if (this.state.isUpdated) {
+            // 更新操作
+            let kwList = [];
+            for (let i = 0; i < this.state.types.length; ++i) {
+                kwList = kwList.concat(this.state.types[i].checkedList);
+            }
+            const newkeyword = {'name': postKw, 'sites': kwList};
+            const updatedIndex = this.state.updatedIndex;
+            const updatedID = keyword[updatedIndex].keywordid;
+            dispatch(keywordActions.updKws(user, newkeyword, updatedIndex, updatedID));
+
+        } else {
+            // 添加操作
+            for (let i = 0; i < this.props.keyword.length; ++i) {
+                if (this.props.keyword[i].name === postKw) {
+                    alert("关键字已存在");
+                    this.setState({
+                        confirmLoading: false,
+                    });
+                    return;
+                }
+            }
+            let kwList = [];
+            for (let i = 0; i < this.state.types.length; ++i) {
+                kwList = kwList.concat(this.state.types[i].checkedList);
+            }
+
+            const newkeyword = {'name': postKw, 'sites': kwList};
+
+            dispatch(keywordActions.addKws(user, newkeyword));
+        }
+
+        setTimeout(() => {
+            this.setState({
+                updateVisible: false,
+                confirmLoading: false,
+            });
+        }, 1000);
+    };
+
+    // 取消按钮
+    handleCancel = () => {
+        this.setState({
+            updateVisible: false,
+        });
+    };
+
+    // 处理输入
+    handleChange = (e) => {
+        const { value } = e.target;
+        this.setState({ modelKw: value });
+    };
+
+    // CheckboxGroup
+    onChange = (checkedList, index) => {
+
+        const newSites = this.state.types;
+
+        newSites[index].checkedList = checkedList;
+        newSites[index].indeterminate = !!checkedList.length && (checkedList.length < this.state.types[index].subsites.length);
+        newSites[index].checkAll = checkedList.length === this.state.types[0].subsites.length;
+
+        this.setState(preState => ({
+            ...preState,
+            types: newSites
+        }));
+    };
+
+    // Checkbox
+    onCheckAllChange = (index,event) => {
+
+        const newSites = this.state.types;
+
+        newSites[index].checkedList = event.target.checked ? this.state.types[index].subsites : [];
+        newSites[index].indeterminate = false;
+        newSites[index].checkAll = event.target.checked;
+
+        this.setState(preState => ({
+            ...preState,
+            sites: newSites
+        }));
+
+    };
 
 
     render() {
+        const { keyword } = this.props;
         return (
             <div className="content-wrapper" style={{marginLeft:0}}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="email-btn-row hidden-xs f-s-15">
-                                <a href="#myModal" className="btn btn-sm btn-primary" data-toggle="modal" data-backdrop="false"><i className="fa fa-plus m-r-5"/> 新加关键字 </a>
-                            </div>
-                            <div className="email-content">
+
+                            {/*此时Button对应的操作是添加关键字*/}
+                            <Button type="primary" onClick={event=>this.showUpdateModal(false,event)}><i className="fa fa-plus m-r-5"/>新加关键字</Button>
+
+                            {/*显示关键词*/}
+                            <div style={{marginTop:10}}>
                                 <table className="table table-email f-s-14">
                                     <thead>
                                     <tr>
@@ -26,64 +217,67 @@ class KeywordsPage extends React.Component {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr className="ng-scope">
-                                        <td style={{width: "15%"}} className="ng-binding">作弊</td>
-                                        <td style={{width: "35%"}} className="ng-binding">人民网,新浪教育,搜狐教育,腾讯教育,网易教育,高考网 ,中国新闻网,新浪新闻,环球新闻,澎湃新闻,人民新闻,天涯论坛,大家论坛,家长帮论坛, 知乎,外贸圈论坛,新浪微博,答案贴吧,教育贴吧,考试贴吧,李毅贴吧,成人高考贴吧,成考吧吧,北京成考吧,微信公众号,百度搜一搜</td>
-                                        <td style={{width: "10%"}}><a href="#myModal" title="修改话题"><i className="fa fa-edit"/></a> <a href="#myModal"><i className="fa fa-trash-o"/></a></td>
-                                    </tr>
+                                    {
+                                        keyword.map((keyword, index)=>
+                                        <tr className="ng-scope" key={index} id={index}>
+                                            <td style={{width: "15%"}} className="ng-binding" value={keyword.name}><span>{keyword.name}</span></td>
+                                            <td style={{width: "35%"}} className="ng-binding">
+                                            {
+                                                keyword.sites.map((eachSite, index)=>
+                                                    <span style={{marginRight:5}} key={index}>{eachSite}</span>
+                                                )
+                                            }
+                                            </td>
+                                            <td style={{width: "10%"}}>
+                                                <a title="修改话题" onClick={(event)=>this.showUpdateModal(true, event)} value={index}><i className="fa fa-edit" value={index}/></a>
+                                                <a title="删除关键字" onClick={(event)=>this.showConfirm(event, {index})} value={index} style={{marginLeft:5}}><i className="fa fa-trash-o" value={index}/></a>
+                                            </td>
+                                        </tr>)
+                                    }
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
-                        {/*模态框（Modal*/}
-                        <div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h4 className="modal-title" id="myModalLabel">操作</h4>
-                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    </div>
-                                    <div className="modal-body">
 
-                                        <div className="form-group">
-                                            <label>关键字名称</label>
-                                            <input type="text" name="txt_departmentname" data-bind="value:Name" className="form-control" id="txt_departmentname" placeholder="关键字名称"/>
-                                        </div>
-                                        <div className="form-group">
-                                            <label>爬取站点</label>
-                                            <div className="m-b-15">
-                                                <div>
-                                                    <ul className="nav nav-pills nav-stacked nav-sm panel-body">
-                                                        <li>
-                                                            <div>
-                                                                <label className="checkbox inline">
-                                                                    <input type="checkbox"  value="option1"/> <i className="fa fa-inbox fa-fw m-r-5"/><span className="text-muted ng-binding">贴吧</span>
-                                                                </label>
-                                                            </div>
-                                                            <label className="checkbox inline">
-                                                                <input type="checkbox" id="inlineCheckbox1" value="option1"/> <a href=" ">百度贴吧</a>
-                                                            </label>
-                                                            <label className="checkbox inline">
-                                                                <input type="checkbox" id="inlineCheckbox2" value="option2"/> <a href=" ">十度贴吧</a>
-                                                            </label>
-                                                            <label className="checkbox inline">
-                                                                <input type="checkbox" id="inlineCheckbox3" value="option3"/> <a href=" ">千度贴吧</a>
-                                                            </label>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-default" data-dismiss="modal"><span className="glyphicon glyphicon-remove" aria-hidden="true"/>关闭</button>
-                                        <button type="button" id="btn_submit" className="btn btn-primary" data-dismiss="modal"><span className="glyphicon glyphicon-floppy-disk" aria-hidden="true"/>保存</button>
-                                    </div>
+                        <Modal title={this.state.title}
+                               visible={this.state.updateVisible}
+                               onOk={this.handleOk}
+                               confirmLoading={this.state.confirmLoading}
+                               onCancel={this.handleCancel}
+                        >
+                            <div className="form-group">
+                                <label>关键字名称</label>
+                                <input type="text" name="txt_departmentname" data-bind="value:Name" className="form-control" id="txt_departmentname"  onChange={this.handleChange} value={this.state.modelKw}/>
+                            </div>
+                            <div className="form-group">
+                                <label>爬取站点</label>
+                                <div className="m-b-15">
+                                    <ul className="nav nav-pills nav-stacked nav-sm panel-body">
+                                        <li>
+                                            {
+                                                this.state.types.map((site, index)=>
+                                                    <div key={index}>
+                                                        <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                                            <Checkbox
+                                                                indeterminate={site.indeterminate}
+                                                                onChange={(event)=>this.onCheckAllChange(index,event)}
+                                                                checked={site.checkAll}
+                                                            >
+                                                                {site.name}
+                                                            </Checkbox>
+                                                        </div>
+                                                        <br />
+                                                        <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                                    </div>
+                                                )
+                                            }
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
+                        </Modal>
+
                     </div>
                 </div>
             </div>
@@ -91,4 +285,13 @@ class KeywordsPage extends React.Component {
     }
 }
 
-export { KeywordsPage };
+function mapStateToProps(state) {
+    const { authentication, keyword } = state;
+    const { user } = authentication;
+    return {
+        user,keyword,
+    };
+}
+
+const connectedKeywordsPage= connect(mapStateToProps)(KeywordsPage);
+export { connectedKeywordsPage as KeywordsPage };

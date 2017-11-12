@@ -22,24 +22,8 @@ const { Sider } = Layout;
 
 class HomePage extends React.Component {
 
-    /*
-    handleData = (data) => {
-        let result = JSON.parse(data);
-        this.setState({keywords: data
-        });
-        console.log(data);
-    }
-    */
-
-    /*
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
-    */
-
     render() {
 
-        // const {user} = this.props;
 
         return (
             <Layout style={{height:"100%"}}>
@@ -68,15 +52,14 @@ class HomePage extends React.Component {
                 </div>
                 */}
                 <div style={{backgroundColor:"#404040"}}>
-                    <div style={{float:"left"}}>
-                        <img src={require('./woodpecker3.jpg')} height={64} alt={"logo"}/>
-                    </div>
-
-                    <div style={{float:"right"}}>
-                        <Link to="/login" style={{color: '#868e96'}}>
-                            <span> <i className="fa fa-fw fa-sign-out"/>Logout</span>
-                        </Link>
-                    </div>
+                    <img src={require('./woodpecker.jpg')} height={50} alt={"logo"}/>
+                    <ul style={{position:"absolute", top:15, right:0}}>
+                        <li>
+                            <Link to="/login" style={{color: '#868e96'}}>
+                                <span><i className="fa fa-fw fa-sign-out"/>Logout</span>
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
 
                 <Layout>
@@ -91,21 +74,26 @@ class HomePage extends React.Component {
                             <SubMenu key="sub1" title={<span><i className="fa fa-fw fa-dashboard"/>实时监控</span>}>
                                 <Menu.Item key="0"><Link to="/">关键字监控</Link></Menu.Item>
                             </SubMenu>
+
                             <SubMenu key="sub2" title={<span><i className="fa fa-fw fa-area-chart"/>话题分析</span>}>
                                 <Menu.Item key="1"><Link to="/kwAnalysis">关键词分析</Link></Menu.Item>
                                 <Menu.Item key="2"><Link to="/blank">话题预警</Link></Menu.Item>
                             </SubMenu>
+
                             <SubMenu key="sub3" title={<span><i className="fa fa-fw fa-star-half-empty"/>个性化设置</span>}>
                                 <Menu.Item key="3"><Link to="/keywords">我的关键词</Link></Menu.Item>
                                 <Menu.Item key="4"><Link to="/blank">我的报告</Link></Menu.Item>
                             </SubMenu>
+
                             <SubMenu key="sub4" title={<span><i className="fa fa-fw fa-bookmark-o"/>我的收藏</span>}>
                                 <Menu.Item key="5"><Link to="/collectionNews">收藏的消息</Link></Menu.Item>
                                 <Menu.Item key="6"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>
                             </SubMenu>
+
                             <SubMenu key="sub5" title={<span><i className="fa fa-fw fa-wrench"/>系统设置</span>}>
                                 <Menu.Item key="7"><Link to="/blank">待定</Link></Menu.Item>
                             </SubMenu>
+
                         </Menu>
                     </Sider>
                     <Layout>

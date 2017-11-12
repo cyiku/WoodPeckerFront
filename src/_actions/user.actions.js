@@ -6,41 +6,9 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
-    register,
+    //register,
 };
 
-/*
-function getKws(user) {
-
-    return dispatch => {
-        dispatch(request(user));
-        userService.getKws(user)
-            .then(
-                ans => {
-                    if(ans.status) {
-                        dispatch(success(ans.keyword));
-                    } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        history.push("/login");
-                    }
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
-                    history.push("/login");
-                }
-            )
-        ;
-    }
-
-    function request(user) { return { type: userConstants.GETKWS_REQUEST, user } }
-    function success(kws) { return {type: userConstants.GETKWS_SUCCESS, kws} }
-    function failure(error) { return { type: userConstants.GETKWS_FAILURE, error } }
-}
-*/
 
 function login(username, password) {
     return dispatch => {
@@ -75,6 +43,7 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
+/*
 function register(user) {
     return dispatch => {
         dispatch(request(user));
@@ -98,7 +67,6 @@ function register(user) {
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-/*
 function getAll() {
     return dispatch => {
         dispatch(request());

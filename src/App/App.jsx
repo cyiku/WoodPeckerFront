@@ -9,23 +9,14 @@ import { RegisterPage } from '../RegisterPage';
 import { PrivateRoute } from '../_components/PrivateRoute';
 
 class App extends React.Component {
-    /*
-    constructor(props) {
-        super(props);
-        // const { dispatch } = this.props;
-    }
-    */
 
     render() {
-
-        // const { alert } = this.props;
 
         return (
                 <Router history={history}>
                     <Switch>
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
-                        {/*<Route path="/" component={HomePage} onEnter={this.isLogin}/>*/}
                         <PrivateRoute path='/' component={HomePage}/>
                     </Switch>
                 </Router>

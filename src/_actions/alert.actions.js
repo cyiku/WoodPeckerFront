@@ -1,4 +1,3 @@
-// 根据type类型，生成相应的action
 import { alertConstants } from '../_constants';
 
 export const alertActions = {
