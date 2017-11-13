@@ -31,7 +31,7 @@ class MonitoringPage extends React.Component {
                     <div className="row">
                         {
                            keyword.map(
-                                (keyword, index)=><MsgShow keyword={keyword} key={index}/>
+                                (keyword, index)=><MsgShow keyword={keyword}  user = {this.props.user} key={index}/>
                             )
                         }
                     </div>

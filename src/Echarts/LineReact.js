@@ -4,11 +4,12 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/legendScroll'
+import 'echarts/lib/component/toolbox'
 
 export default class LineReact extends React.Component {
   
   constructor(props) {
-    super(props)
+    super(props);
     this.initPie = this.initPie.bind(this)
   }
   

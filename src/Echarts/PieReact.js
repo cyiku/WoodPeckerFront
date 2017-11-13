@@ -3,6 +3,7 @@ import echarts from 'echarts/lib/echarts' //必须
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/toolbox'
 
 export default class PieReact extends React.Component {
   

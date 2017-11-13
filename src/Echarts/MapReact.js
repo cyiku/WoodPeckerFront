@@ -7,6 +7,7 @@ import 'echarts/lib/chart/map' //引入地图
 import 'echarts/lib/chart/lines'
 import 'echarts/lib/chart/effectScatter'
 import 'echarts/map/js/china' // 引入中国地图
+import 'echarts/lib/component/toolbox'
 
 export default class MapReact extends React.Component {
   

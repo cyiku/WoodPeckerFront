@@ -1,4 +1,6 @@
 import React from 'react';
+import {CSVLink} from 'react-csv';
+import { Table } from 'antd';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -6,6 +8,42 @@ import '../_helpers/sb-admin.css';
 
 class CollectionNewsPage extends React.Component {
 
+    state = {
+        weiboColumns: [
+            {title: '发布者', dataIndex: 'publisher'} ,
+            {title: '正文', dataIndex: 'content', sorter: (a, b) => a.content.length - b.content.length,},
+            {title: '点赞量', dataIndex: 'likeNum', sorter: (a, b) => a.likeNum - b.likeNum,},
+            {title: '评论量', dataIndex: 'commentNum', sorter: (a, b) => a.commentNum - b.commentNum,},
+            {title: '转发量', dataIndex: 'transferNum', sorter: (a, b) => a.transferNum - b.transferNum,},
+            {title: '发表时间', dataIndex: 'publishTime', sorter: (a, b) => a.publishTime.length - b.publishTime.length,},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '源地址', dataIndex: 'source'},
+            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '操作', key: 'action', render: (record) => (
+                <span>
+                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
+                    <CSVLink data={this.objToJSON(record)}
+                             filename={new Date().toLocaleString()}
+                             target="_blank"
+                             title="导出">
+                        <i className="fa fa-fw fa-share-square-o"/>
+                    </CSVLink>
+                    <a href=" " title="删除"><i className="fa fa-trash-o"/></a>
+                </span>
+            )},
+
+        ],
+        weiboData: [
+            {'publisher': 'oyyw', 'content': '哈哈哈', 'likeNum': 20, 'commentNum': 30, 'transferNum': 40, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com','sentiment':'正'},
+            {'publisher': 'oyyyw', 'content': '哈哈哈哈', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负'}
+        ]
+
+    };
+
+    objToJSON = (record) => {
+        let str = JSON.stringify([record]); // object list to str
+        return JSON.parse(str);   // str to json
+    };
 
     render() {
         return (
@@ -13,63 +51,25 @@ class CollectionNewsPage extends React.Component {
                 <div className="container-fluid">
                     <div className="row">
                         {/*具体微博展示*/}
-                        <div className="card mb-3" style={{width: "100%"}}>
+                        <div className="card" style={{width:"100%"}}>
                             <div className="card-header">
                                 <i className="fa fa-table"/>收藏的微博</div>
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <table className="table table-bordered" id="dataTable" style={{width: "100%"}}>
-                                        <thead>
-                                        <tr>
-                                            <th>发布者</th>
-                                            <th>正文</th>
-                                            <th>点赞量</th>
-                                            <th>评论量</th>
-                                            <th>转发量</th>
-                                            <th>发表时间</th>
-                                            <th>关键字</th>
-                                            <th>源地址</th>
-                                            <th>正负面</th>
-                                            <th>收藏时间</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tfoot>
-                                        <tr>
-                                            <th>发布者</th>
-                                            <th>正文</th>
-                                            <th>点赞量</th>
-                                            <th>评论量</th>
-                                            <th>转发量</th>
-                                            <th>发表时间</th>
-                                            <th>关键字</th>
-                                            <th>源地址</th>
-                                            <th>正负面</th>
-                                            <th>收藏时间</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </tfoot>
-                                        <tbody>
-                                        <tr>
-                                            <td>路人甲</td>
-                                            <td>成考答案，加QQ: 550155036 </td>
-                                            <td>100</td>
-                                            <td>20</td>
-                                            <td>10</td>
-                                            <td>2017-10-29</td>
-                                            <td>成考</td>
-                                            <td>http://www.4399.com</td>
-                                            <th>负面</th>
-                                            <td>2017-10-29</td>
-                                            <td>
-                                                <a href=" " title="发送"><i className="fa fa-fw fa-send"/></a>
-                                                <a href=" " title="导出"><i className="fa fa-fw fa-share"/></a>
-                                                <a href=" " title="删除"><i className="fa fa-trash-o"/></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <Table columns={this.state.weiboColumns} dataSource={this.state.weiboData} />
                                 </div>
+                            </div>
+                            <div className="card-body py-2 small">
+                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
+                                <CSVLink data={this.state.weiboData}
+                                         filename={new Date().toLocaleString()}
+                                         target="_blank"
+                                         title="导出"
+                                         className="mr-3 d-inline-block"
+                                >
+                                    <i className="fa fa-fw fa-share-square-o"/>导出
+                                </CSVLink>
+                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-trash-o"/>删除</a>
                             </div>
                         </div>
                     </div>

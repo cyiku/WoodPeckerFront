@@ -79,7 +79,18 @@ export const pieOption = {
                 }
             }
         }
-    ]
+    ],
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show:true,
+                excludeComponents :['toolbox'],
+                pixelRatio: 2,
+                title:'导出'
+            }
+        }
+    }
 };
 
 
@@ -168,7 +179,19 @@ export const publishNumOption = {
             data:[430, 400, 440, 450, 500, 550,600,650, 550]
         }
 
-    ]
+    ],
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show:true,
+                excludeComponents :['toolbox'],
+                pixelRatio: 2,
+                title:'导出',
+            }
+        }
+    }
+
 };
 
 export const emotionNumOption = {
@@ -239,7 +262,18 @@ export const emotionNumOption = {
             data:[600, 700, 600, 800, 700, 600,880,660, 640]
         }
 
-    ]
+    ],
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show:true,
+                excludeComponents :['toolbox'],
+                pixelRatio: 2,
+                title:'导出'
+            }
+        }
+    }
 };
 
 
@@ -532,7 +566,18 @@ export const mapOption = {
       }
     }
   },
-  series: series
+  series: series,
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {
+                show:true,
+                excludeComponents :['toolbox'],
+                pixelRatio: 2,
+                title:'导出',
+            }
+        }
+    }
 };
 
 

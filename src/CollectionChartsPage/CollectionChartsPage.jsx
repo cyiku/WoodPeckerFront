@@ -10,6 +10,13 @@ const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" *
 
 class CollectionChartsPage extends React.Component {
 
+    clickChart = (event) => {
+        let targets = document.getElementsByClassName("chart");
+        for (let i = 0; i < targets.length; ++i) {
+            targets[i].setAttribute("class", "btn btn-secondary chart");
+        }
+        event.target.setAttribute("class", "btn btn-primary chart");
+    };
 
     render() {
         return (
@@ -17,10 +24,10 @@ class CollectionChartsPage extends React.Component {
                 <div className="container-fluid">
                     {/*关键词展示*/}
                     <div>
-                        <button type="button" className="btn btn-primary" style={{marginLeft:10}}>折线图</button>
-                        <button type="button" className="btn btn-secondary" style={{marginLeft:10}}>饼图</button>
-                        <button type="button" className="btn btn-secondary" style={{marginLeft:10}}>地域图</button>
-                        <button type="button" className="btn btn-secondary" style={{marginLeft:10}}>表格</button>
+                        <button type="button" className="btn btn-primary chart" style={{marginLeft:10}} onClick={this.clickChart}>折线图</button>
+                        <button type="button" className="btn btn-secondary chart" style={{marginLeft:10}} onClick={this.clickChart}>饼图</button>
+                        <button type="button" className="btn btn-secondary chart" style={{marginLeft:10}} onClick={this.clickChart}>地域图</button>
+                        <button type="button" className="btn btn-secondary chart" style={{marginLeft:10}} onClick={this.clickChart}>表格</button>
                     </div>
                     {/*两个折线图*/}
                     <div className="row" style={{marginTop:20}}>
@@ -33,9 +40,8 @@ class CollectionChartsPage extends React.Component {
                                     <LineReact option={publishNumOption}/>
                                 </div>
                                 <div className="card-body py-2 small">
-                                    <a href=" " title="发送"><i className="fa fa-fw fa-send"/>发送</a>
-                                    <a href=" " title="导出" style={{marginLeft:10}}><i className="fa fa-fw fa-share"/>导出</a>
-                                    <a href=" " title="删除" style={{marginLeft:10}}><i className="fa fa-trash-o"/>删除</a>
+                                    <a href=" " title="发送" className="mr-3 d-inline-block"><i className="fa fa-fw fa-send-o"/>发送</a>
+                                    <a href=" " title="删除" className="d-inline-block"><i className="fa fa-trash-o"/>删除</a>
                                 </div>
                             </div>
                         </div>
