@@ -112,7 +112,7 @@ class MsgShow extends React.Component {
                             <i className="fa fa-newspaper-o"> <span>{keyword.name}</span></i>
                             <div style={{float: 'right'}} onClick={event => event.stopPropagation()}>
                                 <a href="#"><i className="fa fa-pause mr-3 d-inline-block" onClick={this.play}/></a>
-                                <Link to="/" className="mr-3 d-inline-block"><i className="fa fa-refresh"/></Link>
+                                <Link to="/" className="mr-3 d-inline-block"><i className="fa fa-refresh" /></Link>
                                 <Link to="/kwAnalysis" className="mr-3 d-inline-block"><i className="fa fa-bar-chart"/></Link>
                             </div>
                         </div>

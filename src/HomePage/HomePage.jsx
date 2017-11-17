@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
+import {history} from '../_helpers';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -25,9 +26,28 @@ class HomePage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedKeys: []
+            selectedKeys: ""
         }
     }
+
+    componentWillMount(){
+        history.listen((event)=>{
+            let path = event.pathname.split("/");
+            if(path !== null){
+                let location = path[1];
+                if (location === "") {
+                    this.setState({
+                        selectedKeys: 'monitoring'
+                    });
+                } else {
+                    this.setState({
+                        selectedKeys: location
+                    })
+                }
+            }
+        });
+    }
+
 
     render() {
 
@@ -49,33 +69,34 @@ class HomePage extends React.Component {
                         <Menu
                             mode="inline"
                             theme="dark"
-                            defaultSelectedKeys={['1']}
+                            defaultSelectedKeys={['monitoring']}
                             defaultOpenKeys={['sub1']}
+                            selectedKeys={[this.state.selectedKeys]}
                             style={{ height: '100%' }}
                         >
                             <SubMenu key="sub1" title={<span><i className="fa fa-fw fa-dashboard"/> 实时监控</span>}>
-                                <Menu.Item key="0"><Link to="/">关键字监控</Link></Menu.Item>
+                                <Menu.Item key="monitoring"><Link to="/">关键字监控</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu key="sub2" title={<span><i className="fa fa-fw fa-bar-chart"/> 话题分析</span>}>
-                                <Menu.Item key="1"><Link to="/kwAnalysis">关键词分析</Link></Menu.Item>
-                                <Menu.Item key="2"><Link to="/blank">话题预警</Link></Menu.Item>
-                                <Menu.Item key="8"><Link to="/blank">关键词推荐</Link></Menu.Item>
+                                <Menu.Item key="kwAnalysis"><Link to="/kwAnalysis">关键词分析</Link></Menu.Item>
+                                <Menu.Item key="warning"><Link to="/warning">话题预警</Link></Menu.Item>
+                                <Menu.Item key="recommendation"><Link to="/recommendation">关键词推荐</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu key="sub3" title={<span><i className="fa fa-fw fa-heart-o"/> 个性化设置</span>}>
-                                <Menu.Item key="3"><Link to="/keywords">我的关键词</Link></Menu.Item>
-                                <Menu.Item key="4"><Link to="/blank">我的报告</Link></Menu.Item>
-                                <Menu.Item key="9"><Link to="/blank">我的简报夹</Link></Menu.Item>
+                                <Menu.Item key="keywords"><Link to="/keywords">我的关键词</Link></Menu.Item>
+                                <Menu.Item key="report"><Link to="/report">我的报告</Link></Menu.Item>
+                                <Menu.Item key="brief"><Link to="/brief">我的简报夹</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu key="sub4" title={<span><i className="fa fa-fw fa-star-o"/> 我的收藏</span>}>
-                                <Menu.Item key="5"><Link to="/collectionNews">收藏的消息</Link></Menu.Item>
-                                <Menu.Item key="6"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>
+                                <Menu.Item key="collectionNews"><Link to="/collectionNews">收藏的消息</Link></Menu.Item>
+                                <Menu.Item key="collectionCharts"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu key="sub5" title={<span><i className="fa fa-fw fa-wrench"/> 系统设置</span>}>
-                                <Menu.Item key="7"><Link to="/blank">系统公告</Link></Menu.Item>
+                                <Menu.Item key="announcement"><Link to="/announcement">系统公告</Link></Menu.Item>
                             </SubMenu>
 
                         </Menu>
@@ -87,7 +108,7 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}keywords`} exact component={KeywordsPage} />
                             <Route path={`${this.props.match.path}collectionNews`} exact component={CollectionNewsPage} />
                             <Route path={`${this.props.match.path}collectionCharts`} exact component={CollectionChartsPage} />
-                            <Route path={`${this.props.match.path}blank`} exact component={BlankPage} />
+                            <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>
                 </Layout>

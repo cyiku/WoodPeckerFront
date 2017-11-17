@@ -20,7 +20,7 @@ class KwsList extends React.Component {
                         <button type="button" className="btn btn-primary" key={index}>{keyword.name}</button>
                     )
                 }
-                <button type="button" className="btn btn-danger"><Link to="/keywords" style={{color:"white"}}>管理关键字</Link></button>
+                <Link to="/keywords" style={{color:"white", marginLeft:10}} className="btn btn-danger">管理关键字</Link>
             </div>
         );
     }

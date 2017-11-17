@@ -1,6 +1,8 @@
 import React from 'react';
-import {CSVLink} from 'react-csv';
+import { CSVLink } from 'react-csv';
 import { Table } from 'antd';
+import { connect } from 'react-redux';
+import { collectionActions } from '../_actions';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -28,21 +30,52 @@ class CollectionNewsPage extends React.Component {
                              title="导出">
                         <i className="fa fa-fw fa-share-square-o"/>
                     </CSVLink>
-                    <a href=" " title="删除"><i className="fa fa-trash-o"/></a>
+                    <a href=" " title="删除"><i className="fa fa-trash-o" onClick={this.deleteCollection(record.id)}/></a>
                 </span>
             )},
 
         ],
         weiboData: [
             {'publisher': 'oyyw', 'content': '哈哈哈', 'likeNum': 20, 'commentNum': 30, 'transferNum': 40, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com','sentiment':'正'},
-            {'publisher': 'oyyyw', 'content': '哈哈哈哈', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负'}
-        ]
+            {'publisher': 'oyyyw', 'content': '哈哈哈嗝', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负'}
+        ],
+        searchedWeibo: [
+            {'publisher': 'oyyw', 'content': '哈哈哈', 'likeNum': 20, 'commentNum': 30, 'transferNum': 40, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com','sentiment':'正', 'id': 0},
+            {'publisher': 'oyyyw', 'content': '哈哈哈哈嗝', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负', 'id': 1}
+        ],
+        searchWeiboContent: ""
 
     };
 
     objToJSON = (record) => {
         let str = JSON.stringify([record]); // object list to str
         return JSON.parse(str);   // str to json
+    };
+
+    searchWeibo = () => {
+        let searchedWeibo = [];
+        for (let i = 0; i < this.state.weiboData.length; ++i) {
+            if (this.state.weiboData[i]['content'].indexOf(this.state.searchWeiboContent) !== -1) {
+                searchedWeibo.push(this.state.weiboData[i]);
+            }
+        }
+        console.log(searchedWeibo);
+        this.setState(
+            preState => ({
+                ...preState,
+                searchedWeibo: searchedWeibo
+            })
+        );
+    };
+
+    handlechange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    };
+
+    deleteCollection = (id) => {
+        const {user} = this.props;
+        collectionActions.delCollection(user, id);
     };
 
     render() {
@@ -53,15 +86,26 @@ class CollectionNewsPage extends React.Component {
                         {/*具体微博展示*/}
                         <div className="card" style={{width:"100%"}}>
                             <div className="card-header">
-                                <i className="fa fa-table"/>收藏的微博</div>
+                                <i className="fa fa-table"/>收藏的微博
+                                <div style={{float:"right"}}>
+                                    <div className="input-group">
+                                        <input className="form-control" type="text" placeholder="搜正文..." onChange={this.handlechange} name={"searchWeiboContent"}/>
+                                        <span className="input-group-btn">
+                                            <button className="btn btn-primary" type="button" onClick={this.searchWeibo}>
+                                                <i className="fa fa-search"/>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <Table columns={this.state.weiboColumns} dataSource={this.state.weiboData} />
+                                    <Table columns={this.state.weiboColumns} dataSource={this.state.searchedWeibo} />
                                 </div>
                             </div>
                             <div className="card-body py-2 small">
                                 <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                                <CSVLink data={this.state.weiboData}
+                                <CSVLink data={this.state.searchedWeibo}
                                          filename={new Date().toLocaleString()}
                                          target="_blank"
                                          title="导出"
@@ -79,4 +123,15 @@ class CollectionNewsPage extends React.Component {
     }
 }
 
-export { CollectionNewsPage };
+
+function mapStateToProps(state) {
+    const { authentication } = state;
+    const { user } = authentication;
+    return {
+        user
+    };
+}
+
+const connectedCollectionNewsPage = connect(mapStateToProps)(CollectionNewsPage);
+export { connectedCollectionNewsPage as CollectionNewsPage };
+
