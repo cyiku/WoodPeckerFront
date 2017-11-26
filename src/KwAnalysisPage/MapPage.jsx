@@ -1,8 +1,8 @@
 import React from 'react';
-import {MyTablePage} from "./myTable";
 import { connect } from 'react-redux';
 import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
+import {ShowPicPage} from "./ShowPicPage";
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -95,19 +95,7 @@ class MapPage extends React.Component {
     render() {
         return (
             <div className="col-md-12">
-                <div className="card mb-3">
-                    <div className="card-header">
-                        <i className="fa fa-pie-chart"/> 地域分布</div>
-                    <div className="card-body">
-                        <MapReact option={this.state}/>
-                    </div>
-                    <div className="card-body py-2 small">
-                        <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, this.state, "region")}>
-                            <i className="fa fa-star-o" id={"dataSource"}> 收藏</i>
-                        </a>
-                        <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>
-                    </div>
-                </div>
+                <ShowPicPage data={this.state} type={'map'} title={'地域分布'}/>
             </div>
         );
     }

@@ -9,14 +9,16 @@ import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
 const PieReact = asyncComponent(() => import(/* webpackChunkName: "PieReact" */'../Echarts/PieReact'));  //饼图组件
+const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
+const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" */'../Echarts/LineReact')); //折线图组件
 
 class ShowPicPage extends React.Component {
 
 
-    collection = (event, data, id, type) => {
+    collection = (event, data, type) => {
         const {user, dispatch} = this.props;
 
-        let icon = document.getElementById(id);
+        let icon = document.getElementById("collection");
         if (icon.getAttribute("class") === "fa fa-star-o") {
             // 收藏
             icon.setAttribute("class", "fa fa-star");
@@ -40,17 +42,27 @@ class ShowPicPage extends React.Component {
 
 
     render() {
-        const {data, type} = this.props;
+        const {data, type, title} = this.props;
+        let showChart;
+        if (type === 'pie')
+            showChart = <PieReact option={data}/>;
+        else if (type === 'line')
+            showChart = <LineReact option={data}/>;
+        else if (type === 'map')
+            showChart = <MapReact option={data}/>;
+        else
+            showChart = "后续推出, 抱歉!";
+
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    <i className="fa fa-pie-chart"/> 数据源分布</div>
+                    <i className="fa fa-pie-chart"/> {title}</div>
                 <div className="card-body">
-                    <PieReact option={data}/>
+                    {showChart}
                 </div>
                 <div className="card-body py-2 small">
                     <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, data, type)}>
-                        <i className="fa fa-star-o" id={"dataSource"}> 收藏</i>
+                        <i className="fa fa-star-o" id="collection"> 收藏</i>
                     </a>
                     <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>
                 </div>
@@ -61,9 +73,9 @@ class ShowPicPage extends React.Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const { data, type } = ownProps;
+    const { data, type, title } = ownProps;
     return {
-        data, type
+        data, type, title
     };
 }
 

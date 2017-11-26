@@ -1,14 +1,12 @@
 import React from 'react';
-import {MyTablePage} from "./myTable";
 import { connect } from 'react-redux';
-import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
+import {ShowPicPage} from "./ShowPicPage";
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
-const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" */'../Echarts/LineReact')); //折线图组件
 
 class PublishNumPage extends React.Component {
 
@@ -145,19 +143,7 @@ class PublishNumPage extends React.Component {
 
     render() {
         return (
-            <div className="card mb-3">
-                <div className="card-header">
-                    <i className="fa fa-line-chart"/> 发布量折线图</div>
-                <div className="card-body">
-                    <LineReact option={this.state}/>
-                </div>
-                <div className="card-body py-2 small">
-                    <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, this.state, "publish")}>
-                        <i className="fa fa-star-o" id={"publish"}> 收藏</i>
-                    </a>
-                    <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>
-                </div>
-            </div>
+            <ShowPicPage data={this.state} type={'line'} title={'发布量折线图'}/>
         );
     }
 }

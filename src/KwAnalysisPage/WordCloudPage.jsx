@@ -1,14 +1,12 @@
 import React from 'react';
-import {MyTablePage} from "./myTable";
 import { connect } from 'react-redux';
-import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
+import {ShowPicPage} from "./ShowPicPage";
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
-const PieReact = asyncComponent(() => import(/* webpackChunkName: "PieReact" */'../Echarts/PieReact'));  //饼图组件
 
 class WordCloudPage extends React.Component {
 
@@ -52,18 +50,7 @@ class WordCloudPage extends React.Component {
 
     render() {
         return (
-            <div className="card mb-3">
-                <div className="card-header">
-                    <i className="fa fa-pie-chart"/> 相关词分布(暂不可用)</div>
-                <div className="card-body">
-                </div>
-                <div className="card-body py-2 small">
-                    <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, this.state, "dataSource")}>
-                        <i className="fa fa-star-o" id={"dataSource"}> 收藏</i>
-                    </a>
-                    <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>
-                </div>
-            </div>
+            <ShowPicPage data={''} type={''} title={'词语分布图'}/>
         );
     }
 }
