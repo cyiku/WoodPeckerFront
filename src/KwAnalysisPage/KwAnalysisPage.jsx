@@ -1,7 +1,7 @@
 import React from 'react';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
-import {DetailedWeiboPage} from "./WeiboPage";
+import {WeiboTablePage} from "./WeiboTablePage";
 import { keywordActions } from '../_actions';
 
 
@@ -99,7 +99,7 @@ class KwAnalysisPage extends React.Component {
                     </div>
 
                     {/*具体微博展示*/}
-                    <DetailedWeiboPage/>
+                    <WeiboTablePage/>
                 </div>
             </div>
         );

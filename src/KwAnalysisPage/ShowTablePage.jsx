@@ -9,7 +9,7 @@ import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
 
-class MyTablePage extends React.Component {
+class ShowTablePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,12 +21,19 @@ class MyTablePage extends React.Component {
     };
 
     componentDidMount(){
-        const {user, dispatch, type} = this.props;
-        dispatch(collectionActions.getCollection(user, type));
-        dispatch(collectionActions.getCollection(user, 'table'));
-        const { content } = this.props;
+
+        //console.log(this.props);
+        //dispatch(collectionActions.getCollection(user, type));
+        //dispatch(collectionActions.getCollection(user, 'table'));
+        const {tableCollection} = this.props;
+        if (tableCollection.length === 0) {
+            const {user, dispatch} = this.props;
+            dispatch(collectionActions.getCollection(user, 'table'));
+        }
+
+        const { data } = this.props;
         this.setState(preState => ({
-            searchedContent: content,
+            searchedContent: data,
         }));
 
     }
@@ -35,12 +42,12 @@ class MyTablePage extends React.Component {
     /**
      * 初次打开时图标更换
      * @param id
-     * @param typeCollection
+     * @param collection
      * @returns {*}
      */
-    hasCollected = (id, typeCollection) => {
-        for (let i = 0; i < typeCollection.length; ++i) {
-            if (typeCollection[i]['id'] === id)
+    hasCollected = (id, collection) => {
+        for (let i = 0; i < collection.length; ++i) {
+            if (collection[i]['id'] === id)
                 return "fa fa-star"
         }
         return "fa fa-star-o"
@@ -71,7 +78,7 @@ class MyTablePage extends React.Component {
          * type: collection是Json, key为type, 添加和删除时, 加入type, 方便增删
          * typeCollection: 相关类型的收藏, 为list
          */
-        const {user, dispatch, type, typeCollection} = this.props;
+        const {user, dispatch, type, collection} = this.props;
 
         let icon = document.getElementById(iconID);
         if (icon.getAttribute("class") === "fa fa-star-o") {
@@ -83,14 +90,7 @@ class MyTablePage extends React.Component {
         } else {
             // 取消收藏
 
-            for (let i = 0; i < typeCollection.length; ++i) {
-                /*
-                // 找到要取消收藏的id，对应的dataid
-                if (typeCollection[i]['data'][0]['id'] ===  data[0].id) {
-                    let dataid = typeCollection[i]['dataid'];
-                    dispatch(collectionActions.delCollection(user, dataid, type));
-                }
-                */
+            for (let i = 0; i < collection.length; ++i) {
                 dispatch(collectionActions.delCollection(user, [data[0]['id']], type))
             }
 
@@ -105,8 +105,7 @@ class MyTablePage extends React.Component {
      */
     collectionAll = (event) => {
 
-        const { user, dispatch, collection } = this.props;
-        const tableCollection = collection['table'];
+        const { user, dispatch, collection, tableCollection } = this.props;
         const type = 'table';
 
         let icon = document.getElementById('all');
@@ -133,13 +132,13 @@ class MyTablePage extends React.Component {
      * 表格的搜索功能
      */
     search = () => {
-        const {content} = this.props; // 拿到全部内容
+        const {data} = this.props; // 拿到全部内容
 
         // 根据每条消息中的content匹配searchInput的内容
         let searchedContent = [];
-        for (let i = 0; i < content.length; ++i) {
-            if (content[i]['content'].indexOf(this.state.searchInput) !== -1) {
-                searchedContent.push(content[i]);
+        for (let i = 0; i < data.length; ++i) {
+            if (data[i]['content'].indexOf(this.state.searchInput) !== -1) {
+                searchedContent.push(data[i]);
             }
         }
 
@@ -164,13 +163,13 @@ class MyTablePage extends React.Component {
 
 
     render() {
-        const {typeCollection, type} = this.props;
+        const {collection, title} = this.props;
 
         let { columns } = this.props;
         columns = columns.concat(
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record.id)}><i className={this.hasCollected(record.id, typeCollection)} id={record.id}/></a>
+                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record.id)}><i className={this.hasCollected(record.id, collection)} id={record.id}/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString()}
                              target="_blank"
@@ -185,7 +184,7 @@ class MyTablePage extends React.Component {
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    <i className="fa fa-table">相关微博</i>
+                    <i className="fa fa-table">{title}</i>
                     <div style={{float:"right"}}>
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="搜正文..." id="searchInput" onChange={this.handlechange} name={"searchInput"}/>
@@ -229,14 +228,14 @@ class MyTablePage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
 
-    const { authentication, collection} = state;
-    const {columns, content, type, title, typeCollection} = ownProps;
-    const { user } = authentication;
+    const  tableCollection = state['collection']['table'];
+    const  user = state['authentication']['user'];
+    const {columns, data, type, title, collection} = ownProps;
     return {
-        user, columns, content, type, title, typeCollection, collection
+        user, columns, data, type, title, collection, tableCollection
     };
 }
 
-const connectedMyTablePage = connect(mapStateToProps)(MyTablePage);
-export { connectedMyTablePage as MyTablePage };
+const connectedShowTablePage = connect(mapStateToProps)(ShowTablePage);
+export { connectedShowTablePage as ShowTablePage };
 

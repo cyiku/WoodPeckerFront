@@ -1,13 +1,14 @@
 import React from 'react';
-import {MyTablePage} from "./MyTablePage";
+import {ShowTablePage} from "./ShowTablePage";
 import { connect } from 'react-redux';
+import { collectionActions } from '../_actions';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
 
-class DetailedWeiboPage extends React.Component {
+class WeiboTablePage extends React.Component {
 
     state = {
         weiboColumns: [
@@ -30,17 +31,21 @@ class DetailedWeiboPage extends React.Component {
 
     componentDidMount(){
         //这里应该获取关键字对应的全部的微博数据
+        const {user, dispatch} = this.props;
+        if (this.props.collection['weibo'].length === 0) {
+            dispatch(collectionActions.getCollection(user, 'weibo'));
+        }
     }
 
 
     render() {
         const type = "weibo";
-        const content = this.state.weiboData;
+        const data = this.state.weiboData;
         const columns = this.state.weiboColumns;
         const title = "相关微博";
-        const typeCollection = this.props.collection['weibo'];
+        const collection = this.props.collection['weibo'];
         return (
-            <MyTablePage content={content} columns={columns} type={type} title={title} typeCollection={typeCollection}/>
+            <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
         );
     }
 }
@@ -54,6 +59,6 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedDetailedWeiboPage= connect(mapStateToProps)(DetailedWeiboPage);
-export { connectedDetailedWeiboPage as DetailedWeiboPage };
+const connectedWeiboTablePage = connect(mapStateToProps)(WeiboTablePage);
+export { connectedWeiboTablePage as WeiboTablePage };
 
