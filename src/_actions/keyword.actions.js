@@ -23,7 +23,8 @@ function getKws(user) {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
                         alert(ans.reason);
-                        history.push("/login");
+                        if (ans.logout)
+                            history.push("/login");
                     }
                 },
                 error => {
@@ -58,6 +59,7 @@ function addKws(user, newkeyword) {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
                         alert(ans.reason);
+                        if (ans.logout)
                         history.push("/login");
                     }
                 },
@@ -90,6 +92,7 @@ function delKws(user, keyword, index) {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
                         alert(ans.reason);
+                        if (ans.logout)
                         history.push("/login");
                     }
                 },
@@ -121,7 +124,8 @@ function updKws(user, newkeyword, index, keywordid) {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
                         alert(ans.reason);
-                        history.push("/login");
+                        if (ans.logout)
+                            history.push("/login");
                     }
                 },
                 error => {

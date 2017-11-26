@@ -8,8 +8,8 @@ let initialCollection = {
     'pieChart': [],
     'lineChart': [],
     'regionChart': [],
-    'tableChart': [],
-    };
+    'table': [],
+};
 
 export function collection(state = initialCollection, action) {
     switch (action.type) {
@@ -18,19 +18,20 @@ export function collection(state = initialCollection, action) {
             return state;
 
         case collectionConstants.GETCOLLECTION_SUCCESS:
-            return action.collection;
+            let newState = JSON.parse(JSON.stringify(state));
+            newState[action.dataType] = action.collection;
+            return newState;
 
         case collectionConstants.ADDCOLLECTION_SUCCESS:
-            const newcollection = {'data': action.collection, 'id': action.id};
-            return state[action.contenttype].concat(newcollection);
+            newState = JSON.parse(JSON.stringify(state));
+            const newcollection = action.collection;
+            newState[action.contenttype].push(newcollection);
+            return newState;
 
         case collectionConstants.DELCOLLECTION_SUCCESS:
-            for (let i = 0; i < state[action.contenttype].length; ++i) {
-                if (state[action.contenttype][i]['id'] === action.id) {
-                    state[action.contenttype].splice(i, 1);
-                }
-            }
-            return state;
+            newState = JSON.parse(JSON.stringify(state));
+            newState[action.contenttype] = action.contentdata;
+            return newState;
 
         default:
             return state;

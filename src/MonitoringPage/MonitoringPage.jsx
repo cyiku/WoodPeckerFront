@@ -15,13 +15,15 @@ class MonitoringPage extends React.Component {
 
 
     componentDidMount(){
-        const { user, dispatch } = this.props;
-        dispatch(keywordActions.getKws(user));
+        const { user, dispatch, keyword } = this.props;
+        if (keyword.length === 0)
+            dispatch(keywordActions.getKws(user));
     }
 
 
     render() {
         const {keyword} = this.props;
+        //console.log(keyword);
         return (
             <div className="content-wrapper">
                 <div className="container-fluid">
@@ -35,6 +37,8 @@ class MonitoringPage extends React.Component {
                             )
                         }
                     </div>
+
+
                 </div>
             </div>
         );

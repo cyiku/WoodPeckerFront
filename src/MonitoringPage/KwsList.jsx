@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 import './MonitoringPage.css'
 
-
-
+/**
+ * 该类仅负责显示关键字列表
+ */
 class KwsList extends React.Component {
 
     render() {

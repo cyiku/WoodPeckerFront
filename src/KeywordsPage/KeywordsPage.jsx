@@ -39,8 +39,9 @@ class KeywordsPage extends React.Component {
 
 
     componentDidMount(){
-        const { user, dispatch } = this.props;
-        dispatch(keywordActions.getKws(user));
+        const { user, dispatch, keyword } = this.props;
+        if (keyword.length === 0)
+            dispatch(keywordActions.getKws(user));
     }
 
     // 删除
@@ -122,6 +123,7 @@ class KeywordsPage extends React.Component {
             dispatch(keywordActions.updKws(user, newkeyword, updatedIndex, updatedID));
 
         } else {
+
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
                 if (this.props.keyword[i].name === postKw) {
@@ -132,6 +134,7 @@ class KeywordsPage extends React.Component {
                     return;
                 }
             }
+
             let kwList = [];
             for (let i = 0; i < this.state.types.length; ++i) {
                 kwList = kwList.concat(this.state.types[i].checkedList);
@@ -197,6 +200,7 @@ class KeywordsPage extends React.Component {
 
     render() {
         const { keyword } = this.props;
+        console.log(keyword);
         return (
             <div className="content-wrapper" style={{marginLeft:0}}>
                 <div className="container-fluid">

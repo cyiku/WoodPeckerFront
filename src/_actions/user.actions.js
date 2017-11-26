@@ -9,8 +9,8 @@ export const userActions = {
     //register,
 };
 
-
 function login(username, password) {
+
     return dispatch => {
         dispatch(request({ username }));
 

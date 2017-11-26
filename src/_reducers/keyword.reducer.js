@@ -4,9 +4,11 @@ export function keyword(state = [], action) {
   switch (action.type) {
 
       case keywordConstants.GETKWS_REQUEST:
+          //alert('request');
           return state;
 
       case keywordConstants.GETKWS_SUCCESS:
+          //alert('success');
           for (let i = 0; i < action.keyword.length; ++i) {
               action.keyword[i].sites = action.keyword[i].sites.split(';');
           }

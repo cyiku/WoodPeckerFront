@@ -30,11 +30,12 @@ class CollectionNewsPage extends React.Component {
                              title="导出">
                         <i className="fa fa-fw fa-share-square-o"/>
                     </CSVLink>
-                    <a href=" " title="删除"><i className="fa fa-trash-o" onClick={this.deleteCollection(record.id)}/></a>
+                    <a href=" " title="删除"><i className="fa fa-trash-o" onClick={event => this.deleteCollection(event, record.id, 'weibo')}/></a>
                 </span>
             )},
 
         ],
+
         weiboData: [
             {'publisher': 'oyyw', 'content': '哈哈哈', 'likeNum': 20, 'commentNum': 30, 'transferNum': 40, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com','sentiment':'正'},
             {'publisher': 'oyyyw', 'content': '哈哈哈嗝', 'likeNum': 40, 'commentNum': 60, 'transferNum': 70, 'publishTime':'2016-10-20', 'keyword': '成考', 'source': 'www.baidu.com', 'sentiment':'负'}
@@ -47,6 +48,12 @@ class CollectionNewsPage extends React.Component {
 
     };
 
+    componentDidMount() {
+
+        const {user, dispatch} = this.props;
+        dispatch(collectionActions.getCollection(user, 'weibo'));
+
+    }
     objToJSON = (record) => {
         let str = JSON.stringify([record]); // object list to str
         return JSON.parse(str);   // str to json
@@ -73,18 +80,24 @@ class CollectionNewsPage extends React.Component {
         this.setState({ [name]: value });
     };
 
-    deleteCollection = (id) => {
-        const {user} = this.props;
-        collectionActions.delCollection(user, id);
+    deleteCollection = (event, id, type) => {
+        const {user, dispatch} = this.props;
+        dispatch(collectionActions.delCollection(user, [id], type));
     };
 
     render() {
+
+        const {collection} = this.props;
+        const weiboCollection = collection['weibo'];
+
         return (
             <div className="content-wrapper" style={{marginLeft:0}}>
                 <div className="container-fluid">
                     <div className="row">
                         {/*具体微博展示*/}
                         <div className="card" style={{width:"100%"}}>
+
+                            {/*header*/}
                             <div className="card-header">
                                 <i className="fa fa-table"/>收藏的微博
                                 <div style={{float:"right"}}>
@@ -98,14 +111,18 @@ class CollectionNewsPage extends React.Component {
                                     </div>
                                 </div>
                             </div>
+
+                            {/*body*/}
                             <div className="card-body">
                                 <div className="table-responsive">
-                                    <Table columns={this.state.weiboColumns} dataSource={this.state.searchedWeibo} />
+                                    <Table columns={this.state.weiboColumns} dataSource={weiboCollection} />
                                 </div>
                             </div>
+
+                            {/*功能*/}
                             <div className="card-body py-2 small">
                                 <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                                <CSVLink data={this.state.searchedWeibo}
+                                <CSVLink data={weiboCollection}
                                          filename={new Date().toLocaleString()}
                                          target="_blank"
                                          title="导出"
@@ -113,8 +130,9 @@ class CollectionNewsPage extends React.Component {
                                 >
                                     <i className="fa fa-fw fa-share-square-o"/>导出
                                 </CSVLink>
-                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-trash-o"/>删除</a>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -125,10 +143,10 @@ class CollectionNewsPage extends React.Component {
 
 
 function mapStateToProps(state) {
-    const { authentication } = state;
+    const { authentication, collection } = state;
     const { user } = authentication;
     return {
-        user
+        user, collection
     };
 }
 
