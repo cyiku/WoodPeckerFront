@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45cbe2be-f7b8-4024-a704-0af618318dea" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/detailedWeiboMsg.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/WeiboPage.jsx" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/myTable.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/MyTablePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,7 +20,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="WeiboPage.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/WeiboPage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShowPicPage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -81,7 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/_constants/user.constants.js" />
         <option value="$PROJECT_DIR$/src/_helpers/index.js" />
         <option value="$PROJECT_DIR$/src/_actions/alert.actions.js" />
         <option value="$PROJECT_DIR$/src/_services/user.service.js" />
@@ -119,7 +141,6 @@
         <option value="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwsList2.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx" />
         <option value="$PROJECT_DIR$/src/_helpers/options.js" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
@@ -132,6 +153,8 @@
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/WeiboPage.jsx" />
       </list>
     </option>
   </component>
@@ -244,12 +267,12 @@
       <workItem from="1511270016049" duration="703000" />
       <workItem from="1511406666111" duration="862000" />
       <workItem from="1511505508643" duration="9335000" />
-      <workItem from="1511526424497" duration="16768000" />
+      <workItem from="1511526424497" duration="17065000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215294000" />
+    <option name="totallyTimeSpent" value="215591000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -535,25 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/myTable.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="109" column="21" lean-forward="false" selection-start-line="109" selection-start-column="21" selection-end-line="109" selection-end-column="21" />
-          <folding>
-            <element signature="e#1254#1376#0" expanded="false" />
-            <element signature="e#3718#4240#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/detailedWeiboMsg.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="573">
@@ -587,14 +591,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -632,7 +628,7 @@
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#556#607#0" expanded="true" />
+            <element signature="e#549#600#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -697,10 +693,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/MyTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+          <folding>
+            <element signature="e#1254#1376#0" expanded="false" />
+            <element signature="e#3718#4240#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="27" lean-forward="false" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        <state relative-caret-position="585">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/WeiboPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
           <folding />
         </state>
       </provider>

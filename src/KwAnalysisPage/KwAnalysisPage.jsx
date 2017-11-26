@@ -1,7 +1,7 @@
 import React from 'react';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
-import {DetailedWeiboPage} from "./detailedWeiboMsg";
+import {DetailedWeiboPage} from "./WeiboPage";
 import { keywordActions } from '../_actions';
 
 

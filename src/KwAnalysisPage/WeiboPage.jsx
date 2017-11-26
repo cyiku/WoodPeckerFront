@@ -1,5 +1,5 @@
 import React from 'react';
-import {MyTablePage} from "./myTable";
+import {MyTablePage} from "./MyTablePage";
 import { connect } from 'react-redux';
 
 // 导入css

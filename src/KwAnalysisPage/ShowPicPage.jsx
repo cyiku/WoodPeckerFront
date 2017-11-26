@@ -1,5 +1,4 @@
 import React from 'react';
-import {MyTablePage} from "./myTable";
 import { connect } from 'react-redux';
 import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
