@@ -50,7 +50,7 @@ class ShowPicPage extends React.Component {
         else if (type === 'map')
             showChart = <MapReact option={data}/>;
         else
-            showChart = "后续推出, 抱歉!";
+            showChart = "暂无数据, 抱歉!";
 
         return (
             <div className="card mb-3">
@@ -73,6 +73,8 @@ class ShowPicPage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     const { data, type, title } = ownProps;
+    const { authentication } = state;
+    const { user } = authentication;
     return {
         data, type, title
     };

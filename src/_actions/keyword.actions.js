@@ -2,6 +2,7 @@ import {keywordConstants} from "../_constants/";
 import {keywordService} from "../_services/";
 import { alertActions } from './';
 import { history } from '../_helpers';
+import { openNotificationWithIcon } from "../_helpers";
 
 export const keywordActions = {
     getKws,
@@ -18,7 +19,9 @@ function getKws(user) {
             .then(
                 ans => {
                     if(ans.status) {
+                        //console.log(ans.keyword);
                         dispatch(success(ans.keyword));
+                        //openNotificationWithIcon('success', '获取关键字成功', '');
                     } else {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
@@ -53,8 +56,8 @@ function addKws(user, newkeyword) {
                     if(ans.status) {
                         console.log(ans);
                         newkeyword.keywordid = ans.keywordid;
-                        new
                         dispatch(success(newkeyword));
+                        openNotificationWithIcon('success', '添加关键字成功');
                     } else {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
@@ -87,6 +90,7 @@ function delKws(user, keyword, index) {
                 ans => {
                     if(ans.status) {
                         dispatch(success(keyword, index));
+                        openNotificationWithIcon('success', '删除关键字成功', '');
                         history.push("/keywords");
                     } else {
                         dispatch(failure(ans.reason));
@@ -119,6 +123,7 @@ function updKws(user, newkeyword, index, keywordid) {
                 ans => {
                     if(ans.status) {
                         dispatch(success(newkeyword, index));
+                        openNotificationWithIcon('success', '更新关键字成功', '');
                         history.push("/keywords");
                     } else {
                         dispatch(failure(ans.reason));

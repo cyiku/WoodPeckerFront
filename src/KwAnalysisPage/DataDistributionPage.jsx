@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 
 // 导入css
@@ -22,7 +24,7 @@ class DataDistributionPage extends React.Component {
         legend: {
             orient: 'vertical',
             left: 'left',
-            data: ['新闻','微博','论坛','贴吧']
+            data: ['论坛','微博','门户网站','培训机构']
         },
         series : [
             {
@@ -31,10 +33,10 @@ class DataDistributionPage extends React.Component {
                 radius : '55%',
                 center: ['50%', '60%'],
                 data:[
-                    {value:335, name:'新闻'},
-                    {value:310, name:'微博'},
-                    {value:234, name:'论坛'},
-                    {value:135, name:'贴吧'}
+                    {value:0, name:'论坛'},
+                    {value:0, name:'微博'},
+                    {value:0, name:'门户网站'},
+                    {value:0, name:'培训机构'}
                 ],
                 itemStyle: {
                     emphasis: {
@@ -61,10 +63,63 @@ class DataDistributionPage extends React.Component {
     componentDidMount(){
 
         const { currentKwd } = this.props;
+
+        /*
         if (currentKwd !== undefined) {
-            // post到服务器
-            // 更新state中的内容
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd})
+            };
+
+            fetch(serverIP + '/getDataSourceNum', requestOptions).then(
+                response => {
+                    if (!response.ok) {
+                        return Promise.reject(response.statusText);
+                    }
+                    return response.json();
+                }
+            ).then(
+                ans => {
+                    if(ans.status) {
+                        this.setState(preState => ({
+                            ...preState,
+                            series : [
+                                {
+                                    name: '来源',
+                                    type: 'pie',
+                                    radius : '55%',
+                                    center: ['50%', '60%'],
+                                    data:[
+                                        {value:ans.num.forum, name:'论坛'},
+                                        {value:ans.num.weibo, name:'微博'},
+                                        {value:ans.num.portal, name:'门户网站'},
+                                        {value:ans.num.agency, name:'培训机构'}
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ],
+                        }));
+                    } else {
+                        alert(ans.reason);
+                        if (ans.logout)
+                            history.push("/login");
+                    }
+                },
+                error => {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            )
         }
+        */
     }
 
 

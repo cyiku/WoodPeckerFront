@@ -2,6 +2,7 @@ import {collectionConstants} from "../_constants/";
 import {collectionService} from "../_services/";
 import { alertActions } from './';
 import { history } from '../_helpers';
+import { openNotificationWithIcon } from "../_helpers";
 
 export const collectionActions = {
     getCollection,
@@ -18,6 +19,7 @@ function getCollection(user, type) {
             .then(
                 ans => {
                     if(ans.status) {
+                        console.log(ans.collection);
                         dispatch(success(ans.collection, type));
                     } else {
                         dispatch(failure(ans.reason));
@@ -51,6 +53,7 @@ function addCollection(user, collection, type) {
                 ans => {
                     if(ans.status) {
                         dispatch(success(collection, type));
+                        openNotificationWithIcon('success', '收藏成功');
                     } else {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.reason));
@@ -84,6 +87,7 @@ function delCollection(user, id, type) {
                 ans => {
                     if(ans.status) {
                         dispatch(success(id, type, ans.collection));
+                        openNotificationWithIcon('success', '取消收藏成功');
                     } else {
                         dispatch(failure(ans.reason));
                         dispatch(alertActions.error(ans.collection));

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { collectionActions } from '../_actions';
 import {ShowPicPage} from "./ShowPicPage";
 
 // 导入css
@@ -16,7 +15,7 @@ class PublishNumPage extends React.Component {
             trigger: 'axis'
         },
         legend: {
-            data:['新闻','微博', '论坛', '贴吧']
+            data:['论坛','微博', '门户网站', '培训机构']
         },
 
         calculable : true,
@@ -37,11 +36,11 @@ class PublishNumPage extends React.Component {
                 boundaryGap : false,
                 data : function (){
                     var list = [];
-                    for (var i = 10; i <= 18; i++) {
+                    for (var i = 1; i <= 10; i++) {
                         if(i<= 12){
-                            list.push('2016-'+i + '-01');
+                            list.push('2017-'+i + '-01');
                         }else{
-                            list.push('2017-'+(i-12) + '-01');
+                            list.push('2018-'+(i-12) + '-01');
                         }
                     }
                     return list;
@@ -61,12 +60,12 @@ class PublishNumPage extends React.Component {
         ],
         series : [
             {
-                name:'新闻',
+                name:'门户网站',
                 type:'line',
                 symbol:'none',
                 smooth: 0.2,
                 color:['#ffc107'],
-                data:[800, 300, 500, 800, 300, 600,500,600, 700]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
             {
                 name:'微博',
@@ -74,7 +73,7 @@ class PublishNumPage extends React.Component {
                 symbol:'none',
                 smooth: 0.2,
                 color:['#007bff'],
-                data:[600, 700, 600, 800, 700, 600,880,660, 640]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
             {
                 name:'论坛',
@@ -82,15 +81,15 @@ class PublishNumPage extends React.Component {
                 symbol:'none',
                 smooth: 0.2,
                 color:['#868e96'],
-                data:[200, 250, 270, 300, 310, 390,240,235, 245]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
             {
-                name:'贴吧',
+                name:'培训机构',
                 type:'line',
                 symbol:'none',
                 smooth: 0.2,
                 color:['#28a745'],
-                data:[430, 400, 440, 450, 500, 550,600,650, 550]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }
 
         ],
@@ -110,35 +109,78 @@ class PublishNumPage extends React.Component {
     componentDidMount(){
 
         const { currentKwd } = this.props;
+
+        /*
         if (currentKwd !== undefined) {
-            // post到服务器
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd})
+            };
+
+            fetch(serverIP + '/getPublishNum', requestOptions).then(
+                response => {
+                    if (!response.ok) {
+                        return Promise.reject(response.statusText);
+                    }
+                    return response.json();
+                }
+            ).then(
+                ans => {
+                    if(ans.status) {
+                        this.setState(preState => ({
+                            ...preState,
+                            series : [
+                                {
+                                    name:'门户网站',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#ffc107'],
+                                    data:ans.num.portal
+                                },
+                                {
+                                    name:'微博',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#007bff'],
+                                    data:ans.num.weibo
+                                },
+                                {
+                                    name:'论坛',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#868e96'],
+                                    data:ans.num.forum
+                                },
+                                {
+                                    name:'培训机构',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#28a745'],
+                                    data:ans.num.agency
+                                }
+
+                            ],
+                        }));
+                    } else {
+                        alert(ans.reason);
+                        if (ans.logout)
+                            history.push("/login");
+                    }
+                },
+                error => {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            )
         }
+        */
     }
-
-    collection = (event, data, id, type) => {
-        const {user, dispatch} = this.props;
-
-        let icon = document.getElementById(id);
-        if (icon.getAttribute("class") === "fa fa-star-o") {
-            // 收藏
-            icon.setAttribute("class", "fa fa-star");
-
-            dispatch(collectionActions.addCollection(user, data, type));
-
-            if (icon.innerHTML !== "") {
-                icon.innerHTML = " 取消收藏";
-            }
-        } else {
-            // 取消收藏
-            icon.setAttribute("class", "fa fa-star-o");
-
-            dispatch(collectionActions.delCollection(user, data.id, type));
-
-            if (icon.innerHTML !== "") {
-                icon.innerHTML = " 收藏";
-            }
-        }
-    };
 
 
     render() {

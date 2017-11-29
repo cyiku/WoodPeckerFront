@@ -10,7 +10,6 @@ import '../_helpers/sb-admin.css';
 import './MonitoringPage.css'
 
 
-
 class MonitoringPage extends React.Component {
 
 
@@ -26,7 +25,6 @@ class MonitoringPage extends React.Component {
         //console.log(keyword);
         return (
             <div className="content-wrapper">
-                <div className="container-fluid">
 
                     <KwsList keyword={keyword}/>
 
@@ -39,7 +37,6 @@ class MonitoringPage extends React.Component {
                     </div>
 
 
-                </div>
             </div>
         );
     }

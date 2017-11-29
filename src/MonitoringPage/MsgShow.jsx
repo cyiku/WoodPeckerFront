@@ -1,30 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse } from 'antd';
-//import { connect } from 'react-redux';
+import {openNotificationWithIcon} from "../_helpers";
+import {OneMsgPage} from "./OneMsgPage";
+
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import './MonitoringPage.css';
 
-/*
-// 添加store功能
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import {myWebsocket} from "../_reducers/websocket.reducer";
-
-const loggerMiddleware = createLogger();
-const store = createStore(
-    myWebsocket,
-    applyMiddleware(
-        thunkMiddleware,
-        loggerMiddleware
-    )
-);
-*/
 
 const Panel = Collapse.Panel;
 
+const weiboContent = {
+    'publisher': '你是小猪咯',
+    'n_comment':0,
+    'n_forward': 0,
+    'n_like': 0,
+    'content': '看完广告默默打开肯德基APP挑起了外卖，愉快的点了，等快晚饭的时候就可以麻溜的下单啦<span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span><span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span><span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span>话说我好想喝肯德基的粥啊<a href=https://m.weibo.cn/n/肯德基">@肯德基</a>  真的不可以考虑粥全天出售吗',
+    'url': 'https://weibo.cn/appurl?scheme=sinaweibo%3A%2F%2Fdetail%3Fmblogid%3D4178732706656653%26luicode%3D20000061%26lfid%3D4178732706656653%26featurecode%3D20000320&luicode=20000061&lfid=4178732706656653&featurecode=20000320',
+    'time': '2017_11_27_16_22_56',
+    'source': 'sina_weibo',
+    'keyword': '出售',
+};
+let count = 0;
+const portalContent = {
+    'source': '网易网',
+    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+    'time': '2017_11_27_15_53',
+    'keyword': '出售',
+    'publisher': '记者',
+};
 
 class MsgShow extends React.Component {
 
@@ -49,7 +56,12 @@ class MsgShow extends React.Component {
         this.connection.onmessage = evt => {
 
             let newContent = this.state.content;
-            newContent.unshift(evt.data);
+
+            let newWeiboContent = JSON.parse(JSON.stringify(weiboContent));
+
+            newWeiboContent.publisher += count;
+            count += 1;
+            newContent.unshift(newWeiboContent);
 
             this.setState(
                 preState => ({
@@ -57,7 +69,6 @@ class MsgShow extends React.Component {
                     content: newContent,
                 })
             );
-            //console.log(newContent);
         };
 
         this.connection.onopen = () => {
@@ -89,6 +100,7 @@ class MsgShow extends React.Component {
         if (className === "fa fa-pause mr-3 d-inline-block") {
             event.target.setAttribute("class", "fa fa-play mr-3 d-inline-block");
             this.connection.send(JSON.stringify({'id': user.id, 'token': user.token, 'name': keyword.name, 'type': 'pause'}));
+            openNotificationWithIcon('success', '暂停成功');
             console.log(keyword.name + " has been paused");
         } else {
             event.target.setAttribute("class", "fa fa-pause mr-3 d-inline-block");
@@ -108,10 +120,9 @@ class MsgShow extends React.Component {
                 content: [],
             })
         );
-
+        openNotificationWithIcon('success', '刷新成功');
         event.stopPropagation();
     };
-
 
     render() {
         const {keyword} = this.props;
@@ -119,8 +130,9 @@ class MsgShow extends React.Component {
             pathname:'/kwAnalysis',
             state:keyword['name'],
         };
+
         return (
-            <div className="col-md-3">
+            <div className="col-md-4" style={{height:600}}>
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
                     <Panel header= {
@@ -134,38 +146,22 @@ class MsgShow extends React.Component {
                         </div>
                     } key="1" >
 
-                        <div style={{height:500, overflow: "auto"}}>
+                        <div style={{height:600, overflow: "auto"}}>
+
                             {
                                 this.state.content.map((oneContent, index)=>
-                                    <p key={index}>
-                                        {oneContent}
-                                    </p>
+                                        <OneMsgPage content={oneContent} contentType={'weibo'} index={index} key={index}/>
+
                                 )
                             }
 
 
-                            {/*Example Social Card
-                            <div className="card mb-3">
-                                <div className="card-body">
-                                    <h6 className="card-title mb-1"><a href=" ">路人甲</a></h6>
-                                    <a href=" " className="card-text small"><font color="red">成考</font>答案，加QQ: 550155036
-                                    </a>
-                                </div>
-                                <hr className="my-0" />
-                                <div className="card-body py-2 small">
-                                    <a className="mr-3 d-inline-block" href=" ">评论(20)</a>
-                                    <a className="mr-3 d-inline-block" href=" ">转发(10)</a>
-                                    <a className="d-inline-block" href=" ">赞(100)</a>
-                                    <i className="text-muted ng-binding" style={{marginLeft:20}}>2017-10-29 23:50:00, 微博</i>
-                                </div>
-                                <hr className="my-0" />
-                                <div className="card-body py-2 small">
-                                    <a className="mr-3 d-inline-block" href=" "><i className="fa fa-fw fa-star"/>收藏</a>
-                                    <a className="mr-3 d-inline-block" href=" "><i className="fa fa-fw fa-share"/>导出</a>
-                                    <a className="d-inline-block" href=" "><i className="fa fa-fw fa-send"/>发送</a>
-                                </div>
-                            </div>
+
+                            {/*Example Social Card*
+                            <OneMsgPage content={portalContent} contentType={'portal'} index={1}/>
+                            <OneMsgPage content={weiboContent} contentType={'weibo'} index={0}/>
                             */}
+
                         </div>
                     </Panel>
                 </Collapse>

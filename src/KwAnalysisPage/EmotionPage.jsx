@@ -16,7 +16,7 @@ class EmotionPage extends React.Component {
             trigger: 'axis'
         },
         legend: {
-            data:['正面','负面']
+            data:['正面','负面', '中性']
         },
 
         calculable : true,
@@ -37,11 +37,11 @@ class EmotionPage extends React.Component {
                 boundaryGap : false,
                 data : function (){
                     var list = [];
-                    for (var i = 10; i <= 18; i++) {
+                    for (var i = 1; i <= 10; i++) {
                         if(i<= 12){
-                            list.push('2016-'+i + '-01');
+                            list.push('2017-'+i + '-01');
                         }else{
-                            list.push('2017-'+(i-12) + '-01');
+                            list.push('2018-'+(i-12) + '-01');
                         }
                     }
                     return list;
@@ -66,7 +66,7 @@ class EmotionPage extends React.Component {
                 symbol:'none',
                 smooth: 0.2,
                 color:['#ffc107'],
-                data:[800, 300, 500, 800, 300, 600,500,600, 700]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
             {
                 name:'负面',
@@ -74,7 +74,15 @@ class EmotionPage extends React.Component {
                 symbol:'none',
                 smooth: 0.2,
                 color:['#007bff'],
-                data:[600, 700, 600, 800, 700, 600,880,660, 640]
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            },
+            {
+                name:'中性',
+                type:'line',
+                symbol:'none',
+                smooth: 0.2,
+                color:['#28a745'],
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }
 
         ],
@@ -94,9 +102,68 @@ class EmotionPage extends React.Component {
     componentDidMount(){
 
         const { currentKwd } = this.props;
+        /*
         if (currentKwd !== undefined) {
-            // post到服务器
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd })
+            };
+
+            fetch(serverIP + '/getPolarity', requestOptions).then(
+                response => {
+                    if (!response.ok) {
+                        return Promise.reject(response.statusText);
+                    }
+                    return response.json();
+                }
+            ).then(
+                ans => {
+                    if(ans.status) {
+                        this.setState(preState => ({
+                            ...preState,
+                            series : [
+                                {
+                                    name:'正面',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#ffc107'],
+                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                },
+                                {
+                                    name:'负面',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#007bff'],
+                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                },
+                                {
+                                    name:'中性',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#28a745'],
+                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                }
+
+                            ],
+                        }));
+                    } else {
+                        alert(ans.reason);
+                        if (ans.logout)
+                            history.push("/login");
+                    }
+                },
+                error => {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    history.push("/login");
+                }
+            )
         }
+        */
     }
 
 

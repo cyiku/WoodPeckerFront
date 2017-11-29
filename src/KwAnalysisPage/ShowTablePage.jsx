@@ -105,7 +105,7 @@ class ShowTablePage extends React.Component {
      */
     collectionAll = (event) => {
 
-        const { user, dispatch, collection, tableCollection } = this.props;
+        const { user, dispatch } = this.props;
         const type = 'table';
 
         let icon = document.getElementById('all');

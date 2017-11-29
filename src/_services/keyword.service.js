@@ -31,7 +31,6 @@ function delKws(user, keyword, index) {
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
         body: JSON.stringify({ 'id': user.id, 'token': user.token, 'name': keyword[index].name})
     };
-    console.log(requestOptions.body);
     return fetch(serverIP+'/delKws', requestOptions).then(handleResponse)
 }
 

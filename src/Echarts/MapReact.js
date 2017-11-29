@@ -12,7 +12,7 @@ import 'echarts/lib/component/toolbox'
 export default class MapReact extends React.Component {
   
   constructor(props) {
-    super(props)
+    super(props);
     this.initPie = this.initPie.bind(this)
   }
   
@@ -36,7 +36,7 @@ export default class MapReact extends React.Component {
   }
   
   render() {
-    const { width="100%", height="600px" } = this.props
+    const { width="100%", height="600px" } = this.props;
     return <div ref={ID => this.ID = ID} style={{width, height}}></div>
   }
 }

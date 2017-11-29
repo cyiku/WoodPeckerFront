@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { collectionActions } from '../_actions';
 import {ShowPicPage} from "./ShowPicPage";
 
 // 导入css
@@ -21,32 +20,6 @@ class WordCloudPage extends React.Component {
             // post到服务器
         }
     }
-
-    collection = (event, data, id, type) => {
-        const {user, dispatch} = this.props;
-
-        let icon = document.getElementById(id);
-        if (icon.getAttribute("class") === "fa fa-star-o") {
-            // 收藏
-            icon.setAttribute("class", "fa fa-star");
-
-            dispatch(collectionActions.addCollection(user, data, type));
-
-            if (icon.innerHTML !== "") {
-                icon.innerHTML = " 取消收藏";
-            }
-        } else {
-            // 取消收藏
-            icon.setAttribute("class", "fa fa-star-o");
-
-            dispatch(collectionActions.delCollection(user, data.id, type));
-
-            if (icon.innerHTML !== "") {
-                icon.innerHTML = " 收藏";
-            }
-        }
-    };
-
 
     render() {
         return (

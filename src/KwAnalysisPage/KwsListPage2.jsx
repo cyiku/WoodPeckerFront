@@ -6,11 +6,6 @@ import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
 
-import asyncComponent from '../_helpers/AsyncComponent';
-
-
-import { publishNumOption, emotionNumOption, pieOption, mapOption } from '../_helpers/options'
-
 class KwsListPage2 extends React.Component {
 
 
