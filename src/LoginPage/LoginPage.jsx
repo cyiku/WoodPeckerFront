@@ -36,6 +36,9 @@ class LoginPage extends React.Component {
         const { dispatch } = this.props;
         if (username && password) {
             dispatch(userActions.login(username, password));
+            //let data = document.querySelector('form');
+            //console.log(data);
+            //dispatch(userActions.login2(username, data));
         } else {
             alert("Please input your username or password");
         }

@@ -3,20 +3,31 @@ import {serverIP} from '../_helpers';
 export const userService = {
     login,
     logout,
+    login2
     //register,
 };
 
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json;charset=UTF-8' },
-        body: JSON.stringify({ 'username': username, 'password': password })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'username=' + username + '&password=' + password
     };
-
+    console.log(requestOptions);
     return fetch(serverIP + '/login', requestOptions)
         .then(handleResponse);
 }
 
+function login2(data) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new FormData(data)
+    };
+    console.log(requestOptions);
+    return fetch(serverIP + '/login', requestOptions)
+        .then(handleResponse);
+}
 
 function logout() {
     // remove user from local storage to log user out

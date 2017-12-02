@@ -51,7 +51,8 @@ class MsgShow extends React.Component {
 
 
         //this.connection = new WebSocket('ws://114.212.86.148:8080/websocket.ws');
-        this.connection = new WebSocket('ws://localhost:8080/websocket.ws');
+        //this.connection = new WebSocket('ws://localhost:8080/websocket.ws');
+        this.connection = new WebSocket('ws://localhost:8888')
 
         this.connection.onmessage = evt => {
 
@@ -132,7 +133,7 @@ class MsgShow extends React.Component {
         };
 
         return (
-            <div className="col-md-4" style={{height:600}}>
+            <div className="col-md-4" style={{height:"100% "}}>
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
                     <Panel header= {
