@@ -30,14 +30,21 @@ class OneMsgPage extends React.Component {
         return time + '秒';
     };
 
-    componentDidMount () {
-        let {content} = this.props;
+    componentWillUpdate() {
+        const {content} = this.props;
+        document.getElementById(content._id).innerHTML = "";
+    }
 
+    componentDidUpdate() {
+        const {content} = this.props;
         const newContent = this.markKeyword(content.content, content.keyword);
-        alert(content._id);
-        console.log(content._id + ': ' + content.content);
-        console.log(content._id + ': ' + content.publisher);
-        //document.getElementsByClassName(content._id)[0].innerHTML = newContent;
+        document.getElementById(content._id).innerHTML = newContent;
+    }
+
+    componentDidMount () {
+        const {content} = this.props;
+        const newContent = this.markKeyword(content.content, content.keyword);
+        document.getElementById(content._id).innerHTML = newContent;
 
     }
     render() {
@@ -49,7 +56,7 @@ class OneMsgPage extends React.Component {
         if (contentType === 'weibo')
             showMsg =
                 <div>
-                    <div style={{fontSize:15}} className={content._id}>{content.content}</div>
+                    <div style={{fontSize:15}} id={content._id}/>
                     <span>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
@@ -60,7 +67,7 @@ class OneMsgPage extends React.Component {
                             {content.title}
                         </a>
                     </div>
-                    <div style={{fontSize:15}} className={content._id}>{content.content}</div>
+                    <div style={{fontSize:15}} id={content._id}/>
                 </div>;
         return (
             <div className="card mb-4">

@@ -130,7 +130,7 @@ class MsgShow extends React.Component {
         event.stopPropagation();
     };
 
-
+    /*
     addMsg1 = () => {
         let dom=document.getElementById(123);
         let newMsg = array[count % 2];
@@ -141,8 +141,7 @@ class MsgShow extends React.Component {
         dom.insertBefore(div, dom.firstChild);
         count += 1;
     };
-
-
+    */
 
     addMsg2 = () => {
         let newContent = JSON.parse(JSON.stringify(this.state.content));
@@ -174,7 +173,7 @@ class MsgShow extends React.Component {
         return (
             <div className="col-md-4" style={{height:"100% "}}>
 
-                <button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>
+                {/*<button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>*/}
                 <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
