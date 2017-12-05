@@ -7,7 +7,6 @@ import { openNotificationWithIcon } from "../_helpers";
 export const userActions = {
     login,
     logout,
-    login2,
     //register,
 };
 
@@ -19,20 +18,15 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => {
-                    if (user && user.token) {
-                        localStorage.setItem('user', JSON.stringify(user));
-                        dispatch(success(user));
-                        openNotificationWithIcon("success", "Hi " + user.username);
-                        history.push('/');
-                    } else {
-                        alert("账号或密码输入错误！");
-                    }
+                    localStorage.setItem('user', JSON.stringify(user));
+                    dispatch(success(user));
+                    openNotificationWithIcon("success", "Hi " + username);
+                    history.push('/');
                 },
                 error => {
-                    console.log(error);
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    alert("您无权访问，请检查账号密码");
                 }
             );
     };
@@ -42,37 +36,6 @@ function login(username, password) {
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
-
-function login2(username, data) {
-
-    return dispatch => {
-        dispatch(request({ username }));
-
-        userService.login2(data)
-            .then(
-                user => {
-                    if (user && user.token) {
-                        localStorage.setItem('user', JSON.stringify(user));
-                        dispatch(success(user));
-                        openNotificationWithIcon("success", "Hi " + user.username);
-                        history.push('/');
-                    } else {
-                        alert("账号或密码输入错误！");
-                    }
-                },
-                error => {
-                    console.log(error);
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
-                }
-            );
-    };
-
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
-}
 
 function logout() {
     userService.logout();

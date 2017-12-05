@@ -18,22 +18,24 @@ function getKws(user) {
         keywordService.getKws(user)
             .then(
                 ans => {
-                    if(ans.status) {
-                        //console.log(ans.keyword);
-                        dispatch(success(ans.keyword));
-                        //openNotificationWithIcon('success', '获取关键字成功', '');
+                    if(ans.status === 1) {
+                        dispatch(success(ans.result.keyword));
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             )
@@ -53,23 +55,27 @@ function addKws(user, newkeyword) {
         keywordService.addKws(user, newkeyword)
             .then(
                 ans => {
-                    if(ans.status) {
-                        console.log(ans);
-                        newkeyword.keywordid = ans.keywordid;
+                    if(ans.status === 1) {
+                        //console.log(ans);
+                        newkeyword.keywordid = ans.result.keywordid;
                         dispatch(success(newkeyword));
                         openNotificationWithIcon('success', '添加关键字成功');
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );
@@ -88,22 +94,26 @@ function delKws(user, keyword, index) {
         keywordService.delKws(user, keyword, index)
             .then(
                 ans => {
-                    if(ans.status) {
+                    if(ans.status === 1) {
                         dispatch(success(keyword, index));
                         openNotificationWithIcon('success', '删除关键字成功', '');
                         history.push("/keywords");
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );
@@ -121,22 +131,26 @@ function updKws(user, newkeyword, index, keywordid) {
         keywordService.updKws(user, newkeyword, keywordid)
             .then(
                 ans => {
-                    if(ans.status) {
+                    if(ans.status === 1) {
                         dispatch(success(newkeyword, index));
                         openNotificationWithIcon('success', '更新关键字成功', '');
                         history.push("/keywords");
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );

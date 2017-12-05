@@ -31,22 +31,25 @@ class OneMsgPage extends React.Component {
     };
 
     componentDidMount () {
-        let {content, index} = this.props;
+        let {content} = this.props;
 
         const newContent = this.markKeyword(content.content, content.keyword);
+        alert(content._id);
+        console.log(content._id + ': ' + content.content);
+        console.log(content._id + ': ' + content.publisher);
+        //document.getElementsByClassName(content._id)[0].innerHTML = newContent;
 
-        document.getElementById("content" + index).innerHTML = newContent;
     }
     render() {
         let showMsg;
 
-        const {content, contentType, index} = this.props;
+        const {content, contentType} = this.props;
         const newTime = this.timeTransfer(content.time);
 
         if (contentType === 'weibo')
             showMsg =
                 <div>
-                    <div style={{fontSize:15}} id={"content" + index}/>
+                    <div style={{fontSize:15}} className={content._id}>{content.content}</div>
                     <span>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
@@ -57,16 +60,13 @@ class OneMsgPage extends React.Component {
                             {content.title}
                         </a>
                     </div>
-                    <div style={{fontSize:15}} id={'content' + index}>
-
-                    </div>
+                    <div style={{fontSize:15}} className={content._id}>{content.content}</div>
                 </div>;
-
         return (
             <div className="card mb-4">
                 <div className="card-body">
                     <div>
-                        <h6 style={{display:"inline"}}>{content.publisher}</h6>
+                        <h6 style={{display:"inline"}}>{content.publisher + content._id}</h6>
                         <i style={{float:"right"}}>{newTime}, {content.source}</i>
                     </div>
                     {showMsg}

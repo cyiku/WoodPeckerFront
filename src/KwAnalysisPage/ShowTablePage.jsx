@@ -3,6 +3,8 @@ import { Table } from 'antd';
 import { CSVLink } from 'react-csv';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -17,6 +19,7 @@ class ShowTablePage extends React.Component {
         this.state = {
             searchedContent: [],
             searchInput: '',
+            //isCollection: false,
         };
     };
 
@@ -32,9 +35,16 @@ class ShowTablePage extends React.Component {
         }
 
         const { data } = this.props;
+
+        let dataid = [];
+        for (let i = 0; i < data.length; ++i) {
+            dataid.push(data[i].id);
+        }
+        //this.isCollection(dataid);
         this.setState(preState => ({
             searchedContent: data,
         }));
+
 
     }
 
@@ -89,11 +99,7 @@ class ShowTablePage extends React.Component {
 
         } else {
             // 取消收藏
-
-            for (let i = 0; i < collection.length; ++i) {
-                dispatch(collectionActions.delCollection(user, [data[0]['id']], type))
-            }
-
+            dispatch(collectionActions.delCollection(user, [data[0]['id']], type));
             icon.setAttribute("class", "fa fa-star-o"); //更换图标
         }
     };
@@ -114,6 +120,7 @@ class ShowTablePage extends React.Component {
 
             dispatch(collectionActions.addCollection(user, this.state.searchedContent, type));
             icon.setAttribute("class", "fa fa-star");
+            icon.innerHTML = "取消收藏";
         } else {
 
             let dataidlist = [];
@@ -123,6 +130,7 @@ class ShowTablePage extends React.Component {
 
             dispatch(collectionActions.delCollection(user, dataidlist, type));
             icon.setAttribute("class", "fa fa-star-o"); //更换图标
+            icon.innerHTML = "收藏";
         }
 
     };
@@ -132,15 +140,19 @@ class ShowTablePage extends React.Component {
      * 表格的搜索功能
      */
     search = () => {
-        const {data} = this.props; // 拿到全部内容
+        const {user, data} = this.props; // 拿到全部内容
 
         // 根据每条消息中的content匹配searchInput的内容
         let searchedContent = [];
+        let searchedContentId = [];
         for (let i = 0; i < data.length; ++i) {
             if (data[i]['content'].indexOf(this.state.searchInput) !== -1) {
                 searchedContent.push(data[i]);
+                searchedContentId.push(data[i].id);
             }
         }
+
+        //this.isCollection(searchedContentId);
 
         // 重置state, 刷新对应的dom
         this.setState(
@@ -151,6 +163,54 @@ class ShowTablePage extends React.Component {
         );
     };
 
+    /*
+    isCollection = (searchedContentId) => {
+        const {user} = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({'type': "table", 'dataid': searchedContentId})
+        };
+        console.log(requestOptions.body);
+        fetch(serverIP + '/isCollection', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }).then(
+            ans => {
+                if(ans.status === 1) {
+                    console.log(ans.result.iscollection);
+                    if (ans.result.iscollection === true) {
+                        this.setState(
+                            preState => ({
+                                ...preState,
+                                isCollection: true
+                            })
+                        );
+                    } else {
+                        this.setState(
+                            preState => ({
+                                ...preState,
+                                isCollection: false
+                            })
+                        );
+                    }
+
+                } else {
+                    alert(ans.message);
+                    if (ans.status === -1)
+                        history.push("/login");
+                }
+            },
+            error => {
+                alert("服务器内部错误,请联系管理员,抱歉！");
+                history.push("/login");
+            }
+        );
+    };
+    */
 
     /**
      * searchInput被更改时, 实时更新this.state.searchInput中的值
@@ -166,6 +226,14 @@ class ShowTablePage extends React.Component {
         const {collection, title} = this.props;
 
         let { columns } = this.props;
+
+        /*
+        let collectionDiv;
+        if (this.state.isCollection === false)
+            collectionDiv = <i className="fa fa-star-o" id="all"> 收藏</i>;
+        else
+            collectionDiv = <i className="fa fa-star" id="all"> 取消收藏</i>;
+        */
         columns = columns.concat(
             {title: '操作', key: 'action', render: (record) => (
                 <span>
@@ -206,9 +274,11 @@ class ShowTablePage extends React.Component {
 
 
                 <div className="card-body py-2 small">
+                    {/*
                     <a className="mr-3 d-inline-block" href='javascript:void(0);' onClick={event => this.collectionAll(event)} >
-                        <i className="fa fa-star-o" id="all"> 收藏</i>
+                        {collectionDiv}
                     </a>
+                    */}
                     <CSVLink data={this.state.searchedContent}
                              filename={new Date().toLocaleString()}
                              target="_blank"

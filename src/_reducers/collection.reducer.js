@@ -25,7 +25,10 @@ export function collection(state = initialCollection, action) {
         case collectionConstants.ADDCOLLECTION_SUCCESS:
             newState = JSON.parse(JSON.stringify(state));
             const newcollection = action.collection;
-            newState[action.contenttype].push(newcollection);
+            if (action.contenttype === 'table')
+                newState[action.contenttype].push(newcollection);
+            else
+                newState[action.contenttype].push(newcollection[0]);
             return newState;
 
         case collectionConstants.DELCOLLECTION_SUCCESS:

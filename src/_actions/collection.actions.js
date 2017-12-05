@@ -18,21 +18,25 @@ function getCollection(user, type) {
         collectionService.getCollection(user, type)
             .then(
                 ans => {
-                    if(ans.status) {
-                        console.log(ans.collection);
-                        dispatch(success(ans.collection, type));
+                    if(ans.status === 1) {
+                        console.log(ans.result.collection);
+                        dispatch(success(ans.result.collection, type));
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );
@@ -51,21 +55,29 @@ function addCollection(user, collection, type) {
         collectionService.addCollection(user, collection, type)
             .then(
                 ans => {
-                    if(ans.status) {
+                    if(ans.status === 1) {
+                        //console.log(collection);
                         dispatch(success(collection, type));
-                        openNotificationWithIcon('success', '收藏成功');
+                        if (type === 'table')
+                            openNotificationWithIcon('success', '收藏表格成功');
+                        else
+                            openNotificationWithIcon('success', '收藏消息成功');
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.reason));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.message));
+                        alert(ans.message);
+                        if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );
@@ -73,7 +85,9 @@ function addCollection(user, collection, type) {
 
 
     function request(user) { return { type: collectionConstants.ADDCOLLECTION_REQUEST, user } }
-    function success(collection, contenttype) { return {type: collectionConstants.ADDCOLLECTION_SUCCESS, collection, contenttype} }
+    function success(collection, contenttype) {
+        return {type: collectionConstants.ADDCOLLECTION_SUCCESS, collection, contenttype}
+    }
     function failure(error) { return { type: collectionConstants.ADDCOLLECTION_FAILURE, error } }
 }
 
@@ -85,21 +99,25 @@ function delCollection(user, id, type) {
         collectionService.delCollection(user, id, type)
             .then(
                 ans => {
-                    if(ans.status) {
-                        dispatch(success(id, type, ans.collection));
+                    if(ans.status === 1) {
+                        dispatch(success(id, type, ans.result.collection));
                         openNotificationWithIcon('success', '取消收藏成功');
                     } else {
-                        dispatch(failure(ans.reason));
-                        dispatch(alertActions.error(ans.collection));
-                        alert(ans.reason);
-                        if (ans.logout)
+                        dispatch(failure(ans.message));
+                        dispatch(alertActions.error(ans.result.collection));
+                        alert(ans.message);
+                        if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             );

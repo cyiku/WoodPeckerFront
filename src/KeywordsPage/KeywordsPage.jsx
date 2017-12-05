@@ -3,6 +3,9 @@ import { Modal, Button } from 'antd';
 import { Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
+
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -37,6 +40,34 @@ class KeywordsPage extends React.Component {
         ],
     };
 
+
+    getTypes = () => {
+        const {user} = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({})
+        };
+        fetch(serverIP + '/getSites', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }).then(
+            ans => {
+                if(ans.status === 1) {
+
+                } else {
+
+                }
+            },
+            error => {
+                alert("服务器内部错误,请联系管理员,抱歉！");
+                history.push("/login");
+            }
+        );
+    };
 
     componentDidMount(){
         const { user, dispatch, keyword } = this.props;

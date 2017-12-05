@@ -12,6 +12,8 @@ import './MonitoringPage.css';
 const Panel = Collapse.Panel;
 
 const weiboContent = {
+    '_id': 1,
+    'contentType': 'weibo',
     'publisher': '你是小猪咯',
     'n_comment':0,
     'n_forward': 0,
@@ -24,6 +26,8 @@ const weiboContent = {
 };
 let count = 0;
 const portalContent = {
+    '_id': 0,
+    'contentType': 'portal',
     'source': '网易网',
     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
@@ -33,6 +37,7 @@ const portalContent = {
     'publisher': '记者',
 };
 
+const array = [weiboContent, portalContent];
 class MsgShow extends React.Component {
 
 
@@ -49,11 +54,11 @@ class MsgShow extends React.Component {
         const {user, keyword} = this.props;
         console.log(keyword);
 
-
         //this.connection = new WebSocket('ws://114.212.86.148:8080/websocket.ws');
         //this.connection = new WebSocket('ws://localhost:8080/websocket.ws');
-        this.connection = new WebSocket('ws://localhost:8888')
+        //this.connection = new WebSocket('ws://192.168.1.130:4321');
 
+        /*
         this.connection.onmessage = evt => {
 
             let newContent = this.state.content;
@@ -74,11 +79,11 @@ class MsgShow extends React.Component {
 
         this.connection.onopen = () => {
             console.log(keyword.name + " has been connected");
-            this.connection.send(JSON.stringify({'id': user.id, 'token': user.token, 'name': keyword.name, 'type': 'play'}));
+            this.connection.send(keyword.name + "\n");
             console.log(keyword.name + " has been started to get data");
         };
 
-
+        */
 
         /* 前端向后端发送定时请求
         this.interval = setInterval(_ => {
@@ -90,7 +95,7 @@ class MsgShow extends React.Component {
 
     componentWillUnmount(){
         //clearInterval(this.interval);
-        this.connection.close();
+        //this.connection.close();
     }
 
     play = (event) => {
@@ -125,6 +130,40 @@ class MsgShow extends React.Component {
         event.stopPropagation();
     };
 
+
+    addMsg1 = () => {
+        let dom=document.getElementById(123);
+        let newMsg = array[count % 2];
+        newMsg._id = count;
+
+        //div.setAttribute("value", <OneMsgPage content={newMsg} contentType={newMsg['contentType']}/>);
+        let div = <OneMsgPage content={newMsg} contentType={newMsg['contentType']}/>;
+        dom.insertBefore(div, dom.firstChild);
+        count += 1;
+    };
+
+
+
+    addMsg2 = () => {
+        let newContent = JSON.parse(JSON.stringify(this.state.content));
+
+        let newMsg = array[count % 2];
+        newMsg._id = count;
+
+        newContent.unshift(newMsg);
+
+        console.log(newContent);
+
+        this.setState(
+            preState => ({
+                ...preState,
+                content: newContent,
+            })
+        );
+        count += 1;
+    };
+
+
     render() {
         const {keyword} = this.props;
         let path = {
@@ -134,6 +173,9 @@ class MsgShow extends React.Component {
 
         return (
             <div className="col-md-4" style={{height:"100% "}}>
+
+                <button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>
+                <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
                     <Panel header= {
@@ -147,21 +189,14 @@ class MsgShow extends React.Component {
                         </div>
                     } key="1" >
 
-                        <div style={{height:600, overflow: "auto"}}>
+                        <div style={{height:600, overflow: "auto"}} id={123}>
 
                             {
                                 this.state.content.map((oneContent, index)=>
-                                        <OneMsgPage content={oneContent} contentType={'weibo'} index={index} key={index}/>
+                                        <OneMsgPage content={oneContent} contentType={oneContent['contentType']} key={index}/>
 
                                 )
                             }
-
-
-
-                            {/*Example Social Card*
-                            <OneMsgPage content={portalContent} contentType={'portal'} index={1}/>
-                            <OneMsgPage content={weiboContent} contentType={'weibo'} index={0}/>
-                            */}
 
                         </div>
                     </Panel>
