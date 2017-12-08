@@ -35,8 +35,10 @@ class KeywordsPage extends React.Component {
         title: '',
         // checkbox, 从服务器读
         types: [
-            type('贴吧', ['百度贴吧', '千度贴吧']),
-            type('新闻', ['搜狐新闻', '腾讯新闻'])
+            type('贴吧', []),
+            type('门户网站', []),
+            type('微博', []),
+            type('培训机构', []),
         ],
     };
 
@@ -57,13 +59,28 @@ class KeywordsPage extends React.Component {
             }).then(
             ans => {
                 if(ans.status === 1) {
-
+                    console.log(ans.result);
+                    this.setState(preState => ({
+                        ...preState,
+                        types: [
+                            type('贴吧', ans.result.tieba),
+                            type('门户网站', ans.result.portal),
+                            type('微博', ans.result.weibo),
+                            type('培训机构', ans.result.agency),
+                        ]
+                    }));
                 } else {
-
+                    alert(ans.message);
+                    if (ans.status === -1)
+                        history.push("/login");
                 }
             },
             error => {
-                alert("服务器内部错误,请联系管理员,抱歉！");
+                if (error.message === "Failed to fetch") {
+                    alert("登录过期, 请重新登录");
+                } else {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                }
                 history.push("/login");
             }
         );
@@ -73,6 +90,7 @@ class KeywordsPage extends React.Component {
         const { user, dispatch, keyword } = this.props;
         if (keyword.length === 0)
             dispatch(keywordActions.getKws(user));
+        this.getTypes();
     }
 
     // 删除
@@ -304,6 +322,8 @@ class KeywordsPage extends React.Component {
                                                         </div>
                                                         <br />
                                                         <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                                        <br />
+                                                        <br />
                                                     </div>
                                                 )
                                             }

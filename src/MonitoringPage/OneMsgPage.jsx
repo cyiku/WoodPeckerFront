@@ -57,13 +57,13 @@ class OneMsgPage extends React.Component {
             showMsg =
                 <div>
                     <div style={{fontSize:15}} id={content._id}/>
-                    <span>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
+                    <span>转发({content.n_forword}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
             showMsg =
                 <div>
                     <div>
-                        <a href={content.url} style={{fontSize:10}}>
+                        <a href={content.url} style={{fontSize:10}} target="_blank">
                             {content.title}
                         </a>
                     </div>
@@ -73,14 +73,15 @@ class OneMsgPage extends React.Component {
             <div className="card mb-4">
                 <div className="card-body">
                     <div>
-                        <h6 style={{display:"inline"}}>{content.publisher + content._id}</h6>
-                        <i style={{float:"right"}}>{newTime}, {content.source}</i>
+                        <h6 style={{display:"inline"}}>{content.publisher}</h6>
+                        <i
+                            style={{float:"right"}}>{newTime}, {content.source}</i>
                     </div>
                     {showMsg}
                 </div>
                 <hr className="my-0" />
                 <div className="card-body py-2 small">
-                    <a className="mr-3 d-inline-block" href={content.url}>原文地址</a>
+                    <a className="mr-3 d-inline-block" href={content.url} target="_blank">原文地址</a>
                     <a className="mr-3 d-inline-block" href=" "><i className="fa fa-fw fa-star-o"/>收藏</a>
                     <a className="mr-3 d-inline-block" href=" "><i className="fa fa-fw fa-share-square-o"/>导出</a>
                     <a className="d-inline-block" href=" "><i className="fa fa-fw fa-send-o"/>发送</a>

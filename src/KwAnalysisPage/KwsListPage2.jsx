@@ -11,10 +11,14 @@ class KwsListPage2 extends React.Component {
 
     clickKeyword = (event) => {
         let targets = document.getElementsByClassName("keyword");
+        /*
         for (let i = 0; i < targets.length; ++i) {
             targets[i].setAttribute("class", "btn btn-secondary keyword");
         }
         event.target.setAttribute("class", "btn btn-primary keyword");
+        */
+
+        alert(123);
     };
 
     render() {
@@ -41,7 +45,6 @@ class KwsListPage2 extends React.Component {
                             to={{pathname:'/kwAnalysis', state:oneKwd.name}}
                             className={kwdButtonClass[oneKwd.name]}
                             key={index}
-                            onClick={event => {this.clickKeyword(event)}}
                             style={{color:"white", marginLeft:10}}
                         >
                             {oneKwd.name}

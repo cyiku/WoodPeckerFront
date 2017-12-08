@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Collapse } from 'antd';
 import {openNotificationWithIcon} from "../_helpers";
 import {OneMsgPage} from "./OneMsgPage";
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -11,20 +13,8 @@ import './MonitoringPage.css';
 
 const Panel = Collapse.Panel;
 
-const weiboContent = {
-    '_id': 1,
-    'contentType': 'weibo',
-    'publisher': '你是小猪咯',
-    'n_comment':0,
-    'n_forward': 0,
-    'n_like': 0,
-    'content': '看完广告默默打开肯德基APP挑起了外卖，愉快的点了，等快晚饭的时候就可以麻溜的下单啦<span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span><span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span><span class="url-icon"><img src="//h5.sinaimg.cn/m/emoticon/icon/default/d_yunbei-c6964bf237.png" style="width:1em;height:1em;" alt="[允悲]"></span>话说我好想喝肯德基的粥啊<a href=https://m.weibo.cn/n/肯德基">@肯德基</a>  真的不可以考虑粥全天出售吗',
-    'url': 'https://weibo.cn/appurl?scheme=sinaweibo%3A%2F%2Fdetail%3Fmblogid%3D4178732706656653%26luicode%3D20000061%26lfid%3D4178732706656653%26featurecode%3D20000320&luicode=20000061&lfid=4178732706656653&featurecode=20000320',
-    'time': '2017_11_27_16_22_56',
-    'source': 'sina_weibo',
-    'keyword': '出售',
-};
-let count = 0;
+
+
 const portalContent = {
     '_id': 0,
     'contentType': 'portal',
@@ -37,7 +27,7 @@ const portalContent = {
     'publisher': '记者',
 };
 
-const array = [weiboContent, portalContent];
+
 class MsgShow extends React.Component {
 
 
@@ -85,18 +75,63 @@ class MsgShow extends React.Component {
 
         */
 
-        /* 前端向后端发送定时请求
+        /* 前端向后端发送定时请求*/
+        this.monitor()
         this.interval = setInterval(_ => {
-            this.connection.send(JSON.stringify({'id': user.id, 'token': user.token}))
-        }, 2000 )
-        */
+            this.monitor()
+        }, 20000 )
 
     }
 
     componentWillUnmount(){
-        //clearInterval(this.interval);
+        clearInterval(this.interval);
         //this.connection.close();
     }
+
+    monitor = () => {
+        const {user,keyword} = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({ 'name': keyword.name })
+        };
+
+        fetch(serverIP + '/monitor', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }
+        ).then(
+            ans => {
+                if(ans.status === 1) {
+                    console.log(ans.result.data);
+                    let newContent = JSON.parse(JSON.stringify(this.state.content));
+                    for (let i = 0; i < ans.result.data.length; ++i) {
+                        newContent.unshift(ans.result.data[i])
+                    }
+                    this.setState(preState => ({
+                        ...preState,
+                        content: newContent,
+                    }));
+                } else {
+                    alert(ans.message);
+                    if (ans.status === -1)
+                        history.push("/login");
+                }
+            },
+            error => {
+                if (error.message === "Failed to fetch") {
+                    alert("登录过期, 请重新登录");
+                } else {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                }
+                history.push("/login");
+            }
+        )
+    };
+
 
     play = (event) => {
 
@@ -151,7 +186,7 @@ class MsgShow extends React.Component {
 
         newContent.unshift(newMsg);
 
-        console.log(newContent);
+        //console.log(newContent);
 
         this.setState(
             preState => ({
@@ -173,8 +208,8 @@ class MsgShow extends React.Component {
         return (
             <div className="col-md-4" style={{height:"100% "}}>
 
-                {/*<button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>*/}
-                <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>
+                {/*<button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>
+                <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>*/}
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
                     <Panel header= {
@@ -188,7 +223,7 @@ class MsgShow extends React.Component {
                         </div>
                     } key="1" >
 
-                        <div style={{height:600, overflow: "auto"}} id={123}>
+                        <div style={{height:600, overflow: "auto"}}>
 
                             {
                                 this.state.content.map((oneContent, index)=>

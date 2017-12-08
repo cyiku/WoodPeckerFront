@@ -64,14 +64,15 @@ class DataDistributionPage extends React.Component {
 
         const { currentKwd } = this.props;
 
-        /*
+
         if (currentKwd !== undefined) {
             const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd})
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': currentKwd})
             };
+            console.log(requestOptions);
 
             fetch(serverIP + '/getDataSourceNum', requestOptions).then(
                 response => {
@@ -82,7 +83,7 @@ class DataDistributionPage extends React.Component {
                 }
             ).then(
                 ans => {
-                    if(ans.status) {
+                    if(ans.status === 1) {
                         this.setState(preState => ({
                             ...preState,
                             series : [
@@ -92,10 +93,10 @@ class DataDistributionPage extends React.Component {
                                     radius : '55%',
                                     center: ['50%', '60%'],
                                     data:[
-                                        {value:ans.num.forum, name:'论坛'},
-                                        {value:ans.num.weibo, name:'微博'},
-                                        {value:ans.num.portal, name:'门户网站'},
-                                        {value:ans.num.agency, name:'培训机构'}
+                                        {value:ans.result.num.forum, name:'论坛'},
+                                        {value:ans.result.num.weibo, name:'微博'},
+                                        {value:ans.result.num.portal, name:'门户网站'},
+                                        {value:ans.result.num.agency, name:'培训机构'}
                                     ],
                                     itemStyle: {
                                         emphasis: {
@@ -108,18 +109,22 @@ class DataDistributionPage extends React.Component {
                             ],
                         }));
                     } else {
-                        alert(ans.reason);
-                        if (ans.logout)
+                        alert(ans.message);
+                        if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             )
         }
-        */
+
     }
 
 

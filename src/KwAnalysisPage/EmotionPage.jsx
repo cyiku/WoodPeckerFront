@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { collectionActions } from '../_actions';
 import {ShowPicPage} from "./ShowPicPage";
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -16,7 +17,7 @@ class EmotionPage extends React.Component {
             trigger: 'axis'
         },
         legend: {
-            data:['正面','负面', '中性']
+            data:['正面','负面']
         },
 
         calculable : true,
@@ -75,14 +76,6 @@ class EmotionPage extends React.Component {
                 smooth: 0.2,
                 color:['#007bff'],
                 data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
-            {
-                name:'中性',
-                type:'line',
-                symbol:'none',
-                smooth: 0.2,
-                color:['#28a745'],
-                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             }
 
         ],
@@ -102,13 +95,13 @@ class EmotionPage extends React.Component {
     componentDidMount(){
 
         const { currentKwd } = this.props;
-        /*
+
         if (currentKwd !== undefined) {
             const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd })
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': currentKwd })
             };
 
             fetch(serverIP + '/getPolarity', requestOptions).then(
@@ -130,7 +123,7 @@ class EmotionPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#ffc107'],
-                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                    data: ans.result.num.positive
                                 },
                                 {
                                     name:'负面',
@@ -138,16 +131,8 @@ class EmotionPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#007bff'],
-                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                    data:ans.result.num.negative
                                 },
-                                {
-                                    name:'中性',
-                                    type:'line',
-                                    symbol:'none',
-                                    smooth: 0.2,
-                                    color:['#28a745'],
-                                    data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                                }
 
                             ],
                         }));
@@ -163,7 +148,6 @@ class EmotionPage extends React.Component {
                 }
             )
         }
-        */
     }
 
 

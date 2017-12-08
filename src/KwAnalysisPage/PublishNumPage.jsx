@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -110,13 +112,13 @@ class PublishNumPage extends React.Component {
 
         const { currentKwd } = this.props;
 
-        /*
+
         if (currentKwd !== undefined) {
             const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd})
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token  },
+                body: JSON.stringify({ 'keyword': currentKwd})
             };
 
             fetch(serverIP + '/getPublishNum', requestOptions).then(
@@ -131,6 +133,22 @@ class PublishNumPage extends React.Component {
                     if(ans.status) {
                         this.setState(preState => ({
                             ...preState,
+                            xAxis : [
+                                {
+                                    axisLabel:{
+                                        rotate: 30,
+                                        interval:0
+                                    },
+                                    axisLine:{
+                                        lineStyle :{
+                                            color: '#CECECE'
+                                        }
+                                    },
+                                    type : 'category',
+                                    boundaryGap : false,
+                                    data : ans.result.date
+                                }
+                            ],
                             series : [
                                 {
                                     name:'门户网站',
@@ -138,7 +156,7 @@ class PublishNumPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#ffc107'],
-                                    data:ans.num.portal
+                                    data:ans.result.num.portal
                                 },
                                 {
                                     name:'微博',
@@ -146,7 +164,7 @@ class PublishNumPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#007bff'],
-                                    data:ans.num.weibo
+                                    data:ans.result.num.weibo
                                 },
                                 {
                                     name:'论坛',
@@ -154,7 +172,7 @@ class PublishNumPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#868e96'],
-                                    data:ans.num.forum
+                                    data:ans.result.num.forum
                                 },
                                 {
                                     name:'培训机构',
@@ -162,24 +180,27 @@ class PublishNumPage extends React.Component {
                                     symbol:'none',
                                     smooth: 0.2,
                                     color:['#28a745'],
-                                    data:ans.num.agency
+                                    data:ans.result.num.agency
                                 }
 
                             ],
                         }));
                     } else {
-                        alert(ans.reason);
-                        if (ans.logout)
+                        alert(ans.message);
+                        if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             )
         }
-        */
     }
 
 

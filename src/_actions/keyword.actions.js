@@ -97,7 +97,7 @@ function delKws(user, keyword, index) {
                     if(ans.status === 1) {
                         dispatch(success(keyword, index));
                         openNotificationWithIcon('success', '删除关键字成功', '');
-                        history.push("/keywords");
+                        //history.push("/keywords");
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));

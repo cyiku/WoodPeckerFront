@@ -19,8 +19,9 @@ export function keyword(state = [], action) {
           return action.keyword;
 
       case keywordConstants.DELKWS_SUCCESS:
-          action.keyword.splice(action.index, 1);
-          return action.keyword;
+          let newState = JSON.parse(JSON.stringify(state));
+          newState.splice(action.index, 1);
+          return newState;
 
       case keywordConstants.UPDKWS_SUCCESS:
           state[action.index].name = action.keyword.name;

@@ -17,6 +17,8 @@ import {BlankPage} from '../BlankPage'
 import {KeywordsPage} from '../KeywordsPage'
 import {CollectionNewsPage} from '../CollectionNewsPage'
 import {CollectionChartsPage} from '../CollectionChartsPage'
+import { ClusteringPage } from '../ClusteringPage'
+import {RecommendationPage} from "../RecommendationPage";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -80,7 +82,7 @@ class HomePage extends React.Component {
 
                             <SubMenu key="sub2" title={<span><i className="fa fa-fw fa-bar-chart"/> 话题分析</span>}>
                                 <Menu.Item key="kwAnalysis"><Link to="/kwAnalysis">关键词分析</Link></Menu.Item>
-                                <Menu.Item key="warning"><Link to="/warning">话题预警</Link></Menu.Item>
+                                <Menu.Item key="clustering"><Link to="/clustering">话题聚类</Link></Menu.Item>
                                 <Menu.Item key="recommendation"><Link to="/recommendation">关键词推荐</Link></Menu.Item>
                             </SubMenu>
 
@@ -108,6 +110,8 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}keywords`} exact component={KeywordsPage} />
                             <Route path={`${this.props.match.path}collectionNews`} exact component={CollectionNewsPage} />
                             <Route path={`${this.props.match.path}collectionCharts`} exact component={CollectionChartsPage} />
+                            <Route path={`${this.props.match.path}clustering`} exact component={ClusteringPage} />
+                            <Route path={`${this.props.match.path}recommendation`} exact component={RecommendationPage} />
                             <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>

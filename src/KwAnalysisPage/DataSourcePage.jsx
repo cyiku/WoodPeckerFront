@@ -21,13 +21,13 @@ class DataSourcePage extends React.Component {
     componentDidMount(){
 
         const { currentKwd } = this.props;
-        /*
+
         if (currentKwd !== undefined) {
             const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'id': user.id, 'token': user.token, 'keyword': currentKwd })
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': currentKwd })
             };
 
             fetch(serverIP + '/getDataSourceNum', requestOptions).then(
@@ -39,27 +39,31 @@ class DataSourcePage extends React.Component {
                 }
             ).then(
                 ans => {
-                    if(ans.status) {
+                    if(ans.status === 1) {
                         this.setState(preState => ({
                             ...preState,
-                            forum: ans.num.forum,
-                            weibo: ans.num.weibo,
-                            portal: ans.num.portal,
-                            agency: ans.num.agency,
+                            forum: ans.result.num.forum,
+                            weibo: ans.result.num.weibo,
+                            portal: ans.result.num.portal,
+                            agency: ans.result.num.agency,
                         }));
                     } else {
-                        alert(ans.reason);
-                        if (ans.logout)
+                        alert(ans.message);
+                        if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                     history.push("/login");
                 }
             )
         }
-        */
+
     }
 
 

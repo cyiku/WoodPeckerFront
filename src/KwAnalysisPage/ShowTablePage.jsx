@@ -235,7 +235,7 @@ class ShowTablePage extends React.Component {
             collectionDiv = <i className="fa fa-star" id="all"> 取消收藏</i>;
         */
         columns = columns.concat(
-            {title: '操作', key: 'action', render: (record) => (
+            {title: '操作', key: 'action', width: 100, fixed: 'right', render: (record) => (
                 <span>
                     <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record.id)}><i className={this.hasCollected(record.id, collection)} id={record.id}/></a>
                     <CSVLink data={this.objToJSON(record)}
