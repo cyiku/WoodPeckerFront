@@ -35,6 +35,7 @@ class MsgShow extends React.Component {
         super(props);
         this.state = {
             content: [],
+            updateTime: [],
         }
     }
 
@@ -76,7 +77,7 @@ class MsgShow extends React.Component {
         */
 
         /* 前端向后端发送定时请求*/
-        this.monitor()
+        this.monitor();
         this.interval = setInterval(_ => {
             this.monitor()
         }, 20000 )
@@ -87,6 +88,24 @@ class MsgShow extends React.Component {
         clearInterval(this.interval);
         //this.connection.close();
     }
+
+    getNowFormatDate = () => {
+        let date = new Date();
+        let seperator1 = "-";
+        let seperator2 = ":";
+        let month = date.getMonth() + 1;
+        let strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+    };
 
     monitor = () => {
         const {user,keyword} = this.props;
@@ -106,13 +125,19 @@ class MsgShow extends React.Component {
         ).then(
             ans => {
                 if(ans.status === 1) {
-                    console.log(ans.result.data);
+                    //console.log(ans.result.data);
                     let newContent = JSON.parse(JSON.stringify(this.state.content));
+                    let newUpdateTime = JSON.parse(JSON.stringify(this.state.updateTime));
+                    /*
                     for (let i = 0; i < ans.result.data.length; ++i) {
                         newContent.unshift(ans.result.data[i])
                     }
+                    */
+                    newContent.unshift(ans.result.data);
+                    newUpdateTime.unshift(this.getNowFormatDate());
                     this.setState(preState => ({
                         ...preState,
+                        updateTime: newUpdateTime,
                         content: newContent,
                     }));
                 } else {
@@ -176,7 +201,7 @@ class MsgShow extends React.Component {
         dom.insertBefore(div, dom.firstChild);
         count += 1;
     };
-    */
+
 
     addMsg2 = () => {
         let newContent = JSON.parse(JSON.stringify(this.state.content));
@@ -196,6 +221,7 @@ class MsgShow extends React.Component {
         );
         count += 1;
     };
+    */
 
 
     render() {
@@ -226,9 +252,16 @@ class MsgShow extends React.Component {
                         <div style={{height:600, overflow: "auto"}}>
 
                             {
-                                this.state.content.map((oneContent, index)=>
-                                        <OneMsgPage content={oneContent} contentType={oneContent['contentType']} key={index}/>
-
+                                this.state.content.map((oneContentList, index)=> (
+                                    <div key={index}>
+                                        <div style={{textAlign:"center", marginBottom: "5px"}} className={"card mb4"}>
+                                            <span>更新于: {this.state.updateTime[index]}</span>
+                                        </div>
+                                        {
+                                            oneContentList.map((oneContent, index2) => <OneMsgPage content={oneContent} contentType={oneContent['contentType']} key={index2} time={this.state.updateTime[index]}/>)
+                                        }
+                                    </div>
+                                    )
                                 )
                             }
 

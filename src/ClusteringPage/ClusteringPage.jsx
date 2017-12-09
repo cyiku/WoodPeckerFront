@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'antd';
 import { CSVLink } from 'react-csv';
+import {serverIP} from '../_helpers';
+import { history } from '../_helpers';
 
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -11,11 +13,10 @@ class ClusteringPage extends React.Component {
     state = {
         columns : [
             {title: '话题ID', dataIndex: 'id'},
-            {title: '相关词', dataIndex: 'words'},
+            {title: '相关词', dataIndex: 'word'},
         ],
         content: [
-            {'id': 1, 'words': "成考: 40%, 考试: 30%, 十月: 20%, 答案: 10%"},
-            {'id': 2, 'words': "购物: 40%, 双十一: 30%, 淘宝: 20%, 剁手: 10%"},
+            {'id': 1, 'word': ""},
         ],
         time: "2017年12月6号"
     };
@@ -23,6 +24,46 @@ class ClusteringPage extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        const {user} = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({})
+        };
+        console.log(requestOptions);
+
+        fetch(serverIP + '/getClustering', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }
+        ).then(
+            ans => {
+                if(ans.status === 1) {
+                    console.log(ans.result);
+                    this.setState(preState => ({
+                        ...preState,
+                        content: ans.result.topic
+                    }));
+                } else {
+                    alert(ans.message);
+                    if (ans.status === -1)
+                        history.push("/login");
+                }
+            },
+            error => {
+                if (error.message === "Failed to fetch") {
+                    alert("登录过期, 请重新登录");
+                } else {
+                    alert("服务器内部错误,请联系管理员,抱歉！");
+                }
+                history.push("/login");
+            }
+        )
+    }
 
     render() {
 
