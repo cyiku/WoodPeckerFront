@@ -13,6 +13,8 @@ import '../vendor/bootstrap/css/bootstrap.min.css';
 class OneMsgPage extends React.Component {
 
     markKeyword = (content, keywords) => {
+        //console.log(content);
+        //console.log(keywords);
         // 分割keywords
         const keyword_list = keywords.split('_');
         //console.log(keyword_list);
