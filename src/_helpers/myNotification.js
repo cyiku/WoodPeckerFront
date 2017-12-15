@@ -2,7 +2,7 @@ import {notification} from 'antd';
 
 const openNotificationWithIcon = (type, message, description="") => {
     notification.config({
-        duration: 3,
+        duration: 2,
     });
     notification[type]({
         message: message,

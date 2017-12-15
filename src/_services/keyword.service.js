@@ -13,7 +13,7 @@ function getKws(user) {
         headers: {'Content-Type': 'application/json;charset=UTF-8', Authorization: 'Bearer ' + user.token},
         body: JSON.stringify({'token': user.token})
     };
-    console.log(requestOptions);
+    //console.log(requestOptions);
     return fetch(serverIP + '/getKws', requestOptions).then(handleResponse)
 }
 

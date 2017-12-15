@@ -3,6 +3,7 @@ import {collectionService} from "../_services/";
 import { alertActions } from './';
 import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
+import {userActions} from '../_actions';
 
 export const collectionActions = {
     getCollection,
@@ -19,25 +20,27 @@ function getCollection(user, type) {
             .then(
                 ans => {
                     if(ans.status === 1) {
-                        console.log(ans.result.collection);
+                        //console.log(ans.result.collection);
                         dispatch(success(ans.result.collection, type));
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         alert(ans.message);
                         if (ans.status === -1)
-                        history.push("/login");
+                            dispatch(userActions.logout());
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };
@@ -71,14 +74,16 @@ function addCollection(user, collection, type) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };
@@ -111,14 +116,16 @@ function delCollection(user, id, type) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };

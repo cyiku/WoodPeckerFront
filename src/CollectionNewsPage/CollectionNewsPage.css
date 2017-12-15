@@ -1,0 +1,6 @@
+.content {
+    text-overflow:ellipsis;overflow:hidden;white-space: nowrap;width:40%;
+}
+table{
+    word-wrap: break-word; word-break: break-all;table-layout: fixed
+}

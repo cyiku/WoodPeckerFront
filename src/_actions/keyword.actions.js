@@ -3,6 +3,7 @@ import {keywordService} from "../_services/";
 import { alertActions } from './';
 import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
+import {userActions} from '../_actions';
 
 export const keywordActions = {
     getKws,
@@ -29,14 +30,16 @@ function getKws(user) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             )
         ;
@@ -69,14 +72,16 @@ function addKws(user, newkeyword) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };
@@ -107,14 +112,16 @@ function delKws(user, keyword, index) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };
@@ -144,14 +151,16 @@ function updKws(user, newkeyword, index, keywordid) {
                     }
                 },
                 error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(failure(error));
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             );
     };

@@ -1,14 +1,14 @@
 import { collectionConstants } from '../_constants';
 
 let initialCollection = {
-    'weibo': [],
-    'news': [],
-    'tieba': [],
-    'forum': [],
-    'pieChart': [],
-    'lineChart': [],
-    'regionChart': [],
-    'table': [],
+    'weibo': null,
+    'portal': null,
+    'agency': null,
+    'forum': null,
+    'pieChart': null,
+    'lineChart': null,
+    'regionChart': null,
+    'table': null,
 };
 
 export function collection(state = initialCollection, action) {

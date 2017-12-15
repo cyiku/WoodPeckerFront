@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-
+import {userActions} from "../_actions/user.actions";
+import {alertActions} from "../_actions/alert.actions";
+import { openNotificationWithIcon } from "../_helpers";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -12,6 +14,7 @@ import '../_helpers/sb-admin.css';
 class EmotionPage extends React.Component {
 
     state = {
+        keyword: '',
         backgroundColor: '#FBFBFB',
         tooltip : {
             trigger: 'axis'
@@ -92,10 +95,9 @@ class EmotionPage extends React.Component {
         }
     };
 
-    componentDidMount(){
-
-        const { currentKwd } = this.props;
-
+    getData = () => {
+        const { currentKwd,dispatch } = this.props;
+        console.log(currentKwd + ' getting emotion data...');
         if (currentKwd !== undefined) {
             const {user} = this.props;
             const requestOptions = {
@@ -114,8 +116,26 @@ class EmotionPage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status) {
+                        openNotificationWithIcon('success', currentKwd + '获取情感分析成功');
                         this.setState(preState => ({
                             ...preState,
+                            xAxis : [
+                                {
+                                    axisLabel:{
+                                        rotate: 30,
+                                        interval:0
+                                    },
+                                    axisLine:{
+                                        lineStyle :{
+                                            color: '#CECECE'
+                                        }
+                                    },
+                                    type : 'category',
+                                    boundaryGap : false,
+                                    data : ans.result.date
+                                }
+                            ],
+                            keyword: currentKwd,
                             series : [
                                 {
                                     name:'正面',
@@ -143,10 +163,28 @@ class EmotionPage extends React.Component {
                     }
                 },
                 error => {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
-                    history.push("/login");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
+                    }
                 }
             )
+        }
+    };
+    componentDidMount(){
+        this.getData();
+    }
+    componentDidUpdate() {
+        const { currentKwd } = this.props;
+        if (currentKwd === this.state.keyword){
+
+        } else {
+            this.getData();
         }
     }
 

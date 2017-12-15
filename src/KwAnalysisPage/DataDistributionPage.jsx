@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-
-
+import { openNotificationWithIcon } from "../_helpers";
+import {userActions} from "../_actions/user.actions";
+import {alertActions} from "../_actions/alert.actions";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -66,7 +67,7 @@ class DataDistributionPage extends React.Component {
 
 
         if (currentKwd !== undefined) {
-            const {user} = this.props;
+            const {user, dispatch} = this.props;
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
@@ -84,6 +85,7 @@ class DataDistributionPage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status === 1) {
+                        openNotificationWithIcon('success', currentKwd + '获取数据源数量成功');
                         this.setState(preState => ({
                             ...preState,
                             series : [
@@ -115,12 +117,15 @@ class DataDistributionPage extends React.Component {
                     }
                 },
                 error => {
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             )
         }

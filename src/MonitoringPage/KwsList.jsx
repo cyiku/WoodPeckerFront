@@ -16,7 +16,7 @@ class KwsList extends React.Component {
             <div>
                 {
                     this.props.keyword.map( (keyword, index)=>
-                        <button type="button" className="btn btn-primary" key={index}>{keyword.name}</button>
+                        <a className="btn btn-primary" key={index} href={"#"+keyword.name} style={{marginLeft:10}}>{keyword.name}</a>
                     )
                 }
                 <Link to="/keywords" style={{color:"white", marginLeft:10}} className="btn btn-danger">管理关键字</Link>

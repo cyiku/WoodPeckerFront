@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
 import {history} from '../_helpers';
-
+import {WeiboTablePage} from "../MsgPage/WeiboTablePage";
+import {PortalTablePage} from "../MsgPage/PortalTablePage";
+import {AgencyTablePage} from "../MsgPage/AgencyTablePage";
+import {ForumTablePage} from "../MsgPage/ForumTablePage";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -16,7 +19,7 @@ import {KwAnalysisPage} from '../KwAnalysisPage'
 import {BlankPage} from '../BlankPage'
 import {KeywordsPage} from '../KeywordsPage'
 import {CollectionNewsPage} from '../CollectionNewsPage'
-import {CollectionChartsPage} from '../CollectionChartsPage'
+// import {CollectionChartsPage} from '../CollectionChartsPage'
 import { ClusteringPage } from '../ClusteringPage'
 import {RecommendationPage} from "../RecommendationPage";
 
@@ -59,9 +62,9 @@ class HomePage extends React.Component {
                     <img src={require('./woodpecker.jpg')} height={50} alt={"logo"}/>
                     <ul style={{position:"absolute", top:15, right:0}}>
                         <li>
-                            <Link to="/login" style={{color: '#868e96'}}>
+                            <a href="/login" style={{color: '#868e96'}}>
                                 <span><i className="fa fa-fw fa-sign-out"/>Logout</span>
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -86,15 +89,22 @@ class HomePage extends React.Component {
                                 <Menu.Item key="recommendation"><Link to="/recommendation">关键词推荐</Link></Menu.Item>
                             </SubMenu>
 
+                            <SubMenu key="sub6" title={<span><i className="fa fa-fw fa-table"/> 消息展示</span>}>
+                                <Menu.Item key="weiboMsg"><Link to="/weiboMsg">微博消息</Link></Menu.Item>
+                                <Menu.Item key="forumMsg"><Link to="/forumMsg">相关论坛</Link></Menu.Item>
+                                <Menu.Item key="portalMsg"><Link to="/portalMsg">门户网站</Link></Menu.Item>
+                                <Menu.Item key="agencyMsg"><Link to="/agencyMsg">培训结构</Link></Menu.Item>
+                            </SubMenu>
+
                             <SubMenu key="sub3" title={<span><i className="fa fa-fw fa-heart-o"/> 个性化设置</span>}>
                                 <Menu.Item key="keywords"><Link to="/keywords">我的关键词</Link></Menu.Item>
-                                <Menu.Item key="report"><Link to="/report">我的报告</Link></Menu.Item>
+                                {/*<Menu.Item key="report"><Link to="/report">我的报告</Link></Menu.Item>*/}
                                 <Menu.Item key="brief"><Link to="/brief">我的简报夹</Link></Menu.Item>
                             </SubMenu>
 
                             <SubMenu key="sub4" title={<span><i className="fa fa-fw fa-star-o"/> 我的收藏</span>}>
                                 <Menu.Item key="collectionNews"><Link to="/collectionNews">收藏的消息</Link></Menu.Item>
-                                <Menu.Item key="collectionCharts"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>
+                                {/*<Menu.Item key="collectionCharts"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>*/}
                             </SubMenu>
 
                             <SubMenu key="sub5" title={<span><i className="fa fa-fw fa-wrench"/> 系统设置</span>}>
@@ -109,9 +119,13 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}kwAnalysis`} exact component={KwAnalysisPage} />
                             <Route path={`${this.props.match.path}keywords`} exact component={KeywordsPage} />
                             <Route path={`${this.props.match.path}collectionNews`} exact component={CollectionNewsPage} />
-                            <Route path={`${this.props.match.path}collectionCharts`} exact component={CollectionChartsPage} />
+                            {/*<Route path={`${this.props.match.path}collectionCharts`} exact component={CollectionChartsPage} />*/}
                             <Route path={`${this.props.match.path}clustering`} exact component={ClusteringPage} />
                             <Route path={`${this.props.match.path}recommendation`} exact component={RecommendationPage} />
+                            <Route path={`${this.props.match.path}weiboMsg`} exact component={WeiboTablePage} />
+                            <Route path={`${this.props.match.path}portalMsg`} exact component={PortalTablePage} />
+                            <Route path={`${this.props.match.path}agencyMsg`} exact component={AgencyTablePage} />
+                            <Route path={`${this.props.match.path}forumMsg`} exact component={ForumTablePage} />
                             <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>

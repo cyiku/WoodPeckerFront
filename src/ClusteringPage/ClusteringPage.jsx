@@ -12,17 +12,15 @@ class ClusteringPage extends React.Component {
 
     state = {
         columns : [
-            {title: '话题ID', dataIndex: 'id'},
+            {title: '话题ID', dataIndex: 'id', width: 200},
             {title: '相关词', dataIndex: 'word'},
         ],
         content: [
             {'id': 1, 'word': ""},
         ],
-        time: "2017年12月6号"
+        time: ""
     };
-    constructor(props){
-        super(props);
-    }
+
 
     componentDidMount(){
         const {user} = this.props;
@@ -31,8 +29,8 @@ class ClusteringPage extends React.Component {
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
             body: JSON.stringify({})
         };
-        console.log(requestOptions);
-
+        //console.log(requestOptions);
+        console.log("getting clustering data...");
         fetch(serverIP + '/getClustering', requestOptions).then(
             response => {
                 if (!response.ok) {
@@ -43,10 +41,11 @@ class ClusteringPage extends React.Component {
         ).then(
             ans => {
                 if(ans.status === 1) {
-                    console.log(ans.result);
+                    //console.log(ans.result);
                     this.setState(preState => ({
                         ...preState,
-                        content: ans.result.topic
+                        content: ans.result.topic,
+                        time: ans.result.time
                     }));
                 } else {
                     alert(ans.message);
@@ -87,7 +86,7 @@ class ClusteringPage extends React.Component {
                 <div className="card-body py-2 small">
 
                     <CSVLink data={content}
-                             filename={new Date().toLocaleString()}
+                             filename={new Date().toLocaleString()  + '.csv'}
                              target="_blank"
                              title="导出"
                              className="mr-3 d-inline-block"

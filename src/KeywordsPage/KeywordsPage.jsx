@@ -33,6 +33,8 @@ class KeywordsPage extends React.Component {
         isUpdated: false,
         updatedIndex: null,
         title: '',
+        deleteVisible: false,
+        deleteIndex: null,
         // checkbox, 从服务器读
         types: [
             type('贴吧', []),
@@ -42,7 +44,6 @@ class KeywordsPage extends React.Component {
         ],
     };
 
-
     getTypes = () => {
         const {user} = this.props;
         const requestOptions = {
@@ -50,6 +51,7 @@ class KeywordsPage extends React.Component {
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
             body: JSON.stringify({})
         };
+        console.log("getting site type...");
         fetch(serverIP + '/getSites', requestOptions).then(
             response => {
                 if (!response.ok) {
@@ -59,11 +61,11 @@ class KeywordsPage extends React.Component {
             }).then(
             ans => {
                 if(ans.status === 1) {
-                    console.log(ans.result);
+                    //console.log(ans.result);
                     this.setState(preState => ({
                         ...preState,
                         types: [
-                            type('贴吧', ans.result.tieba),
+                            type('论坛', ans.result.forum),
                             type('门户网站', ans.result.portal),
                             type('微博', ans.result.weibo),
                             type('培训机构', ans.result.agency),
@@ -88,17 +90,19 @@ class KeywordsPage extends React.Component {
 
     componentDidMount(){
         const { user, dispatch, keyword } = this.props;
-        if (keyword.length === 0)
+        if (keyword === null)
             dispatch(keywordActions.getKws(user));
         this.getTypes();
     }
 
     // 删除
     showConfirm = (event, index) => {
-        const {user, dispatch, keyword} = this.props;
-        dispatch(keywordActions.delKws(user, keyword, index.index));
-    };
+        this.setState({
+            deleteVisible: true,
+            deleteIndex: index,
 
+        });
+    };
 
     // 管理关键字对话框
     showUpdateModal = (isUpdated, event) => {
@@ -152,9 +156,9 @@ class KeywordsPage extends React.Component {
 
     // ok按钮
     handleOk = () => {
-        this.setState({
-            confirmLoading: true,
-        });
+        // this.setState({
+        //     confirmLoading: true,
+        // });
         const {user, dispatch, keyword} = this.props;
 
         // 获取新的keyword
@@ -172,6 +176,10 @@ class KeywordsPage extends React.Component {
             dispatch(keywordActions.updKws(user, newkeyword, updatedIndex, updatedID));
 
         } else {
+            if (postKw === '') {
+                alert("关键字不能为空");
+                return;
+            }
 
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
@@ -188,11 +196,17 @@ class KeywordsPage extends React.Component {
             for (let i = 0; i < this.state.types.length; ++i) {
                 kwList = kwList.concat(this.state.types[i].checkedList);
             }
+            console.log(kwList);
+            if (kwList === []) {
+                alert("监控站点不能为空");
+                return;
+            }
 
             const newkeyword = {'name': postKw, 'sites': kwList};
 
             dispatch(keywordActions.addKws(user, newkeyword));
         }
+
 
         setTimeout(() => {
             this.setState({
@@ -246,10 +260,26 @@ class KeywordsPage extends React.Component {
 
     };
 
+    handleDeleteOk = (e) => {
+        const {user, dispatch, keyword} = this.props;
+        const {deleteIndex} = this.state;
+        dispatch(keywordActions.delKws(user, keyword, deleteIndex.index));
+        this.setState({
+            deleteVisible: false,
+        });
+    };
+
+    handleDeleteCancel = (e) => {
+        this.setState({
+            deleteVisible: false,
+        });
+    };
 
     render() {
-        const { keyword } = this.props;
-        console.log(keyword);
+        let { keyword } = this.props;
+        //console.log(keyword);
+        if (keyword === null)
+            keyword = [];
         return (
             <div className="content-wrapper" style={{marginLeft:0}}>
                 <div className="container-fluid">
@@ -331,6 +361,15 @@ class KeywordsPage extends React.Component {
                                     </ul>
                                 </div>
                             </div>
+                        </Modal>
+
+                        <Modal
+                            title="提示框"
+                            visible={this.state.deleteVisible}
+                            onOk={this.handleDeleteOk}
+                            onCancel={this.handleDeleteCancel}
+                        >
+                            <p>是否删除? </p>
                         </Modal>
 
                     </div>

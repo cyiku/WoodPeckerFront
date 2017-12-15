@@ -1,11 +1,12 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-
+import {alertActions} from "../_actions/alert.actions";
+import {userActions} from "../_actions/user.actions";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -50,12 +51,13 @@ class RecommendationPage extends React.Component {
 
 
     getTypes = () => {
-        const {user} = this.props;
+        const {user, dispatch} = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
             body: JSON.stringify({})
         };
+        console.log("getting site type...");
         fetch(serverIP + '/getSites', requestOptions).then(
             response => {
                 if (!response.ok) {
@@ -65,7 +67,7 @@ class RecommendationPage extends React.Component {
             }).then(
             ans => {
                 if(ans.status === 1) {
-                    console.log(ans.result);
+                    //console.log(ans.result);
                     this.setState(preState => ({
                         ...preState,
                         types: [
@@ -82,18 +84,21 @@ class RecommendationPage extends React.Component {
                 }
             },
             error => {
-                if (error.message === "Failed to fetch") {
-                    alert("登录过期, 请重新登录");
-                } else {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                if (localStorage.getItem('user') !== null) {
+                    dispatch(userActions.logout());
+                    dispatch(alertActions.error(error));
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
                 }
-                history.push("/login");
             }
         );
     };
 
     getRecommendation = () => {
-        const { user } = this.props;
+        const { user, dispatch } = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
@@ -114,8 +119,15 @@ class RecommendationPage extends React.Component {
                 }
             },
             error => {
-                alert("服务器内部错误,请联系管理员,抱歉！");
-                history.push("/login");
+                if (localStorage.getItem('user') !== null) {
+                    dispatch(userActions.logout());
+                    dispatch(alertActions.error(error));
+                    if (error.message === "Failed to fetch") {
+                        alert("登录过期, 请重新登录");
+                    } else {
+                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    }
+                }
             }
         );
     };

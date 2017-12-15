@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>woodpecker</title>
+    <style>
+        .text{
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+    </style>
 </head>
 <body>
-    <div id="app" style="height: 100%"></div>
+    <div id="app" style="height: 100vh; min-height:800px;"></div>
 </body>
 
 </html>

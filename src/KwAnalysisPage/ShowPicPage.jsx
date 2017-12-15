@@ -22,6 +22,7 @@ class ShowPicPage extends React.Component {
             // 收藏
             icon.setAttribute("class", "fa fa-star");
 
+            console.log(data);
             dispatch(collectionActions.addCollection(user, data, type));
 
             if (icon.innerHTML !== "") {
@@ -59,12 +60,12 @@ class ShowPicPage extends React.Component {
                 <div className="card-body">
                     {showChart}
                 </div>
-                <div className="card-body py-2 small">
-                    <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, data, type)}>
-                        <i className="fa fa-star-o" id="collection"> 收藏</i>
-                    </a>
-                    <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>
-                </div>
+                {/*<div className="card-body py-2 small">*/}
+                    {/*<a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, data, type)}>*/}
+                        {/*<i className="fa fa-star-o" id="collection"> 收藏</i>*/}
+                    {/*</a>*/}
+                    {/*<a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>*/}
+                {/*</div>*/}
             </div>
         );
     }
@@ -76,7 +77,7 @@ function mapStateToProps(state, ownProps) {
     const { authentication } = state;
     const { user } = authentication;
     return {
-        data, type, title
+        user, data, type, title
     };
 }
 

@@ -12,7 +12,7 @@ function login(username, password) {
         headers: { 'Content-Type': 'application/json;charset=UTF-8'},
         body: JSON.stringify({'username' : username , 'password': password})
     };
-    console.log(requestOptions);
+    //console.log(requestOptions);
     return fetch(serverIP + '/auth', requestOptions)
         .then(handleResponse);
 }

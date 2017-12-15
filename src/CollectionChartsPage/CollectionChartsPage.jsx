@@ -4,7 +4,7 @@ import React from 'react';
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
-import {CollectionTablePage} from "./CollectionTablePage";
+//import {CollectionTablePage} from "./CollectionTablePage";
 import asyncComponent from '../_helpers/AsyncComponent';
 import { publishNumOption } from '../_helpers/options';
 const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" */'../Echarts/LineReact')); //折线图组件

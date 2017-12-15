@@ -1,12 +1,13 @@
 import React from 'react';
-import { Collapse } from 'antd';
+import { Popover } from 'antd';
 import { CSVLink } from 'react-csv';
+import { collectionActions } from '../_actions';
+import { connect } from 'react-redux';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 
-
-const Panel = Collapse.Panel;
+//const Panel = Collapse.Panel;
 
 
 class OneMsgPage extends React.Component {
@@ -40,7 +41,58 @@ class OneMsgPage extends React.Component {
         return JSON.parse(str);   // str to json
     };
 
+    /**
+     * 收藏一条消息
+     * @param event: 鼠标点击收藏(取消收藏)的事件
+     * @param data: 消息对应的类型, 为JsonArray,[{'content':'', 'id':''...}]
+     * @param iconID: 消息对应的收藏Icon的ID, 和消息的ID一致
+     */
+    collectionOneRow = (event, data, iconID) => {
 
+        /**
+         * user: 为了发送请求时后台辨识用户
+         * dispatch: react-redux
+         * type: collection是Json, key为type, 添加和删除时, 加入type, 方便增删
+         */
+        const {user, dispatch} = this.props;
+
+        let icon = document.getElementById(iconID);
+        if (icon.getAttribute("class") === "fa fa-star-o") {
+            // 收藏
+            console.log(data);
+            dispatch(collectionActions.addCollection(user, data, data[0]['contentType']));
+            icon.setAttribute("class", "fa fa-star"); // 更换图标
+            icon.innerHTML = "取消收藏"
+
+        } else {
+            // 取消收藏
+            dispatch(collectionActions.delCollection(user, [data[0]['_id']], data[0]['contentType']));
+            icon.setAttribute("class", "fa fa-star-o"); //更换图标
+            icon.innerHTML = "收藏"
+        }
+    };
+
+    /**
+     * 初次打开时图标更换
+     * @param id
+     * @param collection
+     * @returns {*}
+     */
+    hasCollected = (id, collection) => {
+        //let icon = document.getElementById(id);
+        //console.log(collection[0]['_id']);
+        //console.log(id);
+        if (collection === null)
+            return {collectionClass: "fa fa-star-o", collectionInner: "收藏"};
+        for (let i = 0; i < collection.length; ++i) {
+            if (collection[i]['_id'] === id) {
+                return {collectionClass: "fa fa-star", collectionInner: "取消收藏"}
+            }
+        }
+        return {collectionClass: "fa fa-star-o", collectionInner: "收藏"}
+    };
+
+    /*
     componentWillUpdate() {
         const {content, time} = this.props;
         document.getElementById(content._id + time).innerHTML = "";
@@ -58,56 +110,92 @@ class OneMsgPage extends React.Component {
         document.getElementById(content._id + time).innerHTML = newContent;
 
     }
+    */
+
     render() {
         let showMsg;
 
-        const {content, contentType, time} = this.props;
+        const {content, contentType, collection} = this.props;
         const newTime = this.timeTransfer(content.time);
+        const {collectionClass, collectionInner} = this.hasCollected(content._id, collection[contentType]);
+
+        const testContent = (
+            <div style={{width: 400}}>
+                <p dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}}/>
+            </div>
+        );
 
         if (contentType === 'weibo')
             showMsg =
-                <div>
-                    <div style={{fontSize:15}} id={content._id + time}/>
-                    <span>转发({content.n_forword}) 评论({content.n_comment}) 赞({content.n_like})</span>
+                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                    <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
+                    <span style={{}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
             showMsg =
-                <div>
+                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <div>
                         <a href={content.url} style={{fontSize:10}} target="_blank">
                             {content.title}
                         </a>
                     </div>
-                    <div style={{fontSize:15}} id={content._id + time}/>
+                    <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
+                </div>;
+        else if (contentType === 'forum')
+            showMsg =
+                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                    <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
+                    <span>点击({content.n_click}) 回复({content.n_reply})</span>
+                </div>;
+        else if (contentType === 'agency')
+            showMsg =
+                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                    <div>
+                        <a href={content.url} style={{fontSize:10}} target="_blank">
+                            {content.title}
+                        </a>
+                    </div>
+                    <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                 </div>;
         return (
-            <div className="card mb-4">
+            <div className="card" style={{marginBottom: 10}}>
                 <div className="card-body">
                     <div>
-                        <h6 style={{display:"inline"}}>{content.publisher}</h6>
-                        <i
-                            style={{float:"right"}}>{newTime}, {content.source}</i>
+                        <i style={{float: "right"}}>{newTime}, {content.source}</i>
+                        <h6>{content.authid? content.authid: "匿名用户"}</h6>
                     </div>
                     {showMsg}
                 </div>
                 <hr className="my-0" />
                 <div className="card-body py-2 small">
+                    <Popover content={testContent} title="全文内容">
+                        <a className="mr-3 d-inline-block" href="javascript:void(0);" target="_blank">全部内容</a>
+                    </Popover>
                     <a className="mr-3 d-inline-block" href={content.url} target="_blank">原文地址</a>
-                    <a className="mr-3 d-inline-block" href=" "><i className="fa fa-fw fa-star-o"/>收藏</a>
+                    <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)}>
+                        <i id={content._id} className={collectionClass}>{collectionInner}</i>
+                    </a>
                     <CSVLink data={this.objToJSON(content)}
-                             filename={new Date().toLocaleString()}
+                             filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出"
                              className="mr-3 d-inline-block"
                     >
                         <i className="fa fa-fw fa-share-square-o"/>导出
                     </CSVLink>
-                    <a className="d-inline-block" href=" "><i className="fa fa-fw fa-send-o"/>发送</a>
+                    <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-fw fa-send-o"/>发送</a>
                 </div>
             </div>
         );
     }
 }
 
+function mapStateToProps(state, ownProps) {
+    const {authentication, collection} = state;
+    const {user} = authentication;
+    const {content, contentType, time} = ownProps;
+    return {user, collection, content, contentType, time};
+}
 
-export {OneMsgPage};
+const connectedOneMsgPage = connect(mapStateToProps)(OneMsgPage);
+export { connectedOneMsgPage as OneMsgPage };

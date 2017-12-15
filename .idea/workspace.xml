@@ -2,9 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45cbe2be-f7b8-4024-a704-0af618318dea" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/asset-manifest.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/css/main.e46d7a25.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/css/main.e46d7a25.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.04a0f4e8.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.04a0f4e8.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.ec1f68e7.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.ec1f68e7.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.5b75a0cc.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.5b75a0cc.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.02cf504f.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.02cf504f.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/fontawesome-webfont.674f50d2.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/fontawesome-webfont.912ec66d.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/fontawesome-webfont.af7ae505.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/fontawesome-webfont.b06871f2.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/fontawesome-webfont.fee66e71.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/media/woodpecker.50d56eb2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/啄木鸟备忘录" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/啄木鸟备忘录" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/WeiboTablePage.jsx" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" afterPath="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" afterPath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" afterPath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" afterPath="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" afterPath="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/collection.actions.js" afterPath="$PROJECT_DIR$/src/_actions/collection.actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/keyword.actions.js" afterPath="$PROJECT_DIR$/src/_actions/keyword.actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/myNotification.js" afterPath="$PROJECT_DIR$/src/_helpers/myNotification.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/serverIP.js" afterPath="$PROJECT_DIR$/src/_helpers/serverIP.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/collection.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/collection.reducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/collection.service.js" afterPath="$PROJECT_DIR$/src/_services/collection.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/keyword.service.js" afterPath="$PROJECT_DIR$/src/_services/keyword.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/user.service.js" afterPath="$PROJECT_DIR$/src/_services/user.service.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,31 +70,27 @@
       <file leaf-file-name="MsgShow.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="917">
-              <caret line="276" column="2" lean-forward="true" selection-start-line="276" selection-start-column="2" selection-end-line="276" selection-end-column="2" />
+            <state relative-caret-position="-139">
+              <caret line="312" column="30" lean-forward="true" selection-start-line="312" selection-start-column="30" selection-end-line="312" selection-end-column="30" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#283#334#0" expanded="true" />
+                <element signature="e#581#2117#0" expanded="false" />
+                <element signature="n#!!block;n#constructor#0;n#MsgShow#0" expanded="false" />
+                <element signature="e#2372#2448#0" expanded="false" />
+                <element signature="e#3584#3891#0" expanded="false" />
+                <element signature="n#!!block;n#componentWillUnmount#0;n#MsgShow#0" expanded="false" />
+                <element signature="e#4031#4614#0" expanded="false" />
+                <element signature="e#7152#7940#0" expanded="false" />
+                <element signature="e#8231#9049#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MonitoringPage.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx">
+      <file leaf-file-name="KwsList.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShowTablePage.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2965">
-              <caret line="239" column="209" lean-forward="false" selection-start-line="239" selection-start-column="209" selection-end-line="239" selection-end-column="209" />
+            <state relative-caret-position="105">
+              <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -58,26 +103,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get</find>
-      <find>导出</find>
-      <find>share</find>
-      <find>bookmark</find>
-      <find>send</find>
-      <find>.map</find>
-      <find>keyword</find>
-      <find>Kws</find>
-      <find>keywordConstants</find>
-      <find>KWS</find>
-      <find>delCollection</find>
-      <find>this.collection</find>
-      <find>setS</find>
       <find>columns</find>
       <find>#</find>
       <find>collection</find>
@@ -95,6 +127,19 @@
       <find>ans.collection</find>
       <find>alert(&quot;服务器内部错误,请联系管理员,抱歉！&quot;);</find>
       <find>var</find>
+      <find>weiboData</find>
+      <find>undefined</find>
+      <find>icon</find>
+      <find>10</find>
+      <find>currentKwd</find>
+      <find>200</find>
+      <find>clickKeyword</find>
+      <find>weibo</find>
+      <find>id</find>
+      <find>searchWeibo</find>
+      <find>csv</find>
+      <find>forwor</find>
+      <find>markKeyword</find>
     </findStrings>
     <replaceStrings>
       <replace>this.state.types</replace>
@@ -110,6 +155,8 @@
       <replace>ans.status === 1</replace>
       <replace>message</replace>
       <replace>let</replace>
+      <replace>null</replace>
+      <replace>keyword</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -118,57 +165,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/_constants/collection.constants.js" />
-        <option value="$PROJECT_DIR$/src/_reducers/index.js" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/detailedWeiboMsg.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/myTable.jsx" />
-        <option value="$PROJECT_DIR$/src/MonitoringPage/index.js" />
-        <option value="$PROJECT_DIR$/src/_reducers/kwBeingAnalyzed.js" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwsList2.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/WeiboPage.jsx" />
-        <option value="$PROJECT_DIR$/src/_helpers/index.js" />
-        <option value="$PROJECT_DIR$/src/_helpers/myNotification.js" />
-        <option value="$PROJECT_DIR$/src/_helpers/options.js" />
-        <option value="$PROJECT_DIR$/src/Echarts/MapReact.js" />
-        <option value="$PROJECT_DIR$/src/Echarts/PieReact.js" />
-        <option value="$PROJECT_DIR$/src/Echarts/WordcloudReact.js" />
-        <option value="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
         <option value="$PROJECT_DIR$/src/RegisterPage/RegisterPage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" />
         <option value="$PROJECT_DIR$/src/CollectionChartsPage/CollectionTablePage.jsx" />
         <option value="$PROJECT_DIR$/src/BlankPage/BlankPage.jsx" />
-        <option value="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" />
         <option value="$PROJECT_DIR$/src/LoginPage/LoginPage.jsx" />
-        <option value="$PROJECT_DIR$/src/_services/collection.service.js" />
-        <option value="$PROJECT_DIR$/src/_services/user.service.js" />
         <option value="$PROJECT_DIR$/src/_actions/user.actions.js" />
-        <option value="$PROJECT_DIR$/src/_services/keyword.service.js" />
-        <option value="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" />
         <option value="$PROJECT_DIR$/src/ClusteringPage/index.js" />
         <option value="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.js" />
         <option value="$PROJECT_DIR$/src/RecommendationPage/index.js" />
-        <option value="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/WeiboTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/_actions/keyword.actions.js" />
-        <option value="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" />
-        <option value="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
-        <option value="$PROJECT_DIR$/src/_actions/collection.actions.js" />
-        <option value="$PROJECT_DIR$/src/_reducers/collection.reducer.js" />
-        <option value="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" />
-        <option value="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" />
-        <option value="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx" />
-        <option value="$PROJECT_DIR$/src/_helpers/serverIP.js" />
+        <option value="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" />
+        <option value="$PROJECT_DIR$/src/_reducers/collection.reducer.js" />
+        <option value="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" />
+        <option value="$PROJECT_DIR$/src/_actions/keyword.actions.js" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/PortalTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/ForumTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/AgencyTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/WeiboTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" />
+        <option value="$PROJECT_DIR$/src/_services/collection.service.js" />
+        <option value="$PROJECT_DIR$/src/_services/keyword.service.js" />
+        <option value="$PROJECT_DIR$/src/_services/user.service.js" />
+        <option value="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" />
+        <option value="$PROJECT_DIR$/public/啄木鸟备忘录" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
+        <option value="$PROJECT_DIR$/src/_actions/collection.actions.js" />
+        <option value="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.css" />
+        <option value="$PROJECT_DIR$/src/MsgPage/ShowTablePage.css" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
+        <option value="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.css" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" />
         <option value="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
+        <option value="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
+        <option value="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
+        <option value="$PROJECT_DIR$/src/_helpers/myNotification.js" />
+        <option value="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
+        <option value="$PROJECT_DIR$/src/_helpers/serverIP.js" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
+        <option value="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
       </list>
     </option>
   </component>
@@ -183,9 +230,11 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="245" />
+    <option name="y" value="23" />
     <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="height" value="947" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -205,8 +254,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,18 +270,14 @@
               <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
               <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="KwAnalysisPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="MonitoringPage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -247,11 +290,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/RecommendationPage" />
-      <recent name="$PROJECT_DIR$/src/ClusteringPage" />
+      <recent name="$PROJECT_DIR$/src/MsgPage" />
       <recent name="$PROJECT_DIR$/src/MonitoringPage" />
       <recent name="$PROJECT_DIR$/src/KwAnalysisPage" />
-      <recent name="$PROJECT_DIR$/src/CollectionChartsPage" />
+      <recent name="$PROJECT_DIR$/src/RecommendationPage" />
+      <recent name="$PROJECT_DIR$/src/ClusteringPage" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -293,12 +336,17 @@
       <workItem from="1512138842957" duration="6333000" />
       <workItem from="1512265947983" duration="32880000" />
       <workItem from="1512475643797" duration="15197000" />
-      <workItem from="1512637821856" duration="11081000" />
+      <workItem from="1512637821856" duration="16646000" />
+      <workItem from="1512825298854" duration="20150000" />
+      <workItem from="1512956200715" duration="2523000" />
+      <workItem from="1512976180631" duration="27174000" />
+      <workItem from="1513128501164" duration="18482000" />
+      <workItem from="1513306044641" duration="8005000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="316836000" />
+    <option name="totallyTimeSpent" value="398735000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -308,8 +356,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -319,7 +367,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -331,85 +379,81 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/echarts-wordcloud/index.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/react-virtual-list/src/VirtualList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="41" />
+        <state relative-caret-position="-12">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Echarts/PieReact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Echarts/WordcloudReact.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="38" column="25" lean-forward="true" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_components/index.js">
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx" />
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/WeiboTablePage.jsx" />
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BlankPage/index.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="47" column="35" lean-forward="true" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_actions/collection.actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Echarts/LineReact.js">
+    <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="180">
+          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RegisterPage/RegisterPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/_helpers/store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="6" column="51" lean-forward="true" selection-start-line="6" selection-start-column="51" selection-end-line="7" selection-end-column="34" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/_helpers/sb-admin.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="51" lean-forward="true" selection-start-line="7" selection-start-column="51" selection-end-line="8" selection-end-column="34" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CollectionChartsPage/CollectionTablePage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/_helpers/options.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="7" column="51" lean-forward="true" selection-start-line="7" selection-start-column="51" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BlankPage/BlankPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -420,44 +464,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_components/PrivateRoute.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_reducers/authentication.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="true" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="51" lean-forward="true" selection-start-line="6" selection-start-column="51" selection-end-line="7" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_actions/websocket.actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="109" lean-forward="false" selection-start-line="34" selection-start-column="109" selection-end-line="34" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
+    <entry file="file://$PROJECT_DIR$/src/_helpers/AsyncComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -474,267 +481,352 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HomePage/index.js">
+    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.css" />
+    <entry file="file://$PROJECT_DIR$/public/favicon.ico">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_reducers/alert.reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="27" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/index.js">
+    <entry file="file://$PROJECT_DIR$/src/_reducers/authentication.reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.js" />
-    <entry file="file://$PROJECT_DIR$/src/RecommendationPage/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="35" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_services/keyword.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" lean-forward="true" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_reducers/keyword.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="68" column="35" lean-forward="true" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-          <folding />
+          <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/_reducers/collection.reducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LoginPage/LoginPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="75" column="22" lean-forward="true" selection-start-line="75" selection-start-column="22" selection-end-line="75" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_actions/user.actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        <state relative-caret-position="555">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/_services/user.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+        <state relative-caret-position="330">
+          <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_actions/keyword.actions.js">
+    <entry file="file://$PROJECT_DIR$/src/_actions/user.actions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="117" column="17" lean-forward="false" selection-start-line="107" selection-start-column="17" selection-end-line="117" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1158">
-          <caret line="109" column="38" lean-forward="true" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+        <state relative-caret-position="435">
+          <caret line="33" column="81" lean-forward="true" selection-start-line="33" selection-start-column="81" selection-end-line="33" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.css" />
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="49" column="96" lean-forward="false" selection-start-line="49" selection-start-column="59" selection-end-line="49" selection-end-column="96" />
+        <state relative-caret-position="362">
+          <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
           <folding>
-            <element signature="e#4415#5982#0" expanded="false" />
-            <element signature="e#6022#6099#0" expanded="false" />
-            <element signature="e#6140#6226#0" expanded="false" />
-            <element signature="e#6289#6719#0" expanded="false" />
-            <element signature="e#6778#7139#0" expanded="false" />
+            <element signature="e#251#299#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidMount#0;n#KwAnalysisPage#0" expanded="false" />
+            <element signature="e#1021#1703#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/MiddleWare.jsx" />
+    <entry file="file://$PROJECT_DIR$/src/_helpers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="92" column="21" lean-forward="false" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/_services/collection.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_actions/collection.actions.js">
+    <entry file="file://$PROJECT_DIR$/src/_actions/keyword.actions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="349">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#48#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-766">
-          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        <state relative-caret-position="540">
+          <caret line="37" column="9" lean-forward="true" selection-start-line="26" selection-start-column="8" selection-end-line="37" selection-end-column="9" />
           <folding>
             <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="28" column="50" lean-forward="true" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#551#602#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="41" column="17" lean-forward="true" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_helpers/serverIP.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HomePage/HomePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
-          <caret line="112" column="114" lean-forward="true" selection-start-line="112" selection-start-column="114" selection-end-line="112" selection-end-column="114" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="12" column="13" lean-forward="true" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1036">
-          <caret line="1" column="38" lean-forward="true" selection-start-line="1" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-          <folding>
-            <element signature="e#154#205#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-841">
-          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        <state relative-caret-position="536">
+          <caret line="114" column="17" lean-forward="true" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/WeiboTablePage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="27" column="224" lean-forward="false" selection-start-line="27" selection-start-column="224" selection-end-line="27" selection-end-column="224" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/ShowTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2965">
-          <caret line="239" column="209" lean-forward="false" selection-start-line="239" selection-start-column="209" selection-end-line="239" selection-end-column="209" />
+        <state relative-caret-position="580">
+          <caret line="149" column="31" lean-forward="false" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="47" column="73" lean-forward="false" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="87" column="73" lean-forward="true" selection-start-line="87" selection-start-column="60" selection-end-line="87" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+            <element signature="e#361#412#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="194" column="28" lean-forward="true" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
+          <folding>
+            <element signature="e#1126#2672#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidMount#0;n#KeywordsPage#0" expanded="false" />
+            <element signature="e#3087#4456#0" expanded="false" />
+            <element signature="e#6353#6430#0" expanded="false" />
+            <element signature="e#6471#6557#0" expanded="false" />
+            <element signature="e#6620#7050#0" expanded="false" />
+            <element signature="e#7109#7470#0" expanded="false" />
+            <element signature="e#10588#13258#0" expanded="false" />
+            <element signature="e#13284#13612#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="87" column="23" lean-forward="false" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
+        <state relative-caret-position="585">
+          <caret line="183" column="64" lean-forward="false" selection-start-line="183" selection-start-column="64" selection-end-line="183" selection-end-column="64" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1512789955598" expanded="true" signature="634:644" ph="..." />
+            <element signature="e#366#835#0" expanded="false" />
+            <element signature="e#867#1054#0" expanded="false" />
+            <element signature="e#1061#1127#0" expanded="false" />
+            <element signature="e#1156#1278#0" expanded="false" />
+            <element signature="e#1285#1463#0" expanded="false" />
+            <element signature="e#1512#2318#0" expanded="false" />
+            <element signature="e#2325#2415#0" expanded="false" />
+            <element signature="e#2978#3600#0" expanded="false" />
+            <marker date="1513325389168" expanded="true" signature="722:732" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="284" column="75" lean-forward="false" selection-start-line="284" selection-start-column="75" selection-end-line="284" selection-end-column="75" />
+          <folding>
+            <element signature="e#1226#1316#0" expanded="false" />
+            <element signature="e#1356#1605#0" expanded="false" />
+            <element signature="e#1613#1679#0" expanded="false" />
+            <element signature="e#1708#1830#0" expanded="false" />
+            <element signature="e#1838#2028#0" expanded="false" />
+            <element signature="e#2803#2882#0" expanded="false" />
+            <element signature="e#2887#2918#0" expanded="false" />
+            <element signature="e#3815#3841#0" expanded="false" />
+            <element signature="e#3846#4523#0" expanded="false" />
+            <element signature="e#4529#6213#0" expanded="false" />
+            <element signature="e#6219#6322#0" expanded="false" />
+            <element signature="e#6327#6463#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_helpers/myNotification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HomePage/HomePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="93" column="83" lean-forward="false" selection-start-line="93" selection-start-column="83" selection-end-line="93" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="27" column="29" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="27" selection-end-column="29" />
+          <folding>
+            <element signature="e#2038#2507#0" expanded="false" />
+            <element signature="e#2537#4223#0" expanded="false" />
+            <marker date="1513326983990" expanded="true" signature="2394:2404" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="38" column="29" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="38" selection-end-column="29" />
+          <folding>
+            <element signature="e#2229#2698#0" expanded="false" />
+            <marker date="1513326983995" expanded="true" signature="2585:2595" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="41" column="29" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="41" selection-end-column="29" />
+          <folding>
+            <marker date="1513326816536" expanded="true" signature="2439:2449" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="38" column="29" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="38" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!block;n#componentDidMount#0;n#PortalTablePage#0" expanded="false" />
+            <element signature="e#2202#3890#0" expanded="false" />
+            <element signature="e#3923#4401#0" expanded="false" />
+            <element signature="e#4445#4914#0" expanded="false" />
+            <marker date="1513326983998" expanded="true" signature="4801:4811" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="126" column="48" lean-forward="true" selection-start-line="126" selection-start-column="48" selection-end-line="126" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#224#275#0" expanded="true" />
+            <element signature="e#435#2561#0" expanded="false" />
+            <element signature="e#2610#4115#0" expanded="false" />
+            <element signature="e#4164#5840#0" expanded="false" />
+            <element signature="e#8047#8516#0" expanded="false" />
+            <element signature="e#8547#8669#0" expanded="false" />
+            <element signature="e#9246#9337#0" expanded="false" />
+            <element signature="e#9384#9505#0" expanded="false" />
+            <element signature="e#10466#11238#0" expanded="false" />
+            <element signature="e#12768#13540#0" expanded="false" />
+            <element signature="e#15070#15842#0" expanded="false" />
+            <element signature="e#17377#18149#0" expanded="false" />
+            <marker date="1513329187334" expanded="true" signature="8403:8413" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_helpers/serverIP.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="917">
-          <caret line="276" column="2" lean-forward="true" selection-start-line="276" selection-start-column="2" selection-end-line="276" selection-end-column="2" />
+        <state relative-caret-position="-139">
+          <caret line="312" column="30" lean-forward="true" selection-start-line="312" selection-start-column="30" selection-end-line="312" selection-end-column="30" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#283#334#0" expanded="true" />
+            <element signature="e#581#2117#0" expanded="false" />
+            <element signature="n#!!block;n#constructor#0;n#MsgShow#0" expanded="false" />
+            <element signature="e#2372#2448#0" expanded="false" />
+            <element signature="e#3584#3891#0" expanded="false" />
+            <element signature="n#!!block;n#componentWillUnmount#0;n#MsgShow#0" expanded="false" />
+            <element signature="e#4031#4614#0" expanded="false" />
+            <element signature="e#7152#7940#0" expanded="false" />
+            <element signature="e#8231#9049#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="105">
+          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

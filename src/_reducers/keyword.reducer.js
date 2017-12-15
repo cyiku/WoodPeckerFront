@@ -1,6 +1,6 @@
 import { keywordConstants } from '../_constants';
 
-export function keyword(state = [], action) {
+export function keyword(state = null, action) {
   switch (action.type) {
 
       case keywordConstants.GETKWS_REQUEST:

@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-
+import {userActions} from "../_actions/user.actions";
+import {alertActions} from "../_actions/alert.actions";
+import { openNotificationWithIcon } from "../_helpers";
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
@@ -12,18 +14,21 @@ import '../_helpers/sb-admin.css';
 class DataSourcePage extends React.Component {
 
     state = {
+        keyword: '',
         forum: 0,
         weibo: 0,
         portal: 0,
         agency: 0,
-    }
+    };
 
-    componentDidMount(){
+    getData = () => {
+        const { currentKwd, dispatch } = this.props;
 
-        const { currentKwd } = this.props;
+        console.log(currentKwd + ' getting source data...');
 
         if (currentKwd !== undefined) {
             const {user} = this.props;
+            //openNotificationWithIcon('info', '获取数据源分布');
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
@@ -40,8 +45,10 @@ class DataSourcePage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status === 1) {
+                        openNotificationWithIcon('success', currentKwd + '获取发布量折线图成功');
                         this.setState(preState => ({
                             ...preState,
+                            keyword: currentKwd,
                             forum: ans.result.num.forum,
                             weibo: ans.result.num.weibo,
                             portal: ans.result.num.portal,
@@ -54,16 +61,31 @@ class DataSourcePage extends React.Component {
                     }
                 },
                 error => {
-                    if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
-                    } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                    if (localStorage.getItem('user') !== null) {
+                        dispatch(userActions.logout());
+                        dispatch(alertActions.error(error));
+                        if (error.message === "Failed to fetch") {
+                            alert("登录过期, 请重新登录");
+                        } else {
+                            alert("服务器内部错误,请联系管理员,抱歉！");
+                        }
                     }
-                    history.push("/login");
                 }
             )
         }
+    };
 
+
+    componentDidMount(){
+        this.getData();
+    }
+    componentDidUpdate() {
+        const { currentKwd } = this.props;
+        if (currentKwd === this.state.keyword){
+
+        } else {
+            this.getData();
+        }
     }
 
 
