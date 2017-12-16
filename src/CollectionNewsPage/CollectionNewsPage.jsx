@@ -373,7 +373,7 @@ class CollectionNewsPage extends React.Component {
 
                             {/*功能*/}
                             <div className="card-body py-2 small">
-                                <CSVLink data={portalCollection}
+                                <CSVLink data={agencyCollection + '.csv'}
                                          filename={new Date().toLocaleString() + '.csv'}
                                          target="_blank"
                                          title="导出"

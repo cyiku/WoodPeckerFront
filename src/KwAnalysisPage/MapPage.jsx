@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import asyncComponent from '../_helpers/AsyncComponent';
+//import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
 import {ShowPicPage} from "./ShowPicPage";
 
@@ -8,7 +8,7 @@ import {ShowPicPage} from "./ShowPicPage";
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
 
-const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
+//const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
 
 class MapPage extends React.Component {
 

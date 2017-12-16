@@ -333,13 +333,13 @@ class MsgShow extends React.Component {
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
                     <Panel header= {
                         <div>
-                            <i className="fa fa-newspaper-o"> <span>{keyword.name}</span></i>
-                            <i style={{marginLeft:10}}>更新于: {this.state.time}</i>
                             <div style={{float: 'right'}} onClick={event => event.stopPropagation()}>
                                 <a href="javascript:void(0);"><i className="fa fa-pause mr-3 d-inline-block" onClick={this.play}/></a>
                                 <a href="javascript:void(0);"><i className="fa fa-refresh mr-3 d-inline-block" onClick={this.fresh}/></a>
                                 <Link to={path} className="mr-3 d-inline-block"><i className="fa fa-bar-chart"/></Link>
                             </div>
+                            <i className="fa fa-newspaper-o"> <span>{keyword.name}</span></i>
+                            <i style={{marginLeft:10}}>更新于: {this.state.time}</i>
                         </div>
                     } key="1" >
 
