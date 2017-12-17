@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
@@ -287,7 +287,7 @@ class KeywordsPage extends React.Component {
                         <div className="col-md-12">
 
                             {/*此时Button对应的操作是添加关键字*/}
-                            <Button type="primary" onClick={event=>this.showUpdateModal(false,event)}><i className="fa fa-plus m-r-5"/>新加关键字</Button>
+                            <button className="btn btn-primary" onClick={event=>this.showUpdateModal(false,event)}><i className="fa fa-plus m-r-5"/>新加关键字</button>
 
                             {/*显示关键词*/}
                             <div style={{marginTop:10}}>

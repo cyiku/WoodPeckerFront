@@ -67,11 +67,12 @@ class ClusteringPage extends React.Component {
     render() {
 
         let { columns, content, time } = this.state;
-
+        for (let i = 0; i < content.length; ++i)
+            content[i]['word'] = content[i]['word'].replace(/'/g, '');
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    <i className="fa fa-table">话题聚类, 更新于: {time}</i>
+                    <i className="fa fa-table">话题聚类, 更新于: {time.replace(/'/g, '')}</i>
 
                 </div>
 

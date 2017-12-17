@@ -191,7 +191,7 @@ class MsgShow extends React.Component {
                         ...preState,
                         message: newMessage,
                         time: this.getNowFormatDate(),
-                        virtualList: newMessage.length == 0 ? null : <MyVirtualList items={newMessage} itemHeight={217}/>
+                        virtualList: newMessage.length === 0 ? null : <MyVirtualList items={newMessage} itemHeight={217}/>
                     }));
                 } else {
                     alert(ans.message);

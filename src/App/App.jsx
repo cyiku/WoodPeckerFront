@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { history } from '../_helpers';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
-import { RegisterPage } from '../RegisterPage';
 import { PrivateRoute } from '../_components/PrivateRoute';
 
 class App extends React.Component {
@@ -16,7 +15,6 @@ class App extends React.Component {
                 <Router history={history}>
                     <Switch>
                         <Route path="/login" component={LoginPage} />
-                        <Route path="/register" component={RegisterPage} />
                         <PrivateRoute path='/' component={HomePage}/>
                     </Switch>
                 </Router>
