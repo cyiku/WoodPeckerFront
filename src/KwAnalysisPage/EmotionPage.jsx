@@ -176,9 +176,11 @@ class EmotionPage extends React.Component {
             )
         }
     };
+
     componentDidMount(){
         this.getData();
     }
+
     componentDidUpdate() {
         const { currentKwd } = this.props;
         if (currentKwd === this.state.keyword){
@@ -187,8 +189,6 @@ class EmotionPage extends React.Component {
             this.getData();
         }
     }
-
-
 
     render() {
         return (

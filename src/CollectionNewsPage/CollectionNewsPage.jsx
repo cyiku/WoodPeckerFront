@@ -14,7 +14,7 @@ class CollectionNewsPage extends React.Component {
 
     state = {
         weiboColumns: [
-            {title: '发布者', dataIndex: 'publisher'} ,
+            {title: '发布者', dataIndex: 'authid'} ,
             //{title: '正文', sorter: (a, b) => a.content.length - b.content.length, render: (record) => <div dangerouslySetInnerHTML={{__html: record.content}}> </div>},
             {title: '正文', className:'content', width: "40%",render: (record) => (
                 <Popover content={
