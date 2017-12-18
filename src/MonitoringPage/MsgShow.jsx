@@ -343,7 +343,7 @@ class MsgShow extends React.Component {
                         </div>
                     } key="1" >
 
-                        <div id="container" ref={this.props.keyword} style={{ overflow: 'scroll', height: this.state.containerHeight }}>
+                        <div id="container" ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
 
                             {/*{
                                 this.state.content.map((oneContentList, index)=> (
