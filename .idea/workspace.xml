@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45cbe2be-f7b8-4024-a704-0af618318dea" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.0df3c2b6.chunk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.0df3c2b6.chunk.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.42f239a4.chunk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.42f239a4.chunk.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.7559485c.chunk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.7559485c.chunk.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.4bb4d4ee.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.4bb4d4ee.js.map" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/asset-manifest.json" afterPath="$PROJECT_DIR$/build/asset-manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,19 +19,80 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MsgShow.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
+      <file leaf-file-name="WeiboTablePage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="351" column="92" lean-forward="false" selection-start-line="351" selection-start-column="92" selection-end-line="351" selection-end-column="92" />
+            <state relative-caret-position="300">
+              <caret line="30" column="92" lean-forward="true" selection-start-line="30" selection-start-column="92" selection-end-line="30" selection-end-column="92" />
               <folding>
-                <element signature="e#581#2117#0" expanded="false" />
-                <element signature="n#!!block;n#constructor#0;n#MsgShow#0" expanded="false" />
-                <element signature="e#2372#2448#0" expanded="false" />
-                <element signature="n#!!block;n#componentWillUnmount#0;n#MsgShow#0" expanded="false" />
-                <element signature="e#4031#4614#0" expanded="false" />
-                <element signature="e#7153#7941#0" expanded="false" />
-                <element signature="e#8232#9050#0" expanded="false" />
+                <element signature="e#2099#2568#0" expanded="false" />
+                <element signature="e#2598#4284#0" expanded="false" />
+                <marker date="1513574615286" expanded="true" signature="2455:2465" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PortalTablePage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="43" column="112" lean-forward="false" selection-start-line="43" selection-start-column="112" selection-end-line="43" selection-end-column="112" />
+              <folding>
+                <element signature="n#!!block;n#componentDidMount#0;n#PortalTablePage#0" expanded="false" />
+                <element signature="e#2263#3951#0" expanded="false" />
+                <element signature="e#3984#4462#0" expanded="false" />
+                <element signature="e#4506#4975#0" expanded="false" />
+                <marker date="1513574770080" expanded="true" signature="4862:4872" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ForumTablePage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="48" column="112" lean-forward="false" selection-start-line="48" selection-start-column="112" selection-end-line="48" selection-end-column="112" />
+              <folding>
+                <marker date="1513574770074" expanded="true" signature="2500:2510" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AgencyTablePage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+              <folding>
+                <element signature="e#2290#2759#0" expanded="false" />
+                <marker date="1513574770078" expanded="true" signature="2646:2656" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CollectionNewsPage.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="115" column="23" lean-forward="false" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
+              <folding>
+                <element signature="e#435#2561#0" expanded="false" />
+                <element signature="e#2610#4115#0" expanded="false" />
+                <element signature="e#4164#5840#0" expanded="false" />
+                <element signature="e#5889#7380#0" expanded="false" />
+                <element signature="e#8047#8516#0" expanded="false" />
+                <element signature="e#8547#8669#0" expanded="false" />
+                <element signature="e#9246#9337#0" expanded="false" />
+                <element signature="e#9384#9505#0" expanded="false" />
+                <element signature="e#10466#11238#0" expanded="false" />
+                <element signature="e#12768#13540#0" expanded="false" />
+                <element signature="e#15070#15842#0" expanded="false" />
+                <element signature="e#17377#18149#0" expanded="false" />
+                <marker date="1513390423368" expanded="true" signature="8403:8413" ph="..." />
               </folding>
             </state>
           </provider>
@@ -147,10 +199,6 @@
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
         <option value="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
         <option value="$PROJECT_DIR$/src/_helpers/myNotification.js" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
@@ -164,6 +212,10 @@
         <option value="$PROJECT_DIR$/src/App/App.jsx" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
       </list>
     </option>
   </component>
@@ -216,7 +268,13 @@
               <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
               <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="MonitoringPage" type="462c0819:PsiDirectoryNode" />
+              <item name="CollectionNewsPage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="MsgPage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -290,12 +348,12 @@
       <workItem from="1513306044641" duration="8407000" />
       <workItem from="1513340462734" duration="2253000" />
       <workItem from="1513422786687" duration="1228000" />
-      <workItem from="1513487798410" duration="2734000" />
+      <workItem from="1513487798410" duration="3194000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="405352000" />
+    <option name="totallyTimeSpent" value="405812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -508,53 +566,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="284" column="75" lean-forward="false" selection-start-line="284" selection-start-column="75" selection-end-line="284" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_helpers/myNotification.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="27" column="29" lean-forward="true" selection-start-line="20" selection-start-column="46" selection-end-line="27" selection-end-column="29" />
-          <folding>
-            <element signature="e#2038#2507#0" expanded="false" />
-            <element signature="e#2537#4223#0" expanded="false" />
-            <marker date="1513326983990" expanded="true" signature="2394:2404" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="41" column="29" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="41" selection-end-column="29" />
-          <folding>
-            <marker date="1513326816536" expanded="true" signature="2439:2449" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="38" column="29" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!block;n#componentDidMount#0;n#PortalTablePage#0" expanded="false" />
-            <element signature="e#2202#3890#0" expanded="false" />
-            <element signature="e#3923#4401#0" expanded="false" />
-            <element signature="e#4445#4914#0" expanded="false" />
-            <marker date="1513326983998" expanded="true" signature="4801:4811" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -603,31 +618,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="224" column="29" lean-forward="true" selection-start-line="224" selection-start-column="29" selection-end-line="224" selection-end-column="29" />
-          <folding>
-            <element signature="e#435#2561#0" expanded="false" />
-            <element signature="e#2610#4115#0" expanded="false" />
-            <element signature="e#4164#5840#0" expanded="false" />
-            <element signature="e#8047#8516#0" expanded="false" />
-            <element signature="e#8547#8669#0" expanded="false" />
-            <element signature="e#9246#9337#0" expanded="false" />
-            <element signature="e#9384#9505#0" expanded="false" />
-            <element signature="e#10466#11238#0" expanded="false" />
-            <element signature="e#12768#13540#0" expanded="false" />
-            <element signature="e#15070#15842#0" expanded="false" />
-            <element signature="e#17377#18149#0" expanded="false" />
-            <marker date="1513390423368" expanded="true" signature="8403:8413" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+            <element signature="e#125#173#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -635,17 +633,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="541">
           <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1361">
-          <caret line="38" column="29" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="e#2229#2698#0" expanded="false" />
-            <marker date="1513326983995" expanded="true" signature="2585:2595" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -688,7 +676,7 @@
         <state relative-caret-position="-231">
           <caret line="17" column="48" lean-forward="false" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -729,8 +717,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="351" column="92" lean-forward="false" selection-start-line="351" selection-start-column="92" selection-end-line="351" selection-end-column="92" />
+        <state relative-caret-position="468">
+          <caret line="342" column="12" lean-forward="false" selection-start-line="342" selection-start-column="12" selection-end-line="342" selection-end-column="12" />
           <folding>
             <element signature="e#581#2117#0" expanded="false" />
             <element signature="n#!!block;n#constructor#0;n#MsgShow#0" expanded="false" />
@@ -739,6 +727,96 @@
             <element signature="e#4031#4614#0" expanded="false" />
             <element signature="e#7153#7941#0" expanded="false" />
             <element signature="e#8232#9050#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2190">
+          <caret line="284" column="75" lean-forward="false" selection-start-line="284" selection-start-column="75" selection-end-line="284" selection-end-column="75" />
+          <folding>
+            <element signature="e#1226#1316#0" expanded="false" />
+            <element signature="e#1356#1605#0" expanded="false" />
+            <element signature="e#1613#1679#0" expanded="false" />
+            <element signature="e#1708#1830#0" expanded="false" />
+            <element signature="e#1838#2028#0" expanded="false" />
+            <element signature="e#2803#2882#0" expanded="false" />
+            <element signature="e#2887#2918#0" expanded="false" />
+            <element signature="e#3815#3841#0" expanded="false" />
+            <element signature="e#3846#4523#0" expanded="false" />
+            <element signature="e#4529#6213#0" expanded="false" />
+            <element signature="e#6219#6322#0" expanded="false" />
+            <element signature="e#6327#6463#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="30" column="92" lean-forward="true" selection-start-line="30" selection-start-column="92" selection-end-line="30" selection-end-column="92" />
+          <folding>
+            <element signature="e#2099#2568#0" expanded="false" />
+            <element signature="e#2598#4284#0" expanded="false" />
+            <marker date="1513574615286" expanded="true" signature="2455:2465" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="43" column="112" lean-forward="false" selection-start-line="43" selection-start-column="112" selection-end-line="43" selection-end-column="112" />
+          <folding>
+            <element signature="n#!!block;n#componentDidMount#0;n#PortalTablePage#0" expanded="false" />
+            <element signature="e#2263#3951#0" expanded="false" />
+            <element signature="e#3984#4462#0" expanded="false" />
+            <element signature="e#4506#4975#0" expanded="false" />
+            <marker date="1513574770080" expanded="true" signature="4862:4872" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="48" column="112" lean-forward="false" selection-start-line="48" selection-start-column="112" selection-end-line="48" selection-end-column="112" />
+          <folding>
+            <marker date="1513574770074" expanded="true" signature="2500:2510" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+          <folding>
+            <element signature="e#2290#2759#0" expanded="false" />
+            <marker date="1513574770078" expanded="true" signature="2646:2656" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="115" column="23" lean-forward="false" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
+          <folding>
+            <element signature="e#435#2561#0" expanded="false" />
+            <element signature="e#2610#4115#0" expanded="false" />
+            <element signature="e#4164#5840#0" expanded="false" />
+            <element signature="e#5889#7380#0" expanded="false" />
+            <element signature="e#8047#8516#0" expanded="false" />
+            <element signature="e#8547#8669#0" expanded="false" />
+            <element signature="e#9246#9337#0" expanded="false" />
+            <element signature="e#9384#9505#0" expanded="false" />
+            <element signature="e#10466#11238#0" expanded="false" />
+            <element signature="e#12768#13540#0" expanded="false" />
+            <element signature="e#15070#15842#0" expanded="false" />
+            <element signature="e#17377#18149#0" expanded="false" />
+            <marker date="1513390423368" expanded="true" signature="8403:8413" ph="..." />
           </folding>
         </state>
       </provider>

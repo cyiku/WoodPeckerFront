@@ -41,7 +41,7 @@ class AgencyTablePage extends React.Component {
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
-            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '正负面', key: 'sentiment', render: (record) => (<p>{record.sentiment > 0.5 ? "正" : "负"}</p>)},
         ],
         agencyData: null,
         currentKwd: '',
