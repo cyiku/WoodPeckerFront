@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
-
+import './OneMsgPage.css';
 //const Panel = Collapse.Panel;
 
 
@@ -138,7 +138,7 @@ class OneMsgPage extends React.Component {
                 <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <div>
                         <a href={content.url} style={{fontSize:10}} target="_blank">
-                            {content.title}
+                            <p className={"title"}>{content.title}</p>
                         </a>
                     </div>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
@@ -154,7 +154,7 @@ class OneMsgPage extends React.Component {
                 <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <div>
                         <a href={content.url} style={{fontSize:10}} target="_blank">
-                            {content.title}
+                            <p className={"title"}>{content.title}</p>
                         </a>
                     </div>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>

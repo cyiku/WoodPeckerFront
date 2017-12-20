@@ -134,7 +134,7 @@ class PublishNumPage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status) {
-                        console.log(ans.result);
+                        //console.log(ans.result);
                         openNotificationWithIcon('success', currentKwd + '获取数据源数量成功');
                         this.setState(preState => ({
                             ...preState,

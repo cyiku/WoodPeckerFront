@@ -53,8 +53,8 @@ class ForumTablePage extends React.Component {
     };
 
     markKeyword = (content, keywords) => {
-        console.log(content);
-        console.log(keywords);
+        //console.log(content);
+        //console.log(keywords);
         // 分割keywords
         const keyword_list = keywords.split('_');
         //console.log(keyword_list);
@@ -98,7 +98,7 @@ class ForumTablePage extends React.Component {
                 }
             ).then(
                 ans => {
-                    console.log(ans.result);
+                   // console.log(ans.result);
                     if(ans.status === 1) {
                         this.setState(preState => ({
                             ...preState,

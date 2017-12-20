@@ -174,10 +174,13 @@ class MsgShow extends React.Component {
             ans => {
                 if(ans.status === 1) {
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
+                    if (ans.result.data.length > 0) {
+                        openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + ans.result.data.length + "条");
+                    }
                     for (let i = ans.result.data.length - 1; i >= 0; --i) {
                         newMessage.unshift(ans.result.data[i]);
                     }
-                    console.log(ans.result.data[0]);
+                    //console.log(ans.result.data[0]);
                     newMessage = newMessage.slice(0, 1000);
                     //newMessage.unshift(ans.result.data);
                     //newMessage.unshift({content: ans.result.data, updateTime: this.getNowFormatDate()});
