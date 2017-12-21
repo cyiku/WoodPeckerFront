@@ -111,9 +111,9 @@ class MsgShow extends React.Component {
         //     console.log(keyword.name + " has been started to get data");
         // };
 
-        this.monitor();
+        this.monitor(true);
         this.interval = setInterval(_ => {
-             this.monitor()
+             this.monitor(false)
         }, 20000 );
 
     }
@@ -153,13 +153,13 @@ class MsgShow extends React.Component {
         return currentdate;
     };
 
-    monitor = () => {
+    monitor = (isFirst) => {
 
         const {user,keyword,dispatch} = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-            body: JSON.stringify({ 'name': keyword.name })
+            body: JSON.stringify({ 'name': keyword.name, 'first': isFirst })
         };
 
         console.log(keyword.name + ' monitor request...');
@@ -229,7 +229,7 @@ class MsgShow extends React.Component {
         } else {
             event.target.setAttribute("class", "fa fa-pause mr-3 d-inline-block");
             this.interval = setInterval(_ => {
-                this.monitor()
+                this.monitor(false)
             }, 20000 );
             openNotificationWithIcon('success', '开始监控');
             console.log(keyword.name + " has been started to get data");
@@ -247,7 +247,7 @@ class MsgShow extends React.Component {
                 virtualList: null,
             })
         );
-        this.monitor();
+        this.monitor(false);
         openNotificationWithIcon('success', '刷新成功');
         event.stopPropagation();
     };

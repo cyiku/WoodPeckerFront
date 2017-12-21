@@ -45,7 +45,7 @@ class DataSourcePage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status === 1) {
-                        openNotificationWithIcon('success', currentKwd + '获取发布量折线图成功');
+                        openNotificationWithIcon('success', currentKwd + '获取各数据源数量成功');
                         this.setState(preState => ({
                             ...preState,
                             keyword: currentKwd,

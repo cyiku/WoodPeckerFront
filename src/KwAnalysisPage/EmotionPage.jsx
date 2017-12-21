@@ -116,7 +116,7 @@ class EmotionPage extends React.Component {
             ).then(
                 ans => {
                     if(ans.status) {
-                        openNotificationWithIcon('success', currentKwd + '获取情感分析成功');
+                        openNotificationWithIcon('success', currentKwd + '获取情感分析图成功');
                         this.setState(preState => ({
                             ...preState,
                             xAxis : [

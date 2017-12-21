@@ -135,7 +135,7 @@ class PublishNumPage extends React.Component {
                 ans => {
                     if(ans.status) {
                         //console.log(ans.result);
-                        openNotificationWithIcon('success', currentKwd + '获取数据源数量成功');
+                        openNotificationWithIcon('success', currentKwd + '获取发布量折线图成功');
                         this.setState(preState => ({
                             ...preState,
                             keyword: currentKwd,
@@ -191,6 +191,7 @@ class PublishNumPage extends React.Component {
 
                             ],
                         }));
+
                     } else {
                         alert(ans.message);
                         if (ans.status === -1)

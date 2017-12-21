@@ -13,8 +13,8 @@ export default class PieReact extends React.Component {
   }
   
   initPie() {
-    const { option={} } = this.props //外部传入的data数据
-    let myChart = echarts.init(this.ID) //初始化echarts
+    const { option={} } = this.props; //外部传入的data数据
+    let myChart = echarts.init(this.ID); //初始化echarts
 
     //设置options
     myChart.setOption(option)

@@ -10,13 +10,13 @@ export default class LineReact extends React.Component {
   
   constructor(props) {
     super(props);
-    this.initPie = this.initPie.bind(this)
   }
   
-  initPie() {
+  initPie = () => {
     const { option={} } = this.props; //外部传入的data数据
     let myChart = echarts.init(this.ID); //初始化echarts
-    
+
+
     //设置options
     myChart.setOption(option)
     window.onresize = function() {
@@ -25,15 +25,17 @@ export default class LineReact extends React.Component {
   }
   
   componentDidMount() {
+    //alert(1);
     this.initPie()
   }
   
   componentDidUpdate() {
+    //alert(2);
     this.initPie()
   }
   
   render() {
     const { width="100%", height="300px" } = this.props
-    return <div ref={ID => this.ID = ID} style={{width, height}}></div>
+    return <div ref={ID => this.ID = ID} style={{width, height}} id="line-chart"></div>
   }
 }
