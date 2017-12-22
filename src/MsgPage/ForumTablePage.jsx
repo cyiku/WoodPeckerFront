@@ -171,7 +171,8 @@ class ForumTablePage extends React.Component {
         }
 
         const type = "forum";
-        const data = (this.state.forumData === null ? [] : this.state.forumData);
+        //const data = (this.state.forumData === null ? [] : this.state.forumData);
+        const data = this.state.forumData;
         const columns = this.state.forumColumns;
         const title = " 相关论坛";
         const collection = this.props.collection['forum'];

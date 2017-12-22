@@ -154,7 +154,8 @@ class WeiboTablePage extends React.Component {
         }
 
         const type = "weibo";
-        const data = (this.state.weiboData === null ? [] : this.state.weiboData);
+        //const data = (this.state.weiboData === null ? [] : this.state.weiboData);
+        const data = this.state.weiboData;
         const columns = this.state.weiboColumns;
         const title = " 相关微博";
         const collection = this.props.collection['weibo'];

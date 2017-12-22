@@ -166,7 +166,8 @@ class AgencyTablePage extends React.Component {
 
 
         const type = "agency";
-        const data = (this.state.agencyData === null ? [] : this.state.agencyData);
+        //const data = (this.state.agencyData === null ? [] : this.state.agencyData);
+        const data = this.state.agencyData;
         const columns = this.state.agencyColumns;
         const title = " 相关机构";
         const collection = this.props.collection['agency'];

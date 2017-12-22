@@ -163,7 +163,8 @@ class PortalTablePage extends React.Component {
         }
 
         const type = "portal";
-        const data = (this.state.portalData  === null ? [] : this.state.portalData);
+        //const data = (this.state.portalData  === null ? [] : this.state.portalData);
+        const data = this.state.portalData;
         const columns = this.state.portalColumns;
         const title = " 门户网站";
         const collection = this.props.collection['portal'];

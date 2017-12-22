@@ -227,6 +227,13 @@ class ShowTablePage extends React.Component {
 
         let { data, columns } = this.props;
 
+        let isLoading = false;
+        if (data === null) {
+            data = [];
+            isLoading = true;
+        }
+
+        console.log(data);
         /*
         let collectionDiv;
         if (this.state.isCollection === false)
@@ -270,7 +277,7 @@ class ShowTablePage extends React.Component {
 
                 <div className="card-body">
                     <div className="table-responsive">
-                        <Table columns={columns} dataSource={data} rowKey={'_id'}/>
+                        <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
                     </div>
                 </div>
 
