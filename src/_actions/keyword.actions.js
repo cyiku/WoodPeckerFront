@@ -35,7 +35,7 @@ function getKws(user) {
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            alert("连接服务器失败");
                         } else {
                             alert("服务器内部错误,请联系管理员,抱歉！");
                         }
@@ -77,7 +77,7 @@ function addKws(user, newkeyword) {
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            alert("连接服务器失败");
                         } else {
                             alert("服务器内部错误,请联系管理员,抱歉！");
                         }
@@ -117,7 +117,7 @@ function delKws(user, keyword, index) {
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            alert("连接服务器失败");
                         } else {
                             alert("服务器内部错误,请联系管理员,抱歉！");
                         }
@@ -156,7 +156,7 @@ function updKws(user, newkeyword, index, keywordid) {
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            alert("连接服务器失败");
                         } else {
                             alert("服务器内部错误,请联系管理员,抱歉！");
                         }

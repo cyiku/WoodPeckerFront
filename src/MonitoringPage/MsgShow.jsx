@@ -75,8 +75,11 @@ class MsgShow extends React.Component {
     constructor(props) {
         super(props);
 
+        const {user, keyword} = this.props;
+        const {token} = user;
+
         this.state = {
-            message: [],
+            message: JSON.parse(localStorage.getItem(token + '_' + keyword) || "[]") || [],
             containerHeight: 651,
             virtualList: null
         }
@@ -131,6 +134,10 @@ class MsgShow extends React.Component {
     };
 
     componentWillUnmount(){
+        const {user, keyword} = this.props;
+        const {token} = user;
+
+        localStorage.setItem(token + '_' + keyword, JSON.stringify(this.state.message.slice(0, 10)));
         clearInterval(this.interval);
         //this.connection.close();
     }

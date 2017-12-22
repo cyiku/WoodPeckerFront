@@ -185,7 +185,7 @@ class OneMsgPage extends React.Component {
                     >
                         <i className="fa fa-fw fa-share-square-o"/>导出
                     </CSVLink>
-                    <a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-fw fa-send-o"/>发送</a>
+                    {/*<a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-fw fa-send-o"/>发送</a>*/}
                 </div>
             </div>
         );
