@@ -181,6 +181,11 @@ class KeywordsPage extends React.Component {
                 return;
             }
 
+            if (postKw.indexOf(' ') !== -1) {
+                openNotificationWithIcon("error", "关键字不能带空格");
+                return;
+            }
+
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
                 if (this.props.keyword[i].name === postKw) {

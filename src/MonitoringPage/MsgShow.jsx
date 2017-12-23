@@ -68,7 +68,7 @@ const Panel = Collapse.Panel;
 //     'keyword': '出售',
 // };
 //
-// const contents = [portalContent];
+// const contents = [portalContent, forumContent, agencyContent];
 
 class MsgShow extends React.Component {
 
@@ -196,7 +196,19 @@ class MsgShow extends React.Component {
         ).then(
             ans => {
                 if(ans.status === 1) {
-                    console.log("获得新数据:" + ans.result.data.length);
+
+                    // if (ans.result.data.length === 0) {
+                    //     this.setState(preState => ({
+                    //         ...preState,
+                    //         time: this.getNowFormatDate(),
+                    //     }));
+                    //     openNotificationWithIcon("info", keyword.name + "暂无新消息");
+                    //     return;
+                    // }
+
+
+
+                    //console.log("获得新数据:" + ans.result.data.length);
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
                     let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
                     //openNotificationWithIcon("success", keyword.name + " 成功获取原始新消息" + ans.result.data.length + "条");
