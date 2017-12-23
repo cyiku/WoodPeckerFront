@@ -197,13 +197,13 @@ class ShowTablePage extends React.Component {
                     }
 
                 } else {
-                    alert(ans.message);
+                    openNotificationWithIcon("error", ans.message);
                     if (ans.status === -1)
                         history.push("/login");
                 }
             },
             error => {
-                alert("服务器内部错误,请联系管理员,抱歉！");
+                openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                 history.push("/login");
             }
         );

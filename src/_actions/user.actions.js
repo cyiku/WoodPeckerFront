@@ -26,7 +26,7 @@ function login(username, password) {
                 error => {
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
-                    alert("您无权访问，请检查账号密码");
+                    openNotificationWithIcon("error", "您无权访问，请检查账号密码");
                 }
             );
     };

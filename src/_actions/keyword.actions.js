@@ -24,20 +24,20 @@ function getKws(user) {
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
-                        alert(ans.message);
+                        openNotificationWithIcon("error", ans.message);
                         if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("连接服务器失败");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }
@@ -66,20 +66,20 @@ function addKws(user, newkeyword) {
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
-                        alert(ans.message);
+                        openNotificationWithIcon("error", ans.message);
                         if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("连接服务器失败");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }
@@ -106,20 +106,20 @@ function delKws(user, keyword, index) {
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
-                        alert(ans.message);
+                        openNotificationWithIcon("error", ans.message);
                         if (ans.status === -1)
                         history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("连接服务器失败");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }
@@ -145,20 +145,20 @@ function updKws(user, newkeyword, index, keywordid) {
                     } else {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
-                        alert(ans.message);
+                        openNotificationWithIcon("error", ans.message);
                         if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         dispatch(failure(error));
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("连接服务器失败");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }

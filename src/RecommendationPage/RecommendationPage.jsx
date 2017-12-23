@@ -10,6 +10,7 @@ import {userActions} from "../_actions/user.actions";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
+import { openNotificationWithIcon } from "../_helpers";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -78,19 +79,19 @@ class RecommendationPage extends React.Component {
                         ]
                     }));
                 } else {
-                    alert(ans.message);
+                    openNotificationWithIcon("error", ans.message);
                     if (ans.status === -1)
                         history.push("/login");
                 }
             },
             error => {
                 if (localStorage.getItem('user') !== null) {
-                    dispatch(userActions.logout());
+                    // dispatch(userActions.logout());
                     dispatch(alertActions.error(error));
                     if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
+                        openNotificationWithIcon("error", "连接服务器失败");
                     } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                        openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                     }
                 }
             }
@@ -120,12 +121,12 @@ class RecommendationPage extends React.Component {
             },
             error => {
                 if (localStorage.getItem('user') !== null) {
-                    dispatch(userActions.logout());
+                    // dispatch(userActions.logout());
                     dispatch(alertActions.error(error));
                     if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
+                        openNotificationWithIcon("error", "连接服务器失败");
                     } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                        openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                     }
                 }
             }
@@ -207,7 +208,7 @@ class RecommendationPage extends React.Component {
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
                 if (this.props.keyword[i].name === postKw) {
-                    alert("关键字已存在");
+                    openNotificationWithIcon("error", "关键字已存在");
                     this.setState({
                         confirmLoading: false,
                     });

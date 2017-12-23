@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-
+import { openNotificationWithIcon } from "../_helpers";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -72,18 +72,18 @@ class KeywordsPage extends React.Component {
                         ]
                     }));
                 } else {
-                    alert(ans.message);
+                    openNotificationWithIcon("error", ans.message);
                     if (ans.status === -1)
                         history.push("/login");
                 }
             },
             error => {
                 if (error.message === "Failed to fetch") {
-                    alert("登录过期, 请重新登录");
+                    openNotificationWithIcon("error", "连接服务器失败");
                 } else {
-                    alert("服务器内部错误,请联系管理员,抱歉！");
+                    openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                 }
-                history.push("/login");
+                //history.push("/login");
             }
         );
     };
@@ -177,14 +177,14 @@ class KeywordsPage extends React.Component {
 
         } else {
             if (postKw === '') {
-                alert("关键字不能为空");
+                openNotificationWithIcon("error", "关键字不能为空");
                 return;
             }
 
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
                 if (this.props.keyword[i].name === postKw) {
-                    alert("关键字已存在");
+                    openNotificationWithIcon("error", "关键字已存在");
                     this.setState({
                         confirmLoading: false,
                     });
@@ -198,7 +198,7 @@ class KeywordsPage extends React.Component {
             }
             console.log(kwList);
             if (kwList === []) {
-                alert("监控站点不能为空");
+                openNotificationWithIcon("error", "监控站点不能为空");
                 return;
             }
 

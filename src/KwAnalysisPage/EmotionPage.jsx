@@ -157,19 +157,19 @@ class EmotionPage extends React.Component {
                             ],
                         }));
                     } else {
-                        alert(ans.reason);
+                        openNotificationWithIcon("error", ans.reason);
                         if (ans.logout)
                             history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         dispatch(alertActions.error(error));
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }

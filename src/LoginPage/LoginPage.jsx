@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
-
+import { openNotificationWithIcon } from "../_helpers";
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css'
 import '../vendor/font-awesome/css/font-awesome.min.css'
@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
             //console.log(data);
             //dispatch(userActions.login2(username, data));
         } else {
-            alert("Please input your username or password");
+            openNotificationWithIcon("error", "Please input your username or password");
         }
     }
 

@@ -17,57 +17,58 @@ import './MonitoringPage.css';
 const Panel = Collapse.Panel;
 
 
-/*
-const portalContent = {
-    '_id': 0,
-    'contentType': 'portal',
-    'source': '网易网',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
 
-const weiboContent = {
-    '_id': 1,
-    "attention": 0,
-    "contentType": "weibo",
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
-    "keyword": "出售",
-    "n_comment": 0,
-    "n_forword": 0,
-    "n_like": 0,
-    "authid": "oyyw",
-    "source": "sina_weibo",
-    "time": "2017_12_08_03_38_34",
-    "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
-};
-
-const agencyContent = {
-    '_id': 2,
-    'contentType': 'agency',
-    'source': '海文考研',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
-
-const forumContent = {
-    '_id': 3,
-    'contentType': 'forum',
-    'source': '百度贴吧',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
-    'n_click': 10,
-    'n_reply': 12,
-    'authid': "oyyw",
-    "time": "2017_12_08_03_38_34",
-    'keyword': '出售',
-};
-*/
+// const portalContent = {
+//     '_id': 0,
+//     'contentType': 'portal',
+//     'source': '网易网',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const weiboContent = {
+//     '_id': 1,
+//     "attention": 0,
+//     "contentType": "新浪微博",
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
+//     "keyword": "出售",
+//     "n_comment": 0,
+//     "n_forword": 0,
+//     "n_like": 0,
+//     "authid": "oyyw",
+//     "source": "sina_weibo",
+//     "time": "2017_12_08_03_38_34",
+//     "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
+// };
+//
+// const agencyContent = {
+//     '_id': 2,
+//     'contentType': 'agency',
+//     'source': '海文考研',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const forumContent = {
+//     '_id': 3,
+//     'contentType': 'forum',
+//     'source': '百度贴吧',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
+//     'n_click': 10,
+//     'n_reply': 12,
+//     'authid': "oyyw",
+//     "time": "2017_12_08_03_38_34",
+//     'keyword': '出售',
+// };
+//
+// const contents = [portalContent, weiboContent, agencyContent, forumContent];
 
 class MsgShow extends React.Component {
 
@@ -79,7 +80,8 @@ class MsgShow extends React.Component {
         const {token} = user;
 
         this.state = {
-            message: JSON.parse(localStorage.getItem(token + '_' + keyword) || "[]") || [],
+            message: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || [],
+            //messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
             containerHeight: 651,
             virtualList: null
         }
@@ -137,7 +139,7 @@ class MsgShow extends React.Component {
         const {user, keyword} = this.props;
         const {token} = user;
 
-        localStorage.setItem(token + '_' + keyword, JSON.stringify(this.state.message.slice(0, 10)));
+        localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
         clearInterval(this.interval);
         //this.connection.close();
     }
@@ -154,9 +156,22 @@ class MsgShow extends React.Component {
         if (strDate >= 0 && strDate <= 9) {
             strDate = "0" + strDate;
         }
+        let hour = date.getHours();
+        if (hour >= 0 && hour <= 9) {
+            hour = "0" + hour;
+        }
+        let minute = date.getMinutes();
+        if (minute >= 0 && minute <= 9) {
+            minute = "0" + minute;
+        }
+        let second = date.getSeconds();
+        if (second >=0 && second <= 9) {
+            second = "0" + second;
+        }
+
         let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes()
-            + seperator2 + date.getSeconds();
+            + " " + hour + seperator2 + minute
+            + seperator2 + second;
         return currentdate;
     };
 
@@ -180,15 +195,35 @@ class MsgShow extends React.Component {
         ).then(
             ans => {
                 if(ans.status === 1) {
+                    console.log("获得新数据:" + ans.result.data.length);
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
-                    if (ans.result.data.length > 0) {
-                        openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + ans.result.data.length + "条");
+                    //openNotificationWithIcon("success", keyword.name + " 成功获取原始新消息" + ans.result.data.length + "条");
+                    //console.log("before sort: ");
+                    //console.log(ans.result.data);
+                    // ans.result.data.sort(function(a,b){
+                    //     return b.time<a.time});
+                    //console.log("after sort: ");
+                    //console.log(ans.result.data);
+                    let count = 0;
+                    // ans.result.data = contents;
+                    for (let i = 0; i < ans.result.data.length; ++i) {
+                        if (keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
+                            newMessage.unshift(ans.result.data[i]);
+                            count += 1;
+                        }
                     }
-                    for (let i = ans.result.data.length - 1; i >= 0; --i) {
-                        newMessage.unshift(ans.result.data[i]);
+                    if (count > 0) {
+                        openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
                     }
+
+                    // for (let i = ans.result.data.length - 1; i >= 0; --i) {
+                    //     newMessage.unshift(ans.result.data[i]);
+                    // }
+                    newMessage.sort(function(a,b){
+                        return b.time>a.time});
+
                     //console.log(ans.result.data[0]);
-                    newMessage = newMessage.slice(0, 1000);
+                    newMessage = newMessage.slice(0, 100);
                     //newMessage.unshift(ans.result.data);
                     //newMessage.unshift({content: ans.result.data, updateTime: this.getNowFormatDate()});
                     //newUpdateTime.unshift(this.getNowFormatDate());
@@ -204,19 +239,19 @@ class MsgShow extends React.Component {
                         virtualList: newMessage.length === 0 ? null : <MyVirtualList items={newMessage} itemHeight={217}/>
                     }));
                 } else {
-                    alert(ans.message);
+                    openNotificationWithIcon("error", ans.message);
                     if (ans.status === -1)
                         history.push("/login");
                 }
             },
             error => {
                 if (localStorage.getItem('user') !== null) {
-                    dispatch(userActions.logout());
+                    // dispatch(userActions.logout());
                     dispatch(alertActions.error(error));
                     if (error.message === "Failed to fetch") {
-                        alert("登录过期, 请重新登录");
+                        openNotificationWithIcon("error", "连接服务器失败");
                     } else {
-                        alert("服务器内部错误,请联系管理员,抱歉！");
+                        openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                     }
                 }
             }
@@ -255,7 +290,7 @@ class MsgShow extends React.Component {
             })
         );
         this.monitor(false);
-        openNotificationWithIcon('success', '刷新成功');
+        //openNotificationWithIcon('success', '刷新成功');
         event.stopPropagation();
     };
 

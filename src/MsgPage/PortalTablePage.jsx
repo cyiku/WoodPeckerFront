@@ -8,6 +8,7 @@ import { history } from '../_helpers';
 import {userActions} from "../_actions/user.actions";
 import { Link } from 'react-router-dom';
 import { Popover } from 'antd';
+import { openNotificationWithIcon } from "../_helpers";
 // 导入css
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css';
@@ -85,18 +86,18 @@ class PortalTablePage extends React.Component {
                             portalData: ans.result
                         }));
                     } else {
-                        alert(ans.message);
+                        openNotificationWithIcon("error", ans.message);
                         if (ans.status === -1)
                             history.push("/login");
                     }
                 },
                 error => {
                     if (localStorage.getItem('user') !== null) {
-                        dispatch(userActions.logout());
+                        // dispatch(userActions.logout());
                         if (error.message === "Failed to fetch") {
-                            alert("登录过期, 请重新登录");
+                            openNotificationWithIcon("error", "连接服务器失败");
                         } else {
-                            alert("服务器内部错误,请联系管理员,抱歉！");
+                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
                         }
                     }
                 }
