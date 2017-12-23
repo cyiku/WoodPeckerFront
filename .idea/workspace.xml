@@ -2,100 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45cbe2be-f7b8-4024-a704-0af618318dea" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.247829b9.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.247829b9.js.map" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/woodpecker.jpg" afterPath="$PROJECT_DIR$/src/HomePage/woodpecker.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/asset-manifest.json" afterPath="$PROJECT_DIR$/build/asset-manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/App.jsx" afterPath="$PROJECT_DIR$/src/App/App.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/index.js" afterPath="$PROJECT_DIR$/src/App/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BlankPage/BlankPage.jsx" afterPath="$PROJECT_DIR$/src/BlankPage/BlankPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BlankPage/index.js" afterPath="$PROJECT_DIR$/src/BlankPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" afterPath="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClusteringPage/index.js" afterPath="$PROJECT_DIR$/src/ClusteringPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" afterPath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionChartsPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionTablePage.jsx" afterPath="$PROJECT_DIR$/src/CollectionChartsPage/CollectionTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionChartsPage/index.js" afterPath="$PROJECT_DIR$/src/CollectionChartsPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.css" afterPath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" afterPath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionNewsPage/index.js" afterPath="$PROJECT_DIR$/src/CollectionNewsPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Echarts/WordcloudReact.js" afterPath="$PROJECT_DIR$/src/Echarts/WordcloudReact.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/HomePage.css" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/index.js" afterPath="$PROJECT_DIR$/src/HomePage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" afterPath="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KeywordsPage/index.js" afterPath="$PROJECT_DIR$/src/KeywordsPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/DataSourcePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/PublishNumPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/WordCloudPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/KwAnalysisPage/index.js" afterPath="$PROJECT_DIR$/src/KwAnalysisPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LoginPage/LoginPage.jsx" afterPath="$PROJECT_DIR$/src/LoginPage/LoginPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LoginPage/index.js" afterPath="$PROJECT_DIR$/src/LoginPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/KwsList.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.css" afterPath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/MonitoringPage.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.css" afterPath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx" afterPath="$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MonitoringPage/index.js" afterPath="$PROJECT_DIR$/src/MonitoringPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" afterPath="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RecommendationPage/index.js" afterPath="$PROJECT_DIR$/src/RecommendationPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RegisterPage/RegisterPage.jsx" afterPath="$PROJECT_DIR$/src/RegisterPage/RegisterPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RegisterPage/index.js" afterPath="$PROJECT_DIR$/src/RegisterPage/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/alert.actions.js" afterPath="$PROJECT_DIR$/src/_actions/alert.actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/collection.actions.js" afterPath="$PROJECT_DIR$/src/_actions/collection.actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/index.js" afterPath="$PROJECT_DIR$/src/_actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/keyword.actions.js" afterPath="$PROJECT_DIR$/src/_actions/keyword.actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/user.actions.js" afterPath="$PROJECT_DIR$/src/_actions/user.actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_actions/websocket.actions.js" afterPath="$PROJECT_DIR$/src/_actions/websocket.actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_components/PrivateRoute.jsx" afterPath="$PROJECT_DIR$/src/_components/PrivateRoute.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_components/index.js" afterPath="$PROJECT_DIR$/src/_components/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/alert.constants.js" afterPath="$PROJECT_DIR$/src/_constants/alert.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/collection.constants.js" afterPath="$PROJECT_DIR$/src/_constants/collection.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/index.js" afterPath="$PROJECT_DIR$/src/_constants/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/keyword.constants.js" afterPath="$PROJECT_DIR$/src/_constants/keyword.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/user.constants.js" afterPath="$PROJECT_DIR$/src/_constants/user.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_constants/websocket.constants.js" afterPath="$PROJECT_DIR$/src/_constants/websocket.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/history.js" afterPath="$PROJECT_DIR$/src/_helpers/history.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/index.js" afterPath="$PROJECT_DIR$/src/_helpers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/myNotification.js" afterPath="$PROJECT_DIR$/src/_helpers/myNotification.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/serverIP.js" afterPath="$PROJECT_DIR$/src/_helpers/serverIP.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/store.js" afterPath="$PROJECT_DIR$/src/_helpers/store.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/alert.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/alert.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/authentication.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/authentication.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/collection.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/collection.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/index.js" afterPath="$PROJECT_DIR$/src/_reducers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/keyword.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/registration.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/registration.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_reducers/websocket.reducer.js" afterPath="$PROJECT_DIR$/src/_reducers/websocket.reducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/collection.service.js" afterPath="$PROJECT_DIR$/src/_services/collection.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/index.js" afterPath="$PROJECT_DIR$/src/_services/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/keyword.service.js" afterPath="$PROJECT_DIR$/src/_services/keyword.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_services/user.service.js" afterPath="$PROJECT_DIR$/src/_services/user.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/logo.svg" afterPath="$PROJECT_DIR$/src/logo.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-grid.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-grid.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-grid.min.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-grid.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-reboot.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-reboot.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-reboot.min.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap-reboot.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.bundle.js" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.bundle.min.js" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/vendor/bootstrap/js/bootstrap.min.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -112,8 +20,8 @@
       <file leaf-file-name="MsgShow.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="83" column="14" lean-forward="false" selection-start-line="83" selection-start-column="14" selection-end-line="83" selection-end-column="14" />
+            <state relative-caret-position="-4094">
+              <caret line="66" column="37" lean-forward="true" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -412,7 +320,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="423785000" />
+    <option name="totallyTimeSpent" value="424736000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -838,8 +746,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="83" column="14" lean-forward="false" selection-start-line="83" selection-start-column="14" selection-end-line="83" selection-end-column="14" />
+        <state relative-caret-position="-4094">
+          <caret line="66" column="37" lean-forward="true" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
           <folding />
         </state>
       </provider>

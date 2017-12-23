@@ -68,7 +68,7 @@ const Panel = Collapse.Panel;
 //     'keyword': '出售',
 // };
 //
-// const contents = [portalContent, weiboContent, agencyContent, forumContent];
+// const contents = [portalContent];
 
 class MsgShow extends React.Component {
 
@@ -81,7 +81,7 @@ class MsgShow extends React.Component {
 
         this.state = {
             message: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || [],
-            //messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
+            messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
             containerHeight: 651,
             virtualList: null
         }
@@ -140,6 +140,7 @@ class MsgShow extends React.Component {
         const {token} = user;
 
         localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
+        localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
         //this.connection.close();
     }
@@ -197,6 +198,7 @@ class MsgShow extends React.Component {
                 if(ans.status === 1) {
                     console.log("获得新数据:" + ans.result.data.length);
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
+                    let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
                     //openNotificationWithIcon("success", keyword.name + " 成功获取原始新消息" + ans.result.data.length + "条");
                     //console.log("before sort: ");
                     //console.log(ans.result.data);
@@ -205,10 +207,13 @@ class MsgShow extends React.Component {
                     //console.log("after sort: ");
                     //console.log(ans.result.data);
                     let count = 0;
-                    // ans.result.data = contents;
+                    //ans.result.data = contents;
+                    //console.log(newMessageId);
                     for (let i = 0; i < ans.result.data.length; ++i) {
-                        if (keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
+                        //console.log(newMessageId.indexOf(ans.result.data[i]._id));
+                        if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
                             newMessage.unshift(ans.result.data[i]);
+                            newMessageId.unshift(ans.result.data[i]._id);
                             count += 1;
                         }
                     }
@@ -235,6 +240,7 @@ class MsgShow extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         message: newMessage,
+                        messageId: newMessageId,
                         time: this.getNowFormatDate(),
                         virtualList: newMessage.length === 0 ? null : <MyVirtualList items={newMessage} itemHeight={217}/>
                     }));
