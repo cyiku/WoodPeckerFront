@@ -197,30 +197,9 @@ class MsgShow extends React.Component {
             ans => {
                 if(ans.status === 1) {
 
-                    // if (ans.result.data.length === 0) {
-                    //     this.setState(preState => ({
-                    //         ...preState,
-                    //         time: this.getNowFormatDate(),
-                    //     }));
-                    //     openNotificationWithIcon("info", keyword.name + "暂无新消息");
-                    //     return;
-                    // }
-
-
-
-                    //console.log("获得新数据:" + ans.result.data.length);
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
                     let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
-                    //openNotificationWithIcon("success", keyword.name + " 成功获取原始新消息" + ans.result.data.length + "条");
-                    //console.log("before sort: ");
-                    //console.log(ans.result.data);
-                    // ans.result.data.sort(function(a,b){
-                    //     return b.time<a.time});
-                    //console.log("after sort: ");
-                    //console.log(ans.result.data);
                     let count = 0;
-                    //ans.result.data = contents;
-                    //console.log(newMessageId);
                     for (let i = 0; i < ans.result.data.length; ++i) {
                         //console.log(newMessageId.indexOf(ans.result.data[i]._id));
                         if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
@@ -231,20 +210,19 @@ class MsgShow extends React.Component {
                     }
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
+                    } else {
+                        return;
                     }
 
-                    // for (let i = ans.result.data.length - 1; i >= 0; --i) {
-                    //     newMessage.unshift(ans.result.data[i]);
-                    // }
                     newMessage.sort(function(a,b){
-                        return b.time>a.time});
+                        if (a.time === b.time)
+                            return 0;
+                        if (a.time < b.time)
+                            return 1;
+                        return -1;
+                    });
 
-                    //console.log(ans.result.data[0]);
                     newMessage = newMessage.slice(0, 100);
-                    //newMessage.unshift(ans.result.data);
-                    //newMessage.unshift({content: ans.result.data, updateTime: this.getNowFormatDate()});
-                    //newUpdateTime.unshift(this.getNowFormatDate());
-                    //console.log(newMessage);
                     const options = {
                         container: this.refs[keyword],
                     };

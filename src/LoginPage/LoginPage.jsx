@@ -5,6 +5,7 @@ import { openNotificationWithIcon } from "../_helpers";
 import '../vendor/bootstrap/css/bootstrap.min.css';
 import '../_helpers/sb-admin.css'
 import '../vendor/font-awesome/css/font-awesome.min.css'
+import './main.css'
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -44,34 +45,47 @@ class LoginPage extends React.Component {
         }
     }
 
-    componentWillMount() {
-        document.body.className = "bg-dark"
-    }
-
     render() {
         const { username, password} = this.state;
         return (
+            <div className="limiter">
+                <div className="container-login100">
+                    <div className="wrap-login100">
 
-            <div className="container">
-                <div className="card card-login mx-auto mt-5">
-                    <div className="card-header">登录</div>
-                    <div className="card-body">
+                        <span className="login100-form-title" style={{paddingBottom: 50}}>
+                            Woodpecker
+                        </span>
+
                         <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label>用户名</label>
-                                <input className="form-control" placeholder="Username" name="username" value={username} onChange={this.handleChange} />
+                            <div className="wrap-input100">
+                                <input className="input100" type="text" placeholder="Username" name="username" value={username} onChange={this.handleChange} />
                             </div>
-                            <div className="form-group">
-                                <label>密码</label>
-                                <input className="form-control" type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange} />
+
+                            <div className="wrap-input100">
+                                <span className="btn-show-pass">
+                                    <i className="zmdi zmdi-eye"/>
+                                </span>
+                                <input className="input100" type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange}/>
                             </div>
-                            <button className="btn btn-primary btn-block">登录</button>
+
+                            <div className="container-login100-form-btn">
+                                <div className="wrap-login100-form-btn">
+                                    <div className="login100-form-bgbtn"/>
+                                    <button className="login100-form-btn">
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
                         </form>
-                        {/*
-                        <div className="text-center">
-                            <Link className="d-block small mt-3" to="/register">注册账号</Link>
+
+                        <div className="text-center" style={{marginTop: 50}}>
+						    <span className="txt1">
+							    Don’t have an account?
+						    </span>
+                            <a className="txt2" href="#">
+                                Sign Up
+                            </a>
                         </div>
-                        */}
                     </div>
                 </div>
             </div>
