@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'antd';
+import { Card, Icon } from 'antd';
 import { CSVLink } from 'react-csv';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 
 class ClusteringPage extends React.Component {
 
@@ -70,34 +69,22 @@ class ClusteringPage extends React.Component {
         for (let i = 0; i < content.length; ++i)
             content[i]['word'] = content[i]['word'].replace(/'/g, '');
         return (
-            <div className="card mb-3">
-                <div className="card-header">
-                    <i className="fa fa-table">话题聚类, 更新于: {time.replace(/'/g, '')}</i>
-
-                </div>
-
-
-                <div className="card-body">
-                    <div className="table-responsive">
-                        <Table columns={columns} dataSource={content} rowKey={'id'}/>
-                    </div>
-                </div>
-
-
-                <div className="card-body py-2 small">
-
+            <Card style={{marginTop: 15, marginLeft:15}} title={
+                <span>话题聚类,更新于: {time.replace(/'/g, '')}</span>
+            }>
+                <Table columns={columns} dataSource={content} rowKey={'id'}/>
+                <div>
                     <CSVLink data={content}
                              filename={new Date().toLocaleString()  + '.csv'}
                              target="_blank"
                              title="导出"
-                             className="mr-3 d-inline-block"
                     >
-                        <i className="fa fa-fw fa-share-square-o"/>导出
+                        <Icon type="download" /> 导出
                     </CSVLink>
-                    <a className="d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
                 </div>
 
-            </div>
+            </Card>
+
         );
     }
 }

@@ -1,14 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
 import {ShowPicPage} from "./ShowPicPage";
-
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
-//const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
 
 class MapPage extends React.Component {
 
@@ -94,9 +87,7 @@ class MapPage extends React.Component {
 
     render() {
         return (
-            <div className="col-md-12">
                 <ShowPicPage data={this.state} type={'map'} title={'地域分布'}/>
-            </div>
         );
     }
 }

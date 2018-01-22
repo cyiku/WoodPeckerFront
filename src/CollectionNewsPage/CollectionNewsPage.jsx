@@ -1,13 +1,11 @@
 import React from 'react';
 import { CSVLink } from 'react-csv';
-import { Table } from 'antd';
+import { Table, Card, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { Popover } from 'antd';
 
 // 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 import './CollectionNewsPage.css';
 
 class CollectionNewsPage extends React.Component {
@@ -218,174 +216,91 @@ class CollectionNewsPage extends React.Component {
 
 
         return (
-            <div className="content-wrapper" style={{marginLeft:0}}>
-                <div className="container-fluid">
-                    <div className="row">
-                        {/*具体微博展示*/}
-                        <div className="card" style={{width:"100%", marginBottom: 50}}>
+            <div style={{marginTop: 15, marginLeft:15}}>
 
-                            {/*header*/}
-                            <div className="card-header">
-                                <i className="fa fa-table"/><span style={{fontWeight:800}}> 收藏的微博</span>
-                                {/*
-                                <div style={{float:"right"}}>
-                                    <div className="input-group">
-                                        <input className="form-control" type="text" placeholder="搜正文..." onChange={this.handlechange} name={"searchWeiboContent"}/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-primary" type="button" onClick={}>
-                                                <i className="fa fa-search"/>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                */}
-                            </div>
-
-                            {/*body*/}
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <Table columns={this.state.weiboColumns} dataSource={weiboCollection}/>
-                                </div>
-                            </div>
-
-                            {/*功能*/}
-                            <div className="card-body py-2 small">
-                                <CSVLink data={weiboCollection}
-                                         filename={new Date().toLocaleString() + '.csv'}
-                                         target="_blank"
-                                         title="导出"
-                                         className="mr-3 d-inline-block"
-                                >
-                                    <i className="fa fa-fw fa-share-square-o"/>导出
-                                </CSVLink>
-                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                            </div>
-                        </div>
-
-                        {/*具体贴吧展示*/}
-                        <div className="card" style={{width:"100%", marginBottom: 50}}>
-
-                            {/*header*/}
-                            <div className="card-header">
-                                <i className="fa fa-table"/><span style={{fontWeight:800}}> 收藏的论坛</span>
-                                {/*
-                                <div style={{float:"right"}}>
-                                    <div className="input-group">
-                                        <input className="form-control" type="text" placeholder="搜正文..." onChange={this.handlechange} name={"searchWeiboContent"}/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-primary" type="button" onClick={}>
-                                                <i className="fa fa-search"/>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                */}
-                            </div>
-
-                            {/*body*/}
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <Table columns={this.state.forumColumns} dataSource={forumCollection}/>
-                                </div>
-                            </div>
-
-                            {/*功能*/}
-                            <div className="card-body py-2 small">
-                                <CSVLink data={forumCollection}
-                                         filename={new Date().toLocaleString() + '.csv'}
-                                         target="_blank"
-                                         title="导出"
-                                         className="mr-3 d-inline-block"
-                                >
-                                    <i className="fa fa-fw fa-share-square-o"/>导出
-                                </CSVLink>
-                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                            </div>
-                        </div>
-
-                        {/*门户网站展示*/}
-                        <div className="card" style={{width:"100%", marginBottom: 50}}>
-
-                            {/*header*/}
-                            <div className="card-header">
-                                <i className="fa fa-table"/><span style={{fontWeight:800}}> 收藏的门户</span>
-                                {/*
-                                <div style={{float:"right"}}>
-                                    <div className="input-group">
-                                        <input className="form-control" type="text" placeholder="搜正文..." onChange={this.handlechange} name={"searchWeiboContent"}/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-primary" type="button" onClick={}>
-                                                <i className="fa fa-search"/>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                */}
-                            </div>
-
-                            {/*body*/}
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <Table columns={this.state.portalColumns} dataSource={portalCollection}/>
-                                </div>
-                            </div>
-
-                            {/*功能*/}
-                            <div className="card-body py-2 small">
-                                <CSVLink data={portalCollection + '.csv'}
-                                         filename={new Date().toLocaleString()}
-                                         target="_blank"
-                                         title="导出"
-                                         className="mr-3 d-inline-block"
-                                >
-                                    <i className="fa fa-fw fa-share-square-o"/>导出
-                                </CSVLink>
-                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                            </div>
-                        </div>
-
-                        {/*培训结构展示*/}
-                        <div className="card" style={{width:"100%", marginBottom: 50}}>
-
-                            {/*header*/}
-                            <div className="card-header">
-                                <i className="fa fa-table"/><span style={{fontWeight:800}}> 收藏的培训机构</span>
-                                {/*
-                                <div style={{float:"right"}}>
-                                    <div className="input-group">
-                                        <input className="form-control" type="text" placeholder="搜正文..." onChange={this.handlechange} name={"searchWeiboContent"}/>
-                                        <span className="input-group-btn">
-                                            <button className="btn btn-primary" type="button" onClick={}>
-                                                <i className="fa fa-search"/>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                */}
-                            </div>
-
-                            {/*body*/}
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <Table columns={this.state.portalColumns} dataSource={portalCollection}/>
-                                </div>
-                            </div>
-
-                            {/*功能*/}
-                            <div className="card-body py-2 small">
-                                <CSVLink data={agencyCollection + '.csv'}
-                                         filename={new Date().toLocaleString() + '.csv'}
-                                         target="_blank"
-                                         title="导出"
-                                         className="mr-3 d-inline-block"
-                                >
-                                    <i className="fa fa-fw fa-share-square-o"/>导出
-                                </CSVLink>
-                                <a className="mr-3 d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                            </div>
-                        </div>
+                {/*具体微博展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的微博</span>
                     </div>
-                </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.weiboColumns} dataSource={weiboCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={weiboCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
+
+                {/*具体贴吧展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的论坛</span>
+                    </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.forumColumns} dataSource={forumCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={forumCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
+
+                {/*门户网站展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的门户</span>
+                    </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.portalColumns} dataSource={portalCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={portalCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
+
+                {/*培训结构展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的培训机构</span>
+                    </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.portalColumns} dataSource={agencyCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={agencyCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
             </div>
         );
     }

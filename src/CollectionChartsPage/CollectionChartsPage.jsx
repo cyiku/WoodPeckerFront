@@ -1,8 +1,5 @@
 import React from 'react';
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 
 //import {CollectionTablePage} from "./CollectionTablePage";
 import asyncComponent from '../_helpers/AsyncComponent';

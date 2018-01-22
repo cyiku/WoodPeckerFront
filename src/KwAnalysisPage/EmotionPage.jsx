@@ -6,10 +6,6 @@ import { history } from '../_helpers';
 import {userActions} from "../_actions/user.actions";
 import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
 
 class EmotionPage extends React.Component {
 

@@ -2,10 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
 
 class WordCloudPage extends React.Component {
 

@@ -4,10 +4,6 @@ import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
 class CollectionTablePage extends React.Component {
 
     state = {

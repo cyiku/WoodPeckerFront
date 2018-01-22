@@ -1,28 +1,23 @@
 import React from 'react';
-import { Popover } from 'antd';
+import { Popover, Card, Icon } from 'antd';
 import { CSVLink } from 'react-csv';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
-
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import './OneMsgPage.css';
+// 开源代码: 限制段落行数，chrome, firefox, safari都可以
+import './clamp.js';
 //const Panel = Collapse.Panel;
 
 
 class OneMsgPage extends React.Component {
 
     markKeyword = (content, keywords) => {
-        //console.log(content);
-        //console.log(keywords);
+
         // 分割keywords
         const keyword_list = keywords.split('_');
         //console.log(keyword_list);
         for (let i = 0; i < keyword_list.length; ++i) {
-            //content.replace(keyword_list[i], '<span style="color: red">'+keyword_list[i]+'</span>')
             content = content.replace(new RegExp(keyword_list[i], "gm"), '<span style="color: red">'+keyword_list[i]+'</span>');
         }
-        //console.log(content);
         return content;
     };
 
@@ -59,18 +54,15 @@ class OneMsgPage extends React.Component {
         const {user, dispatch} = this.props;
 
         let icon = document.getElementById(iconID);
-        if (icon.getAttribute("class") === "fa fa-star-o") {
+        if (icon.getAttribute("class") === "anticon anticon-star-o") {
             // 收藏
-            console.log(data);
             dispatch(collectionActions.addCollection(user, data, data[0]['contentType']));
-            icon.setAttribute("class", "fa fa-star"); // 更换图标
-            icon.innerHTML = "取消收藏"
+            icon.setAttribute("class", "anticon anticon-star"); // 更换图标
 
         } else {
             // 取消收藏
             dispatch(collectionActions.delCollection(user, [data[0]['_id']], data[0]['contentType']));
-            icon.setAttribute("class", "fa fa-star-o"); //更换图标
-            icon.innerHTML = "收藏"
+            icon.setAttribute("class", "anticon anticon-star-o"); //更换图标
         }
     };
 
@@ -81,17 +73,14 @@ class OneMsgPage extends React.Component {
      * @returns {*}
      */
     hasCollected = (id, collection) => {
-        //let icon = document.getElementById(id);
-        //console.log(collection[0]['_id']);
-        //console.log(id);
         if (collection === null)
-            return {collectionClass: "fa fa-star-o", collectionInner: "收藏"};
+            return {collectionType: "star-o", collectionInner: "收藏"};
         for (let i = 0; i < collection.length; ++i) {
             if (collection[i]['_id'] === id) {
-                return {collectionClass: "fa fa-star", collectionInner: "取消收藏"}
+                return {collectionType: "star", collectionInner: "取消收藏"}
             }
         }
-        return {collectionClass: "fa fa-star-o", collectionInner: "收藏"}
+        return {collectionType: "star-o", collectionInner: "收藏"}
     };
 
     /*
@@ -113,14 +102,20 @@ class OneMsgPage extends React.Component {
 
     }
     */
+    componentDidMount () {
+        var p = document.getElementsByClassName('text');
+        for (let i = 0; i < p.length; ++i)
+            window.$clamp(p[i], {clamp: 3, useNativeClamp: false});   // 设置最多显示消息的行数
+    }
 
     render() {
         let showMsg;
 
         const {content, contentType, collection} = this.props;
         const newTime = this.timeTransfer(content.time);
-        const {collectionClass, collectionInner} = this.hasCollected(content._id, collection[contentType]);
+        const {collectionType, collectionInner} = this.hasCollected(content._id, collection[contentType]);
 
+        // 全文内容
         const testContent = (
             <div style={{width: 400}}>
                 <p dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}}/>
@@ -160,34 +155,63 @@ class OneMsgPage extends React.Component {
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                 </div>;
         return (
-            <div className="card" style={{marginBottom: 10}}>
-                <div className="card-body">
-                    <div>
-                        <i style={{float: "right"}}>{newTime}, {content.source}</i>
-                        <h6>{content.authid? content.authid: "匿名用户"}</h6>
-                    </div>
-                    {showMsg}
+
+            <Card title={
+                <div>
+                    <span style={{float: "right"}}>{newTime}, {content.source}</span>
+                    <span>{content.authid? content.authid: "匿名用户"}</span>
                 </div>
-                <hr className="my-0" />
-                <div className="card-body py-2 small">
+            } style={{ marginBottom: 10 }}>
+
+                {showMsg}
+
+                <div>
                     <Popover content={testContent} title="全文内容">
-                        <a className="mr-3 d-inline-block" href="javascript:void(0);" target="_blank">全部内容</a>
+                        <a href="javascript:void(0);" target="_blank">全部内容</a>
                     </Popover>
-                    <a className="mr-3 d-inline-block" href={content.url} target="_blank">原文地址</a>
-                    <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)}>
-                        <i id={content._id} className={collectionClass}>{collectionInner}</i>
+                    <a href={content.url} target="_blank" style={{marginLeft:15}}>原文地址</a>
+                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)} style={{marginLeft:15}}>
+                        <Icon id={content._id} type={collectionType}/> {collectionInner}
                     </a>
                     <CSVLink data={this.objToJSON(content)}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出"
-                             className="mr-3 d-inline-block"
+                             style={{marginLeft:15}}
                     >
-                        <i className="fa fa-fw fa-share-square-o"/>导出
+                        <Icon type="download" /> 导出
                     </CSVLink>
-                    {/*<a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-fw fa-send-o"/>发送</a>*/}
                 </div>
-            </div>
+            </Card>
+
+            // <div className="card" style={{marginBottom: 10}}>
+            //     <div className="card-body">
+            //         <div>
+            //             <i style={{float: "right"}}>{newTime}, {content.source}</i>
+            //             <h6>{content.authid? content.authid: "匿名用户"}</h6>
+            //         </div>
+            //         {showMsg}
+            //     </div>
+            //     <hr className="my-0" />
+            //     <div className="card-body py-2 small">
+            //         <Popover content={testContent} title="全文内容">
+            //             <a className="mr-3 d-inline-block" href="javascript:void(0);" target="_blank">全部内容</a>
+            //         </Popover>
+            //         <a className="mr-3 d-inline-block" href={content.url} target="_blank">原文地址</a>
+            //         <a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)}>
+            //             <i id={content._id} className={collectionClass}>{collectionInner}</i>
+            //         </a>
+            //         <CSVLink data={this.objToJSON(content)}
+            //                  filename={new Date().toLocaleString() + '.csv'}
+            //                  target="_blank"
+            //                  title="导出"
+            //                  className="mr-3 d-inline-block"
+            //         >
+            //             <i className="fa fa-fw fa-share-square-o"/>导出
+            //         </CSVLink>
+            //         {/*<a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-fw fa-send-o"/>发送</a>*/}
+            //     </div>
+            // </div>
         );
     }
 }

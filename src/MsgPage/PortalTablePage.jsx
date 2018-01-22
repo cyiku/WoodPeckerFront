@@ -5,13 +5,10 @@ import { collectionActions } from '../_actions';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-import {userActions} from "../_actions/user.actions";
+import {Button} from 'antd';
 import { Link } from 'react-router-dom';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 
 /*
 const portalContent = {
@@ -109,9 +106,9 @@ class PortalTablePage extends React.Component {
         let targets = document.getElementsByClassName("keyword");
 
         for (let i = 0; i < targets.length; ++i) {
-            targets[i].setAttribute("class", "btn btn-secondary keyword");
+            targets[i].setAttribute("type", "default");
         }
-        event.target.setAttribute("class", "btn btn-primary keyword");
+        event.target.setAttribute("type", "primary");
 
         let newKwd = event.target.getAttribute("value");
 
@@ -153,9 +150,9 @@ class PortalTablePage extends React.Component {
 
         for (let i = 0; i < keyword.length; i++) {
             if (keyword[i].name === currentKwd) {
-                kwdButtonClass[keyword[i].name] = "btn btn-primary keyword";
+                kwdButtonClass[keyword[i].name] = "primary";
             } else {
-                kwdButtonClass[keyword[i].name] = "btn btn-secondary keyword";
+                kwdButtonClass[keyword[i].name] = "default";
             }
         }
 
@@ -170,30 +167,26 @@ class PortalTablePage extends React.Component {
         const title = " 门户网站";
         const collection = this.props.collection['portal'];
         return (
-            <div>
-                <div style={{marginBottom: 10, marginTop: 10}}>
+            <div style={{marginLeft:15, marginTop:15}}>
+                <div>
                     {
                         keyword.map( (oneKwd, index)=>
-                            <button
-                                className={kwdButtonClass[oneKwd.name]}
+                            <Button
+                                size="large"
+                                type={kwdButtonClass[oneKwd.name]}
                                 key={index}
-                                style={{color:"white", marginLeft:10}}
                                 onClick={this.clickKeyword}
                                 value={oneKwd.name}
                             >
                                 {oneKwd.name}
-                            </button>
+                            </Button>
                         )
                     }
-                    <Link
-                        to="/keywords"
-                        style={{color:"white", marginLeft:10}}
-                        className="btn btn-danger"
-                    >
-                        管理关键字
-                    </Link>
+                    <Button type="primary" size="large"><Link to="/keywords">管理关键字</Link></Button>
                 </div>
-                <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                <div style={{marginTop:15}}>
+                    <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                </div>
             </div>
         );
     }

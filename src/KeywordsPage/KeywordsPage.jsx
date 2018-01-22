@@ -1,14 +1,11 @@
 import React from 'react';
-import { Modal } from 'antd';
-import { Checkbox } from 'antd';
+import { Modal, Input } from 'antd';
+import { Checkbox, Button, Icon, Table } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -96,16 +93,78 @@ class KeywordsPage extends React.Component {
     }
 
     // 删除
-    showConfirm = (event, index) => {
+    // showConfirm = (event, index) => {
+    //     this.setState({
+    //         deleteVisible: true,
+    //         deleteIndex: index,
+    //     });
+    // };
+
+    showConfirm = (event, name) => {
+        const {keyword} = this.props;
+        let index = -1;
+        for (let i = 0; i < keyword.length; ++i) {
+            if (keyword[i].name === name)
+                index = i;
+        }
         this.setState({
             deleteVisible: true,
             deleteIndex: index,
-
         });
     };
 
     // 管理关键字对话框
-    showUpdateModal = (isUpdated, event) => {
+    // showUpdateModal = (isUpdated, event) => {
+    //
+    //     // 用于更新this.state.sites
+    //     const newTypes = this.state.types;
+    //     // 用于更新this.modelKw
+    //     let modelKw = "关键字名称";
+    //
+    //     let title = '';
+    //
+    //     var updatedIndex = null;
+    //
+    //     if (isUpdated) {
+    //         // 如果是修改关键字操作
+    //         title = '修改关键字';
+    //
+    //         // 根据点击的index得到要跟新的keyword
+    //         const index = event.target.getAttribute("value");
+    //         const keyword = this.props.keyword[index];
+    //         updatedIndex = index;
+    //
+    //         modelKw = keyword.name;
+    //
+    //         for (let i = 0; i < newTypes.length; ++i) {
+    //             newTypes[i].indeterminate = true;
+    //             newTypes[i].checkAll = false;
+    //             // checkedList是所有站点与用户原先选的站点的交集
+    //             newTypes[i].checkedList = this.state.types[i].subsites.filter(v=>keyword.sites.includes(v))
+    //         }
+    //
+    //     } else {
+    //         title = '新加关键字';
+    //         for (let i = 0; i < newTypes.length; ++i) {
+    //             newTypes[i].indeterminate = true;
+    //             newTypes[i].checkAll = false;
+    //             newTypes[i].checkedList = [];
+    //         }
+    //     }
+    //
+    //     this.setState(preState => ({
+    //         ...preState,
+    //         updatedIndex: updatedIndex,
+    //         isUpdated: isUpdated,
+    //         title: title,
+    //         modelKw: modelKw,
+    //         updateVisible: true,
+    //         types: newTypes
+    //     }));
+    // };
+
+    // 管理关键字对话框
+    showUpdateModal = (isUpdated, keyword, event) => {
 
         // 用于更新this.state.sites
         const newTypes = this.state.types;
@@ -119,13 +178,12 @@ class KeywordsPage extends React.Component {
         if (isUpdated) {
             // 如果是修改关键字操作
             title = '修改关键字';
-
-            // 根据点击的index得到要跟新的keyword
-            const index = event.target.getAttribute("value");
-            const keyword = this.props.keyword[index];
-            updatedIndex = index;
-
             modelKw = keyword.name;
+            const allkwd = this.props.keyword;
+            for (let i = 0; i < allkwd.length; ++i) {
+                if (allkwd[i].name === modelKw)
+                    updatedIndex = i;
+            }
 
             for (let i = 0; i < newTypes.length; ++i) {
                 newTypes[i].indeterminate = true;
@@ -180,11 +238,6 @@ class KeywordsPage extends React.Component {
                 openNotificationWithIcon("error", "关键字不能为空");
                 return;
             }
-
-            // if (postKw.indexOf(' ') !== -1) {
-            //     openNotificationWithIcon("error", "关键字不能带空格");
-            //     return;
-            // }
 
             // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
@@ -268,7 +321,7 @@ class KeywordsPage extends React.Component {
     handleDeleteOk = (e) => {
         const {user, dispatch, keyword} = this.props;
         const {deleteIndex} = this.state;
-        dispatch(keywordActions.delKws(user, keyword, deleteIndex.index));
+        dispatch(keywordActions.delKws(user, keyword, deleteIndex));
         this.setState({
             deleteVisible: false,
         });
@@ -281,104 +334,84 @@ class KeywordsPage extends React.Component {
     };
 
     render() {
+
         let { keyword } = this.props;
-        //console.log(keyword);
         if (keyword === null)
             keyword = [];
+
+        const columns = [
+            {title: '关键词名称', dataIndex: 'name'},
+            {title: '爬取站点', render: (record) => (
+                record.sites.map((eachSite, index)=>
+                    <span style={{marginRight:5}} key={index}>{eachSite}</span>
+                )
+            )},
+            {title: '操作', key: 'action', render: (record) => (
+                <span>
+                    <a title="修改话题" onClick={(event)=>this.showUpdateModal(true, record, event)}><Icon type="edit"/></a>
+                    <a title="删除关键字" onClick={(event)=>this.showConfirm(event, record.name)} style={{marginLeft:5}}><Icon type="delete"/></a>
+                </span>
+            )},
+        ];
         return (
-            <div className="content-wrapper" style={{marginLeft:0}}>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12">
+            <div style={{marginTop: 15, marginLeft:15}}>
 
-                            {/*此时Button对应的操作是添加关键字*/}
-                            <button className="btn btn-primary" onClick={event=>this.showUpdateModal(false,event)}><i className="fa fa-plus m-r-5"/>新加关键字</button>
+                {/*此时Button对应的操作是添加关键字*/}
+                <Button type="primary" onClick={event=>this.showUpdateModal(false, event)}>新加关键字</Button>
 
-                            {/*显示关键词*/}
-                            <div style={{marginTop:10}}>
-                                <table className="table table-email f-s-14">
-                                    <thead>
-                                    <tr>
-                                        <th>关键字名称</th>
-                                        <th>爬取站点</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {
-                                        keyword.map((keyword, index)=>
-                                        <tr className="ng-scope" key={index} id={index}>
-                                            <td style={{width: "15%"}} className="ng-binding" value={keyword.name}><span>{keyword.name}</span></td>
-                                            <td style={{width: "35%"}} className="ng-binding">
-                                            {
-                                                keyword.sites.map((eachSite, index)=>
-                                                    <span style={{marginRight:5}} key={index}>{eachSite}</span>
-                                                )
-                                            }
-                                            </td>
-                                            <td style={{width: "10%"}}>
-                                                <a title="修改话题" onClick={(event)=>this.showUpdateModal(true, event)} value={index}><i className="fa fa-edit" value={index}/></a>
-                                                <a title="删除关键字" onClick={(event)=>this.showConfirm(event, {index})} value={index} style={{marginLeft:5}}><i className="fa fa-trash-o" value={index}/></a>
-                                            </td>
-                                        </tr>)
-                                    }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-                        <Modal title={this.state.title}
-                               visible={this.state.updateVisible}
-                               onOk={this.handleOk}
-                               confirmLoading={this.state.confirmLoading}
-                               onCancel={this.handleCancel}
-                        >
-                            <div className="form-group">
-                                <label>关键字名称</label>
-                                <input type="text" name="txt_departmentname" data-bind="value:Name" className="form-control" id="txt_departmentname"  onChange={this.handleChange} value={this.state.modelKw}/>
-                            </div>
-                            <div className="form-group">
-                                <label>爬取站点</label>
-                                <div className="m-b-15">
-                                    <ul className="nav nav-pills nav-stacked nav-sm panel-body">
-                                        <li>
-                                            {
-                                                this.state.types.map((site, index)=>
-                                                    <div key={index}>
-                                                        <div style={{ borderBottom: '1px solid #E9E9E9' }}>
-                                                            <Checkbox
-                                                                indeterminate={site.indeterminate}
-                                                                onChange={(event)=>this.onCheckAllChange(index,event)}
-                                                                checked={site.checkAll}
-                                                            >
-                                                                {site.name}
-                                                            </Checkbox>
-                                                        </div>
-                                                        <br />
-                                                        <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
-                                                        <br />
-                                                        <br />
-                                                    </div>
-                                                )
-                                            }
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </Modal>
-
-                        <Modal
-                            title="提示框"
-                            visible={this.state.deleteVisible}
-                            onOk={this.handleDeleteOk}
-                            onCancel={this.handleDeleteCancel}
-                        >
-                            <p>是否删除? </p>
-                        </Modal>
-
-                    </div>
+                {/*显示关键词*/}
+                <div style={{marginTop:10}}>
+                    <Table dataSource={keyword} columns={columns}/>
                 </div>
+
+                <Modal title={this.state.title}
+                       visible={this.state.updateVisible}
+                       onOk={this.handleOk}
+                       confirmLoading={this.state.confirmLoading}
+                       onCancel={this.handleCancel}
+                >
+                    <div>
+                        <label>关键字名称</label>
+                        <Input  onChange={this.handleChange} placeholder={this.state.modelKw}/>
+                    </div>
+                    <div style={{marginTop: 15}}>
+                        <label>爬取站点</label>
+                        <div>
+                            <ul>
+                                <li>
+                                    {
+                                        this.state.types.map((site, index)=>
+                                            <div key={index}>
+                                                <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                                    <Checkbox
+                                                        indeterminate={site.indeterminate}
+                                                        onChange={(event)=>this.onCheckAllChange(index,event)}
+                                                        checked={site.checkAll}
+                                                    >
+                                                        {site.name}
+                                                    </Checkbox>
+                                                </div>
+                                                <br />
+                                                <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                                <br />
+                                                <br />
+                                            </div>
+                                        )
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Modal>
+
+                <Modal
+                    title="提示框"
+                    visible={this.state.deleteVisible}
+                    onOk={this.handleDeleteOk}
+                    onCancel={this.handleDeleteCancel}
+                >
+                    <p>是否删除? </p>
+                </Modal>
             </div>
         );
     }

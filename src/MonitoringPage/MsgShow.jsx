@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse } from 'antd';
+import { Collapse, Icon, Col } from 'antd';
 import { connect } from 'react-redux';
 import {openNotificationWithIcon} from "../_helpers";
 import {OneMsgPage} from "./OneMsgPage";
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-import {userActions} from '../_actions';
 import {alertActions} from "../_actions/alert.actions";
 import VirtualList from 'react-virtual-list';
 // 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
 import './MonitoringPage.css';
 
 
@@ -18,57 +16,57 @@ const Panel = Collapse.Panel;
 
 
 
-// const portalContent = {
-//     '_id': 0,
-//     'contentType': 'portal',
-//     'source': '网易网',
-//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-//     'time': '2017_11_27_15_53',
-//     'keyword': '出售',
-// };
-//
-// const weiboContent = {
-//     '_id': 1,
-//     "attention": 0,
-//     "contentType": "新浪微博",
-//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
-//     "keyword": "出售",
-//     "n_comment": 0,
-//     "n_forword": 0,
-//     "n_like": 0,
-//     "authid": "oyyw",
-//     "source": "sina_weibo",
-//     "time": "2017_12_08_03_38_34",
-//     "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
-// };
-//
-// const agencyContent = {
-//     '_id': 2,
-//     'contentType': 'agency',
-//     'source': '海文考研',
-//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-//     'time': '2017_11_27_15_53',
-//     'keyword': '出售',
-// };
-//
-// const forumContent = {
-//     '_id': 3,
-//     'contentType': 'forum',
-//     'source': '百度贴吧',
-//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
-//     'n_click': 10,
-//     'n_reply': 12,
-//     'authid': "oyyw",
-//     "time": "2017_12_08_03_38_34",
-//     'keyword': '出售',
-// };
-//
-// const contents = [portalContent, forumContent, agencyContent];
+const portalContent = {
+    '_id': 0,
+    'contentType': 'portal',
+    'source': '网易网',
+    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+    'time': '2017_11_27_15_53',
+    'keyword': '出售',
+};
+
+const weiboContent = {
+    '_id': 1,
+    "attention": 0,
+    "contentType": "weibo",
+    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
+    "keyword": "出售",
+    "n_comment": 0,
+    "n_forward": 0,
+    "n_like": 0,
+    "authid": "oyyw",
+    "source": "新浪微博",
+    "time": "2017_12_08_03_38_34",
+    "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
+};
+
+const agencyContent = {
+    '_id': 2,
+    'contentType': 'agency',
+    'source': '海文考研',
+    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+    'time': '2017_11_27_15_53',
+    'keyword': '出售',
+};
+
+const forumContent = {
+    '_id': 3,
+    'contentType': 'forum',
+    'source': '百度贴吧',
+    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
+    'n_click': 10,
+    'n_reply': 12,
+    'authid': "oyyw",
+    "time": "2017_12_08_03_38_34",
+    'keyword': '出售',
+};
+
+const contents = [weiboContent, portalContent, forumContent, agencyContent];
 
 class MsgShow extends React.Component {
 
@@ -83,7 +81,6 @@ class MsgShow extends React.Component {
             message: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || [],
             messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
             containerHeight: 651,
-            virtualList: null
         }
     }
 
@@ -123,17 +120,16 @@ class MsgShow extends React.Component {
 
     }
 
-    MyList = ({virtual, itemHeight}) => {
-        // console.log(virtual);
-        return <ul style={virtual.style}>
-            {
-                virtual.items.map((item) => (
-                        <li><OneMsgPage content={item} contentType={item['contentType']}/></li>
-                    )
-                )
-            }
-        </ul>;
-    };
+    // MyList = ({virtual, itemHeight}) => {
+    //     return <ul style={virtual.style}>
+    //         {
+    //             virtual.items.map((item) => (
+    //                     <li><OneMsgPage content={item} contentType={item['contentType']}/></li>
+    //                 )
+    //             )
+    //         }
+    //     </ul>;
+    // };
 
     componentWillUnmount(){
         const {user, keyword} = this.props;
@@ -142,7 +138,6 @@ class MsgShow extends React.Component {
         localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
         localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
-        //this.connection.close();
     }
 
     getNowFormatDate = () => {
@@ -201,13 +196,22 @@ class MsgShow extends React.Component {
                     let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
                     let count = 0;
                     for (let i = 0; i < ans.result.data.length; ++i) {
-                        //console.log(newMessageId.indexOf(ans.result.data[i]._id));
                         if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
                             newMessage.unshift(ans.result.data[i]);
                             newMessageId.unshift(ans.result.data[i]._id);
                             count += 1;
                         }
                     }
+
+                    // test
+                    for (let i = 0; i < contents.length; ++i) {
+                        if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
+                            newMessage.unshift(contents[i]);
+                            newMessageId.unshift(contents[i]._id);
+                            count += 1;
+                        }
+                    }
+
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
                     } else {
@@ -221,18 +225,17 @@ class MsgShow extends React.Component {
                             return 1;
                         return -1;
                     });
-
                     newMessage = newMessage.slice(0, 100);
+
                     const options = {
                         container: this.refs[keyword],
                     };
-                    const MyVirtualList = VirtualList(options)(this.MyList);
+
                     this.setState(preState => ({
                         ...preState,
                         message: newMessage,
                         messageId: newMessageId,
                         time: this.getNowFormatDate(),
-                        virtualList: newMessage.length === 0 ? null : <MyVirtualList items={newMessage} itemHeight={217}/>
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
@@ -258,14 +261,15 @@ class MsgShow extends React.Component {
 
         const {keyword} = this.props;
 
-        let className = event.target.getAttribute("class");
-        if (className === "fa fa-pause mr-3 d-inline-block") {
-            event.target.setAttribute("class", "fa fa-play mr-3 d-inline-block");
+        let type = event.target.getAttribute("class");
+
+        if (type === "anticon anticon-pause-circle-o") {
+            event.target.setAttribute("class", "anticon anticon-play-circle-o");
             clearInterval(this.interval);
             openNotificationWithIcon('success', '暂停成功');
             console.log(keyword.name + " has been paused");
         } else {
-            event.target.setAttribute("class", "fa fa-pause mr-3 d-inline-block");
+            event.target.setAttribute("class", "anticon anticon-pause-circle-o");
             this.interval = setInterval(_ => {
                 this.monitor(false)
             }, 20000 );
@@ -282,11 +286,11 @@ class MsgShow extends React.Component {
         this.setState(
             preState => ({
                 ...preState,
-                virtualList: null,
+                message: [],
+                messageId: [],
             })
         );
         this.monitor(false);
-        //openNotificationWithIcon('success', '刷新成功');
         event.stopPropagation();
     };
 
@@ -330,76 +334,32 @@ class MsgShow extends React.Component {
             pathname:'/kwAnalysis',
             state:keyword['name'],
         };
-
-        // const MyList = ({virtual, itemHeight}) => {
-        //
-        //     console.log(virtual);
-        //     return <ul>
-        //         {
-        //             /*
-        //             virtual.items.map((item) => (
-        //                     <li><OneMsgPage content={item} contentType={item['contentType']}/></li>
-        //                 )
-        //             )
-        //             */
-        //             [1,2,3,4,5,6,7,8,9,10].map((item) => (
-        //                 <li style={{height: itemHeight}}>{'item' + item}</li>
-        //             ))
-        //         }
-        //     </ul>;};
-        //
-        //
-        // /*
-        // const options = {
-        //     initialState: {
-        //         firstItemIndex: 0, // show first ten items
-        //         lastItemIndex: 100,  // during initial render
-        //     },
-        // };
-        // */
-        //
-        // const options = {
-        //     container: this.refs.container,
-        // };
-        // const MyVirtualList = VirtualList(options)(MyList);
-        //console.log(this.state.message.length);
-
-
+        const {message} = this.state;
         return (
-            <div className="col-md-4" style={{height:"100% "}} name={keyword.name} id={keyword.name}>
+            <div style={{height:"100% "}} name={keyword.name} id={keyword.name}>
 
                 {/*<button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>
                 <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>*/}
 
-                <Collapse defaultActiveKey={['1']} style={{marginTop:10}}>
+                <Collapse defaultActiveKey={['1']} style={{marginTop:10, backgroundColor:"white"}}>
                     <Panel header= {
                         <div>
                             <div style={{float: 'right'}} onClick={event => event.stopPropagation()}>
-                                <a href="javascript:void(0);"><i className="fa fa-pause mr-3 d-inline-block" onClick={this.play}/></a>
-                                <a href="javascript:void(0);"><i className="fa fa-refresh mr-3 d-inline-block" onClick={this.fresh}/></a>
-                                <Link to={path} className="mr-3 d-inline-block"><i className="fa fa-bar-chart"/></Link>
+                                <Icon type="pause-circle-o" onClick={this.play} style={{fontSize:15, marginRight:10}}/>
+                                <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/>
+                                <Link to={path} style={{color:"black"}}><Icon type="dot-chart" style={{fontSize:15, marginRight:10}}/></Link>
                             </div>
-                            <i className="fa fa-newspaper-o"> <span>{keyword.name}</span></i>
-                            <i style={{marginLeft:10}}>更新于: {this.state.time}</i>
+                            <Icon type="file-text"/><span> {keyword.name}</span>
+                            <span style={{marginLeft:10}}>更新于: {this.state.time}</span>
                         </div>
                     } key="1" >
 
-                        <div id="container" ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
-
-                            {/*{
-                                this.state.content.map((oneContentList, index)=> (
-                                    <div key={index}>
-                                        <div style={{textAlign:"center", marginBottom: "5px"}} className={"card mb4"}>
-                                            <span>更新于: {this.state.updateTime[index]}</span>
-                                        </div>
-                                        {
-                                            oneContentList.map((oneContent, index2) => <OneMsgPage content={oneContent} contentType={oneContent['contentType']} key={index2} time={this.state.updateTime[index]}/>)
-                                        }
-                                    </div>
-                                    )
-                                )
-                            }*/}
-                            { this.state.virtualList }
+                        <div ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
+                            <div>
+                                {
+                                    message.map((item) => <OneMsgPage content={item} contentType={item['contentType']}/>)
+                                }
+                            </div>
                         </div>
                     </Panel>
                 </Collapse>

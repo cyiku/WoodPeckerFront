@@ -1,15 +1,11 @@
 import React from 'react';
-import { Modal } from 'antd';
+import { Modal, Card, Icon, Input, Table } from 'antd';
 import { Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import {alertActions} from "../_actions/alert.actions";
-import {userActions} from "../_actions/user.actions";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 import { openNotificationWithIcon } from "../_helpers";
 
 const CheckboxGroup = Checkbox.Group;
@@ -139,12 +135,27 @@ class RecommendationPage extends React.Component {
         this.getTypes();
     }
 
+    // // 删除
+    // showConfirm = (event, index) => {
+    //
+    //     let newKwd = JSON.parse(JSON.stringify(this.state.keyword));
+    //     newKwd.splice(index.index, 1);
+    //     //console.log(this.state.keyword);
+    //
+    //     this.setState(preState => ({
+    //         ...preState,
+    //         keyword: newKwd
+    //     }));
+    // };
+
     // 删除
-    showConfirm = (event, index) => {
+    showConfirm = (event, name) => {
 
         let newKwd = JSON.parse(JSON.stringify(this.state.keyword));
-        newKwd.splice(index.index, 1);
-        //console.log(this.state.keyword);
+        for (let i = 0; i < newKwd.length; ++i) {
+            if (newKwd[i].name === name)
+                newKwd.splice(i, 1);
+        }
 
         this.setState(preState => ({
             ...preState,
@@ -152,19 +163,42 @@ class RecommendationPage extends React.Component {
         }));
     };
 
+    // 管理关键字对话框
+    // showUpdateModal = (isUpdated, event) => {
+    //
+    //     // 用于更新this.state.sites
+    //     const newTypes = this.state.types;
+    //     // 用于更新this.modelKw
+    //     let modelKw = "关键字名称";
+    //
+    //     const index = event.target.getAttribute("value");
+    //     const keyword = this.state.keyword[index];
+    //     modelKw = keyword.name;
+    //
+    //
+    //     let title = '新加关键字';
+    //     for (let i = 0; i < newTypes.length; ++i) {
+    //         newTypes[i].indeterminate = true;
+    //         newTypes[i].checkAll = false;
+    //         newTypes[i].checkedList = [];
+    //     }
+    //
+    //     this.setState(preState => ({
+    //         ...preState,
+    //         title: title,
+    //         modelKw: modelKw,
+    //         updateVisible: true,
+    //         types: newTypes
+    //     }));
+    // };
 
     // 管理关键字对话框
     showUpdateModal = (isUpdated, event) => {
 
         // 用于更新this.state.sites
         const newTypes = this.state.types;
-        // 用于更新this.modelKw
-        let modelKw = "关键字名称";
 
-        const index = event.target.getAttribute("value");
-        const keyword = this.state.keyword[index];
-        modelKw = keyword.name;
-
+        let modelKw = event.target.getAttribute("value");
 
         let title = '新加关键字';
         for (let i = 0; i < newTypes.length; ++i) {
@@ -254,7 +288,7 @@ class RecommendationPage extends React.Component {
 
         newSites[index].checkedList = checkedList;
         newSites[index].indeterminate = !!checkedList.length && (checkedList.length < this.state.types[index].subsites.length);
-        newSites[index].checkAll = checkedList.length === this.state.types[0].subsites.length;
+        newSites[index].checkAll = checkedList.length === this.state.types[index].subsites.length;
 
         this.setState(preState => ({
             ...preState,
@@ -281,84 +315,65 @@ class RecommendationPage extends React.Component {
 
     render() {
         const { keyword, time } = this.state;
-
-        //console.log(keyword);
+        const columns = [
+            {title: '关键词名称', dataIndex: 'name'},
+            {title: '关键字热度', dataIndex: 'popularity'},
+            {title: '操作', key: 'action', render: (record) => (
+                <span>
+                    <a title="加入我的关键字" onClick={(event)=>this.showUpdateModal(true, event)} value={record.name}><Icon type="plus" value={record.name}/></a>
+                    <a title="不感兴趣" onClick={(event)=>this.showConfirm(event, record.name)} style={{marginLeft:5}}><Icon type="delete"/></a>
+                </span>
+            )},
+        ];
 
         return (
-            <div className="content-wrapper" style={{marginLeft:0}}>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <i>更新于：{time}</i>
-                            {/*显示关键词*/}
-                            <div style={{marginTop:10}}>
-                                <table className="table table-email f-s-14">
-                                    <thead>
-                                    <tr>
-                                        <th>关键字名称</th>
-                                        <th>关键字热度</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {
-                                        keyword.map((keyword, index)=>
-                                        <tr className="ng-scope" key={index} id={index}>
-                                            <td style={{width: "15%"}} className="ng-binding" value={keyword.name}><span>{keyword.name}</span></td>
-                                            <td style={{width: "35%"}} className="ng-binding">{keyword.popularity}</td>
-                                            <td style={{width: "10%"}}>
-                                                <a title="加入我的关键字" onClick={(event)=>this.showUpdateModal(true, event)} value={index}><i className="fa fa-plus" value={index}/></a>
-                                                <a title="不感兴趣" onClick={(event)=>this.showConfirm(event, {index})} value={index} style={{marginLeft:5}}><i className="fa fa-trash-o" value={index}/></a>
-                                            </td>
-                                        </tr>)
-                                    }
-                                    </tbody>
-                                </table>
-                            </div>
+            <Card style={{marginTop: 15, marginLeft:15}} title={
+                <span>关键词推荐,更新于: {time.replace(/'/g, '')}</span>
+            }>
 
-                        </div>
+                <Table dataSource={keyword} columns={columns}/>
 
-                        <Modal title={this.state.title}
-                               visible={this.state.updateVisible}
-                               onOk={this.handleOk}
-                               confirmLoading={this.state.confirmLoading}
-                               onCancel={this.handleCancel}
-                        >
-                            <div className="form-group">
-                                <label>关键字名称</label>
-                                <input type="text" name="txt_departmentname" data-bind="value:Name" className="form-control" id="txt_departmentname"  onChange={this.handleChange} value={this.state.modelKw}/>
-                            </div>
-                            <div className="form-group">
-                                <label>爬取站点</label>
-                                <div className="m-b-15">
-                                    <ul className="nav nav-pills nav-stacked nav-sm panel-body">
-                                        <li>
-                                            {
-                                                this.state.types.map((site, index)=>
-                                                    <div key={index}>
-                                                        <div style={{ borderBottom: '1px solid #E9E9E9' }}>
-                                                            <Checkbox
-                                                                indeterminate={site.indeterminate}
-                                                                onChange={(event)=>this.onCheckAllChange(index,event)}
-                                                                checked={site.checkAll}
-                                                            >
-                                                                {site.name}
-                                                            </Checkbox>
-                                                        </div>
-                                                        <br />
-                                                        <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
-                                                    </div>
-                                                )
-                                            }
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </Modal>
 
+                <Modal title={this.state.title}
+                       visible={this.state.updateVisible}
+                       onOk={this.handleOk}
+                       confirmLoading={this.state.confirmLoading}
+                       onCancel={this.handleCancel}
+                >
+                    <div>
+                        <label>关键字名称</label>
+                        <Input  onChange={this.handleChange} value={this.state.modelKw}/>
                     </div>
-                </div>
-            </div>
+                    <div style={{marginTop:10}}>
+                        <label>爬取站点</label>
+                        <div>
+                            <ul>
+                                <li>
+                                    {
+                                        this.state.types.map((site, index)=>
+                                            <div key={index}>
+                                                <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                                    <Checkbox
+                                                        indeterminate={site.indeterminate}
+                                                        onChange={(event)=>this.onCheckAllChange(index,event)}
+                                                        checked={site.checkAll}
+                                                    >
+                                                        {site.name}
+                                                    </Checkbox>
+                                                </div>
+                                                <br />
+                                                <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                            </div>
+                                        )
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </Modal>
+
+            </Card>
+
         );
     }
 }

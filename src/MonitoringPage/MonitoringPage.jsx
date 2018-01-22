@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
 import { keywordActions } from '../_actions';
 import {collectionActions} from "../_actions";
 import {KwsList} from "./KwsList";
 import {MsgShow} from "./MsgShow";
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
+
 import './MonitoringPage.css'
 
 
@@ -40,21 +39,20 @@ class MonitoringPage extends React.Component {
         let keywordDiv = <div></div>;
         if (keyword !== null)
             keywordDiv =
-                <div>
+                <div style={{marginLeft:15}}>
                     <KwsList keyword={keyword}/>
 
-                    <div className="row">
+                    <Row gutter={16}>
                         {
                             keyword.map(
-                                (keyword, index)=><MsgShow keyword={keyword}  key={index}/>
+                                (keyword, index)=><Col span={8}><MsgShow keyword={keyword}  key={index}/></Col>
                             )
                         }
-                    </div>
+                    </Row>
                 </div>;
 
-        //console.log(keyword);
         return (
-            <div className="content-wrapper">
+            <div style={{marginTop:15}}>
                 {keywordDiv}
             </div>
         );

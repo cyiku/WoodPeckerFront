@@ -6,9 +6,7 @@ import {WeiboTablePage} from "../MsgPage/WeiboTablePage";
 import {PortalTablePage} from "../MsgPage/PortalTablePage";
 import {AgencyTablePage} from "../MsgPage/AgencyTablePage";
 import {ForumTablePage} from "../MsgPage/ForumTablePage";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
+
 import './HomePage.css'
 
 import { Layout, Menu} from 'antd';
@@ -19,12 +17,11 @@ import {KwAnalysisPage} from '../KwAnalysisPage'
 import {BlankPage} from '../BlankPage'
 import {KeywordsPage} from '../KeywordsPage'
 import {CollectionNewsPage} from '../CollectionNewsPage'
-// import {CollectionChartsPage} from '../CollectionChartsPage'
 import { ClusteringPage } from '../ClusteringPage'
 import {RecommendationPage} from "../RecommendationPage";
 
 const { SubMenu } = Menu;
-const { Sider } = Layout;
+const { Sider, Header } = Layout;
 
 class HomePage extends React.Component {
 
@@ -58,22 +55,27 @@ class HomePage extends React.Component {
 
         return (
             <Layout style={{height:"100%"}}>
-                <div style={{backgroundColor:"#404040"}}>
-                    <img src={require('./woodpecker.jpg')} height={50} alt={"logo"}/>
-                    <ul style={{position:"absolute", top:15, right:0}}>
-                        <li>
-                            <a href="/login" style={{color: '#868e96'}}>
-                                <span><i className="fa fa-fw fa-sign-out"/>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                {/*<div style={{backgroundColor:"#ffffff"}}>*/}
+                    {/*/!*<img src={require('./woodpecker.jpg')} height={50} alt={"logo"}/>*!/*/}
+                    {/*<ul style={{position:"absolute", top:15, right:0}}>*/}
+                        {/*<li>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</div>*/}
+
+                <Header className="header">
+                    {/*<span style={{fontFamily: "Poppins-Regular", fontSize:25, color: "#555555"}}>Woooodpecker</span>*/}
+                    <img src={require('./woodpecker2.png')} height={50} alt={"logo"}/>
+                    <a href="/login" style={{float:"right"}}>
+                        <span><i className="fa fa-fw fa-sign-out"/>Logout</span>
+                    </a>
+                </Header>
+
 
                 <Layout>
-                    <Sider width={200} style={{ background: '#fff'}}>
+                    <Sider width={200}>
                         <Menu
                             mode="inline"
-                            theme="dark"
                             defaultSelectedKeys={['monitoring']}
                             defaultOpenKeys={['sub1']}
                             selectedKeys={[this.state.selectedKeys]}
@@ -113,7 +115,7 @@ class HomePage extends React.Component {
 
                         </Menu>
                     </Sider>
-                    <Layout>
+                    <Layout style={{backgroundColor:"white"}}>
                         <Switch>
                             <Route path={this.props.match.path} exact component={MonitoringPage} />
                             <Route path={`${this.props.match.path}kwAnalysis`} exact component={KwAnalysisPage} />

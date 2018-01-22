@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import { openNotificationWithIcon } from "../_helpers";
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css'
-import '../vendor/font-awesome/css/font-awesome.min.css'
+
 import './main.css'
 
 class LoginPage extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -37,9 +36,6 @@ class LoginPage extends React.Component {
         const { dispatch } = this.props;
         if (username && password) {
             dispatch(userActions.login(username, password));
-            //let data = document.querySelector('form');
-            //console.log(data);
-            //dispatch(userActions.login2(username, data));
         } else {
             openNotificationWithIcon("error", "Please input your username or password");
         }

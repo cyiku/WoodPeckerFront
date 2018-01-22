@@ -1,11 +1,9 @@
 import React from 'react';
+import { Card } from 'antd';
 import { connect } from 'react-redux';
 import asyncComponent from '../_helpers/AsyncComponent';
 import { collectionActions } from '../_actions';
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
 
 const PieReact = asyncComponent(() => import(/* webpackChunkName: "PieReact" */'../Echarts/PieReact'));  //饼图组件
 const MapReact = asyncComponent(() => import(/* webpackChunkName: "MapReact" */'../Echarts/MapReact'));  //地图组件
@@ -54,19 +52,9 @@ class ShowPicPage extends React.Component {
             showChart = "暂无数据, 抱歉!";
 
         return (
-            <div className="card mb-3">
-                <div className="card-header">
-                    <i className="fa fa-pie-chart"/> {title}</div>
-                <div className="card-body">
-                    {showChart}
-                </div>
-                {/*<div className="card-body py-2 small">*/}
-                    {/*<a className="mr-3 d-inline-block" href="javascript:void(0);" onClick={(event)=>this.collection(event, data, type)}>*/}
-                        {/*<i className="fa fa-star-o" id="collection"> 收藏</i>*/}
-                    {/*</a>*/}
-                    {/*<a className="d-inline-block" href="javascript:void(0);"><i className="fa fa-send-o"> 发送</i></a>*/}
-                {/*</div>*/}
-            </div>
+        <Card title={title}>
+            {showChart}
+        </Card>
         );
     }
 }

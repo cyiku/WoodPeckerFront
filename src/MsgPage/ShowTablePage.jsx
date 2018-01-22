@@ -1,15 +1,9 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Card, Icon } from 'antd';
 import { CSVLink } from 'react-csv';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
-//import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
 
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-import '../CollectionNewsPage/CollectionNewsPage.css';
 
 class ShowTablePage extends React.Component {
 
@@ -257,49 +251,19 @@ class ShowTablePage extends React.Component {
         );
 
         return (
-            <div className="card mb-3">
-                <div className="card-header">
-                    <i className="fa fa-table">{title}</i>
-                    {/*
-                    <div style={{float:"right"}}>
-                        <div className="input-group">
-                            <input className="form-control" type="text" placeholder="搜正文..." id="searchInput" onChange={this.handlechange} name={"searchInput"}/>
-                            <span className="input-group-btn">
-                                <button className="btn btn-primary" type="button" onClick={this.search}>
-                                    <i className="fa fa-search"/>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    */}
-                </div>
-
-
-                <div className="card-body">
-                    <div className="table-responsive">
-                        <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
-                    </div>
-                </div>
-
-
-                <div className="card-body py-2 small">
-                    {/*
-                    <a className="mr-3 d-inline-block" href='javascript:void(0);' onClick={event => this.collectionAll(event)} >
-                        {collectionDiv}
-                    </a>
-                    */}
-                    <CSVLink data={data}
-                             filename={new Date().toLocaleString() + '.csv'}
-                             target="_blank"
-                             title="导出"
-                             className="mr-3 d-inline-block"
-                    >
-                        <i className="fa fa-fw fa-share-square-o"/>导出
-                    </CSVLink>
-                    <a className="d-inline-block" href="  "><i className="fa fa-fw fa-send-o"/>发送</a>
-                </div>
-
-            </div>
+            <Card title={
+                <span>{title}</span>
+            }>
+                <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
+                <CSVLink data={data}
+                         filename={new Date().toLocaleString() + '.csv'}
+                         target="_blank"
+                         title="导出"
+                         className="mr-3 d-inline-block"
+                >
+                    <Icon type="download" /> 导出
+                </CSVLink>
+            </Card>
         );
     }
 }

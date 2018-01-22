@@ -6,14 +6,11 @@ import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
 import {userActions} from "../_actions/user.actions";
 import {alertActions} from "../_actions/alert.actions";
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
 
 class DataDistributionPage extends React.Component {
 
     state = {
+        keyword: '',
         title : {
             text: '关键字数据源',
             x:'center'
@@ -61,11 +58,11 @@ class DataDistributionPage extends React.Component {
         }
     };
 
-    componentDidMount(){
 
+    getData = () => {
         const { currentKwd } = this.props;
 
-
+        console.log(currentKwd + ' getting pie data...');
         if (currentKwd !== undefined) {
             const {user, dispatch} = this.props;
             const requestOptions = {
@@ -88,6 +85,7 @@ class DataDistributionPage extends React.Component {
                         openNotificationWithIcon('success', currentKwd + '获取数据源数量成功');
                         this.setState(preState => ({
                             ...preState,
+                            keyword: currentKwd,
                             series : [
                                 {
                                     name: '来源',
@@ -129,9 +127,20 @@ class DataDistributionPage extends React.Component {
                 }
             )
         }
+    };
 
+    componentDidMount(){
+        this.getData()
     }
 
+    componentDidUpdate() {
+        const { currentKwd } = this.props;
+        if (currentKwd === this.state.keyword){
+
+        } else {
+            this.getData();
+        }
+    }
 
 
     render() {

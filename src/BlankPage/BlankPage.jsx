@@ -6,8 +6,8 @@ class BlankPage extends React.Component {
 
     render() {
         return (
-            <div>
-               后续推出，敬请期待
+            <div style={{marginLeft:15, marginTop:15}}>
+                后续推出，敬请期待
             </div>
         );
     }

@@ -1,28 +1,16 @@
 import React from 'react';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
-
 import { keywordActions } from '../_actions';
 import { Link } from 'react-router-dom';
-
-//import {KwsListPage2} from "./KwsListPage2";
-import {DataSourcePage} from "./DataSourcePage";
+import {DataDistributionPage} from "./DataDistributionPage";
 import {PublishNumPage} from "./PublishNumPage";
 import {EmotionPage} from "./EmotionPage";
-//import {DataDistributionPage} from "./DataDistributionPage";
 import {MapPage} from "./MapPage";
-//import {WordCloudPage} from "./WordCloudPage";
-
-// 导入css
-import '../vendor/bootstrap/css/bootstrap.min.css';
-import '../_helpers/sb-admin.css';
-
-
-
-
+import { Button } from 'antd';
+import { Row, Col } from 'antd';
 
 class KwAnalysisPage extends React.Component {
-
 
 
     constructor(props) {
@@ -108,9 +96,9 @@ class KwAnalysisPage extends React.Component {
 
         for (let i = 0; i < keyword.length; i++) {
             if (keyword[i].name === currentKwd) {
-                kwdButtonClass[keyword[i].name] = "btn btn-primary keyword";
+                kwdButtonClass[keyword[i].name] = "primary";
             } else {
-                kwdButtonClass[keyword[i].name] = "btn btn-secondary keyword";
+                kwdButtonClass[keyword[i].name] = "default";
             }
         }
 
@@ -118,66 +106,57 @@ class KwAnalysisPage extends React.Component {
         let keywordDiv = <div>暂无关键字</div>;
         if (currentKwd !== '')
             keywordDiv =
-                <div className="container-fluid">
+                <Row>
                     {/*关键字展示
                     <KwsListPage2 currentKwd={currentKwd} keyword={keyword}/>
                     */}
 
-                    <div>
+                    <div style={{marginBottom:15}}>
                         {
                             keyword.map( (oneKwd, index)=>
-                                <button
-                                    className={kwdButtonClass[oneKwd.name]}
+                                <Button
+                                    size="large"
+                                    type={kwdButtonClass[oneKwd.name]}
                                     key={index}
-                                    style={{color:"white", marginLeft:10}}
                                     onClick={this.clickKeyword}
                                     value={oneKwd.name}
                                 >
                                     {oneKwd.name}
-                                </button>
+                                </Button>
                             )
                         }
-                        <Link
-                            to="/keywords"
-                            style={{color:"white", marginLeft:10}}
-                            className="btn btn-danger"
-                        >
-                            管理关键字
-                        </Link>
+
+                        <Button type="primary" size="large"><Link to="/keywords">管理关键字</Link></Button>
+
                     </div>
 
                     {/*不同来源数量展示*/}
-                    <DataSourcePage currentKwd={currentKwd}/>
+                    {/*<DataSourcePage currentKwd={currentKwd}/>*/}
 
                     {/*发布量图和情感图*/}
-                    <div className="row">
 
-                        <div className="col-md-6">
-                            <PublishNumPage currentKwd={currentKwd}/>
-                        </div>
+                    <Row gutter={16} style={{marginBottom:15}}>
+                        <Col span={12}><PublishNumPage currentKwd={currentKwd}/></Col>
+                        <Col span={12}><EmotionPage currentKwd={currentKwd}/></Col>
+                    </Row>
 
-                        <div className="col-md-6">
-                            <EmotionPage currentKwd={currentKwd}/>
-                        </div>
+                    {/*数据源分布与词云图*/}
+                    <Row gutter={16} style={{marginBottom:15}}>
+
+                        <Col span={12}>
+                            <DataDistributionPage currentKwd={currentKwd}/>
+                        </Col>
+
+                        {/*<Col span={12}>*/}
+                            {/*<WordCloudPage currentKwd={currentKwd}/>*/}
+                        {/*</Col>*/}
+                    </Row>
+
+
+
+                    <div style={{marginBottom:15}}>
+                       <MapPage currentKwd={currentKwd}/>
                     </div>
-
-                    {/*数据源分布与词云图
-                        <div className="row">
-
-                            <div className="col-md-6">
-                                <DataDistributionPage currentKwd={currentKwd}/>
-                            </div>
-
-                            <div className="col-md-6">
-                                <WordCloudPage currentKwd={currentKwd}/>
-                            </div>
-                        </div>
-                        */}
-
-
-                        <div className="row">
-                            <MapPage currentKwd={currentKwd}/>
-                        </div>
 
 
                     {/*具体微博展示
@@ -186,10 +165,10 @@ class KwAnalysisPage extends React.Component {
                     <PortalTablePage/>
                     <AgencyTablePage/>
                     */}
-                </div>;
+                </Row>;
 
         return (
-            <div className="content-wrapper" style={{marginLeft:0}}>
+            <div style={{marginTop: 15, marginLeft:15}}>
                 {keywordDiv}
             </div>
         );
