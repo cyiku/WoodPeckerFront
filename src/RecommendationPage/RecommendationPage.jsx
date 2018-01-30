@@ -39,11 +39,11 @@ class RecommendationPage extends React.Component {
             type('培训机构', []),
         ],
         keyword: [
-            {"name": "考研", "popularity": "30%"},
-            {"name": "圣诞节", "popularity": "20%"},
-            {"name": "元旦", "popularity": "15%"}
+            {"name": "贾跃亭", "popularity": "30%"},
+            {"name": "比特币", "popularity": "20%"},
+            {"name": "苏炳添", "popularity": "15%"}
         ],
-        time: "2017年12月5号",
+        time: "2018年1月31号",
     };
 
 
