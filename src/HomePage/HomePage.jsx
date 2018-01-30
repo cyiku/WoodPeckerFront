@@ -6,10 +6,7 @@ import {WeiboTablePage} from "../MsgPage/WeiboTablePage";
 import {PortalTablePage} from "../MsgPage/PortalTablePage";
 import {AgencyTablePage} from "../MsgPage/AgencyTablePage";
 import {ForumTablePage} from "../MsgPage/ForumTablePage";
-
-import './HomePage.css'
-
-import { Layout, Menu} from 'antd';
+import { Layout, Menu, Icon, Input} from 'antd';
 
 //主页不同模块
 import {MonitoringPage} from '../MonitoringPage'
@@ -20,6 +17,9 @@ import {CollectionNewsPage} from '../CollectionNewsPage'
 import { ClusteringPage } from '../ClusteringPage'
 import {RecommendationPage} from "../RecommendationPage";
 
+import './HomePage.css'
+
+const Search = Input.Search;
 const { SubMenu } = Menu;
 const { Sider, Header } = Layout;
 
@@ -66,6 +66,7 @@ class HomePage extends React.Component {
                 <Header className="header">
                     {/*<span style={{fontFamily: "Poppins-Regular", fontSize:25, color: "#555555"}}>Woooodpecker</span>*/}
                     <img src={require('./woodpecker2.png')} height={50} alt={"logo"}/>
+                    {/*<Search placeholder="input search text" enterButton="Search" style={{width:"30%"}} />*/}
                     <a href="/login" style={{float:"right"}}>
                         <span><i className="fa fa-fw fa-sign-out"/>Logout</span>
                     </a>
@@ -81,35 +82,35 @@ class HomePage extends React.Component {
                             selectedKeys={[this.state.selectedKeys]}
                             style={{ height: '100%' }}
                         >
-                            <SubMenu key="sub1" title={<span><i className="fa fa-fw fa-dashboard"/> 实时监控</span>}>
+                            <SubMenu key="sub1" title={<span><Icon type="eye" />实时监控</span>}>
                                 <Menu.Item key="monitoring"><Link to="/">关键字监控</Link></Menu.Item>
                             </SubMenu>
 
-                            <SubMenu key="sub2" title={<span><i className="fa fa-fw fa-bar-chart"/> 话题分析</span>}>
+                            <SubMenu key="sub2" title={<span><Icon type="line-chart" />话题分析</span>}>
                                 <Menu.Item key="kwAnalysis"><Link to="/kwAnalysis">关键词分析</Link></Menu.Item>
                                 <Menu.Item key="clustering"><Link to="/clustering">话题聚类</Link></Menu.Item>
                                 <Menu.Item key="recommendation"><Link to="/recommendation">关键词推荐</Link></Menu.Item>
                             </SubMenu>
 
-                            <SubMenu key="sub6" title={<span><i className="fa fa-fw fa-table"/> 消息展示</span>}>
+                            <SubMenu key="sub6" title={<span><Icon type="table" />消息展示</span>}>
                                 <Menu.Item key="weiboMsg"><Link to="/weiboMsg">微博消息</Link></Menu.Item>
                                 <Menu.Item key="forumMsg"><Link to="/forumMsg">相关论坛</Link></Menu.Item>
                                 <Menu.Item key="portalMsg"><Link to="/portalMsg">门户网站</Link></Menu.Item>
                                 <Menu.Item key="agencyMsg"><Link to="/agencyMsg">培训结构</Link></Menu.Item>
                             </SubMenu>
 
-                            <SubMenu key="sub3" title={<span><i className="fa fa-fw fa-heart-o"/> 个性化设置</span>}>
+                            <SubMenu key="sub3" title={<span><Icon type="user" />个性化设置</span>}>
                                 <Menu.Item key="keywords"><Link to="/keywords">我的关键词</Link></Menu.Item>
                                 {/*<Menu.Item key="report"><Link to="/report">我的报告</Link></Menu.Item>*/}
                                 <Menu.Item key="brief"><Link to="/brief">我的简报夹</Link></Menu.Item>
                             </SubMenu>
 
-                            <SubMenu key="sub4" title={<span><i className="fa fa-fw fa-star-o"/> 我的收藏</span>}>
+                            <SubMenu key="sub4" title={<span><Icon type="star-o" />我的收藏</span>}>
                                 <Menu.Item key="collectionNews"><Link to="/collectionNews">收藏的消息</Link></Menu.Item>
                                 {/*<Menu.Item key="collectionCharts"><Link to="/collectionCharts">收藏的图表</Link></Menu.Item>*/}
                             </SubMenu>
 
-                            <SubMenu key="sub5" title={<span><i className="fa fa-fw fa-wrench"/> 系统设置</span>}>
+                            <SubMenu key="sub5" title={<span><Icon type="tool" />系统设置</span>}>
                                 <Menu.Item key="announcement"><Link to="/announcement">系统公告</Link></Menu.Item>
                             </SubMenu>
 

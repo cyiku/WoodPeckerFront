@@ -115,6 +115,10 @@ class OneMsgPage extends React.Component {
         const newTime = this.timeTransfer(content.time);
         const {collectionType, collectionInner} = this.hasCollected(content._id, collection[contentType]);
 
+        // let header;
+        // if (content.boudary !== undefined) {
+        //     header = <h3 style={{color:"red", textAlign:"center"}}>上次您读到这里</h3>;
+        // }
         // 全文内容
         const testContent = (
             <div style={{width: 400}}>
@@ -124,15 +128,15 @@ class OneMsgPage extends React.Component {
 
         if (contentType === 'weibo')
             showMsg =
-                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                     <span style={{}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
             showMsg =
-                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <div>
-                        <a href={content.url} style={{fontSize:10}} target="_blank">
+                        <a href={content.url} style={{fontSize:14}} target="_blank">
                             <p className={"title"}>{content.title}</p>
                         </a>
                     </div>
@@ -140,15 +144,15 @@ class OneMsgPage extends React.Component {
                 </div>;
         else if (contentType === 'forum')
             showMsg =
-                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                     <span>点击({content.n_click}) 回复({content.n_reply})</span>
                 </div>;
         else if (contentType === 'agency')
             showMsg =
-                <div style={{height: 110, display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
                     <div>
-                        <a href={content.url} style={{fontSize:10}} target="_blank">
+                        <a href={content.url} style={{fontSize:14}} target="_blank">
                             <p className={"title"}>{content.title}</p>
                         </a>
                     </div>
@@ -156,33 +160,36 @@ class OneMsgPage extends React.Component {
                 </div>;
         return (
 
-            <Card title={
-                <div>
-                    <span style={{float: "right"}}>{newTime}, {content.source}</span>
-                    <span>{content.authid? content.authid: "匿名用户"}</span>
-                </div>
-            } style={{ marginBottom: 10 }}>
+            <div style={{ marginBottom: 10 }}>
+                {/*{header}*/}
+                <Card title={
+                    <div>
+                        <span style={{float: "right"}}>{content.source}</span>
+                        <span>{content.authid? content.authid: "匿名用户"}</span>
+                    </div>
+                }>
 
-                {showMsg}
-
-                <div>
-                    <Popover content={testContent} title="全文内容">
-                        <a href="javascript:void(0);" target="_blank">全部内容</a>
-                    </Popover>
-                    <a href={content.url} target="_blank" style={{marginLeft:15}}>原文地址</a>
-                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)} style={{marginLeft:15}}>
-                        <Icon id={content._id} type={collectionType}/> {collectionInner}
-                    </a>
-                    <CSVLink data={this.objToJSON(content)}
-                             filename={new Date().toLocaleString() + '.csv'}
-                             target="_blank"
-                             title="导出"
-                             style={{marginLeft:15}}
-                    >
-                        <Icon type="download" /> 导出
-                    </CSVLink>
-                </div>
-            </Card>
+                    {showMsg}
+                    <span>发表于: {newTime}</span>
+                    <div>
+                        <Popover content={testContent} title="全文内容">
+                            <a href="javascript:void(0);" target="_blank">全部内容</a>
+                        </Popover>
+                        <a href={content.url} target="_blank" style={{marginLeft:15}} className={"colorChanged"}>原文地址</a>
+                        <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(content), content._id)} style={{marginLeft:15}}>
+                            <Icon id={content._id} type={collectionType}/> {collectionInner}
+                        </a>
+                        <CSVLink data={this.objToJSON(content)}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                                 style={{marginLeft:15}}
+                        >
+                            <Icon type="download" /> 导出
+                        </CSVLink>
+                    </div>
+                </Card>
+            </div>
 
             // <div className="card" style={{marginBottom: 10}}>
             //     <div className="card-body">

@@ -372,34 +372,30 @@ class KeywordsPage extends React.Component {
                 >
                     <div>
                         <label>关键字名称</label>
-                        <Input  onChange={this.handleChange} placeholder={this.state.modelKw}/>
+                        <Input  onChange={this.handleChange} placeholder={this.state.modelKw} style={{marginTop:10}}/>
                     </div>
-                    <div style={{marginTop: 15}}>
+                    <div style={{marginTop: 10}}>
                         <label>爬取站点</label>
-                        <div>
-                            <ul>
-                                <li>
-                                    {
-                                        this.state.types.map((site, index)=>
-                                            <div key={index}>
-                                                <div style={{ borderBottom: '1px solid #E9E9E9' }}>
-                                                    <Checkbox
-                                                        indeterminate={site.indeterminate}
-                                                        onChange={(event)=>this.onCheckAllChange(index,event)}
-                                                        checked={site.checkAll}
-                                                    >
-                                                        {site.name}
-                                                    </Checkbox>
-                                                </div>
-                                                <br />
-                                                <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
-                                                <br />
-                                                <br />
-                                            </div>
-                                        )
-                                    }
-                                </li>
-                            </ul>
+                        <div style={{marginTop:10}}>
+                            {
+                                this.state.types.map((site, index)=>
+                                    <div key={index} style={{marginBottom:10}}>
+                                        <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                            <Checkbox
+                                                indeterminate={site.indeterminate}
+                                                onChange={(event)=>this.onCheckAllChange(index,event)}
+                                                checked={site.checkAll}
+                                            >
+                                                {site.name}
+                                            </Checkbox>
+                                        </div>
+                                        <br />
+                                        <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                        <br />
+                                        <br />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Modal>

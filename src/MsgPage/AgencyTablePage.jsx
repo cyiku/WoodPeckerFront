@@ -9,6 +9,7 @@ import { history } from '../_helpers';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import {Button} from 'antd';
+import { cmpTime } from '../_helpers';
 
 /*
 const agencyContent = {
@@ -36,10 +37,9 @@ class AgencyTablePage extends React.Component {
                     <p>{record.content}</p>
                 </Popover>)},
             {title: '来源', dataIndex: 'source'},
-            {title: '发表时间', dataIndex: 'time',},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
-            {title: '正负面', key: 'sentiment', render: (record) => (<p>{record.sentiment > 0.5 ? "正" : "负"}</p>)},
         ],
         agencyData: null,
         currentKwd: '',
@@ -180,6 +180,7 @@ class AgencyTablePage extends React.Component {
                                 key={index}
                                 onClick={this.clickKeyword}
                                 value={oneKwd.name}
+                                style={{marginRight:15}}
                             >
                                 {oneKwd.name}
                             </Button>

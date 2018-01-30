@@ -68,7 +68,7 @@ class RecommendationPage extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         types: [
-                            type('贴吧', ans.result.tieba),
+                            type('贴吧', ans.result.forum),
                             type('门户网站', ans.result.portal),
                             type('微博', ans.result.weibo),
                             type('培训机构', ans.result.agency),
@@ -342,32 +342,28 @@ class RecommendationPage extends React.Component {
                 >
                     <div>
                         <label>关键字名称</label>
-                        <Input  onChange={this.handleChange} value={this.state.modelKw}/>
+                        <Input  onChange={this.handleChange} value={this.state.modelKw} style={{marginTop:10}}/>
                     </div>
                     <div style={{marginTop:10}}>
                         <label>爬取站点</label>
-                        <div>
-                            <ul>
-                                <li>
-                                    {
-                                        this.state.types.map((site, index)=>
-                                            <div key={index}>
-                                                <div style={{ borderBottom: '1px solid #E9E9E9' }}>
-                                                    <Checkbox
-                                                        indeterminate={site.indeterminate}
-                                                        onChange={(event)=>this.onCheckAllChange(index,event)}
-                                                        checked={site.checkAll}
-                                                    >
-                                                        {site.name}
-                                                    </Checkbox>
-                                                </div>
-                                                <br />
-                                                <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
-                                            </div>
-                                        )
-                                    }
-                                </li>
-                            </ul>
+                        <div style={{marginTop:10}}>
+                            {
+                                this.state.types.map((site, index)=>
+                                    <div key={index} style={{marginBottom:10}}>
+                                        <div style={{ borderBottom: '1px solid #E9E9E9' }}>
+                                            <Checkbox
+                                                indeterminate={site.indeterminate}
+                                                onChange={(event)=>this.onCheckAllChange(index,event)}
+                                                checked={site.checkAll}
+                                            >
+                                                {site.name}
+                                            </Checkbox>
+                                        </div>
+                                        <br />
+                                        <CheckboxGroup options={site.subsites}  value={this.state.types[index].checkedList} onChange={(checkedList)=>this.onChange(checkedList, index)} />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </Modal>

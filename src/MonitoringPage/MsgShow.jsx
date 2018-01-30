@@ -204,13 +204,13 @@ class MsgShow extends React.Component {
                     }
 
                     // test
-                    for (let i = 0; i < contents.length; ++i) {
-                        if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
-                            newMessage.unshift(contents[i]);
-                            newMessageId.unshift(contents[i]._id);
-                            count += 1;
-                        }
-                    }
+                    // for (let i = 0; i < contents.length; ++i) {
+                    //     if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
+                    //         newMessage.unshift(contents[i]);
+                    //         newMessageId.unshift(contents[i]._id);
+                    //         count += 1;
+                    //     }
+                    // }
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
@@ -225,6 +225,7 @@ class MsgShow extends React.Component {
                             return 1;
                         return -1;
                     });
+
                     newMessage = newMessage.slice(0, 100);
 
                     const options = {
@@ -347,17 +348,17 @@ class MsgShow extends React.Component {
                             <div style={{float: 'right'}} onClick={event => event.stopPropagation()}>
                                 <Icon type="pause-circle-o" onClick={this.play} style={{fontSize:15, marginRight:10}}/>
                                 <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/>
-                                <Link to={path} style={{color:"black"}}><Icon type="dot-chart" style={{fontSize:15, marginRight:10}}/></Link>
+                                <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}}/></Link>
                             </div>
                             <Icon type="file-text"/><span> {keyword.name}</span>
-                            <span style={{marginLeft:10}}>更新于: {this.state.time}</span>
+                            {/*<span style={{marginLeft:10}}>更新于: {this.state.time}</span>*/}
                         </div>
                     } key="1" >
 
                         <div ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
                             <div>
                                 {
-                                    message.map((item) => <OneMsgPage content={item} contentType={item['contentType']}/>)
+                                    message.map((item, index) => <OneMsgPage content={item} contentType={item['contentType']}/>)
                                 }
                             </div>
                         </div>

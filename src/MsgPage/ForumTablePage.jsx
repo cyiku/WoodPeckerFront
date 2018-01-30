@@ -9,21 +9,9 @@ import { history } from '../_helpers';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import {Button} from 'antd';
+import { cmpTime } from '../_helpers';
 
-/*
-const forumContent = {
-    '_id': 3,
-    'contentType': 'forum',
-    'source': '百度贴吧',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
-    'n_click': 10,
-    'n_reply': 12,
-    'authid': "oyyw",
-    "time": "2017_12_08_03_38_34",
-    'keyword': '出售',
-};
- */
+
 class ForumTablePage extends React.Component {
 
     state = {
@@ -40,26 +28,22 @@ class ForumTablePage extends React.Component {
             {title: '点击量', dataIndex: 'n_click', sorter: (a, b) => a.n_click - b.n_click,},
             {title: '转发量', dataIndex: 'n_reply', sorter: (a, b) => a.n_reply - b.n_reply,},
             {title: '来源', dataIndex: 'source'},
-            {title: '发表时间', dataIndex: 'time',},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
-            {title: '正负面', key: 'sentiment', render: (record) => (<p>{record.sentiment > 0.5 ? "正" : "负"}</p>)},
         ],
         forumData: null,
         currentKwd: '',
     };
 
     markKeyword = (content, keywords) => {
-        //console.log(content);
-        //console.log(keywords);
+
         // 分割keywords
         const keyword_list = keywords.split('_');
-        //console.log(keyword_list);
+
         for (let i = 0; i < keyword_list.length; ++i) {
-            //content.replace(keyword_list[i], '<span style="color: red">'+keyword_list[i]+'</span>')
             content = content.replace(new RegExp(keyword_list[i], "gm"), '<span style="color: red">'+keyword_list[i]+'</span>');
         }
-        //console.log(content);
         return content;
     };
 
@@ -184,6 +168,7 @@ class ForumTablePage extends React.Component {
                                 key={index}
                                 onClick={this.clickKeyword}
                                 value={oneKwd.name}
+                                style={{marginRight:15}}
                             >
                                 {oneKwd.name}
                             </Button>

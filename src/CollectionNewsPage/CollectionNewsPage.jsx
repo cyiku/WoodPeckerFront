@@ -33,14 +33,13 @@ class CollectionNewsPage extends React.Component {
             {title: '正负面', dataIndex: 'sentiment'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出">
-                        <i className="fa fa-fw fa-share-square-o"/>
+                        <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除"><i className="fa fa-trash-o" onClick={event => this.deleteCollection(event, record._id, 'weibo')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'weibo')}/></a>
                 </span>
             )},
 
@@ -65,14 +64,13 @@ class CollectionNewsPage extends React.Component {
             {title: '正负面', dataIndex: 'sentiment'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出">
-                        <i className="fa fa-fw fa-share-square-o"/>
+                        <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除"><i className="fa fa-trash-o" onClick={event => this.deleteCollection(event, record._id, 'agency')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'agency')}/></a>
                 </span>
             )},
         ],
@@ -98,14 +96,13 @@ class CollectionNewsPage extends React.Component {
             {title: '正负面', dataIndex: 'sentiment'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出">
-                        <i className="fa fa-fw fa-share-square-o"/>
+                        <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除"><i className="fa fa-trash-o" onClick={event => this.deleteCollection(event, record._id, 'forum')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'forum')}/></a>
                 </span>
             )},
         ],
@@ -129,14 +126,13 @@ class CollectionNewsPage extends React.Component {
             {title: '正负面', dataIndex: 'sentiment'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
                              title="导出">
-                        <i className="fa fa-fw fa-share-square-o"/>
+                        <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除"><i className="fa fa-trash-o" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
                 </span>
             )},
         ],

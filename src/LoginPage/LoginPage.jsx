@@ -74,14 +74,14 @@ class LoginPage extends React.Component {
                             </div>
                         </form>
 
-                        <div className="text-center" style={{marginTop: 50}}>
-						    <span className="txt1">
-							    Don’t have an account?
-						    </span>
-                            <a className="txt2" href="#">
-                                Sign Up
-                            </a>
-                        </div>
+                        {/*<div className="text-center" style={{marginTop: 50}}>*/}
+						    {/*<span className="txt1">*/}
+							    {/*Don’t have an account?*/}
+						    {/*</span>*/}
+                            {/*<a className="txt2" href="#">*/}
+                                {/*Sign Up*/}
+                            {/*</a>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

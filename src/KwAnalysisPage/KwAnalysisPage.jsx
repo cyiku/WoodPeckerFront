@@ -120,6 +120,7 @@ class KwAnalysisPage extends React.Component {
                                     key={index}
                                     onClick={this.clickKeyword}
                                     value={oneKwd.name}
+                                    style={{marginRight:15}}
                                 >
                                     {oneKwd.name}
                                 </Button>

@@ -1,10 +1,13 @@
 import React from 'react';
-import { Table, Card, Icon } from 'antd';
+import { Table, Card, Icon, Button, Modal, Radio } from 'antd';
 import { CSVLink } from 'react-csv';
 import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
+import { openNotificationWithIcon } from "../_helpers";
+import {serverIP} from "../_helpers/serverIP";
+import { history } from '../_helpers';
 
-
+const RadioGroup = Radio.Group;
 class ShowTablePage extends React.Component {
 
     constructor(props) {
@@ -13,28 +16,15 @@ class ShowTablePage extends React.Component {
         this.state = {
             searchedContent: [],
             searchInput: '',
+            visible: false,
             //isCollection: false,
+            // 修改极性
+            unmodified_polarity: "",
+            modify_polarity: "",
+            modify_source: "",
+            modify_id: "",
         };
     };
-
-    componentDidMount(){
-
-        //console.log(this.props);
-        //dispatch(collectionActions.getCollection(user, type));
-        //dispatch(collectionActions.getCollection(user, 'table'));
-
-        /*
-        const {tableCollection} = this.props;
-        if (tableCollection.length === undefined) {
-            const {user, dispatch} = this.props;
-            dispatch(collectionActions.getCollection(user, 'table'));
-        }
-        let dataid = [];
-        for (let i = 0; i < data.length; ++i) {
-            dataid.push(data[i].id);
-        }
-        */
-    }
 
 
     /**
@@ -45,12 +35,12 @@ class ShowTablePage extends React.Component {
      */
     hasCollected = (id, collection) => {
         if (collection === null)
-            return "fa fa-star-o";
+            return "star-o";
         for (let i = 0; i < collection.length; ++i) {
             if (collection[i]['id'] === id)
-                return "fa fa-star"
+                return "star"
         }
-        return "fa fa-star-o"
+        return "star-o"
     };
 
 
@@ -81,19 +71,85 @@ class ShowTablePage extends React.Component {
         const {user, dispatch, type} = this.props;
 
         let icon = document.getElementById(iconID);
-        if (icon.getAttribute("class") === "fa fa-star-o") {
+        if (icon.getAttribute("class") === "anticon anticon-star-o") {
             // 收藏
 
             dispatch(collectionActions.addCollection(user, data, type));
-            icon.setAttribute("class", "fa fa-star"); // 更换图标
+            icon.setAttribute("class", "anticon anticon-star"); // 更换图标
 
         } else {
             // 取消收藏
             dispatch(collectionActions.delCollection(user, [data[0]['_id']], type));
-            icon.setAttribute("class", "fa fa-star-o"); //更换图标
+            icon.setAttribute("class", "anticon anticon-star-o"); //更换图标
         }
     };
 
+    showModal = (record) => {
+        this.setState({
+            visible: true,
+            unmodified_polarity: record.sentiment > 0.7 ? "正" : (record.sentiment < 0.3 ? "负": "中"),
+            modify_id:record._id,
+            modify_source:record.source,
+        });
+    };
+
+    handleOk = (e) => {
+        // 发送给服务端
+        if (this.state.unmodified_polarity === this.state.modify_polarity) {
+            openNotificationWithIcon("error", "未检测到改动");
+            return;
+        }
+
+        const {user} = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({ 'source': this.state.modify_source, 'id': this.state.modify_id, 'polarity': this.state.modify_polarity })
+        };
+        fetch(serverIP + '/modifyPolarity', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }
+        ).then(
+            ans => {
+                if (ans.status === 1) {
+                    openNotificationWithIcon("success", "感谢您的反馈:)");
+                } else {
+                    openNotificationWithIcon("error", ans.message);
+                    if (ans.status === -1)
+                        history.push("/login");
+                }
+            }
+        );
+
+        this.setState({
+            visible: false,
+            polarity:"",
+            modify_source:"",
+            modify_id:"",
+        });
+
+
+    };
+
+    handleCancel = (e) => {
+
+        this.setState({
+            visible: false,
+            polarity:"",
+            modify_source:"",
+            modify_id:"",
+        });
+    };
+
+    onChange = (e) => {
+        this.setState({
+            modify_polarity: e.target.value,
+        });
+    }
 
     /**
      * 收藏(取消收藏)searchedContent
@@ -217,8 +273,8 @@ class ShowTablePage extends React.Component {
 
 
     render() {
-        const {collection, title} = this.props;
 
+        const {collection, title} = this.props;
         let { data, columns } = this.props;
 
         let isLoading = false;
@@ -227,43 +283,60 @@ class ShowTablePage extends React.Component {
             isLoading = true;
         }
 
-        console.log(data);
-        /*
-        let collectionDiv;
-        if (this.state.isCollection === false)
-            collectionDiv = <i className="fa fa-star-o" id="all"> 收藏</i>;
-        else
-            collectionDiv = <i className="fa fa-star" id="all"> 取消收藏</i>;
-        */
         columns = columns.concat(
+            {title: '正负面', key: 'sentiment', render: (record) => (
+                <Button onClick={event=>this.showModal(record)}>{record.sentiment > 0.7 ? "正" : (record.sentiment < 0.3 ? "负": "中")}</Button>)},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
-                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record._id)}><i className={this.hasCollected(record._id, collection)} id={record._id}/></a>
+                    <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record._id)}><Icon type={this.hasCollected(record._id, collection)} id={record._id}/></a>
                     <CSVLink data={this.objToJSON(record)}
                              filename={new Date().toLocaleString()}
                              target="_blank"
-                             title="导出">
-                        <i className="fa fa-fw fa-share-square-o"/>
+                             title="导出"
+                             style={{marginLeft:5}}
+                    >
+                        <Icon type="download" />
                     </CSVLink>
-                    <a href=" " title="发送"><i className="fa fa-fw fa-send-o"/></a>
                 </span>
             )},
         );
 
+        const radioStyle = {
+            display: 'block',
+            height: '30px',
+            lineHeight: '30px',
+        };
+
         return (
-            <Card title={
-                <span>{title}</span>
-            }>
-                <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
-                <CSVLink data={data}
-                         filename={new Date().toLocaleString() + '.csv'}
-                         target="_blank"
-                         title="导出"
-                         className="mr-3 d-inline-block"
+            <div>
+
+                <Card title={
+                    <span>{title}</span>
+                }>
+                    <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
+                    <CSVLink data={data}
+                             filename={new Date().toLocaleString() + '.csv'}
+                             target="_blank"
+                             title="导出"
+                             className="mr-3 d-inline-block"
+                    >
+                        <Icon type="download" /> 导出
+                    </CSVLink>
+                </Card>
+
+                <Modal
+                    title="修改情感极性"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
                 >
-                    <Icon type="download" /> 导出
-                </CSVLink>
-            </Card>
+                    <RadioGroup onChange={this.onChange} value={this.state.modify_polarity}>
+                        <Radio style={radioStyle} value="正">正</Radio>
+                        <Radio style={radioStyle} value="负">负</Radio>
+                        <Radio style={radioStyle} value="中">中</Radio>
+                    </RadioGroup>
+                </Modal>
+            </div>
         );
     }
 }

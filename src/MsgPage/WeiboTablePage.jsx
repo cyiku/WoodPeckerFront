@@ -9,6 +9,7 @@ import { history } from '../_helpers';
 import { Button } from 'antd';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
+import { cmpTime } from '../_helpers';
 
 class WeiboTablePage extends React.Component {
 
@@ -26,10 +27,9 @@ class WeiboTablePage extends React.Component {
             {title: '点赞量', dataIndex: 'n_like', sorter: (a, b) => a.n_like - b.n_like,},
             {title: '评论量', dataIndex: 'n_comment', sorter: (a, b) => a.n_comment - b.n_comment,},
             {title: '转发量', dataIndex: 'n_forward', sorter: (a, b) => a.n_forward - b.n_forward,},
-            {title: '发表时间', dataIndex: 'time',},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
-            {title: '正负面', key: 'sentiment', render: (record) => (<p>{record.sentiment > 0.5 ? "正" : "负"}</p>)},
         ],
         weiboData: null,
         currentKwd: '',
@@ -168,6 +168,7 @@ class WeiboTablePage extends React.Component {
                                 key={index}
                                 onClick={this.clickKeyword}
                                 value={oneKwd.name}
+                                style={{marginRight:15}}
                             >
                                 {oneKwd.name}
                             </Button>
