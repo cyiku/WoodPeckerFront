@@ -372,7 +372,7 @@ class KeywordsPage extends React.Component {
                 >
                     <div>
                         <label>关键字名称</label>
-                        <Input  onChange={this.handleChange} placeholder={this.state.modelKw} style={{marginTop:10}}/>
+                        <Input  onChange={this.handleChange} value={this.state.modelKw} style={{marginTop:10}}/>
                     </div>
                     <div style={{marginTop: 10}}>
                         <label>爬取站点</label>
