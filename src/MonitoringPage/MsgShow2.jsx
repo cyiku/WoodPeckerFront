@@ -1,3 +1,7 @@
+/**
+ * 这个在消息展示上用的是virtualList 可以一次缓存更多的消息
+ */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Collapse, Icon, Col } from 'antd';

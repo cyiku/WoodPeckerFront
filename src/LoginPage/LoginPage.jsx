@@ -58,9 +58,6 @@ class LoginPage extends React.Component {
                             </div>
 
                             <div className="wrap-input100">
-                                <span className="btn-show-pass">
-                                    <i className="zmdi zmdi-eye"/>
-                                </span>
                                 <input className="input100" type="password" placeholder="Password" name="password" value={password} onChange={this.handleChange}/>
                             </div>
 

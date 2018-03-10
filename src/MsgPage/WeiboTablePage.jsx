@@ -28,8 +28,7 @@ class WeiboTablePage extends React.Component {
             {title: '评论量', dataIndex: 'n_comment', sorter: (a, b) => a.n_comment - b.n_comment,},
             {title: '转发量', dataIndex: 'n_forward', sorter: (a, b) => a.n_forward - b.n_forward,},
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
-            {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
+            {title: '链接', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>url</a>)},
         ],
         weiboData: null,
         currentKwd: '',
@@ -44,6 +43,7 @@ class WeiboTablePage extends React.Component {
             dispatch(keywordActions.getKws(user));
     }
 
+    // 讲消息中的keyword标记为红色
     markKeyword = (content, keywords) => {
         // 分割keywords
         const keyword_list = keywords.split('_');

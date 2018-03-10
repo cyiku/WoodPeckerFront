@@ -4,6 +4,7 @@
 * Copyright 2011-2013, Joseph Schmitt http://joe.sh
 * Released under the WTFPL license
 * http://sam.zoy.org/wtfpl/
+* 为了控制消息内容最大行数
 */
 
 (function(){

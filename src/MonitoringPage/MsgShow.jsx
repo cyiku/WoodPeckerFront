@@ -7,7 +7,7 @@ import {OneMsgPage} from "./OneMsgPage";
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import {alertActions} from "../_actions/alert.actions";
-import VirtualList from 'react-virtual-list';
+// import VirtualList from 'react-virtual-list';
 // 导入css
 import './MonitoringPage.css';
 
@@ -16,57 +16,57 @@ const Panel = Collapse.Panel;
 
 
 
-const portalContent = {
-    '_id': 0,
-    'contentType': 'portal',
-    'source': '网易网',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
-
-const weiboContent = {
-    '_id': 1,
-    "attention": 0,
-    "contentType": "weibo",
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
-    "keyword": "出售",
-    "n_comment": 0,
-    "n_forward": 0,
-    "n_like": 0,
-    "authid": "oyyw",
-    "source": "新浪微博",
-    "time": "2017_12_08_03_38_34",
-    "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
-};
-
-const agencyContent = {
-    '_id': 2,
-    'contentType': 'agency',
-    'source': '海文考研',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
-
-const forumContent = {
-    '_id': 3,
-    'contentType': 'forum',
-    'source': '百度贴吧',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
-    'n_click': 10,
-    'n_reply': 12,
-    'authid': "oyyw",
-    "time": "2017_12_08_03_38_34",
-    'keyword': '出售',
-};
-
-const contents = [weiboContent, portalContent, forumContent, agencyContent];
+// const portalContent = {
+//     '_id': 0,
+//     'contentType': 'portal',
+//     'source': '网易网',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const weiboContent = {
+//     '_id': 1,
+//     "attention": 0,
+//     "contentType": "weibo",
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
+//     "keyword": "出售",
+//     "n_comment": 0,
+//     "n_forward": 0,
+//     "n_like": 0,
+//     "authid": "oyyw",
+//     "source": "新浪微博",
+//     "time": "2017_12_08_03_38_34",
+//     "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
+// };
+//
+// const agencyContent = {
+//     '_id': 2,
+//     'contentType': 'agency',
+//     'source': '海文考研',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const forumContent = {
+//     '_id': 3,
+//     'contentType': 'forum',
+//     'source': '百度贴吧',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
+//     'n_click': 10,
+//     'n_reply': 12,
+//     'authid': "oyyw",
+//     "time": "2017_12_08_03_38_34",
+//     'keyword': '出售',
+// };
+//
+// const contents = [weiboContent, portalContent, forumContent, agencyContent];
 
 class MsgShow extends React.Component {
 
@@ -173,6 +173,7 @@ class MsgShow extends React.Component {
 
     monitor = (isFirst) => {
 
+        // isFirst变量是为了让用户新进入网站的时候有信息可看，还没实现
         const {user,keyword,dispatch} = this.props;
         const requestOptions = {
             method: 'POST',
@@ -228,9 +229,9 @@ class MsgShow extends React.Component {
 
                     newMessage = newMessage.slice(0, 100);
 
-                    const options = {
-                        container: this.refs[keyword],
-                    };
+                    // const options = {
+                    //     container: this.refs[keyword],
+                    // };
 
                     this.setState(preState => ({
                         ...preState,
@@ -246,7 +247,6 @@ class MsgShow extends React.Component {
             },
             error => {
                 if (localStorage.getItem('user') !== null) {
-                    // dispatch(userActions.logout());
                     dispatch(alertActions.error(error));
                     if (error.message === "Failed to fetch") {
                         openNotificationWithIcon("error", "连接服务器失败");
@@ -295,39 +295,6 @@ class MsgShow extends React.Component {
         event.stopPropagation();
     };
 
-    /*
-    addMsg1 = () => {
-        let dom=document.getElementById(123);
-        let newMsg = array[count % 2];
-        newMsg._id = count;
-
-        //div.setAttribute("value", <OneMsgPage content={newMsg} contentType={newMsg['contentType']}/>);
-        let div = <OneMsgPage content={newMsg} contentType={newMsg['contentType']}/>;
-        dom.insertBefore(div, dom.firstChild);
-        count += 1;
-    };
-
-
-    addMsg2 = () => {
-        let newContent = JSON.parse(JSON.stringify(this.state.content));
-
-        let newMsg = array[count % 2];
-        newMsg._id = count;
-
-        newContent.unshift(newMsg);
-
-        //console.log(newContent);
-
-        this.setState(
-            preState => ({
-                ...preState,
-                content: newContent,
-            })
-        );
-        count += 1;
-    };
-    */
-
 
     render() {
         const {keyword} = this.props;
@@ -338,9 +305,6 @@ class MsgShow extends React.Component {
         const {message} = this.state;
         return (
             <div style={{height:"100% "}} name={keyword.name} id={keyword.name}>
-
-                {/*<button type="button" className="btn btn-primary" onClick={this.addMsg1}>添加消息_insertBefore</button>
-                <button type="button" className="btn btn-primary" onClick={this.addMsg2}>添加消息_updateState</button>*/}
 
                 <Collapse defaultActiveKey={['1']} style={{marginTop:10, backgroundColor:"white"}}>
                     <Panel header= {
