@@ -340,7 +340,7 @@ class KeywordsPage extends React.Component {
             keyword = [];
 
         const columns = [
-            {title: '关键词名称', dataIndex: 'name'},
+            {title: '关键字名称', dataIndex: 'name'},
             {title: '爬取站点', render: (record) => (
                 record.sites.map((eachSite, index)=>
                     <span style={{marginRight:5}} key={index}>{eachSite}</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Icon, Col } from 'antd';
+import { Collapse, Icon, Popover, Button, List } from 'antd';
 import { connect } from 'react-redux';
 import {openNotificationWithIcon} from "../_helpers";
 import {OneMsgPage} from "./OneMsgPage";
@@ -303,6 +303,14 @@ class MsgShow extends React.Component {
             state:keyword['name'],
         };
         const {message} = this.state;
+        const sortData = ['按重要度排序', '按负面影响排序', '按关注度排序', '按情感排序', '默认排序'];
+        const sortContent = (
+            <List
+                bordered
+                dataSource={sortData}
+                renderItem={item => (<List.Item><a onClick={event => alert('后续推出, 敬请期待')}>{item}</a></List.Item>)}
+            />
+        );
         return (
             <div style={{height:"100% "}} name={keyword.name} id={keyword.name}>
 
@@ -310,6 +318,9 @@ class MsgShow extends React.Component {
                     <Panel header= {
                         <div>
                             <div style={{float: 'right'}} onClick={event => event.stopPropagation()}>
+                                <Popover content={sortContent} placement="bottom" >
+                                    <Icon type="database" style={{fontSize:15, marginRight:10}}/>
+                                </Popover>
                                 <Icon type="pause-circle-o" onClick={this.play} style={{fontSize:15, marginRight:10}}/>
                                 <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/>
                                 <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}}/></Link>

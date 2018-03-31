@@ -316,7 +316,7 @@ class RecommendationPage extends React.Component {
     render() {
         const { keyword, time } = this.state;
         const columns = [
-            {title: '关键词名称', dataIndex: 'name'},
+            {title: '关键字名称', dataIndex: 'name'},
             {title: '关键字热度', dataIndex: 'popularity'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
@@ -328,7 +328,7 @@ class RecommendationPage extends React.Component {
 
         return (
             <Card style={{marginTop: 15, marginLeft:15}} title={
-                <span>关键词推荐,更新于: {time.replace(/'/g, '')}</span>
+                <span>关键字推荐,更新于: {time.replace(/'/g, '')}</span>
             }>
 
                 <Table dataSource={keyword} columns={columns}/>
