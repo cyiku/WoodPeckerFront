@@ -6,6 +6,7 @@ import { history } from '../_helpers';
 import {userActions} from "../_actions/user.actions";
 import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
+import {errorProcess} from "../_helpers/error";
 
 class PublishNumPage extends React.Component {
 
@@ -193,17 +194,7 @@ class PublishNumPage extends React.Component {
                             history.push("/login");
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        // dispatch(userActions.logout());
-                        dispatch(alertActions.error(error));
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             )
         }
     };

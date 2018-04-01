@@ -10,6 +10,7 @@ import { Button } from 'antd';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import { cmpTime } from '../_helpers';
+import {errorProcess} from "../_helpers/error";
 
 class WeiboTablePage extends React.Component {
 
@@ -90,16 +91,7 @@ class WeiboTablePage extends React.Component {
                             history.push("/login");
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        //// dispatch(userActions.logout());
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             )
         }
     };

@@ -10,7 +10,7 @@ import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import {Button} from 'antd';
 import { cmpTime } from '../_helpers';
-
+import {errorProcess} from "../_helpers/error";
 /*
 const agencyContent = {
     '_id': 2,
@@ -101,16 +101,7 @@ class AgencyTablePage extends React.Component {
                             history.push("/login");
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        // dispatch(userActions.logout());
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             )
         }
     };

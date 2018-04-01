@@ -6,6 +6,7 @@ import { history } from '../_helpers';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import { cmpTime } from '../_helpers';
+import {errorProcess} from "../_helpers/error";
 
 class SearchPage extends React.Component {
 
@@ -27,6 +28,59 @@ class SearchPage extends React.Component {
             {title: '链接', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>url</a>)},
         ],
         weiboData: null,
+
+        forumColumns: [
+            {title: '发布者', dataIndex: 'authid'},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                <Popover content={
+                    <div style={{width: 400}}>
+                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                    </div>
+                } title="全文内容">
+                    <p>{record.content}</p>
+                </Popover>)},
+            {title: '点击量', dataIndex: 'n_click', sorter: (a, b) => a.n_click - b.n_click,},
+            {title: '转发量', dataIndex: 'n_reply', sorter: (a, b) => a.n_reply - b.n_reply,},
+            {title: '来源', dataIndex: 'source'},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
+        ],
+        forumData: null,
+
+        portalColumns: [
+            {title: '标题', dataIndex: 'title', width: "20%"},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                <Popover content={
+                    <div style={{width: 400}}>
+                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                    </div>
+                } title="全文内容">
+                    <p>{record.content}</p>
+                </Popover>)},
+            {title: '来源', dataIndex: 'source'},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
+            {title: '关键字', dataIndex: 'keyword'},
+        ],
+        portalData: null,
+
+        agencyColumns: [
+            {title: '标题', dataIndex: 'title', width: "20%"},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                <Popover content={
+                    <div style={{width: 400}}>
+                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                    </div>
+                } title="全文内容">
+                    <p>{record.content}</p>
+                </Popover>)},
+            {title: '来源', dataIndex: 'source'},
+            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
+        ],
+        agencyData: null,
+
         searchContent: '',
     };
 
@@ -91,16 +145,7 @@ class SearchPage extends React.Component {
             //                 history.push("/login");
             //         }
             //     },
-            //     error => {
-            //         if (localStorage.getItem('user') !== null) {
-            //             //// dispatch(userActions.logout());
-            //             if (error.message === "Failed to fetch") {
-            //                 openNotificationWithIcon("error", "连接服务器失败");
-            //             } else {
-            //                 openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-            //             }
-            //         }
-            //     }
+            //     error => errorProcess(error)
             // )
         }
     };
@@ -126,17 +171,35 @@ class SearchPage extends React.Component {
             this.getData(searchContent);
         }
 
-        const type = "weibo";
-        //const data = (this.state.weiboData === null ? [] : this.state.weiboData);
-        const data = this.state.weiboData;
-        const columns = this.state.weiboColumns;
-        const title = " 相关微博";
-        const collection = this.props.collection['weibo'];
-
         return (
             <div style={{marginLeft:15, marginTop:15}}>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                    <ShowTablePage data={this.state.weiboData}
+                                   columns={this.state.weiboColumns}
+                                   type={"weibo"}
+                                   title={" 相关微博"}
+                                   collection={this.props.collection['weibo']}/>
+                </div>
+                <div style={{marginTop:15}}>
+                    <ShowTablePage data={this.state.forumData}
+                                   columns={this.state.forumColumns}
+                                   type={"forum"}
+                                   title={" 相关论坛"}
+                                   collection={this.props.collection['forum']}/>
+                </div>
+                <div style={{marginTop:15}}>
+                    <ShowTablePage data={this.state.portalData}
+                                   columns={this.state.portalColumns}
+                                   type={"weibo"}
+                                   title={" 门户网站"}
+                                   collection={this.props.collection['portal']}/>
+                </div>
+                <div style={{marginTop:15}}>
+                    <ShowTablePage data={this.state.agencyData}
+                                   columns={this.state.agencyColumns}
+                                   type={"agency"}
+                                   title={" 培训机构"}
+                                   collection={this.props.collection['agency']}/>
                 </div>
             </div>
 

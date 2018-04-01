@@ -54,6 +54,14 @@ class HomePage extends React.Component {
         });
     }
 
+    componentDidMount() {
+        alert('did mount');
+    }
+
+    componentWillUnmount() {
+        console.log('did unmount');
+    }
+
     search(value){
         //console.log(value);
         // const {user} = this.props;

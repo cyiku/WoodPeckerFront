@@ -4,6 +4,7 @@ import { alertActions } from './';
 import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
 import {userActions} from '../_actions';
+import {errorProcess} from "../_helpers/error";
 
 export const collectionActions = {
     getCollection,
@@ -30,18 +31,7 @@ function getCollection(user, type) {
                             dispatch(userActions.logout());
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        // dispatch(userActions.logout());
-                        dispatch(failure(error));
-                        dispatch(alertActions.error(error));
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             );
     };
 
@@ -73,18 +63,7 @@ function addCollection(user, collection, type) {
                         history.push("/login");
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        // dispatch(userActions.logout());
-                        dispatch(failure(error));
-                        dispatch(alertActions.error(error));
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             );
     };
 
@@ -115,18 +94,7 @@ function delCollection(user, id, type) {
                         history.push("/login");
                     }
                 },
-                error => {
-                    if (localStorage.getItem('user') !== null) {
-                        // dispatch(userActions.logout());
-                        dispatch(failure(error));
-                        dispatch(alertActions.error(error));
-                        if (error.message === "Failed to fetch") {
-                            openNotificationWithIcon("error", "连接服务器失败");
-                        } else {
-                            openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                        }
-                    }
-                }
+                error => errorProcess(error)
             );
     };
 
