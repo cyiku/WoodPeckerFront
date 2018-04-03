@@ -18,57 +18,57 @@ const Panel = Collapse.Panel;
 
 
 
-const portalContent = {
-    '_id': 0,
-    'contentType': 'portal',
-    'source': '网易网',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
-
-const weiboContent = {
-    '_id': 1,
-    "attention": 0,
-    "contentType": "weibo",
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
-    "keyword": "出售",
-    "n_comment": 0,
-    "n_forward": 0,
-    "n_like": 0,
-    "authid": "oyyw",
-    "source": "新浪微博",
-    "time": "2017_12_08_03_38_34",
-    "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
-};
-
-const agencyContent = {
-    '_id': 2,
-    'contentType': 'agency',
-    'source': '海文考研',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
-
-const forumContent = {
-    '_id': 3,
-    'contentType': 'forum',
-    'source': '百度贴吧',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
-    'n_click': 10,
-    'n_reply': 12,
-    'authid': "oyyw",
-    "time": "2017_12_08_03_38_34",
-    'keyword': '出售',
-};
-
-const contents = [weiboContent, portalContent, forumContent, agencyContent];
+// const portalContent = {
+//     '_id': 0,
+//     'contentType': 'portal',
+//     'source': '网易网',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const weiboContent = {
+//     '_id': 1,
+//     "attention": 0,
+//     "contentType": "weibo",
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播',
+//     "keyword": "出售",
+//     "n_comment": 0,
+//     "n_forward": 0,
+//     "n_like": 0,
+//     "authid": "oyyw",
+//     "source": "新浪微博",
+//     "time": "2017_12_08_03_38_34",
+//     "url": "http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html",
+// };
+//
+// const agencyContent = {
+//     '_id': 2,
+//     'contentType': 'agency',
+//     'source': '海文考研',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
+//     'time': '2017_11_27_15_53',
+//     'keyword': '出售',
+// };
+//
+// const forumContent = {
+//     '_id': 3,
+//     'contentType': 'forum',
+//     'source': '百度贴吧',
+//     'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
+//     'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视',
+//     'n_click': 10,
+//     'n_reply': 12,
+//     'authid': "oyyw",
+//     "time": "2017_12_08_03_38_34",
+//     'keyword': '出售',
+// };
+//
+// const contents = [weiboContent, portalContent, forumContent, agencyContent];
 
 class MsgShow extends React.Component {
 
@@ -118,7 +118,7 @@ class MsgShow extends React.Component {
         this.monitor(true);
         this.interval = setInterval(_ => {
              this.monitor(false)
-        }, 20000 );
+        }, 10000 );
 
     }
 
@@ -137,7 +137,7 @@ class MsgShow extends React.Component {
         const {user, keyword} = this.props;
         const {token} = user;
 
-        // localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
+        localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
         localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
     }
@@ -198,22 +198,22 @@ class MsgShow extends React.Component {
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
                     let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
                     let count = 0;
-                    // for (let i = 0; i < ans.result.data.length; ++i) {
-                    //     if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
-                    //         newMessage.unshift(ans.result.data[i]);
-                    //         newMessageId.unshift(ans.result.data[i]._id);
+                    for (let i = 0; i < ans.result.data.length; ++i) {
+                        if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
+                            newMessage.unshift(ans.result.data[i]);
+                            newMessageId.unshift(ans.result.data[i]._id);
+                            count += 1;
+                        }
+                    }
+
+                    // test
+                    // for (let i = 0; i < contents.length; ++i) {
+                    //     if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
+                    //         newMessage.unshift(contents[i]);
+                    //         newMessageId.unshift(contents[i]._id);
                     //         count += 1;
                     //     }
                     // }
-
-                    // test
-                    for (let i = 0; i < contents.length; ++i) {
-                        // if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
-                            newMessage.unshift(contents[i]);
-                            newMessageId.unshift(contents[i]._id);
-                            count += 1;
-                        // }
-                    }
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
@@ -266,7 +266,7 @@ class MsgShow extends React.Component {
             event.target.setAttribute("class", "anticon anticon-pause-circle-o");
             this.interval = setInterval(_ => {
                 this.monitor(false)
-            }, 20000 );
+            }, 10000 );
             openNotificationWithIcon('success', '开始监控');
             console.log(keyword.name + " has been started to get data");
         }

@@ -55,7 +55,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        alert('did mount');
+        // alert('did mount');
     }
 
     componentWillUnmount() {
