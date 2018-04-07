@@ -12,6 +12,7 @@ import { Layout, Menu, Icon, Input} from 'antd';
 import {serverIP} from "../_helpers/serverIP";
 import { openNotificationWithIcon } from "../_helpers";
 
+import elasticsearch from 'elasticsearch';
 //主页不同模块
 import {MonitoringPage} from '../MonitoringPage'
 import {KwAnalysisPage} from '../KwAnalysisPage'
@@ -33,7 +34,7 @@ class HomePage extends React.Component {
         super(props);
         this.state = {
             selectedKeys: ""
-        }
+        };
     }
 
     componentWillMount(){
@@ -89,6 +90,33 @@ class HomePage extends React.Component {
         //         }
         //     }
         // );
+        var client = new elasticsearch.Client({
+            host: 'http://114.212.189.147:10056',
+            log: 'trace'
+        });
+        client.search({
+            index: 'crawler',
+            type: ['wangyi_menhu'],
+            body:  {
+                'query' : {
+                    'match' : {
+                        'content' : '测试'
+                    }
+                },
+                'sort' : {
+                    'time.keyword' : {
+                        'order' : 'desc'
+                    }
+                },
+                'size' : 100,
+                'from' : 0
+            }
+        }).then(function (resp) {
+            var hits = resp.hits.hits;
+            console.log(hits);
+        }, function (err) {
+            console.trace(err.message);
+        });
         history.push({pathname: '/searchMsg', state: {'value': value}})
 
     }

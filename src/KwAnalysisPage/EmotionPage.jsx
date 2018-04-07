@@ -17,7 +17,7 @@ class EmotionPage extends React.Component {
             trigger: 'axis'
         },
         legend: {
-            data:['正面','负面']
+            data:['正面','中面','负面']
         },
 
         calculable : true,
@@ -70,6 +70,14 @@ class EmotionPage extends React.Component {
                 data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
             {
+                name:'中面',
+                type:'line',
+                symbol:'none',
+                smooth: 0.2,
+                color:['#868e96'],
+                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            },
+            {
                 name:'负面',
                 type:'line',
                 symbol:'none',
@@ -93,7 +101,7 @@ class EmotionPage extends React.Component {
     };
 
     getData = () => {
-        const { currentKwd,dispatch } = this.props;
+        const { currentKwd } = this.props;
         console.log(currentKwd + ' getting emotion data...');
         if (currentKwd !== undefined) {
             const {user} = this.props;
@@ -141,6 +149,14 @@ class EmotionPage extends React.Component {
                                     smooth: 0.2,
                                     color:['#ffc107'],
                                     data: ans.result.num.positive
+                                },
+                                {
+                                    name:'中面',
+                                    type:'line',
+                                    symbol:'none',
+                                    smooth: 0.2,
+                                    color:['#868e96'],
+                                    data: ans.result.num.neutral
                                 },
                                 {
                                     name:'负面',
