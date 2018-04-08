@@ -79,7 +79,7 @@ class WeiboTablePage extends React.Component {
                 }
             ).then(
                 ans => {
-                    //console.log(ans.result);
+                    // console.log(ans.result);
                     if(ans.status === 1) {
                         this.setState(preState => ({
                             ...preState,

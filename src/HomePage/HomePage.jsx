@@ -90,33 +90,6 @@ class HomePage extends React.Component {
         //         }
         //     }
         // );
-        var client = new elasticsearch.Client({
-            host: 'http://114.212.189.147:10056',
-            log: 'trace'
-        });
-        client.search({
-            index: 'crawler',
-            type: ['wangyi_menhu'],
-            body:  {
-                'query' : {
-                    'match' : {
-                        'content' : '测试'
-                    }
-                },
-                'sort' : {
-                    'time.keyword' : {
-                        'order' : 'desc'
-                    }
-                },
-                'size' : 100,
-                'from' : 0
-            }
-        }).then(function (resp) {
-            var hits = resp.hits.hits;
-            console.log(hits);
-        }, function (err) {
-            console.trace(err.message);
-        });
         history.push({pathname: '/searchMsg', state: {'value': value}})
 
     }

@@ -16,7 +16,7 @@ class SearchPage extends React.Component {
             {title: '正文', className: 'content', width: "40%",render: (record) => (
                 <Popover content={
                     <div style={{width: 400}}>
-                        <p dangerouslySetInnerHTML={{__html: this.markSearch(record.content, record.search)}}/>
+                        <p dangerouslySetInnerHTML={{__html: this.markSearch(record.content, record.keyword)}}/>
                     </div>
                 } title="全文内容">
                     <p>{record.content}</p>
@@ -34,7 +34,7 @@ class SearchPage extends React.Component {
             {title: '正文', className: 'content', width: "40%", render: (record) => (
                 <Popover content={
                     <div style={{width: 400}}>
-                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        <p dangerouslySetInnerHTML={{__html: this.markSearch(record.content, record.keyword)}}/>
                     </div>
                 } title="全文内容">
                     <p>{record.content}</p>
@@ -53,7 +53,7 @@ class SearchPage extends React.Component {
             {title: '正文', className: 'content', width: "40%", render: (record) => (
                 <Popover content={
                     <div style={{width: 400}}>
-                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        <p dangerouslySetInnerHTML={{__html: this.markSearch(record.content, record.keyword)}}/>
                     </div>
                 } title="全文内容">
                     <p>{record.content}</p>
@@ -69,7 +69,7 @@ class SearchPage extends React.Component {
             {title: '正文', className: 'content', width: "40%", render: (record) => (
                 <Popover content={
                     <div style={{width: 400}}>
-                        <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        <p dangerouslySetInnerHTML={{__html: this.markSearch(record.content, record.keyword)}}/>
                     </div>
                 } title="全文内容">
                     <p>{record.content}</p>
@@ -81,11 +81,12 @@ class SearchPage extends React.Component {
         ],
         agencyData: null,
 
-        searchContent: '',
+        searchContent: undefined,
+        lastSearch: '',
     };
 
     componentDidMount(){
-        //这里应该获取关键字对应的全部的微博数据
+        // window.alert('mount');
         const {user, dispatch} = this.props;
         let value;
         if (typeof(this.props.location.state) !== "undefined") {
@@ -99,58 +100,185 @@ class SearchPage extends React.Component {
 
     componentDidUpdate(){
         let value;
+        // window.alert('update');
         if (typeof(this.props.location.state) !== "undefined") {
             value = this.props.location.state.value;
         }
         if (value !== this.state.searchContent) {
             this.setState(preState => ({
                 ...preState,
-                searchContent: value
+                searchContent: value,
             }));
         }
     }
 
-
-    getData = (searchContent) => {
-
+    getAgencyData = (searchContent) => {
         const { dispatch } = this.props;
-        console.log(searchContent + ' getting source data...');
-
         if (searchContent !== undefined && searchContent !== '') {
+            console.log(searchContent + ' getting agency data...');
             const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'searchContent': searchContent })
+                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
             };
-            console.log(searchContent);
-            // fetch(serverIP + '/getWeibo', requestOptions).then(
-            //     response => {
-            //         if (!response.ok) {
-            //             return Promise.reject(response.statusText);
-            //         }
-            //         return response.json();
-            //     }
-            // ).then(
-            //     ans => {
-            //         //console.log(ans.result);
-            //         if(ans.status === 1) {
-            //             this.setState(preState => ({
-            //                 ...preState,
-            //                 weiboData: ans.result
-            //             }));
-            //         } else {
-            //             openNotificationWithIcon("error", ans.message);
-            //             if (ans.status === -1)
-            //                 history.push("/login");
-            //         }
-            //     },
-            //     error => errorProcess(error)
-            // )
+
+            if (searchContent !== this.state.lastSearch) {
+                fetch(serverIP + '/getAgency', requestOptions).then(
+                    response => {
+                        if (!response.ok) {
+                            return Promise.reject(response.statusText);
+                        }
+                        return response.json();
+                    }
+                ).then(
+                    ans => {
+                        //console.log(ans.result);
+                        if(ans.status === 1) {
+                            this.setState(preState => ({
+                                ...preState,
+                                agencyData: ans.result,
+                                lastSearch:searchContent,
+                            }));
+                            openNotificationWithIcon("success", "培训机构搜索成功");
+                        } else {
+                            openNotificationWithIcon("error", ans.message);
+                            if (ans.status === -1)
+                                history.push("/login");
+                        }
+                    },
+                    error => errorProcess(error)
+                );
+            }
         }
     };
 
-    // 讲消息中的searchContent标记为红色
+
+    getForumData = (searchContent) => {
+        const { dispatch } = this.props;
+        if (searchContent !== undefined && searchContent !== '') {
+            console.log(searchContent + ' getting forum data...');
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
+            };
+
+            if (searchContent !== this.state.lastSearch) {
+                fetch(serverIP + '/getForum', requestOptions).then(
+                    response => {
+                        if (!response.ok) {
+                            return Promise.reject(response.statusText);
+                        }
+                        return response.json();
+                    }
+                ).then(
+                    ans => {
+                        //console.log(ans.result);
+                        if(ans.status === 1) {
+                            this.setState(preState => ({
+                                ...preState,
+                                forumData: ans.result,
+                                lastSearch: searchContent,
+                            }));
+                            openNotificationWithIcon("success", "论坛搜索成功");
+                        } else {
+                            openNotificationWithIcon("error", ans.message);
+                            if (ans.status === -1)
+                                history.push("/login");
+                        }
+                    },
+                    error => errorProcess(error)
+                );
+            }
+        }
+    };
+
+    getPortalData = (searchContent) => {
+        const { dispatch } = this.props;
+        if (searchContent !== undefined && searchContent !== '') {
+            console.log(searchContent + ' getting portal data...');
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
+            };
+
+            if (searchContent !== this.state.lastSearch) {
+                fetch(serverIP + '/getPortal', requestOptions).then(
+                    response => {
+                        if (!response.ok) {
+                            return Promise.reject(response.statusText);
+                        }
+                        return response.json();
+                    }
+                ).then(
+                    ans => {
+                        //console.log(ans.result);
+                        if(ans.status === 1) {
+                            this.setState(preState => ({
+                                ...preState,
+                                portalData: ans.result,
+                                lastSearch:searchContent,
+                            }));
+                            openNotificationWithIcon("success", "门户网站搜索成功");
+                        } else {
+                            openNotificationWithIcon("error", ans.message);
+                            if (ans.status === -1)
+                                history.push("/login");
+                        }
+                    },
+                    error => errorProcess(error)
+                );
+            }
+        }
+    };
+
+    getWeiboData = (searchContent) => {
+
+        const { dispatch } = this.props;
+        if (searchContent !== undefined && searchContent !== '') {
+            console.log(searchContent + ' getting weibo data...');
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
+            };
+            // console.log(searchContent);
+            if (searchContent !== this.state.lastSearch) {
+                fetch(serverIP + '/getWeibo', requestOptions).then(
+                    response => {
+                        if (!response.ok) {
+                            return Promise.reject(response.statusText);
+                        }
+                        return response.json();
+                    }
+                ).then(
+                    ans => {
+                        //console.log(ans.result);
+                        if(ans.status === 1) {
+                            this.setState(preState => ({
+                                ...preState,
+                                weiboData: ans.result,
+                                lastSearch:searchContent,
+                            }));
+                            openNotificationWithIcon("success", "微博搜索成功");
+                        } else {
+                            openNotificationWithIcon("error", ans.message);
+                            if (ans.status === -1)
+                                history.push("/login");
+                        }
+                    },
+                    error => errorProcess(error)
+                );
+            }
+        }
+    };
+
+    // 将消息中的searchContent标记为红色
     markSearch = (content, search) => {
         // 分割search
         const search_list = search.split('_');
@@ -166,11 +294,18 @@ class SearchPage extends React.Component {
 
     render() {
         const searchContent = this.state.searchContent;
+        // window.alert(searchContent);
 
-        if (searchContent !== '') {
-            this.getData(searchContent);
+        if (searchContent !== this.state.lastSearch) {
+            // if (searchContent === '') {
+            //     openNotificationWithIcon('error', '搜索内容为空');
+            // }
+            // window.alert('getData');
+            this.getWeiboData(searchContent);
+            this.getPortalData(searchContent);
+            this.getAgencyData(searchContent);
+            this.getForumData(searchContent);
         }
-
         return (
             <div style={{marginLeft:15, marginTop:15}}>
                 <div style={{marginTop:15}}>
