@@ -325,7 +325,7 @@ class SearchPage extends React.Component {
                 <div style={{marginTop:15}}>
                     <ShowTablePage data={this.state.portalData}
                                    columns={this.state.portalColumns}
-                                   type={"weibo"}
+                                   type={"portal"}
                                    title={" 门户网站"}
                                    collection={this.props.collection['portal']}/>
                 </div>

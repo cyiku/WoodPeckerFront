@@ -37,7 +37,7 @@ class ShowTablePage extends React.Component {
         if (collection === null)
             return "star-o";
         for (let i = 0; i < collection.length; ++i) {
-            if (collection[i]['id'] === id)
+            if (collection[i]['_id'] === id)
                 return "star"
         }
         return "star-o"

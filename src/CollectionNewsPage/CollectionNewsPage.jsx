@@ -283,7 +283,7 @@ class CollectionNewsPage extends React.Component {
                         <span style={{fontWeight:800}}>收藏的培训机构</span>
                     </div>
                 } style={{marginBottom: 50}}>
-                    <Table columns={this.state.portalColumns} dataSource={agencyCollection}/>
+                    <Table columns={this.state.agencyColumns} dataSource={agencyCollection}/>
 
                     {/*功能*/}
                     <div style={{marginTop: 15}}>
