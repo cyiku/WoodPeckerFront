@@ -121,8 +121,7 @@ class CollectionNewsPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
-            },
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
             {title: '正负面', dataIndex: 'sentiment'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>

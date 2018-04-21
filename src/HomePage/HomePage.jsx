@@ -21,6 +21,7 @@ import {KeywordsPage} from '../KeywordsPage'
 import {CollectionNewsPage} from '../CollectionNewsPage'
 import { ClusteringPage } from '../ClusteringPage'
 import {RecommendationPage} from "../RecommendationPage";
+import {BriefReportPage} from "../BriefReportPage";
 
 import './HomePage.css'
 
@@ -175,6 +176,7 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}agencyMsg`} exact component={AgencyTablePage} />
                             <Route path={`${this.props.match.path}forumMsg`} exact component={ForumTablePage} />
                             <Route path={`${this.props.match.path}searchMsg`} exact component={SearchPage} />
+                            <Route path={`${this.props.match.path}brief`} exact component={BriefReportPage} />
                             <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>

@@ -25,7 +25,7 @@ class SearchPage extends React.Component {
             {title: '评论量', dataIndex: 'n_comment', sorter: (a, b) => a.n_comment - b.n_comment,},
             {title: '转发量', dataIndex: 'n_forward', sorter: (a, b) => a.n_forward - b.n_forward,},
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
-            {title: '链接', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>url</a>)},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
         weiboData: null,
 
@@ -44,7 +44,7 @@ class SearchPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
         forumData: null,
 
@@ -61,6 +61,7 @@ class SearchPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
         portalData: null,
 
@@ -77,7 +78,7 @@ class SearchPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文地址', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文地址</a>)},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
         agencyData: null,
 

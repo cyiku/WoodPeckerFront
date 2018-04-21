@@ -2,10 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45cbe2be-f7b8-4024-a704-0af618318dea" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BriefReportPage/BriefReportPage.jsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BriefReportPage/index.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.cb314362.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/LineReact.cb314362.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.52ee8602.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/MapReact.52ee8602.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.1103df4a.chunk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/PieReact.1103df4a.chunk.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.d8f5013c.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/build/static/js/main.d8f5013c.js.map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/asset-manifest.json" afterPath="$PROJECT_DIR$/build/asset-manifest.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" afterPath="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/SearchPage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/SearchPage.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" afterPath="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_helpers/serverIP.js" afterPath="$PROJECT_DIR$/src/_helpers/serverIP.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,24 +34,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchPage.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MsgPage/SearchPage.jsx">
+      <file leaf-file-name="BriefReportPage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BriefReportPage/BriefReportPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="314" column="50" lean-forward="true" selection-start-line="314" selection-start-column="50" selection-end-line="314" selection-end-column="50" />
+            <state relative-caret-position="152">
+              <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1523235410305" expanded="true" signature="12161:12171" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShowTablePage.jsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
+      <file leaf-file-name="OneMsgPage.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="385">
+              <caret line="176" column="34" lean-forward="false" selection-start-line="176" selection-start-column="34" selection-end-line="176" selection-end-column="34" />
+              <folding>
+                <marker date="1517054475884" expanded="true" signature="634:644" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serverIP.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/_helpers/serverIP.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -48,16 +74,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>400</find>
-      <find>contents</find>
-      <find>antd.c</find>
       <find>id</find>
       <find>clearInterval</find>
       <find>setS</find>
@@ -85,6 +108,9 @@
       <find>collection</find>
       <find>deleteCollection</find>
       <find>collection[i</find>
+      <find>type</find>
+      <find>Button</find>
+      <find>markKeyword</find>
     </findStrings>
     <replaceStrings>
       <replace>this.state.types</replace>
@@ -111,6 +137,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -119,8 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/LoginPage/main.css" />
-        <option value="$PROJECT_DIR$/src/HomePage/HomePage.css" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/KwsListPage2.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/MapPage.jsx" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/ShowPicPage.jsx" />
@@ -153,7 +178,6 @@
         <option value="$PROJECT_DIR$/src/_actions/collection.actions.js" />
         <option value="$PROJECT_DIR$/src/_actions/keyword.actions.js" />
         <option value="$PROJECT_DIR$/src/RecommendationPage/RecommendationPage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
         <option value="$PROJECT_DIR$/src/MonitoringPage/MsgShow2.jsx" />
         <option value="$PROJECT_DIR$/src/KeywordsPage/KeywordsPage.jsx" />
         <option value="$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx" />
@@ -162,14 +186,17 @@
         <option value="$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx" />
         <option value="$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx" />
         <option value="$PROJECT_DIR$/test.html" />
-        <option value="$PROJECT_DIR$/src/_helpers/serverIP.js" />
         <option value="$PROJECT_DIR$/src/KwAnalysisPage/EmotionPage.jsx" />
         <option value="$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx" />
         <option value="$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx" />
-        <option value="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
-        <option value="$PROJECT_DIR$/src/MsgPage/SearchPage.jsx" />
-        <option value="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
         <option value="$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx" />
+        <option value="$PROJECT_DIR$/src/MsgPage/SearchPage.jsx" />
+        <option value="$PROJECT_DIR$/src/BriefReportPage/index.js" />
+        <option value="$PROJECT_DIR$/src/HomePage/HomePage.jsx" />
+        <option value="$PROJECT_DIR$/src/BriefReportPage/BriefReportPage.jsx" />
+        <option value="$PROJECT_DIR$/src/_helpers/serverIP.js" />
       </list>
     </option>
   </component>
@@ -185,8 +212,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1680" />
+    <option name="x" value="110" />
+    <option name="y" value="73" />
+    <option name="width" value="1599" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -207,8 +235,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,25 +247,24 @@
             <path>
               <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
               <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
               <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="_services" type="462c0819:PsiDirectoryNode" />
+              <item name="_helpers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
               <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="CollectionNewsPage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WoodPeckerFront" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WoodPeckerFront" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="MsgPage" type="462c0819:PsiDirectoryNode" />
+              <item name="MonitoringPage" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -255,6 +282,9 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/MonitoringPage" />
       <recent name="$PROJECT_DIR$/src/BlankPage" />
@@ -348,12 +378,16 @@
       <workItem from="1522848024248" duration="3436000" />
       <workItem from="1523065389828" duration="9546000" />
       <workItem from="1523165194086" duration="2689000" />
-      <workItem from="1523235056395" duration="1935000" />
+      <workItem from="1523235056395" duration="2026000" />
+      <workItem from="1523538387569" duration="1669000" />
+      <workItem from="1523607028844" duration="518000" />
+      <workItem from="1524128247517" duration="6159000" />
+      <workItem from="1524224376613" duration="381000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="551732000" />
+    <option name="totallyTimeSpent" value="560550000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -365,10 +399,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
+    <frame x="110" y="73" width="1599" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17721519" sideWeight="0.49570817" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1774398" sideWeight="0.49570817" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -400,34 +434,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/_helpers/cmpTime.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/antd/es/table/style/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="326" column="14" lean-forward="false" selection-start-line="326" selection-start-column="14" selection-end-line="326" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HomePage/HomePage.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LoginPage/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -505,13 +511,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2646">
-          <caret line="199" column="32" lean-forward="true" selection-start-line="199" selection-start-column="32" selection-end-line="199" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/KwAnalysisPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
@@ -570,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_services/keyword.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-194">
@@ -605,20 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="71" column="40" lean-forward="true" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1786">
-          <caret line="103" column="29" lean-forward="false" selection-start-line="103" selection-start-column="29" selection-end-line="103" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_actions/collection.actions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -635,13 +613,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.html" />
-    <entry file="file://$PROJECT_DIR$/src/_helpers/serverIP.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="41" lean-forward="true" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/KwAnalysisPage/DataDistributionPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2014">
@@ -677,10 +648,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/_reducers/collection.reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_services/collection.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/SearchPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="80" column="100" lean-forward="false" selection-start-line="80" selection-start-column="100" selection-end-line="80" selection-end-column="100" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+            <marker date="1523538569417" expanded="true" signature="12260:12270" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MsgPage/WeiboTablePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="75" column="19" lean-forward="true" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+        <state relative-caret-position="1197">
+          <caret line="75" column="19" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
           <folding>
             <marker date="1523151872328" expanded="true" signature="2364:2374" ph="..." />
           </folding>
@@ -689,7 +693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MsgPage/ForumTablePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
+        <state relative-caret-position="1102">
           <caret line="70" column="14" lean-forward="true" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
           <folding>
             <marker date="1523152711950" expanded="true" signature="1877:1887" ph="..." />
@@ -697,65 +701,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HomePage/HomePage.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="92" column="71" lean-forward="false" selection-start-line="92" selection-start-column="71" selection-end-line="92" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MsgPage/PortalTablePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="32" column="24" lean-forward="false" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+        <state relative-caret-position="570">
+          <caret line="42" column="107" lean-forward="false" selection-start-line="42" selection-start-column="107" selection-end-line="42" selection-end-column="107" />
           <folding>
-            <marker date="1522479341807" expanded="true" signature="4301:4311" ph="..." />
+            <marker date="1523538482427" expanded="true" signature="4409:4419" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_reducers/collection.reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_services/collection.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CollectionNewsPage/CollectionNewsPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1383">
-          <caret line="285" column="60" lean-forward="false" selection-start-line="285" selection-start-column="60" selection-end-line="285" selection-end-column="60" />
+        <state relative-caret-position="2451">
+          <caret line="134" column="23" lean-forward="true" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
           <folding>
-            <marker date="1523236987372" expanded="true" signature="7957:7967" ph="..." />
+            <marker date="1523538482421" expanded="true" signature="7944:7954" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/SearchPage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/MsgPage/AgencyTablePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="314" column="50" lean-forward="true" selection-start-line="314" selection-start-column="50" selection-end-line="314" selection-end-column="50" />
+        <state relative-caret-position="380">
+          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BriefReportPage/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HomePage/HomePage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="178" column="110" lean-forward="true" selection-start-line="178" selection-start-column="110" selection-end-line="178" selection-end-column="110" />
+          <folding>
+            <element signature="e#651#699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClusteringPage/ClusteringPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-223">
+          <caret line="10" column="46" lean-forward="true" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1523235410305" expanded="true" signature="12161:12171" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MsgPage/ShowTablePage.jsx">
+    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/MsgShow.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="1027">
+          <caret line="103" column="29" lean-forward="false" selection-start-line="103" selection-start-column="29" selection-end-line="103" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_freemaker.ftl" />
+    <entry file="file://$PROJECT_DIR$/src/BriefReportPage/BriefReportPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MonitoringPage/OneMsgPage.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="176" column="34" lean-forward="false" selection-start-line="176" selection-start-column="34" selection-end-line="176" selection-end-column="34" />
+          <folding>
+            <marker date="1517054475884" expanded="true" signature="634:644" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_helpers/serverIP.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
