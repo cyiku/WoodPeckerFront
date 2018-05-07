@@ -6,8 +6,8 @@ import {openNotificationWithIcon} from "../_helpers";
 import {OneMsgPage} from "./OneMsgPage";
 import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
-import {alertActions} from "../_actions/alert.actions";
 import {errorProcess} from "../_helpers/error";
+import { Pagination } from 'antd';
 
 // import VirtualList from 'react-virtual-list';
 // 导入css
@@ -82,7 +82,11 @@ class MsgShow extends React.Component {
         this.state = {
             message: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || [],
             messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
+            showMessage: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]").slice(0,10) || [],
             containerHeight: 651,
+            total: 0,
+            defaultPage: 0,
+            pageSize: 10,
         }
     }
 
@@ -207,13 +211,14 @@ class MsgShow extends React.Component {
                     }
 
                     // test
-                    // for (let i = 0; i < contents.length; ++i) {
-                    //     if (newMessageId.indexOf(contents[i]._id) === -1 && keyword.sites.indexOf(contents[i].source) !== -1) {
-                    //         newMessage.unshift(contents[i]);
-                    //         newMessageId.unshift(contents[i]._id);
-                    //         count += 1;
+                    // for (let j = 0; j < 5; ++j) {
+                    //     for (let i = 0; i < contents.length; ++i) {
+                    //             newMessage.unshift(contents[i]);
+                    //             newMessageId.unshift(contents[i]._id);
+                    //             count += 1;
                     //     }
                     // }
+
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
@@ -238,8 +243,10 @@ class MsgShow extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         message: newMessage,
+                        showMessage: newMessage.slice(0, 10),
                         messageId: newMessageId,
                         time: this.getNowFormatDate(),
+                        total: newMessage.length,
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
@@ -288,6 +295,13 @@ class MsgShow extends React.Component {
         event.stopPropagation();
     };
 
+    pageChange = (page, pageSize) => {
+        this.setState(preState => ({
+            ...preState,
+            showMessage: this.state.message.slice((page - 1) * 10, page * 10),
+        }));
+    };
+
 
     render() {
         const {keyword} = this.props;
@@ -295,7 +309,7 @@ class MsgShow extends React.Component {
             pathname:'/kwAnalysis',
             state:keyword['name'],
         };
-        const {message} = this.state;
+        const {showMessage} = this.state;
         const sortData = ['按重要度排序', '按负面影响排序', '按关注度排序', '按情感排序', '默认排序'];
         const sortContent = (
             <List
@@ -326,10 +340,12 @@ class MsgShow extends React.Component {
                         <div ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
                             <div>
                                 {
-                                    message.map((item, index) => <OneMsgPage content={item} contentType={item['contentType']}/>)
+                                    showMessage.map((item, index) => <OneMsgPage content={item} contentType={item['contentType']}/>)
                                 }
+
                             </div>
                         </div>
+                        <Pagination defaultCurrent={this.state.defaultPage} pageSize={this.state.pageSize} total={this.state.total} onChange={(page, pageSize)=> this.pageChange(page, pageSize)}/>
                     </Panel>
                 </Collapse>
 
