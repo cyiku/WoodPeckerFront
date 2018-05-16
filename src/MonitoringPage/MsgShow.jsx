@@ -16,8 +16,6 @@ import './MonitoringPage.css';
 
 const Panel = Collapse.Panel;
 
-
-
 // const portalContent = {
 //     '_id': 0,
 //     'contentType': 'portal',
@@ -79,10 +77,12 @@ class MsgShow extends React.Component {
         const {user, keyword} = this.props;
         const {token} = user;
 
+        let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || []
+
         this.state = {
-            message: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || [],
+            message: message,
             messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
-            showMessage: JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]").slice(0,10) || [],
+            showMessage: message,
             containerHeight: 651,
             total: 0,
             defaultPage: 0,
@@ -140,7 +140,8 @@ class MsgShow extends React.Component {
     componentWillUnmount(){
         const {user, keyword} = this.props;
         const {token} = user;
-
+        
+        // message数组里存的都是object,需要转成string存储
         localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
         localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
@@ -234,7 +235,7 @@ class MsgShow extends React.Component {
                         return -1;
                     });
 
-                    newMessage = newMessage.slice(0, 100);
+                    newMessage = newMessage.slice(0, 50);
 
                     // const options = {
                     //     container: this.refs[keyword],

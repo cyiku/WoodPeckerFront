@@ -6,12 +6,10 @@ import {collectionActions} from "../_actions";
 import {KwsList} from "./KwsList";
 import {MsgShow} from "./MsgShow";
 
-
 import './MonitoringPage.css'
 
 
 class MonitoringPage extends React.Component {
-
 
     componentDidMount(){
         const { user, dispatch, keyword, collection } = this.props;
@@ -31,7 +29,6 @@ class MonitoringPage extends React.Component {
             dispatch(collectionActions.getCollection(user, "agency"));
         }
     }
-
 
     render() {
         const {keyword} = this.props;
