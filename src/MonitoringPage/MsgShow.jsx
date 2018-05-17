@@ -74,9 +74,6 @@ class MsgShow extends React.Component {
     constructor(props) {
         super(props);
 
-        const {user, keyword} = this.props;
-        const {token} = user;
-
         //let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || []
 
         this.state = {
@@ -119,12 +116,30 @@ class MsgShow extends React.Component {
         //     this.connection.send(keyword.name + "\n");
         //     console.log(keyword.name + " has been started to get data");
         // };
-        
+        const {user, keyword} = this.props;
+        const {token} = user;
+        let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]");
+        let messageId = JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]");
+        if (message !== []) {
+            this.setState(preState => ({
+                ...preState,
+                message: message,
+                showMessage: message,
+                messageId: messageId,
+                time: this.getNowFormatDate(),
+                total: message.length,
+            }));
+        }
+        const { index } = this.props;
+        // 每个关键字请求错开
+        this.timeout = setTimeout(_=>{this.StartTimingTask()}, index * 10 * 1000);
+    }
+
+    StartTimingTask = () => {
         this.monitor(true);
         this.interval = setInterval(_ => {
-             this.monitor(false)
-        }, 20000 );
-
+            this.monitor(false);
+        }, 30 * 1000 );
     }
 
     // MyList = ({virtual, itemHeight}) => {
@@ -139,13 +154,14 @@ class MsgShow extends React.Component {
     // };
 
     componentWillUnmount(){
-        // const {user, keyword} = this.props;
-        // const {token} = user;
+        const {user, keyword} = this.props;
+        const {token} = user;
         
         // // message数组里存的都是object,需要转成string存储
-        // localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
-        // localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
+        localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
+        localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
+        clearTimeout(this.timeout);
     }
 
     getNowFormatDate = () => {
@@ -181,7 +197,6 @@ class MsgShow extends React.Component {
 
     monitor = (isFirst) => {
 
-        // isFirst变量是为了让用户新进入网站的时候有信息可看，还没实现
         const {user,keyword,dispatch} = this.props;
         const requestOptions = {
             method: 'POST',
@@ -190,6 +205,7 @@ class MsgShow extends React.Component {
         };
 
         let requestIP;
+
         if (isFirst === true) {
             requestIP = serverIP + '/last20';
         } else {
@@ -368,8 +384,8 @@ class MsgShow extends React.Component {
 function mapStateToProps(state, ownProps) {
     const {authentication} = state;
     const {user} = authentication;
-    const {keyword} = ownProps;
-    return {user, keyword};
+    const {keyword, index} = ownProps;
+    return {user, keyword, index};
 }
 
 const connectedMsgShow = connect(mapStateToProps)(MsgShow);

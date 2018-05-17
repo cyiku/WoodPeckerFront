@@ -42,7 +42,7 @@ class MonitoringPage extends React.Component {
                     <Row gutter={16}>
                         {
                             keyword.map(
-                                (keyword, index)=><Col span={8}><MsgShow keyword={keyword}  key={index}/></Col>
+                                (keyword, index)=><Col span={8}><MsgShow keyword={keyword}  key={index} index={index}/></Col>
                             )
                         }
                     </Row>
