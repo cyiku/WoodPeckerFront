@@ -52,6 +52,12 @@ class KwAnalysisPage extends React.Component {
     };
 
     clickKeyword = (event) => {
+
+        let newKwd = event.target.getAttribute("value");
+        // 如果此时keyword没变化，则无需反复请求
+        if (newKwd == this.state.currentKwd || newKwd == null)
+            return;
+
         let targets = document.getElementsByClassName("keyword");
 
         for (let i = 0; i < targets.length; ++i) {
@@ -59,13 +65,10 @@ class KwAnalysisPage extends React.Component {
         }
         event.target.setAttribute("class", "btn btn-primary keyword");
 
-        let newKwd = event.target.getAttribute("value");
-        if (newKwd != this.state.currentKwd && newKwd != null) {
-            this.setState(preState => ({
-                ...preState,
-                currentKwd: newKwd
-            }));
-        }
+        this.setState(preState => ({
+            ...preState,
+            currentKwd: newKwd
+        }));
 
     };
 

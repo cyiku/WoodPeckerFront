@@ -97,14 +97,17 @@ class WeiboTablePage extends React.Component {
     };
 
     clickKeyword = (event) => {
+
+        let newKwd = event.target.getAttribute("value");
+        if (newKwd == this.state.currentKwd || newKwd == null)
+            return;
+            
         let targets = document.getElementsByClassName("keyword");
 
         for (let i = 0; i < targets.length; ++i) {
             targets[i].setAttribute("type", "default");
         }
         event.target.setAttribute("type", "primary");
-
-        let newKwd = event.target.getAttribute("value");
 
         this.setState(preState => ({
             ...preState,
