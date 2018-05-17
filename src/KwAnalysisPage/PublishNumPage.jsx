@@ -132,6 +132,7 @@ class PublishNumPage extends React.Component {
                     if(ans.status) {
                         //console.log(ans.result);
                         openNotificationWithIcon('success', currentKwd + '获取发布量折线图成功');
+                        console.log('ans result: ' + ans.result.num);
                         this.setState(preState => ({
                             ...preState,
                             keyword: currentKwd,

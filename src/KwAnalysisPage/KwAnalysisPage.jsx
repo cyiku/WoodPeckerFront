@@ -60,11 +60,12 @@ class KwAnalysisPage extends React.Component {
         event.target.setAttribute("class", "btn btn-primary keyword");
 
         let newKwd = event.target.getAttribute("value");
-
-        this.setState(preState => ({
-            ...preState,
-            currentKwd: newKwd
-        }));
+        if (newKwd != this.state.currentKwd && newKwd != null) {
+            this.setState(preState => ({
+                ...preState,
+                currentKwd: newKwd
+            }));
+        }
 
     };
 
