@@ -171,8 +171,8 @@ class EmotionPage extends React.Component {
                         }));
                     } else {
                         openNotificationWithIcon("error", ans.reason);
-                        if (ans.logout)
-                            history.push("/login");
+                        //if (ans.logout)
+                        //    history.push("/login");
                     }
                 },
                 error => errorProcess(error)

@@ -119,8 +119,8 @@ class ShowTablePage extends React.Component {
                     openNotificationWithIcon("success", "感谢您的反馈:)");
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    if (ans.status === -1)
-                        history.push("/login");
+                    //if (ans.status === -1)
+                    //    history.push("/login");
                 }
             }
         );

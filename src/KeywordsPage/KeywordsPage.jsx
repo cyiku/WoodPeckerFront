@@ -72,8 +72,8 @@ class KeywordsPage extends React.Component {
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    if (ans.status === -1)
-                        history.push("/login");
+                    //if (ans.status === -1)
+                    //    history.push("/login");
                 }
             },
             error => errorProcess(error)

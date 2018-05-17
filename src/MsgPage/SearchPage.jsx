@@ -144,8 +144,8 @@ class SearchPage extends React.Component {
                             openNotificationWithIcon("success", "培训机构搜索成功");
                         } else {
                             openNotificationWithIcon("error", ans.message);
-                            if (ans.status === -1)
-                                history.push("/login");
+                            //if (ans.status === -1)
+                            //    history.push("/login");
                         }
                     },
                     error => errorProcess(error)
@@ -186,8 +186,8 @@ class SearchPage extends React.Component {
                             openNotificationWithIcon("success", "论坛搜索成功");
                         } else {
                             openNotificationWithIcon("error", ans.message);
-                            if (ans.status === -1)
-                                history.push("/login");
+                            //if (ans.status === -1)
+                            //    history.push("/login");
                         }
                     },
                     error => errorProcess(error)
@@ -227,8 +227,8 @@ class SearchPage extends React.Component {
                             openNotificationWithIcon("success", "门户网站搜索成功");
                         } else {
                             openNotificationWithIcon("error", ans.message);
-                            if (ans.status === -1)
-                                history.push("/login");
+                            //if (ans.status === -1)
+                            //    history.push("/login");
                         }
                     },
                     error => errorProcess(error)
@@ -269,8 +269,8 @@ class SearchPage extends React.Component {
                             openNotificationWithIcon("success", "微博搜索成功");
                         } else {
                             openNotificationWithIcon("error", ans.message);
-                            if (ans.status === -1)
-                                history.push("/login");
+                            //if (ans.status === -1)
+                            //    history.push("/login");
                         }
                     },
                     error => errorProcess(error)

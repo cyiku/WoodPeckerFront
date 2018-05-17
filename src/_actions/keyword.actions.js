@@ -26,8 +26,8 @@ function getKws(user) {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         openNotificationWithIcon("error", ans.message);
-                        if (ans.status === -1)
-                            history.push("/login");
+                        //if (ans.status === -1)
+                        //    history.push("/login");
                     }
                 },
                 error => errorProcess(error)
@@ -57,8 +57,8 @@ function addKws(user, newkeyword) {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         openNotificationWithIcon("error", ans.message);
-                        if (ans.status === -1)
-                        history.push("/login");
+                        //if (ans.status === -1)
+                        //history.push("/login");
                     }
                 },
                 error => errorProcess(error)
@@ -86,8 +86,8 @@ function delKws(user, keyword, index) {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         openNotificationWithIcon("error", ans.message);
-                        if (ans.status === -1)
-                        history.push("/login");
+                        //if (ans.status === -1)
+                        //history.push("/login");
                     }
                 },
                 error => errorProcess(error)
@@ -114,8 +114,8 @@ function updKws(user, newkeyword, index, keywordid) {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         openNotificationWithIcon("error", ans.message);
-                        if (ans.status === -1)
-                            history.push("/login");
+                        //if (ans.status === -1)
+                        //    history.push("/login");
                     }
                 },
                 error => errorProcess(error)
