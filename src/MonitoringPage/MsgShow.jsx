@@ -77,12 +77,13 @@ class MsgShow extends React.Component {
         const {user, keyword} = this.props;
         const {token} = user;
 
-        let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || []
+        //let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || []
 
         this.state = {
-            message: message,
-            messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
-            showMessage: message,
+            message: [],
+            //messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
+            messageId:[],
+            showMessage: [],
             containerHeight: 651,
             total: 0,
             defaultPage: 0,
@@ -118,7 +119,7 @@ class MsgShow extends React.Component {
         //     this.connection.send(keyword.name + "\n");
         //     console.log(keyword.name + " has been started to get data");
         // };
-
+        
         this.monitor(true);
         this.interval = setInterval(_ => {
              this.monitor(false)
@@ -138,12 +139,12 @@ class MsgShow extends React.Component {
     // };
 
     componentWillUnmount(){
-        const {user, keyword} = this.props;
-        const {token} = user;
+        // const {user, keyword} = this.props;
+        // const {token} = user;
         
-        // message数组里存的都是object,需要转成string存储
-        localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
-        localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
+        // // message数组里存的都是object,需要转成string存储
+        // localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
+        // localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
         clearInterval(this.interval);
     }
 
@@ -185,11 +186,19 @@ class MsgShow extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-            body: JSON.stringify({ 'name': keyword.name, 'first': isFirst })
+            body: JSON.stringify({ 'name': keyword.name})
         };
 
+        let requestIP;
+        if (isFirst === true) {
+            requestIP = serverIP + '/last20';
+        } else {
+            requestIP = serverIP + '/monitor';
+        }
+
         console.log(keyword.name + ' monitor request...');
-        fetch(serverIP + '/monitor', requestOptions).then(
+
+        fetch(requestIP, requestOptions).then(
             response => {
                 if (!response.ok) {
                     return Promise.reject(response.statusText);

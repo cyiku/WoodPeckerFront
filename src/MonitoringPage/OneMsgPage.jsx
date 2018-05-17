@@ -73,7 +73,7 @@ class OneMsgPage extends React.Component {
      * @returns {*}
      */
     hasCollected = (id, collection) => {
-        if (collection === null)
+        if (collection === null || collection === undefined)
             return {collectionType: "star-o", collectionInner: "收藏"};
         for (let i = 0; i < collection.length; ++i) {
             if (collection[i]['_id'] === id) {
