@@ -59,7 +59,6 @@ class ForumTablePage extends React.Component {
 
     getData = (keyword) => {
 
-        const { dispatch } = this.props;
         console.log(keyword + ' getting source data...');
 
         if (keyword !== undefined) {
@@ -98,7 +97,7 @@ class ForumTablePage extends React.Component {
 
     clickKeyword = (event) => {
         let newKwd = event.target.getAttribute("value");
-        if (newKwd == this.state.currentKwd || newKwd == null)
+        if (newKwd == this.state.currentKwd || newKwd === null)
             return;
 
         let targets = document.getElementsByClassName("keyword");

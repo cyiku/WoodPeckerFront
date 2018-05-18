@@ -9,10 +9,6 @@ import {ForumTablePage} from "../MsgPage/ForumTablePage";
 import {SearchPage} from "../MsgPage/SearchPage";
 import { Layout, Menu, Icon, Input} from 'antd';
 
-import {serverIP} from "../_helpers/serverIP";
-import { openNotificationWithIcon } from "../_helpers";
-
-import elasticsearch from 'elasticsearch';
 //主页不同模块
 import {MonitoringPage} from '../MonitoringPage'
 import {KwAnalysisPage} from '../KwAnalysisPage'

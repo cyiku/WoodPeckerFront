@@ -1,5 +1,4 @@
 import { openNotificationWithIcon } from "../_helpers";
-import { history } from '../_helpers';
 
 function errorProcess(error) {
     if (localStorage.getItem('user') !== null) {

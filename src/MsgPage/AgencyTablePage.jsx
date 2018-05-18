@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { Link } from 'react-router-dom';
 import { keywordActions } from '../_actions';
-import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import { Popover } from 'antd';
 import { openNotificationWithIcon } from "../_helpers";
 import {Button} from 'antd';
 import { cmpTime } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
+import {serverIP} from '../_helpers';
 /*
 const agencyContent = {
     '_id': 2,
@@ -69,7 +69,6 @@ class AgencyTablePage extends React.Component {
 
     getData = (keyword) => {
 
-        const { dispatch } = this.props;
         console.log(keyword + ' getting source data...');
 
         if (keyword !== undefined) {
@@ -108,7 +107,7 @@ class AgencyTablePage extends React.Component {
 
     clickKeyword = (event) => {
         let newKwd = event.target.getAttribute("value");
-        if (newKwd == this.state.currentKwd || newKwd == null)
+        if (newKwd == this.state.currentKwd || newKwd === null)
             return;
             
         let targets = document.getElementsByClassName("keyword");
