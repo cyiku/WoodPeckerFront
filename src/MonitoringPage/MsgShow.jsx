@@ -8,7 +8,7 @@ import {serverIP} from '../_helpers';
 import { history } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import { Pagination } from 'antd';
-
+import { MsgActions } from '../_actions';
 // import VirtualList from 'react-virtual-list';
 // 导入css
 import './MonitoringPage.css';
@@ -73,12 +73,8 @@ class MsgShow extends React.Component {
 
     constructor(props) {
         super(props);
-
-        //let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]") || []
-
         this.state = {
             message: [],
-            //messageId: JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]") || [],
             messageId:[],
             showMessage: [],
             containerHeight: 651,
@@ -116,11 +112,18 @@ class MsgShow extends React.Component {
         //     this.connection.send(keyword.name + "\n");
         //     console.log(keyword.name + " has been started to get data");
         // };
-        const {user, keyword} = this.props;
+        //let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]");
+        //let messageId = JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]");
+
+        // 加载存储到全局state里的msg
+        const {user, keyword, msg} = this.props;
         const {token} = user;
-        let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]");
-        let messageId = JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]");
-        if (message !== []) {
+        let message = msg[keyword.name];
+        if (message !== undefined && message !== []) {
+            let messageId = [];
+            for (let i = 0; i < message.length; ++i) {
+                messageId.unshift(message[i]._id);
+            }
             this.setState(preState => ({
                 ...preState,
                 message: message,
@@ -130,8 +133,8 @@ class MsgShow extends React.Component {
                 total: message.length,
             }));
         }
+        // 每个关键字请求错开时间
         const { index } = this.props;
-        // 每个关键字请求错开
         this.timeout = setTimeout(_=>{this.StartTimingTask()}, index * 10 * 1000);
     }
 
@@ -154,12 +157,16 @@ class MsgShow extends React.Component {
     // };
 
     componentWillUnmount(){
-        const {user, keyword} = this.props;
-        const {token} = user;
+        const {user, keyword, dispatch} = this.props;
         
-        // // message数组里存的都是object,需要转成string存储
-        localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
-        localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
+        // 该方法因速度慢而废弃
+        // message数组里存的都是object,需要转成string存储
+        // const {token} = user;
+        // localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
+        // localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
+        
+        // 将msg存到全局的state里
+        dispatch(MsgActions.updMsg(user, keyword.name, this.state.message.slice(0, 10)));
         clearInterval(this.interval);
         clearTimeout(this.timeout);
     }
@@ -207,8 +214,10 @@ class MsgShow extends React.Component {
         let requestIP;
 
         if (isFirst === true) {
+            // 第一次请求则请求最新的20条，后因渲染问题改成了5条
             requestIP = serverIP + '/last20';
         } else {
+            // 以后则请求近20s内的新消息
             requestIP = serverIP + '/monitor';
         }
 
@@ -382,10 +391,10 @@ class MsgShow extends React.Component {
 
 
 function mapStateToProps(state, ownProps) {
-    const {authentication} = state;
+    const {authentication, msg} = state;
     const {user} = authentication;
     const {keyword, index} = ownProps;
-    return {user, keyword, index};
+    return {user, keyword, index, msg};
 }
 
 const connectedMsgShow = connect(mapStateToProps)(MsgShow);
