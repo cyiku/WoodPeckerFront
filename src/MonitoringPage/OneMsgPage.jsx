@@ -11,10 +11,8 @@ import './clamp.js';
 class OneMsgPage extends React.Component {
 
     markKeyword = (content, keywords) => {
-
         // 分割keywords
         const keyword_list = keywords.split('_');
-        //console.log(keyword_list);
         for (let i = 0; i < keyword_list.length; ++i) {
             content = content.replace(new RegExp(keyword_list[i], "gm"), '<span style="color: red">'+keyword_list[i]+'</span>');
         }
@@ -83,25 +81,6 @@ class OneMsgPage extends React.Component {
         return {collectionType: "star-o", collectionInner: "收藏"}
     };
 
-    /*
-    componentWillUpdate() {
-        const {content, time} = this.props;
-        document.getElementById(content._id + time).innerHTML = "";
-    }
-
-    componentDidUpdate() {
-        const {content, time} = this.props;
-        const newContent = this.markKeyword(content.content, content.keyword);
-        document.getElementById(content._id + time).innerHTML = newContent;
-    }
-
-    componentDidMount () {
-        const {content, time} = this.props;
-        const newContent = this.markKeyword(content.content, content.keyword);
-        document.getElementById(content._id + time).innerHTML = newContent;
-
-    }
-    */
     componentDidMount () {
         var p = document.getElementsByClassName('text');
         for (let i = 0; i < p.length; ++i)
@@ -114,11 +93,13 @@ class OneMsgPage extends React.Component {
         const {content, contentType, collection} = this.props;
         const newTime = this.timeTransfer(content.time);
         const {collectionType, collectionInner} = this.hasCollected(content._id, collection[contentType]);
+        
+        // 如果是新的则提示
+        let newContent = '';
+        if (this.props.isNew) {
+            newContent = 'New';
+        }
 
-        // let header;
-        // if (content.boudary !== undefined) {
-        //     header = <h3 style={{color:"red", textAlign:"center"}}>上次您读到这里</h3>;
-        // }
         // 全文内容
         const testContent = (
             <div style={{width: 400}}>
@@ -128,13 +109,13 @@ class OneMsgPage extends React.Component {
 
         if (contentType === 'weibo')
             showMsg =
-                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                     <span style={{}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
             showMsg =
-                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <div>
                         <a href={content.url} style={{fontSize:14}} target="_blank">
                             <p className={"title"}>{content.title}</p>
@@ -144,13 +125,13 @@ class OneMsgPage extends React.Component {
                 </div>;
         else if (contentType === 'forum')
             showMsg =
-                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(content.content, content.keyword)}} className={'text'}/>
                     <span>点击({content.n_click}) 回复({content.n_reply})</span>
                 </div>;
         else if (contentType === 'agency')
             showMsg =
-                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
+                <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <div>
                         <a href={content.url} style={{fontSize:14}} target="_blank">
                             <p className={"title"}>{content.title}</p>
@@ -160,10 +141,11 @@ class OneMsgPage extends React.Component {
                 </div>;
         return (
 
-            <div style={{ marginBottom: 10 }}>
+            <div style={{ marginBottom: 10}}>
                 {/*{header}*/}
                 <Card title={
                     <div>
+                        <span style={{float: "right", color:"red", fontStyle: "italic"}}>{newContent}</span>
                         <span style={{float: "right"}}>{content.source}</span>
                         <span>{content.authid? content.authid: "匿名用户"}</span>
                     </div>
@@ -226,8 +208,8 @@ class OneMsgPage extends React.Component {
 function mapStateToProps(state, ownProps) {
     const {authentication, collection} = state;
     const {user} = authentication;
-    const {content, contentType, time} = ownProps;
-    return {user, collection, content, contentType, time};
+    const {content, contentType, time, isNew} = ownProps;
+    return {user, collection, content, contentType, time, isNew};
 }
 
 const connectedOneMsgPage = connect(mapStateToProps)(OneMsgPage);
