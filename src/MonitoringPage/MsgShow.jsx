@@ -261,12 +261,14 @@ class MsgShow extends React.Component {
     }
 
     render() {
+        // 关键字分析Icon
         const {keyword} = this.props;
         let path = {
             pathname:'/kwAnalysis',
             state:keyword['name'],
         };
-        const {showMessage} = this.state;
+        
+        // 排序Icon
         const sortData = ['按重要度排序', '按负面影响排序', '按关注度排序', '按情感排序', '默认排序'];
         const sortContent = (
             <List
@@ -275,6 +277,16 @@ class MsgShow extends React.Component {
                 renderItem={item => (<List.Item><a onClick={event => alert('后续推出, 敬请期待')}>{item}</a></List.Item>)}
             />
         );
+
+        // 消息展示
+        const {showMessage} = this.state;
+
+        // 待读消息数目提示
+        let remindMsg = '(无待读消息)';
+        if (this.state.newMessageNum > 0) {
+            remindMsg = '(未读消息数: ' + this.state.newMessageNum + ')';
+        }
+
         return (
             <div style={{height:"100% "}} name={keyword.name} id={keyword.name}>
 
@@ -285,12 +297,12 @@ class MsgShow extends React.Component {
                                 <Popover content={sortContent} placement="bottom" >
                                     <Icon type="database" style={{fontSize:15, marginRight:10}}/>
                                 </Popover>
-                                <Icon type="pause-circle-o" onClick={this.play} style={{fontSize:15, marginRight:10}}/>
-                                <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/>
-                                <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}}/></Link>
+                                <Icon type="pause-circle-o" onClick={this.play} style={{fontSize:15, marginRight:10}} title={"暂停或启动"}/>
+                                {/* <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/> */}
+                                <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}} title={"关键字分析"}/></Link>
                             </div>
                             <Icon type="file-text"/><span> {keyword.name}</span>
-                            <span style={{marginLeft:15,fontSize: 14}}>(未读消息数: {this.state.newMessageNum})</span>
+                            <span style={{marginLeft:15,fontSize: 14}}>{remindMsg}</span>
                         </div>
                     } key="1" >
 
