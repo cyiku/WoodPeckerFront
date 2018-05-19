@@ -30,7 +30,7 @@ class MsgShow extends React.Component {
             showMessage: [],  // 当前要展示的消息
             containerHeight: 651, // 样式高度
             total: 0,  // 为分页服务
-            defaultPage: 0,  // 为分页服务
+            currentPage: 1,  // 为分页服务
             pageSize: 10,  // 为分页服务
             intervalTime: 30 * 1000, // 请求间隔时间，默认半分钟
         }
@@ -204,10 +204,11 @@ class MsgShow extends React.Component {
     // };
 
     // 换页
-    pageChange = (page, pageSize) => {
+    pageChange = (page) => {
         this.setState(preState => ({
             ...preState,
             showMessage: this.state.message.slice((page - 1) * 10, page * 10),
+            currentPage: page
         }));
     };
 
@@ -280,7 +281,7 @@ class MsgShow extends React.Component {
                                 }
                             </div>
                         </div>
-                        <Pagination defaultCurrent={this.state.defaultPage} pageSize={this.state.pageSize} total={this.state.total} onChange={(page, pageSize)=> this.pageChange(page, pageSize)}/>
+                        <Pagination current={this.state.currentPage} pageSize={this.state.pageSize} total={this.state.total} onChange={this.pageChange}/>
                     </Panel>
                 </Collapse>
 
