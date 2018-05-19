@@ -9,6 +9,7 @@ import { history } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import { Pagination } from 'antd';
 import { MsgActions } from '../_actions';
+//import {getNowFormatDate} from '../_helpers';
 // 导入css
 import './MonitoringPage.css';
 
@@ -17,28 +18,28 @@ const Panel = Collapse.Panel;
 
 
 class MsgShow extends React.Component {
-
+    // 负责展示该关键字下的所有消息
 
     constructor(props) {
         super(props);
         this.state = {
-            message: [],
-            messageId:[],
-            messageIsNew: {}, // key: id, value: true or false
-            newMessageNum: 0,
-            showMessage: [],
-            containerHeight: 651,
-            total: 0,
-            defaultPage: 0,
-            pageSize: 10,
+            message: [],   // 存储所有的消息
+            messageId:[],  // 存储所有的消息的ID
+            messageIsNew: {}, // 记录哪些消息用户还没有看过，key: id, value: true or false
+            newMessageNum: 0, // 记录没有看过的消息的数目
+            showMessage: [],  // 当前要展示的消息
+            containerHeight: 651, // 样式高度
+            total: 0,  // 为分页服务
+            defaultPage: 0,  // 为分页服务
+            pageSize: 10,  // 为分页服务
+            intervalTime: 30 * 1000, // 请求间隔时间，默认半分钟
         }
     }
 
     componentDidMount(){
 
-        // 加载存储到全局state里的msg
-        const {user, keyword, msg} = this.props;
-        const {token} = user;
+        // 加载该关键字存储到全局state里的消息(该消息通常在离开监控页面时存储)，保存到局部的state里
+        const {keyword, msg} = this.props;
         let message = msg[keyword.name];
         if (message !== undefined && message !== []) {
             let messageId = [];
@@ -53,11 +54,11 @@ class MsgShow extends React.Component {
                 showMessage: message,
                 messageId: messageId,
                 messageIsNew: messageIsNew,
-                time: this.getNowFormatDate(),
+                //time: this.getNowFormatDate(),
                 total: message.length,
             }));
         }
-        // 每个关键字请求错开时间
+        // 为每个关键字添加定时任务，并且每个关键字请求错开时间
         const { index } = this.props;
         this.timeout = setTimeout(_=>{this.StartTimingTask()}, index * 10 * 1000);
     }
@@ -66,7 +67,7 @@ class MsgShow extends React.Component {
         this.monitor(true);
         this.interval = setInterval(_ => {
             this.monitor(false);
-        }, 30 * 1000 );
+        }, this.state.intervalTime);
     }
 
     componentWillUnmount(){
@@ -80,40 +81,11 @@ class MsgShow extends React.Component {
         
         // 将msg存到全局的state里
         dispatch(MsgActions.updMsg(user, keyword.name, this.state.message.slice(0, 10)));
+        // 清除定时任务
         clearInterval(this.interval);
         clearTimeout(this.timeout);
     }
 
-    getNowFormatDate = () => {
-        let date = new Date();
-        let seperator1 = "-";
-        let seperator2 = ":";
-        let month = date.getMonth() + 1;
-        let strDate = date.getDate();
-        if (month >= 1 && month <= 9) {
-            month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-        }
-        let hour = date.getHours();
-        if (hour >= 0 && hour <= 9) {
-            hour = "0" + hour;
-        }
-        let minute = date.getMinutes();
-        if (minute >= 0 && minute <= 9) {
-            minute = "0" + minute;
-        }
-        let second = date.getSeconds();
-        if (second >=0 && second <= 9) {
-            second = "0" + second;
-        }
-
-        let currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + hour + seperator2 + minute
-            + seperator2 + second;
-        return currentdate;
-    };
 
     monitor = (isFirst) => {
 
@@ -134,7 +106,7 @@ class MsgShow extends React.Component {
             requestIP = serverIP + '/monitor';
         }
 
-        console.log(keyword.name + ' monitor request...');
+        console.log(keyword.name + ' post monitor request');
 
         fetch(requestIP, requestOptions).then(
             response => {
@@ -154,16 +126,14 @@ class MsgShow extends React.Component {
 
                     let count = 0;
                     for (let i = 0; i < ans.result.data.length; ++i) {
+                        // 遍历所有刚接受的消息，看是否在原来的message里
                         if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
-                        
-                            ans.result.data[i].isNew = true;
                             newMessage.unshift(ans.result.data[i]);
                             newMessageId.unshift(ans.result.data[i]._id);
-                            newMessageIsNew[ans.result.data[i]._id] = true;  //新来一个消息肯定为true
+                            newMessageIsNew[ans.result.data[i]._id] = true; 
                             count += 1;
                         }
                     }
-
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
@@ -171,6 +141,8 @@ class MsgShow extends React.Component {
                         return;
                     }
 
+                    // 只截取50条，再排序，保证新来的消息都能看到
+                    newMessage = newMessage.slice(0, 50);
                     newMessage.sort(function(a,b){
                         if (a.time === b.time)
                             return 0;
@@ -179,9 +151,6 @@ class MsgShow extends React.Component {
                         return -1;
                     });
 
-                    newMessage = newMessage.slice(0, 50);
-
-
                     this.setState(preState => ({
                         ...preState,
                         message: newMessage,
@@ -189,7 +158,7 @@ class MsgShow extends React.Component {
                         messageId: newMessageId,
                         messageIsNew: newMessageIsNew,
                         newMessageNum: newMessageNum + count,
-                        time: this.getNowFormatDate(),
+                        //time: this.getNowFormatDate(),
                         total: newMessage.length,
                     }));
                 } else {
@@ -215,28 +184,26 @@ class MsgShow extends React.Component {
             event.target.setAttribute("class", "anticon anticon-pause-circle-o");
             this.interval = setInterval(_ => {
                 this.monitor(false)
-            }, 10000 );
+            }, this.state.intervalTime);
             openNotificationWithIcon('success', '开始监控');
             console.log(keyword.name + " has been started to get data");
         }
-
-        event.stopPropagation();
-
-    };
-
-    fresh = (event) => {
-
-        this.setState(
-            preState => ({
-                ...preState,
-                message: [],
-                messageId: [],
-            })
-        );
-        this.monitor(false);
         event.stopPropagation();
     };
 
+    // fresh = (event) => {
+    //     this.setState(
+    //         preState => ({
+    //             ...preState,
+    //             message: [],
+    //             messageId: [],
+    //         })
+    //     );
+    //     this.monitor(false);
+    //     event.stopPropagation();
+    // };
+
+    // 换页
     pageChange = (page, pageSize) => {
         this.setState(preState => ({
             ...preState,
@@ -311,7 +278,6 @@ class MsgShow extends React.Component {
                                 {
                                     showMessage.map((item, index) => <div onMouseOver={event=>this.newToOld(event, item._id)}><OneMsgPage content={item} contentType={item['contentType']} isNew = {this.state.messageIsNew[item._id]}/></div>)
                                 }
-
                             </div>
                         </div>
                         <Pagination defaultCurrent={this.state.defaultPage} pageSize={this.state.pageSize} total={this.state.total} onChange={(page, pageSize)=> this.pageChange(page, pageSize)}/>

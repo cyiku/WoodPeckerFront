@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
 /**
- * 该类仅负责显示关键字列表
+ * 该类为监控页面的所有关注的关键字展示
  */
 class KwsList extends React.Component {
 

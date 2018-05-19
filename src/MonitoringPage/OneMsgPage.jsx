@@ -87,6 +87,12 @@ class OneMsgPage extends React.Component {
             window.$clamp(p[i], {clamp: 3, useNativeClamp: false});   // 设置最多显示消息的行数
     }
 
+    componentDidUpdate () {
+        var p = document.getElementsByClassName('text');
+        for (let i = 0; i < p.length; ++i)
+            window.$clamp(p[i], {clamp: 3, useNativeClamp: false});   // 设置最多显示消息的行数
+    }
+
     render() {
         let showMsg;
 
