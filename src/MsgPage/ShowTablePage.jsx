@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { openNotificationWithIcon } from "../_helpers";
 import {serverIP} from "../_helpers/serverIP";
 import { history } from '../_helpers';
+import {errorProcess} from "../_helpers/error";
 
 const RadioGroup = Radio.Group;
 class ShowTablePage extends React.Component {
@@ -14,18 +15,46 @@ class ShowTablePage extends React.Component {
         super(props);
 
         this.state = {
-            searchedContent: [],
-            searchInput: '',
-            visible: false,
-            //isCollection: false,
             // 修改极性
+            visible: false,  // 修改极性的页面
             unmodified_polarity: "",
             modify_polarity: "",
             modify_source: "",
             modify_id: "",
+            // 表格
+            data: [],
+            pagination: {},
+            loading: true,
+            keyword: '',
         };
     };
 
+    componentDidMount () {
+        const {keyword} = this.props;
+        if (keyword !== '' && keyword !== undefined) {
+            this.setState(preState => ({
+                ...preState,
+                keyword: keyword,
+            }));
+            this.getData(keyword, 1);
+        }
+    }
+
+    componentDidUpdate () {
+        const {keyword} = this.props;
+        if (keyword !== '' && keyword !== undefined && keyword !== this.state.keyword) {
+            const pager = { ...this.state.pagination };
+            pager.current = 1;
+            this.setState(preState => ({
+                ...preState,
+                keyword: keyword,
+                data: [],
+                pagination: pager,
+                loading: true,
+            }));
+            this.getData(keyword, 1);
+        }
+    }
 
     /**
      * 初次打开时图标更换
@@ -43,7 +72,6 @@ class ShowTablePage extends React.Component {
         return "star-o"
     };
 
-
     /**
      * 将object类型转换成Json
      * @param record: object类型
@@ -52,7 +80,6 @@ class ShowTablePage extends React.Component {
         let str = JSON.stringify([record]); // object list to str
         return JSON.parse(str);   // str to json
     };
-
 
     /**
      * 收藏(取消收藏)表格中的 一条 消息
@@ -99,7 +126,6 @@ class ShowTablePage extends React.Component {
             openNotificationWithIcon("error", "未检测到改动");
             return;
         }
-
         const {user} = this.props;
         const requestOptions = {
             method: 'POST',
@@ -136,7 +162,6 @@ class ShowTablePage extends React.Component {
     };
 
     handleCancel = (e) => {
-
         this.setState({
             visible: false,
             polarity:"",
@@ -151,137 +176,71 @@ class ShowTablePage extends React.Component {
         });
     }
 
-    /**
-     * 收藏(取消收藏)searchedContent
-     * @param event: 鼠标点击收藏(取消收藏)的事件
-     */
-    // collectionAll = (event) => {
-    //
-    //     const { user, dispatch } = this.props;
-    //     const type = 'table';
-    //
-    //     let icon = document.getElementById('all');
-    //     if (icon.getAttribute("class") === "fa fa-star-o") {
-    //         // 收藏
-    //
-    //         dispatch(collectionActions.addCollection(user, this.state.searchedContent, type));
-    //         icon.setAttribute("class", "fa fa-star");
-    //         icon.innerHTML = "取消收藏";
-    //     } else {
-    //
-    //         let dataidlist = [];
-    //         for (let i = 0; i < this.state.searchedContent.length; ++i) {
-    //             dataidlist.push(this.state.searchedContent[i]['id'])
-    //         }
-    //
-    //         dispatch(collectionActions.delCollection(user, dataidlist, type));
-    //         icon.setAttribute("class", "fa fa-star-o"); //更换图标
-    //         icon.innerHTML = "收藏";
-    //     }
-    //
-    // };
+    handleTableChange = (pagination, filters, sorter) => {
+        const pager = { ...this.state.pagination };
+        pager.current = pagination.current;
+        this.setState({
+          pagination: pager,
+        });
+        this.getData(this.props.keyword, pager.current);
+    }
 
-
-    /**
-     * 表格的搜索功能
-     */
-    /*
-    search = () => {
-        const {data} = this.props; // 拿到全部内容
-
-        // 根据每条消息中的content匹配searchInput的内容
-        let searchedContent = [];
-        let searchedContentId = [];
-        for (let i = 0; i < data.length; ++i) {
-            if (data[i]['content'].indexOf(this.state.searchInput) !== -1) {
-                searchedContent.push(data[i]);
-                searchedContentId.push(data[i].id);
-            }
+    getData = (keyword, page) => {
+        const {type} = this.props;
+        let secondIp = '', title = '';
+        if (type === 'agency') {
+            title = '培训机构';
+        } else if (type === 'portal') {
+            title = '门户网站';
+        } else if (type === 'weibo') {
+            title = '微博';
+        } else if (type === 'forum') {
+            title = '论坛';
         }
+        if (keyword !== undefined && keyword !== '' && page >= 1) {
+            console.log(keyword + ' getting source data...');
+            const {user} = this.props;
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+                body: JSON.stringify({ 'keyword': keyword, 'page': page, 'type': type})
+            };
 
-        //this.isCollection(searchedContentId);
-
-        // 重置state, 刷新对应的dom
-        this.setState(
-            preState => ({
-                ...preState,
-                searchedContent: searchedContent
-            })
-        );
-    };
-    */
-
-    /*
-    isCollection = (searchedContentId) => {
-        const {user} = this.props;
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-            body: JSON.stringify({'type': "table", 'dataid': searchedContentId})
-        };
-        console.log(requestOptions.body);
-        fetch(serverIP + '/isCollection', requestOptions).then(
-            response => {
-                if (!response.ok) {
-                    return Promise.reject(response.statusText);
-                }
-                return response.json();
-            }).then(
-            ans => {
-                if(ans.status === 1) {
-                    console.log(ans.result.iscollection);
-                    if (ans.result.iscollection === true) {
-                        this.setState(
-                            preState => ({
-                                ...preState,
-                                isCollection: true
-                            })
-                        );
-                    } else {
-                        this.setState(
-                            preState => ({
-                                ...preState,
-                                isCollection: false
-                            })
-                        );
+            fetch(serverIP + '/getInfo', requestOptions).then(
+                response => {
+                    if (!response.ok) {
+                        return Promise.reject(response.statusText);
                     }
-
-                } else {
-                    openNotificationWithIcon("error", ans.message);
-                    if (ans.status === -1)
-                        history.push("/login");
+                    return response.json();
                 }
-            },
-            error => {
-                openNotificationWithIcon("error", "服务器内部错误,请联系管理员,抱歉！");
-                history.push("/login");
-            }
-        );
+            ).then(
+                ans => {
+                    const pagination = { ...this.state.pagination };
+                    pagination.total = 1000;
+                    if(ans.status === 1) {
+                        this.setState(preState => ({
+                            ...preState,
+                            data: ans.result,
+                            pagination:pagination,
+                            loading: false,
+                        }));
+                        openNotificationWithIcon("success", "获取" + title + "消息成功");
+                    } else {
+                        openNotificationWithIcon("error", ans.message);
+                        //if (ans.status === -1)
+                        //    history.push("/login");
+                    }
+                },
+                error => errorProcess(error)
+            )
+        }
     };
-    */
-
-    /**
-     * searchInput被更改时, 实时更新this.state.searchInput中的值
-     * @param event: searchInput被修改事件
-     */
-    /*
-    handlechange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-    };
-    */
-
 
     render() {
 
         const {collection, title} = this.props;
-        let { data, columns } = this.props;
-
-        let isLoading = false;
-        if (data === null) {
-            data = [];
-            isLoading = true;
-        }
+        let { columns } = this.props;
+        let { data } = this.state;
 
         columns = columns.concat(
             {title: '正负面', key: 'sentiment', render: (record) => (
@@ -313,7 +272,7 @@ class ShowTablePage extends React.Component {
                 <Card title={
                     <span>{title}</span>
                 }>
-                    <Table columns={columns} dataSource={data} rowKey={'_id'} loading={isLoading}/>
+                    <Table columns={columns} dataSource={data} rowKey={'_id'} onChange={this.handleTableChange} loading={this.state.loading} pagination={this.state.pagination}/>
                     <CSVLink data={data}
                              filename={new Date().toLocaleString() + '.csv'}
                              target="_blank"
@@ -346,9 +305,9 @@ function mapStateToProps(state, ownProps) {
 
     const  tableCollection = state['collection']['table'];
     const  user = state['authentication']['user'];
-    const {columns, data, type, title, collection} = ownProps;
+    const {columns, data, type, title, collection, keyword} = ownProps;
     return {
-        user, columns, data, type, title, collection, tableCollection
+        user, columns, data, type, title, collection, tableCollection, keyword
     };
 }
 

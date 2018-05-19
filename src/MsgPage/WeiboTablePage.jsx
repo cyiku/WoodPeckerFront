@@ -30,7 +30,6 @@ class WeiboTablePage extends React.Component {
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        weiboData: null,
         currentKwd: '',
     };
 
@@ -54,44 +53,6 @@ class WeiboTablePage extends React.Component {
         }
         //console.log(content);
         return content;
-    };
-
-    getData = (keyword) => {
-
-        console.log(keyword + ' getting source data...');
-
-        if (keyword !== undefined) {
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': keyword })
-            };
-
-            fetch(serverIP + '/getWeibo', requestOptions).then(
-                response => {
-                    if (!response.ok) {
-                        return Promise.reject(response.statusText);
-                    }
-                    return response.json();
-                }
-            ).then(
-                ans => {
-                    // console.log(ans.result);
-                    if(ans.status === 1) {
-                        this.setState(preState => ({
-                            ...preState,
-                            weiboData: ans.result
-                        }));
-                    } else {
-                        openNotificationWithIcon("error", ans.message);
-                        //if (ans.status === -1)
-                        //    history.push("/login");
-                    }
-                },
-                error => errorProcess(error)
-            )
-        }
     };
 
     clickKeyword = (event) => {
@@ -118,19 +79,21 @@ class WeiboTablePage extends React.Component {
     render() {
         let {keyword} = this.props;
         if (keyword === null)
-            keyword = [];
+            return <div>请求中, 请稍候</div>;
 
-        if(this.state.currentKwd === '' && keyword.length > 0) {
-            this.setState(preState => ({
-                ...preState,
-                currentKwd: keyword[0].name
-            }));
+        let currentKwd = '';
+        if(this.state.currentKwd === '') {
+            if (keyword.length > 0) {
+                currentKwd = keyword[0].name;
+            }
+        } else {
+            currentKwd = this.state.currentKwd;
         }
-
-        const {currentKwd} = this.state;
+        
+        if (currentKwd === '')
+            return <div>暂无关键字</div>;
 
         let kwdButtonClass = {};
-
         for (let i = 0; i < keyword.length; i++) {
             if (keyword[i].name === currentKwd) {
                 kwdButtonClass[keyword[i].name] = "primary";
@@ -139,13 +102,7 @@ class WeiboTablePage extends React.Component {
             }
         }
 
-        if (currentKwd !== '' && this.state.weiboData === null) {
-            this.getData(currentKwd);
-        }
-
         const type = "weibo";
-        //const data = (this.state.weiboData === null ? [] : this.state.weiboData);
-        const data = this.state.weiboData;
         const columns = this.state.weiboColumns;
         const title = " 相关微博";
         const collection = this.props.collection['weibo'];
@@ -170,7 +127,7 @@ class WeiboTablePage extends React.Component {
                     <Button type="primary" size="large"><Link to="/keywords">管理关键字</Link></Button>
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                <ShowTablePage columns={columns} type={type} title={title} collection={collection} keyword={currentKwd}/>
                 </div>
             </div>
 

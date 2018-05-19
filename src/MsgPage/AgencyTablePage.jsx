@@ -11,18 +11,7 @@ import {Button} from 'antd';
 import { cmpTime } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import {serverIP} from '../_helpers';
-/*
-const agencyContent = {
-    '_id': 2,
-    'contentType': 'agency',
-    'source': '海文考研',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
- */
+ 
 class AgencyTablePage extends React.Component {
 
     state = {
@@ -41,18 +30,17 @@ class AgencyTablePage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        agencyData: null,
         currentKwd: '',
     };
 
     componentDidMount(){
-        //这里应该获取关键字对应的全部的微博数据
+        //这里应该获取关键字对应的全部的收藏数据
         const {user, dispatch, keyword} = this.props;
+        if (keyword === null)
+            dispatch(keywordActions.getKws(user));
         if (this.props.collection['agency'] === null) {
             dispatch(collectionActions.getCollection(user, 'agency'));
         }
-        if (keyword === null)
-            dispatch(keywordActions.getKws(user));
     }
 
     markKeyword = (content, keywords) => {
@@ -65,44 +53,6 @@ class AgencyTablePage extends React.Component {
         }
         //console.log(content);
         return content;
-    };
-
-    getData = (keyword) => {
-
-        console.log(keyword + ' getting source data...');
-
-        if (keyword !== undefined) {
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': keyword })
-            };
-
-            fetch(serverIP + '/getAgency', requestOptions).then(
-                response => {
-                    if (!response.ok) {
-                        return Promise.reject(response.statusText);
-                    }
-                    return response.json();
-                }
-            ).then(
-                ans => {
-                    //console.log(ans.result);
-                    if(ans.status === 1) {
-                        this.setState(preState => ({
-                            ...preState,
-                            agencyData: ans.result
-                        }));
-                    } else {
-                        openNotificationWithIcon("error", ans.message);
-                        //if (ans.status === -1)
-                        //    history.push("/login");
-                    }
-                },
-                error => errorProcess(error)
-            )
-        }
     };
 
     clickKeyword = (event) => {
@@ -129,19 +79,21 @@ class AgencyTablePage extends React.Component {
 
         let {keyword} = this.props;
         if (keyword === null)
-            keyword = [];
+            return <div>请求中, 请稍候</div>;
 
-        if(this.state.currentKwd === '' && keyword.length > 0) {
-            this.setState(preState => ({
-                ...preState,
-                currentKwd: keyword[0].name
-            }));
+        let currentKwd = '';
+        if(this.state.currentKwd === '') {
+            if (keyword.length > 0) {
+                currentKwd = keyword[0].name;
+            }
+        } else {
+            currentKwd = this.state.currentKwd;
         }
-
-        const {currentKwd} = this.state;
+        
+        if (currentKwd === '')
+            return <div>暂无关键字</div>;
 
         let kwdButtonClass = {};
-
         for (let i = 0; i < keyword.length; i++) {
             if (keyword[i].name === currentKwd) {
                 kwdButtonClass[keyword[i].name] = "primary";
@@ -150,14 +102,7 @@ class AgencyTablePage extends React.Component {
             }
         }
 
-        if (currentKwd !== '' && this.state.agencyData === null) {
-            this.getData(currentKwd);
-        }
-
-
         const type = "agency";
-        //const data = (this.state.agencyData === null ? [] : this.state.agencyData);
-        const data = this.state.agencyData;
         const columns = this.state.agencyColumns;
         const title = " 相关机构";
         const collection = this.props.collection['agency'];
@@ -181,7 +126,7 @@ class AgencyTablePage extends React.Component {
                     <Button type="primary" size="large"><Link to="/keywords">管理关键字</Link></Button>
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                    <ShowTablePage columns={columns} type={type} title={title} collection={collection} keyword={currentKwd}/>
                 </div>
             </div>
         );

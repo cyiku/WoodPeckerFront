@@ -11,18 +11,7 @@ import { openNotificationWithIcon } from "../_helpers";
 import { cmpTime } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import {serverIP} from '../_helpers';
-/*
-const portalContent = {
-    '_id': 0,
-    'contentType': 'portal',
-    'source': '网易网',
-    'url': 'http://tech.163.com/17/1127/16/D48SJLQ900097U7H.html',
-    'title': '顶级科技大佬高端闭门会议，你也有机会参加!_网易科技',
-    'content': '近年来，随着电视制播技术的进步和电视终端产业的发展，部分机构经批准开展了4K超高清电视节目制播和传输出售。为促进超高清电视发展开展了有益的探索和实践，但也出现了管理不规范、技术质量不达标等问题。为规范和促进4K超高清电视健康有序发展，通知如下：',
-    'time': '2017_11_27_15_53',
-    'keyword': '出售',
-};
- */
+
 class PortalTablePage extends React.Component {
 
     state = {
@@ -41,7 +30,6 @@ class PortalTablePage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        portalData: null,
         currentKwd: '',
     };
 
@@ -53,44 +41,6 @@ class PortalTablePage extends React.Component {
         if (keyword === null)
             dispatch(keywordActions.getKws(user));
     }
-
-    getData = (keyword) => {
-
-        console.log(keyword + ' getting source data...');
-
-        if (keyword !== undefined) {
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': keyword })
-            };
-
-            fetch(serverIP + '/getPortal', requestOptions).then(
-                response => {
-                    if (!response.ok) {
-                        return Promise.reject(response.statusText);
-                    }
-                    return response.json();
-                }
-            ).then(
-                ans => {
-                    //console.log(ans.result);
-                    if(ans.status === 1) {
-                        this.setState(preState => ({
-                            ...preState,
-                            portalData: ans.result
-                        }));
-                    } else {
-                        openNotificationWithIcon("error", ans.message);
-                        //if (ans.status === -1)
-                        //    history.push("/login");
-                    }
-                },
-                error => errorProcess()
-            )
-        }
-    };
 
     clickKeyword = (event) => {
         let newKwd = event.target.getAttribute("value");
@@ -127,19 +77,21 @@ class PortalTablePage extends React.Component {
     render() {
         let {keyword} = this.props;
         if (keyword === null)
-            keyword = [];
+            return <div>请求中, 请稍候</div>;
 
-        if(this.state.currentKwd === '' && keyword.length > 0) {
-            this.setState(preState => ({
-                ...preState,
-                currentKwd: keyword[0].name
-            }));
+        let currentKwd = '';
+        if(this.state.currentKwd === '') {
+            if (keyword.length > 0) {
+                currentKwd = keyword[0].name;
+            }
+        } else {
+            currentKwd = this.state.currentKwd;
         }
 
-        const {currentKwd} = this.state;
+        if (currentKwd === '')
+            return <div>暂无关键字</div>;
 
         let kwdButtonClass = {};
-
         for (let i = 0; i < keyword.length; i++) {
             if (keyword[i].name === currentKwd) {
                 kwdButtonClass[keyword[i].name] = "primary";
@@ -148,13 +100,7 @@ class PortalTablePage extends React.Component {
             }
         }
 
-        if (currentKwd !== '' && this.state.portalData === null) {
-            this.getData(currentKwd);
-        }
-
         const type = "portal";
-        //const data = (this.state.portalData  === null ? [] : this.state.portalData);
-        const data = this.state.portalData;
         const columns = this.state.portalColumns;
         const title = " 门户网站";
         const collection = this.props.collection['portal'];
@@ -178,7 +124,7 @@ class PortalTablePage extends React.Component {
                     <Button type="primary" size="large"><Link to="/keywords">管理关键字</Link></Button>
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={data} columns={columns} type={type} title={title} collection={collection}/>
+                    <ShowTablePage columns={columns} type={type} title={title} collection={collection} keyword={currentKwd}/>
                 </div>
             </div>
         );

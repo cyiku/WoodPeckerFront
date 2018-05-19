@@ -27,7 +27,6 @@ class SearchPage extends React.Component {
             {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        weiboData: null,
 
         forumColumns: [
             {title: '发布者', dataIndex: 'authid'},
@@ -46,7 +45,6 @@ class SearchPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        forumData: null,
 
         portalColumns: [
             {title: '标题', dataIndex: 'title', width: "20%"},
@@ -63,7 +61,6 @@ class SearchPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        portalData: null,
 
         agencyColumns: [
             {title: '标题', dataIndex: 'title', width: "20%"},
@@ -80,7 +77,6 @@ class SearchPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
-        agencyData: null,
 
         searchContent: undefined,
         lastSearch: '',
@@ -113,171 +109,6 @@ class SearchPage extends React.Component {
         }
     }
 
-    getAgencyData = (searchContent) => {
-        const { dispatch } = this.props;
-        if (searchContent !== undefined && searchContent !== '') {
-            console.log(searchContent + ' getting agency data...');
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
-            };
-
-            if (searchContent !== this.state.lastSearch) {
-                fetch(serverIP + '/getAgency', requestOptions).then(
-                    response => {
-                        if (!response.ok) {
-                            return Promise.reject(response.statusText);
-                        }
-                        return response.json();
-                    }
-                ).then(
-                    ans => {
-                        //console.log(ans.result);
-                        if(ans.status === 1) {
-                            this.setState(preState => ({
-                                ...preState,
-                                agencyData: ans.result,
-                                lastSearch:searchContent,
-                            }));
-                            openNotificationWithIcon("success", "培训机构搜索成功");
-                        } else {
-                            openNotificationWithIcon("error", ans.message);
-                            //if (ans.status === -1)
-                            //    history.push("/login");
-                        }
-                    },
-                    error => errorProcess(error)
-                );
-            }
-        }
-    };
-
-
-    getForumData = (searchContent) => {
-        const { dispatch } = this.props;
-        if (searchContent !== undefined && searchContent !== '') {
-            console.log(searchContent + ' getting forum data...');
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
-            };
-
-            if (searchContent !== this.state.lastSearch) {
-                fetch(serverIP + '/getForum', requestOptions).then(
-                    response => {
-                        if (!response.ok) {
-                            return Promise.reject(response.statusText);
-                        }
-                        return response.json();
-                    }
-                ).then(
-                    ans => {
-                        //console.log(ans.result);
-                        if(ans.status === 1) {
-                            this.setState(preState => ({
-                                ...preState,
-                                forumData: ans.result,
-                                lastSearch: searchContent,
-                            }));
-                            openNotificationWithIcon("success", "论坛搜索成功");
-                        } else {
-                            openNotificationWithIcon("error", ans.message);
-                            //if (ans.status === -1)
-                            //    history.push("/login");
-                        }
-                    },
-                    error => errorProcess(error)
-                );
-            }
-        }
-    };
-
-    getPortalData = (searchContent) => {
-        const { dispatch } = this.props;
-        if (searchContent !== undefined && searchContent !== '') {
-            console.log(searchContent + ' getting portal data...');
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
-            };
-
-            if (searchContent !== this.state.lastSearch) {
-                fetch(serverIP + '/getPortal', requestOptions).then(
-                    response => {
-                        if (!response.ok) {
-                            return Promise.reject(response.statusText);
-                        }
-                        return response.json();
-                    }
-                ).then(
-                    ans => {
-                        //console.log(ans.result);
-                        if(ans.status === 1) {
-                            this.setState(preState => ({
-                                ...preState,
-                                portalData: ans.result,
-                                lastSearch:searchContent,
-                            }));
-                            openNotificationWithIcon("success", "门户网站搜索成功");
-                        } else {
-                            openNotificationWithIcon("error", ans.message);
-                            //if (ans.status === -1)
-                            //    history.push("/login");
-                        }
-                    },
-                    error => errorProcess(error)
-                );
-            }
-        }
-    };
-
-    getWeiboData = (searchContent) => {
-
-        const { dispatch } = this.props;
-        if (searchContent !== undefined && searchContent !== '') {
-            console.log(searchContent + ' getting weibo data...');
-            const {user} = this.props;
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
-                body: JSON.stringify({ 'keyword': searchContent, 'search':1 })
-            };
-            // console.log(searchContent);
-            if (searchContent !== this.state.lastSearch) {
-                fetch(serverIP + '/getWeibo', requestOptions).then(
-                    response => {
-                        if (!response.ok) {
-                            return Promise.reject(response.statusText);
-                        }
-                        return response.json();
-                    }
-                ).then(
-                    ans => {
-                        //console.log(ans.result);
-                        if(ans.status === 1) {
-                            this.setState(preState => ({
-                                ...preState,
-                                weiboData: ans.result,
-                                lastSearch:searchContent,
-                            }));
-                            openNotificationWithIcon("success", "微博搜索成功");
-                        } else {
-                            openNotificationWithIcon("error", ans.message);
-                            //if (ans.status === -1)
-                            //    history.push("/login");
-                        }
-                    },
-                    error => errorProcess(error)
-                );
-            }
-        }
-    };
 
     // 将消息中的searchContent标记为红色
     markSearch = (content, search) => {
@@ -295,47 +126,43 @@ class SearchPage extends React.Component {
 
     render() {
         const searchContent = this.state.searchContent;
-        // window.alert(searchContent);
+        if (searchContent === undefined)
+            return <div>正在加载中</div>;
 
-        if (searchContent !== this.state.lastSearch) {
-            // if (searchContent === '') {
-            //     openNotificationWithIcon('error', '搜索内容为空');
-            // }
-            // window.alert('getData');
-            this.getWeiboData(searchContent);
-            this.getPortalData(searchContent);
-            this.getAgencyData(searchContent);
-            this.getForumData(searchContent);
-        }
         return (
             <div style={{marginLeft:15, marginTop:15}}>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={this.state.weiboData}
+                    <ShowTablePage 
                                    columns={this.state.weiboColumns}
                                    type={"weibo"}
                                    title={" 相关微博"}
-                                   collection={this.props.collection['weibo']}/>
+                                   collection={this.props.collection['weibo']}
+                                   keyword={searchContent}
+                                   />
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={this.state.forumData}
+                    <ShowTablePage 
                                    columns={this.state.forumColumns}
                                    type={"forum"}
                                    title={" 相关论坛"}
-                                   collection={this.props.collection['forum']}/>
+                                   collection={this.props.collection['forum']}
+                                   keyword={searchContent}/>
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={this.state.portalData}
+                    <ShowTablePage 
                                    columns={this.state.portalColumns}
                                    type={"portal"}
                                    title={" 门户网站"}
-                                   collection={this.props.collection['portal']}/>
+                                   collection={this.props.collection['portal']}
+                                   keyword={searchContent}/>
                 </div>
                 <div style={{marginTop:15}}>
-                    <ShowTablePage data={this.state.agencyData}
+                    <ShowTablePage 
                                    columns={this.state.agencyColumns}
                                    type={"agency"}
                                    title={" 培训机构"}
-                                   collection={this.props.collection['agency']}/>
+                                   collection={this.props.collection['agency']}
+                                   keyword={searchContent}/>
                 </div>
             </div>
 
