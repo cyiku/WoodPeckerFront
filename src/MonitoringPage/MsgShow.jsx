@@ -25,6 +25,7 @@ class MsgShow extends React.Component {
             message: [],
             messageId:[],
             messageIsNew: {}, // key: id, value: true or false
+            newMessageNum: 0,
             showMessage: [],
             containerHeight: 651,
             total: 0,
@@ -34,35 +35,6 @@ class MsgShow extends React.Component {
     }
 
     componentDidMount(){
-
-        // this.connection = new WebSocket('ws://114.212.86.148:8080/websocket.ws');
-        // this.connection = new WebSocket('ws://localhost:8080/websocket.ws');
-        // this.connection = new WebSocket('ws://192.168.1.130:4321');
-        // this.connection.onmessage = evt => {
-        //
-        //     let newContent = this.state.content;
-        //
-        //     let newWeiboContent = JSON.parse(JSON.stringify(weiboContent));
-        //
-        //     newWeiboContent.publisher += count;
-        //     count += 1;
-        //     newContent.unshift(newWeiboContent);
-        //
-        //     this.setState(
-        //         preState => ({
-        //             ...preState,
-        //             content: newContent,
-        //         })
-        //     );
-        // };
-        //
-        // this.connection.onopen = () => {
-        //     console.log(keyword.name + " has been connected");
-        //     this.connection.send(keyword.name + "\n");
-        //     console.log(keyword.name + " has been started to get data");
-        // };
-        //let message = JSON.parse(localStorage.getItem(token + '_' + keyword.name) || "[]");
-        //let messageId = JSON.parse(localStorage.getItem(token + '_' + keyword.name + '_id') || "[]");
 
         // 加载存储到全局state里的msg
         const {user, keyword, msg} = this.props;
@@ -178,6 +150,7 @@ class MsgShow extends React.Component {
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
                     let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
                     let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
+                    let newMessageNum = this.state.newMessageNum;
 
                     let count = 0;
                     for (let i = 0; i < ans.result.data.length; ++i) {
@@ -215,6 +188,7 @@ class MsgShow extends React.Component {
                         showMessage: newMessage.slice(0, 10),
                         messageId: newMessageId,
                         messageIsNew: newMessageIsNew,
+                        newMessageNum: newMessageNum + count,
                         time: this.getNowFormatDate(),
                         total: newMessage.length,
                     }));
@@ -272,12 +246,18 @@ class MsgShow extends React.Component {
 
     newToOld = (event, id) => {
         // 如果鼠标放在某个消息上, 则把new置位old
-        let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
-        newMessageIsNew[id] = false;
-        this.setState(preState => ({
-            ...preState,
-            messageIsNew: newMessageIsNew,
-        }));
+        if (this.state.newMessageNum > 0 && this.state.messageIsNew[id] === true) {
+            let newMessageNum = this.state.newMessageNum;
+            let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
+            newMessageNum -= 1;
+            newMessageIsNew[id] = false;
+            this.setState(preState => ({
+                ...preState,
+                messageIsNew: newMessageIsNew,
+                newMessageNum: newMessageNum,
+            }));
+        }
+        
     }
 
     render() {
@@ -310,7 +290,7 @@ class MsgShow extends React.Component {
                                 <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}}/></Link>
                             </div>
                             <Icon type="file-text"/><span> {keyword.name}</span>
-                            {/*<span style={{marginLeft:10}}>更新于: {this.state.time}</span>*/}
+                            <span style={{marginLeft:15,fontSize: 14}}>(未读消息数: {this.state.newMessageNum})</span>
                         </div>
                     } key="1" >
 
