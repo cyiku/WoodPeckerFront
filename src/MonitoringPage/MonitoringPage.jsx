@@ -12,7 +12,7 @@ import './MonitoringPage.css'
 class MonitoringPage extends React.Component {
 
     componentDidMount(){
-        // 刚打开监控页面时，获取关注的所有关键字，关注的每个种类下的收藏
+        // 刚打开监控页面时，获取关注的所有关键字，获取用户所有的收藏
         const { user, dispatch, keyword, collection } = this.props;
         if (keyword === null) {
             dispatch(keywordActions.getKws(user));

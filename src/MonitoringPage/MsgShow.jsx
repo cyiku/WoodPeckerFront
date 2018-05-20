@@ -15,7 +15,10 @@ import './MonitoringPage.css';
 
 
 const Panel = Collapse.Panel;
-
+const pageSize = 5;
+const intervalTime = 20 * 1000;
+const containerHeight = 651;
+const maxDisplay = 25;
 
 class MsgShow extends React.Component {
     // 负责展示该关键字下的所有消息
@@ -24,62 +27,46 @@ class MsgShow extends React.Component {
         super(props);
         this.state = {
             message: [],   // 存储所有的消息
-            messageId:[],  // 存储所有的消息的ID
             messageIsNew: {}, // 记录哪些消息用户还没有看过，key: id, value: true or false
             newMessageNum: 0, // 记录没有看过的消息的数目
-            showMessage: [],  // 当前要展示的消息
-            containerHeight: 651, // 样式高度
+            showMessage: [],  // 当前页要展示的消息
             total: 0,  // 为分页服务
             currentPage: 1,  // 为分页服务
-            pageSize: 10,  // 为分页服务
-            intervalTime: 30 * 1000, // 请求间隔时间，默认半分钟
         }
     }
 
     componentDidMount(){
-
-        // 加载该关键字存储到全局state里的消息(该消息通常在离开监控页面时存储)，保存到局部的state里
+        // 加载该关键字存储到全局state里的消息(该消息通常在离开监控页面时存储)。
         const {keyword, msg} = this.props;
         let message = msg[keyword.name];
         if (message !== undefined && message !== []) {
-            let messageId = [];
             let messageIsNew = {};
             for (let i = 0; i < message.length; ++i) {
-                messageId.unshift(message[i]._id);
                 messageIsNew[message[i]._id] = false; // 原本有的就不是新的
             }
             this.setState(preState => ({
                 ...preState,
                 message: message,
-                showMessage: message,
-                messageId: messageId,
+                showMessage: message.slice(0, pageSize),
                 messageIsNew: messageIsNew,
-                //time: this.getNowFormatDate(),
                 total: message.length,
             }));
         }
         // 为每个关键字添加定时任务，并且每个关键字请求错开时间
         const { index } = this.props;
-        this.timeout = setTimeout(_=>{this.StartTimingTask()}, index * 10 * 1000);
+        this.timeout = setTimeout(_=>{this.StartTimingTask(true)}, index * 10 * 1000);
     }
 
-    StartTimingTask = () => {
-        this.monitor(true);
+    StartTimingTask = (tag) => {
+        this.monitor(tag);
         this.interval = setInterval(_ => {
             this.monitor(false);
-        }, this.state.intervalTime);
+        }, intervalTime);
     }
 
     componentWillUnmount(){
         const {user, keyword, dispatch} = this.props;
         
-        // 该方法因速度慢而废弃
-        // message数组里存的都是object,需要转成string存储
-        // const {token} = user;
-        // localStorage.setItem(token + '_' + keyword.name, JSON.stringify(this.state.message.slice(0, 10)));
-        // localStorage.setItem(token + '_' + keyword.name + '_id', JSON.stringify(this.state.messageId.slice(0, 10)));
-        
-        // 将msg存到全局的state里
         dispatch(MsgActions.updMsg(user, keyword.name, this.state.message.slice(0, 10)));
         // 清除定时任务
         clearInterval(this.interval);
@@ -99,7 +86,7 @@ class MsgShow extends React.Component {
         let requestIP;
 
         if (isFirst === true) {
-            // 第一次请求则请求最新的20条，后因渲染问题改成了5条
+            // 第一次请求则请求最新的20条，后因太慢改成了5条
             requestIP = serverIP + '/last20';
         } else {
             // 以后则请求近20s内的新消息
@@ -119,30 +106,34 @@ class MsgShow extends React.Component {
             ans => {
                 if(ans.status === 1) {
 
-                    let newMessage = JSON.parse(JSON.stringify(this.state.message));
-                    let newMessageId = JSON.parse(JSON.stringify(this.state.messageId));
-                    let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
+                    // 为了更新state
+                    // let newMessage = JSON.parse(JSON.stringify(this.state.message));
+                    // let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
+
+                    let newMessage = this.state.message;
+                    let newMessageIsNew = this.state.messageIsNew;
                     let newMessageNum = this.state.newMessageNum;
 
                     let count = 0;
                     for (let i = 0; i < ans.result.data.length; ++i) {
-                        // 遍历所有刚接受的消息，看是否在原来的message里
-                        if (newMessageId.indexOf(ans.result.data[i]._id) === -1 && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
-                            newMessage.unshift(ans.result.data[i]);
-                            newMessageId.unshift(ans.result.data[i]._id);
+                        // 遍历所有刚接受的消息，看是否在原来的message里,判断消息的来源是否在用户关注的来源里
+                        if (newMessageIsNew[ans.result.data[i]._id] === undefined && keyword.sites.indexOf(ans.result.data[i].source) !== -1) {
+                            newMessage.push(ans.result.data[i]);
                             newMessageIsNew[ans.result.data[i]._id] = true; 
                             count += 1;
                         }
                     }
+                    newMessage.reverse();
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
                     } else {
                         return;
                     }
+                    
+                    // 只截取maxDisplay条，再排序，保证新来的消息都能看到
+                    newMessage = newMessage.slice(0, maxDisplay);
 
-                    // 只截取50条，再排序，保证新来的消息都能看到
-                    newMessage = newMessage.slice(0, 50);
                     newMessage.sort(function(a,b){
                         if (a.time === b.time)
                             return 0;
@@ -154,12 +145,12 @@ class MsgShow extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         message: newMessage,
-                        showMessage: newMessage.slice(0, 10),
-                        messageId: newMessageId,
+                        showMessage: newMessage.slice(0, pageSize),
                         messageIsNew: newMessageIsNew,
-                        newMessageNum: newMessageNum + count,
+                        newMessageNum: newMessageNum + count > maxDisplay? maxDisplay: newMessageNum + count,
                         //time: this.getNowFormatDate(),
                         total: newMessage.length,
+                        currentPage: 1,
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
@@ -169,6 +160,7 @@ class MsgShow extends React.Component {
         )
     };
 
+    // 暂停接受或重新接受
     play = (event) => {
 
         const {keyword} = this.props;
@@ -184,7 +176,7 @@ class MsgShow extends React.Component {
             event.target.setAttribute("class", "anticon anticon-pause-circle-o");
             this.interval = setInterval(_ => {
                 this.monitor(false)
-            }, this.state.intervalTime);
+            }, intervalTime);
             openNotificationWithIcon('success', '开始监控');
             console.log(keyword.name + " has been started to get data");
         }
@@ -207,7 +199,7 @@ class MsgShow extends React.Component {
     pageChange = (page) => {
         this.setState(preState => ({
             ...preState,
-            showMessage: this.state.message.slice((page - 1) * 10, page * 10),
+            showMessage: this.state.message.slice((page - 1) * pageSize, page * pageSize),
             currentPage: page
         }));
     };
@@ -269,19 +261,19 @@ class MsgShow extends React.Component {
                                 {/* <Icon type="reload" onClick={this.fresh} style={{fontSize:15, marginRight:10}}/> */}
                                 <Link to={path} style={{color:"black"}}><Icon type="line-chart" style={{fontSize:15, marginRight:10}} title={"关键字分析"}/></Link>
                             </div>
-                            <Icon type="file-text"/><span> {keyword.name}</span>
+                            <span> {keyword.name}</span>
                             <span style={{marginLeft:15,fontSize: 14}}>{remindMsg}</span>
                         </div>
                     } key="1" >
 
-                        <div ref={this.props.keyword} style={{ overflow: 'auto', height: this.state.containerHeight }}>
+                        <div ref={this.props.keyword} style={{ overflow: 'auto', height: containerHeight}}>
                             <div>
                                 {
                                     showMessage.map((item, index) => <div onMouseOver={event=>this.newToOld(event, item._id)}><OneMsgPage content={item} contentType={item['contentType']} isNew = {this.state.messageIsNew[item._id]}/></div>)
                                 }
                             </div>
                         </div>
-                        <Pagination current={this.state.currentPage} pageSize={this.state.pageSize} total={this.state.total} onChange={this.pageChange}/>
+                        <Pagination current={this.state.currentPage} pageSize={pageSize} total={this.state.total} onChange={this.pageChange}/>
                     </Panel>
                 </Collapse>
 
