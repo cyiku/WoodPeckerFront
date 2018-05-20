@@ -181,6 +181,7 @@ class ShowTablePage extends React.Component {
         pager.current = pagination.current;
         this.setState({
           pagination: pager,
+          loading: true,
         });
         this.getData(this.props.keyword, pager.current);
     }
