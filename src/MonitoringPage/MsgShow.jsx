@@ -16,9 +16,10 @@ import './MonitoringPage.css';
 
 const Panel = Collapse.Panel;
 const pageSize = 5;
-const intervalTime = 20 * 1000;
+const intervalTime = 20 * 1000;  // 每次请求间隔时间
 const containerHeight = 651;
 const maxDisplay = 25;
+const keywordIntervalTime = 5 * 1000; // 关键字之间间隔时间
 
 class MsgShow extends React.Component {
     // 负责展示该关键字下的所有消息
@@ -32,6 +33,7 @@ class MsgShow extends React.Component {
             showMessage: [],  // 当前页要展示的消息
             total: 0,  // 为分页服务
             currentPage: 1,  // 为分页服务
+            isLoading: false,
         }
     }
 
@@ -56,15 +58,7 @@ class MsgShow extends React.Component {
         }
         // 为每个关键字添加定时任务，并且每个关键字请求错开时间
         const { index } = this.props;
-        this.timeout = setTimeout(_=>{this.StartTimingTask(isFirst)}, index * 10 * 1000);
-    }
-
-    StartTimingTask = (isFirst) => {
-        if (isFirst === true)
-            this.monitor(true); // 第一次登陆
-        this.interval = setInterval(_ => {
-            this.monitor(false);
-        }, intervalTime);
+        this.timeout = setTimeout(_=>{this.StartTimingTask(isFirst)}, index * keywordIntervalTime);
     }
 
     componentWillUnmount(){
@@ -76,8 +70,20 @@ class MsgShow extends React.Component {
         clearTimeout(this.timeout);
     }
 
+    StartTimingTask = (isFirst) => {
+        if (isFirst === true)
+            this.monitor(true); // 第一次登陆
+        this.interval = setInterval(_ => {
+            this.monitor(false);
+        }, intervalTime);
+    }
 
     monitor = (isFirst) => {
+
+        this.setState(preState => ({
+            ...preState,
+            isLoading: true,
+        }));
 
         const {user,keyword,dispatch} = this.props;
         const requestOptions = {
@@ -130,6 +136,9 @@ class MsgShow extends React.Component {
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
                     } else {
+                        this.setState(preState => ({
+                            isLoading: false,
+                        }));
                         return;
                     }
 
@@ -161,6 +170,7 @@ class MsgShow extends React.Component {
                         //time: this.getNowFormatDate(),
                         total: newMessage.length,
                         currentPage: 1,
+                        isLoading: false,
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
@@ -252,9 +262,15 @@ class MsgShow extends React.Component {
         const {showMessage} = this.state;
 
         // 待读消息数目提示
-        let remindMsg = '(无待读消息)';
-        if (this.state.newMessageNum > 0) {
-            remindMsg = '(未读消息数: ' + this.state.newMessageNum + ')';
+        let remindMsg;
+        if (this.state.isLoading) {
+            remindMsg = '(正在加载中)';
+        } else {
+            if (this.state.newMessageNum > 0) {
+                remindMsg = '(未读消息数: ' + this.state.newMessageNum + ')';
+            } else {
+                remindMsg = '(无待读消息)';
+            }
         }
 
         return (

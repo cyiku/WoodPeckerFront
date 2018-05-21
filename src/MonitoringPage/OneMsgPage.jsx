@@ -113,7 +113,7 @@ class OneMsgPage extends React.Component {
             showMsg =
                 <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(showContent, content.keyword)}} className={'text'}/>
-                    <span style={{}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
+                    <span style={{fontSize:14}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
         else if (contentType === 'portal')
             showMsg =
@@ -129,7 +129,7 @@ class OneMsgPage extends React.Component {
             showMsg =
                 <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(showContent, content.keyword)}} className={'text'}/>
-                    <span>点击({content.n_click}) 回复({content.n_reply})</span>
+                    <span style={{fontSize:14}}>点击({content.n_click}) 回复({content.n_reply})</span>
                 </div>;
         else if (contentType === 'agency')
             showMsg =

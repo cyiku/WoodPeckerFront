@@ -34,9 +34,9 @@ class MonitoringPage extends React.Component {
     render() {
         const {keyword} = this.props;
         // 生成监控页面
-        let keywordDiv = <div>加载中,若长时间无响应,可尝试刷新页面。</div>;
+        let monitorDiv = <div>加载中,若长时间无响应,可尝试刷新页面。</div>;
         if (keyword !== null)
-            keywordDiv =
+            monitorDiv =
                 <div style={{marginLeft:15}}>
                     <KwsList keyword={keyword}/>
 
@@ -51,7 +51,7 @@ class MonitoringPage extends React.Component {
 
         return (
             <div style={{marginTop:15}}>
-                {keywordDiv}
+                {monitorDiv}
             </div>
         );
     }
