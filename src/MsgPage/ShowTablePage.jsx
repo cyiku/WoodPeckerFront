@@ -42,7 +42,7 @@ class ShowTablePage extends React.Component {
 
     componentDidUpdate () {
         const {keyword} = this.props;
-        if (keyword !== '' && keyword !== undefined && keyword !== this.state.keyword) {
+        if (keyword !== '' && keyword !== undefined && keyword !== this.state.keyword) { // 更换关键字时用
             const pager = { ...this.state.pagination };
             pager.current = 1;
             this.setState(preState => ({

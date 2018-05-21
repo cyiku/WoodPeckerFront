@@ -25,10 +25,10 @@ class ForumTablePage extends React.Component {
                 } title="全文内容">
                     <p>{record.content}</p>
                 </Popover>)},
-            {title: '点击量', dataIndex: 'n_click', sorter: (a, b) => a.n_click - b.n_click,},
-            {title: '转发量', dataIndex: 'n_reply', sorter: (a, b) => a.n_reply - b.n_reply,},
+            {title: '点击量', dataIndex: 'n_click'},
+            {title: '转发量', dataIndex: 'n_reply'},
             {title: '来源', dataIndex: 'source'},
-            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
+            {title: '时间', dataIndex: 'time'},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],

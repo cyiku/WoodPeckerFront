@@ -138,7 +138,7 @@ class HomePage extends React.Component {
                                 <Menu.Item key="forumMsg"><Link to="/forumMsg">相关论坛</Link></Menu.Item>
                                 <Menu.Item key="portalMsg"><Link to="/portalMsg">门户网站</Link></Menu.Item>
                                 <Menu.Item key="agencyMsg"><Link to="/agencyMsg">培训机构</Link></Menu.Item>
-                                <Menu.Item key="searchMsg"><Link to="/searchMsg">全局搜索</Link></Menu.Item>
+                                {/* <Menu.Item key="searchMsg"><Link to="/searchMsg">全局搜索</Link></Menu.Item> */}
                             </SubMenu>
 
                             <SubMenu key="sub3" title={<span><Icon type="user" />个性化设置</span>}>

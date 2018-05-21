@@ -24,10 +24,10 @@ class WeiboTablePage extends React.Component {
                 } title="全文内容">
                     <p>{record.content}</p>
                 </Popover>)},
-            {title: '点赞量', dataIndex: 'n_like', sorter: (a, b) => a.n_like - b.n_like,},
-            {title: '评论量', dataIndex: 'n_comment', sorter: (a, b) => a.n_comment - b.n_comment,},
-            {title: '转发量', dataIndex: 'n_forward', sorter: (a, b) => a.n_forward - b.n_forward,},
-            {title: '发表时间', dataIndex: 'time', sorter: (a, b) => cmpTime(a,b)},
+            {title: '点赞量', dataIndex: 'n_like'},
+            {title: '评论量', dataIndex: 'n_comment'},
+            {title: '转发量', dataIndex: 'n_forward'},
+            {title: '时间', dataIndex: 'time'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
         currentKwd: '',

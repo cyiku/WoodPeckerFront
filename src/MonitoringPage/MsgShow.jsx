@@ -42,7 +42,7 @@ class MsgShow extends React.Component {
         const {keyword, msg} = this.props;
         let message = msg[keyword.name];
         let isFirst = true;
-        if (message !== undefined && message !== []) {
+        if (message !== undefined && message.length !== 0) {
             isFirst = false;
             let messageIsNew = {};
             for (let i = 0; i < message.length; ++i) {
