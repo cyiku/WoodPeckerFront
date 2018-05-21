@@ -27,7 +27,7 @@ class MsgShow extends React.Component {
         super(props);
         this.state = {
             message: [],   // 存储所有的消息
-            messageIsNew: {}, // 记录哪些消息用户还没有看过，key: id, value: true or false
+            messageIsNew: {}, // 记录哪些消息用户还没有看过，key: id, value: true or false，可能会存在数目不断增大问题，但好像也没别的办法
             newMessageNum: 0, // 记录没有看过的消息的数目
             showMessage: [],  // 当前页要展示的消息
             total: 0,  // 为分页服务
@@ -39,7 +39,9 @@ class MsgShow extends React.Component {
         // 加载该关键字存储到全局state里的消息(该消息通常在离开监控页面时存储)。
         const {keyword, msg} = this.props;
         let message = msg[keyword.name];
+        let isFirst = true;
         if (message !== undefined && message !== []) {
+            isFirst = false;
             let messageIsNew = {};
             for (let i = 0; i < message.length; ++i) {
                 messageIsNew[message[i]._id] = false; // 原本有的就不是新的
@@ -54,11 +56,12 @@ class MsgShow extends React.Component {
         }
         // 为每个关键字添加定时任务，并且每个关键字请求错开时间
         const { index } = this.props;
-        this.timeout = setTimeout(_=>{this.StartTimingTask(true)}, index * 10 * 1000);
+        this.timeout = setTimeout(_=>{this.StartTimingTask(isFirst)}, index * 10 * 1000);
     }
 
-    StartTimingTask = (tag) => {
-        this.monitor(tag);
+    StartTimingTask = (isFirst) => {
+        if (isFirst === true)
+            this.monitor(true); // 第一次登陆
         this.interval = setInterval(_ => {
             this.monitor(false);
         }, intervalTime);
@@ -67,7 +70,7 @@ class MsgShow extends React.Component {
     componentWillUnmount(){
         const {user, keyword, dispatch} = this.props;
         
-        dispatch(MsgActions.updMsg(user, keyword.name, this.state.message.slice(0, 10)));
+        dispatch(MsgActions.updMsg(user, keyword.name, this.state.message));
         // 清除定时任务
         clearInterval(this.interval);
         clearTimeout(this.timeout);
@@ -107,12 +110,12 @@ class MsgShow extends React.Component {
                 if(ans.status === 1) {
 
                     // 为了更新state
-                    // let newMessage = JSON.parse(JSON.stringify(this.state.message));
+                    let newMessage = JSON.parse(JSON.stringify(this.state.message));
                     // let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
 
-                    let newMessage = this.state.message;
+                    //let newMessage = this.state.message;
+                    newMessage.reverse();  // 从小到大排
                     let newMessageIsNew = this.state.messageIsNew;
-                    let newMessageNum = this.state.newMessageNum;
 
                     let count = 0;
                     for (let i = 0; i < ans.result.data.length; ++i) {
@@ -123,16 +126,23 @@ class MsgShow extends React.Component {
                             count += 1;
                         }
                     }
-                    newMessage.reverse();
 
                     if (count > 0) {
                         openNotificationWithIcon("success", keyword.name + " 成功获取新消息" + count + "条");
                     } else {
                         return;
                     }
-                    
-                    // 只截取maxDisplay条，再排序，保证新来的消息都能看到
-                    newMessage = newMessage.slice(0, maxDisplay);
+
+                    if (newMessage.length > maxDisplay) {
+                        let length = newMessage.length;
+                        newMessage = newMessage.slice(length - maxDisplay, length);  // 保证最近更新的消息都能看到
+                    }
+
+                    let newMessageNum = 0;
+                    for (let i = 0; i < newMessage.length; ++i) {
+                        if (newMessageIsNew[newMessage[i]._id] === true)
+                            newMessageNum += 1;
+                    }
 
                     newMessage.sort(function(a,b){
                         if (a.time === b.time)
@@ -147,7 +157,7 @@ class MsgShow extends React.Component {
                         message: newMessage,
                         showMessage: newMessage.slice(0, pageSize),
                         messageIsNew: newMessageIsNew,
-                        newMessageNum: newMessageNum + count > maxDisplay? maxDisplay: newMessageNum + count,
+                        newMessageNum: newMessageNum,
                         //time: this.getNowFormatDate(),
                         total: newMessage.length,
                         currentPage: 1,

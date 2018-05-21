@@ -11,6 +11,36 @@ class OneMsgPage extends React.Component {
 
     state = {
         iconType: "star-o",
+        id: '',
+    }
+
+    componentDidMount () {
+        this.initIcon();
+    }
+
+    componentDidUpdate () {
+        const {content} = this.props;
+        if(content._id === this.state.id)
+            return;
+        this.initIcon();
+    }
+
+    initIcon = () => {
+        const {content, contentType, collection} = this.props;
+        const typeCollection = collection[contentType];
+        let iconType = "star-o";
+        let id = content._id;
+        if (typeCollection !== null && typeCollection !== undefined) {
+            for (let i = 0; i < typeCollection.length; ++i) {
+                if (typeCollection[i]['_id'] === id) {
+                    iconType = "star";
+                }
+            }
+        }
+        this.setState(preState=>({
+            iconType: iconType,
+            id: id,
+        }));
     }
 
     markKeyword = (content, keywords) => {
@@ -75,7 +105,7 @@ class OneMsgPage extends React.Component {
 
         // 每条消息最多显示的字符数
         let showContent = content.content;
-        if (content.content.length > maxDisplayCharacter) {
+        if (content.source !=='新浪微博' && content.source !=='百度搜索' && content.content.length > maxDisplayCharacter) {
             showContent = content.content.slice(0, maxDisplayCharacter) + '...';
         }
 
