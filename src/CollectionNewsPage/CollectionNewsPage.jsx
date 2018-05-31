@@ -30,7 +30,7 @@ class CollectionNewsPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
             },
-            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <CSVLink data={this.objToJSON(record)}
@@ -61,7 +61,7 @@ class CollectionNewsPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
             },
-            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <CSVLink data={this.objToJSON(record)}
@@ -93,7 +93,7 @@ class CollectionNewsPage extends React.Component {
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
             },
-            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <CSVLink data={this.objToJSON(record)}
@@ -122,7 +122,7 @@ class CollectionNewsPage extends React.Component {
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
-            {title: '正负面', dataIndex: 'sentiment'},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <CSVLink data={this.objToJSON(record)}

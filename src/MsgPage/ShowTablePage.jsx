@@ -245,7 +245,7 @@ class ShowTablePage extends React.Component {
 
         columns = columns.concat(
             {title: '正负面', key: 'sentiment', render: (record) => (
-                <Button onClick={event=>this.showModal(record)}>{record.sentiment > 0.7 ? "正" : (record.sentiment < 0.3 ? "负": "中")}</Button>)},
+                <Button onClick={event=>this.showModal(record)}>{record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中")}</Button>)},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record._id)}><Icon type={this.hasCollected(record._id, collection)} id={record._id}/></a>
