@@ -13,10 +13,11 @@ class ShowTablePage extends React.Component {
 
     constructor(props) {
         super(props);
+        const {keyword} = this.props;
 
         this.state = {
             // 修改极性
-            visible: false,  // 修改极性的页面
+            visible: false,
             unmodified_polarity: "",
             modify_polarity: "",
             modify_source: "",
@@ -25,17 +26,15 @@ class ShowTablePage extends React.Component {
             data: [],
             pagination: {},
             loading: true,
-            keyword: '',
+            keyword: keyword,
+            //更改后，记录更改的值
+            modify_msg: {}
         };
     };
 
     componentDidMount () {
-        const {keyword} = this.props;
+        const {keyword} = this.state;
         if (keyword !== '' && keyword !== undefined) {
-            this.setState(preState => ({
-                ...preState,
-                keyword: keyword,
-            }));
             this.getData(keyword, 1);
         }
     }
@@ -114,7 +113,7 @@ class ShowTablePage extends React.Component {
     showModal = (record) => {
         this.setState({
             visible: true,
-            unmodified_polarity: record.sentiment > 0.7 ? "正" : (record.sentiment < 0.3 ? "负": "中"),
+            unmodified_polarity: record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"),
             modify_id:record._id,
             modify_source:record.source,
         });
@@ -145,20 +144,20 @@ class ShowTablePage extends React.Component {
                     openNotificationWithIcon("success", "感谢您的反馈:)");
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    //if (ans.status === -1)
-                    //    history.push("/login");
                 }
             }
         );
+        
+        let {modify_msg} = this.state;
+        modify_msg[this.state.modify_id] = this.state.modify_polarity;
 
         this.setState({
             visible: false,
             polarity:"",
             modify_source:"",
             modify_id:"",
+            modify_msg: modify_msg,
         });
-
-
     };
 
     handleCancel = (e) => {
@@ -237,6 +236,17 @@ class ShowTablePage extends React.Component {
         }
     };
 
+    getPolarity(record) {
+        const {modify_msg} = this.state;
+        const id = record._id;
+        console.log('id: ' + id);
+        console.log('modify_msg: ' + modify_msg);
+        if (modify_msg[id] !== undefined)
+            return modify_msg[id] == 3 ? "正" : (modify_msg[id] == 2 ? "负": "中");
+        else
+            return record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中");
+    }
+
     render() {
 
         const {collection, title} = this.props;
@@ -245,7 +255,7 @@ class ShowTablePage extends React.Component {
 
         columns = columns.concat(
             {title: '正负面', key: 'sentiment', render: (record) => (
-                <Button onClick={event=>this.showModal(record)}>{record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中")}</Button>)},
+                <Button onClick={event=>this.showModal(record)}>{this.getPolarity(record)}</Button>)},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <a href="javascript:void(0);" onClick={event => this.collectionOneRow(event, this.objToJSON(record), record._id)}><Icon type={this.hasCollected(record._id, collection)} id={record._id}/></a>
@@ -291,9 +301,9 @@ class ShowTablePage extends React.Component {
                     onCancel={this.handleCancel}
                 >
                     <RadioGroup onChange={this.onChange} value={this.state.modify_polarity}>
-                        <Radio style={radioStyle} value="正">正</Radio>
-                        <Radio style={radioStyle} value="负">负</Radio>
-                        <Radio style={radioStyle} value="中">中</Radio>
+                        <Radio style={radioStyle} value="3">正</Radio>
+                        <Radio style={radioStyle} value="2">负</Radio>
+                        <Radio style={radioStyle} value="1">中</Radio>
                     </RadioGroup>
                 </Modal>
             </div>
