@@ -4,7 +4,7 @@ import { Checkbox, Button, Icon, Table } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
+//import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
@@ -60,7 +60,6 @@ class KeywordsPage extends React.Component {
             }).then(
             ans => {
                 if(ans.status === 1) {
-                    //console.log(ans.result);
                     this.setState(preState => ({
                         ...preState,
                         types: [
@@ -72,6 +71,7 @@ class KeywordsPage extends React.Component {
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
+                    // 用户体验差，故不强制登出
                     //if (ans.status === -1)
                     //    history.push("/login");
                 }
@@ -108,55 +108,6 @@ class KeywordsPage extends React.Component {
         });
     };
 
-    // 管理关键字对话框
-    // showUpdateModal = (isUpdated, event) => {
-    //
-    //     // 用于更新this.state.sites
-    //     const newTypes = this.state.types;
-    //     // 用于更新this.modelKw
-    //     let modelKw = "关键字名称";
-    //
-    //     let title = '';
-    //
-    //     var updatedIndex = null;
-    //
-    //     if (isUpdated) {
-    //         // 如果是修改关键字操作
-    //         title = '修改关键字';
-    //
-    //         // 根据点击的index得到要跟新的keyword
-    //         const index = event.target.getAttribute("value");
-    //         const keyword = this.props.keyword[index];
-    //         updatedIndex = index;
-    //
-    //         modelKw = keyword.name;
-    //
-    //         for (let i = 0; i < newTypes.length; ++i) {
-    //             newTypes[i].indeterminate = true;
-    //             newTypes[i].checkAll = false;
-    //             // checkedList是所有站点与用户原先选的站点的交集
-    //             newTypes[i].checkedList = this.state.types[i].subsites.filter(v=>keyword.sites.includes(v))
-    //         }
-    //
-    //     } else {
-    //         title = '新加关键字';
-    //         for (let i = 0; i < newTypes.length; ++i) {
-    //             newTypes[i].indeterminate = true;
-    //             newTypes[i].checkAll = false;
-    //             newTypes[i].checkedList = [];
-    //         }
-    //     }
-    //
-    //     this.setState(preState => ({
-    //         ...preState,
-    //         updatedIndex: updatedIndex,
-    //         isUpdated: isUpdated,
-    //         title: title,
-    //         modelKw: modelKw,
-    //         updateVisible: true,
-    //         types: newTypes
-    //     }));
-    // };
 
     // 管理关键字对话框
     showUpdateModal = (isUpdated, keyword, event) => {

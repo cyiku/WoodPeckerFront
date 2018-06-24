@@ -33,6 +33,7 @@ class MonitoringPage extends React.Component {
 
     render() {
         const {keyword} = this.props;
+        
         // 生成监控页面
         let monitorDiv = <div>加载中,若长时间无响应,可尝试刷新页面。</div>;
         if (keyword !== null)

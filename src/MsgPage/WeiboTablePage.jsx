@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { Link } from 'react-router-dom';
 import { keywordActions } from '../_actions';
-import {serverIP} from '../_helpers';
+// import {serverIP} from '../_helpers';
 import { Button } from 'antd';
 import { Popover } from 'antd';
-import { openNotificationWithIcon } from "../_helpers";
-import { cmpTime } from '../_helpers';
-import {errorProcess} from "../_helpers/error";
+// import { openNotificationWithIcon } from "../_helpers";
+// import { cmpTime } from '../_helpers';
+// import {errorProcess} from "../_helpers/error";
 
 class WeiboTablePage extends React.Component {
 

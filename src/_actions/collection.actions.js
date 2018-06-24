@@ -1,9 +1,9 @@
 import {collectionConstants} from "../_constants/";
 import {collectionService} from "../_services/";
 import { alertActions } from './';
-import { history } from '../_helpers';
+//import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-import {userActions} from '../_actions';
+//import {userActions} from '../_actions';
 import {errorProcess} from "../_helpers/error";
 
 export const collectionActions = {
@@ -27,8 +27,8 @@ function getCollection(user, type) {
                         dispatch(failure(ans.message));
                         dispatch(alertActions.error(ans.message));
                         openNotificationWithIcon("error", ans.message);
-                        if (ans.status === -1)
-                            dispatch(userActions.logout());
+                        // if (ans.status === -1)
+                        //     dispatch(userActions.logout());
                     }
                 },
                 error => errorProcess(error)

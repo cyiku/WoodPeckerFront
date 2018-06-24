@@ -4,8 +4,8 @@ import { Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
-import {alertActions} from "../_actions/alert.actions";
+//import { history } from '../_helpers';
+//import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
@@ -40,16 +40,25 @@ class RecommendationPage extends React.Component {
             type('培训机构', []),
         ],
         keyword: [
-            {"name": "贾跃亭", "popularity": "30%"},
-            {"name": "比特币", "popularity": "20%"},
-            {"name": "苏炳添", "popularity": "15%"}
+            // {"name": "贾跃亭", "popularity": "30%"},
+            // {"name": "比特币", "popularity": "20%"},
+            // {"name": "苏炳添", "popularity": "15%"}
         ],
-        time: "2018年1月31号",
+        date: "",
     };
+
+    componentDidMount() {
+        this.getTypes();
+        this.getRecommend();
+        const { user, dispatch, keyword} = this.props;
+        if (keyword == null) {
+            dispatch(keywordActions.getKws(user));
+        }
+    }
 
 
     getTypes = () => {
-        const {user, dispatch} = this.props;
+        const {user} = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
@@ -77,22 +86,20 @@ class RecommendationPage extends React.Component {
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    //if (ans.status === -1)
-                    //    history.push("/login");
                 }
             },
             error => errorProcess(error)
         );
     };
 
-    getRecommendation = () => {
-        const { user, dispatch } = this.props;
+    getRecommend = () => {
+        const { user } = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
             body: JSON.stringify({})
         };
-        fetch(serverIP + '/getRecommendation', requestOptions).then(
+        fetch(serverIP + '/getRecommend', requestOptions).then(
             response => {
                 if (!response.ok) {
                     return Promise.reject(response.statusText);
@@ -101,77 +108,69 @@ class RecommendationPage extends React.Component {
             }).then(
             ans => {
                 if(ans.status === 1) {
-
+                    // recomends: 将word由string转为list;keyword:将word由list转为[{"name":}]
+                    let keyword = [];
+                    let recommends = ans.result.words.split(" ");
+                    let date = ans.result.date;
+                    for (let i = 0;i < recommends.length; ++i) {
+                        // 如果是空，直接略过
+                        if (recommends[i].length === 0)
+                            continue;
+                        keyword.push({"name": recommends[i]});
+                    }
+                    // 处理一下日期的格式，将_由年月日替代
+                    date = date.slice(0,4) + "年" + date.slice(5,7) + "月" + date.slice(8,10) + "日" +
+                            date.slice(11,13) + "时" + date.slice(14,16) + "分" + date.slice(17,19) + "秒";
+                    this.setState(preState => ({
+                        ...preState,
+                        keyword: keyword,
+                        date: date
+                    }));
                 } else {
-
+                    openNotificationWithIcon("error", ans.message);
                 }
             },
             error => errorProcess(error)
         );
     };
 
-
-    componentDidMount(){
-        //this.getRecommendation();
-        this.getTypes();
-    }
-
-    // // 删除
-    // showConfirm = (event, index) => {
-    //
-    //     let newKwd = JSON.parse(JSON.stringify(this.state.keyword));
-    //     newKwd.splice(index.index, 1);
-    //     //console.log(this.state.keyword);
-    //
-    //     this.setState(preState => ({
-    //         ...preState,
-    //         keyword: newKwd
-    //     }));
-    // };
-
     // 删除
     showConfirm = (event, name) => {
 
-        let newKwd = JSON.parse(JSON.stringify(this.state.keyword));
-        for (let i = 0; i < newKwd.length; ++i) {
-            if (newKwd[i].name === name)
-                newKwd.splice(i, 1);
-        }
-
-        this.setState(preState => ({
-            ...preState,
-            keyword: newKwd
-        }));
+        const { user } = this.props;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
+            body: JSON.stringify({"word": name, "date": this.state.date})
+        };
+        fetch(serverIP + '/delRecommend', requestOptions).then(
+            response => {
+                if (!response.ok) {
+                    return Promise.reject(response.statusText);
+                }
+                return response.json();
+            }).then(
+            ans => {
+                if(ans.status === 1) {
+                    // 删除成功，更新前端
+                    let newKwd = JSON.parse(JSON.stringify(this.state.keyword));
+                    for (let i = 0; i < newKwd.length; ++i) {
+                        if (newKwd[i].name === name)
+                            newKwd.splice(i, 1);
+                    }
+                    this.setState(preState => ({
+                        ...preState,
+                        keyword: newKwd
+                    }));
+                    openNotificationWithIcon("success", "删除推荐成功");
+                } else {
+                    openNotificationWithIcon("error", ans.message);
+                }
+            },
+            error => errorProcess(error)
+        );
     };
 
-    // 管理关键字对话框
-    // showUpdateModal = (isUpdated, event) => {
-    //
-    //     // 用于更新this.state.sites
-    //     const newTypes = this.state.types;
-    //     // 用于更新this.modelKw
-    //     let modelKw = "关键字名称";
-    //
-    //     const index = event.target.getAttribute("value");
-    //     const keyword = this.state.keyword[index];
-    //     modelKw = keyword.name;
-    //
-    //
-    //     let title = '新加关键字';
-    //     for (let i = 0; i < newTypes.length; ++i) {
-    //         newTypes[i].indeterminate = true;
-    //         newTypes[i].checkAll = false;
-    //         newTypes[i].checkedList = [];
-    //     }
-    //
-    //     this.setState(preState => ({
-    //         ...preState,
-    //         title: title,
-    //         modelKw: modelKw,
-    //         updateVisible: true,
-    //         types: newTypes
-    //     }));
-    // };
 
     // 管理关键字对话框
     showUpdateModal = (isUpdated, event) => {
@@ -295,10 +294,9 @@ class RecommendationPage extends React.Component {
 
 
     render() {
-        const { keyword, time } = this.state;
+        const { keyword, date } = this.state;
         const columns = [
             {title: '关键字名称', dataIndex: 'name'},
-            {title: '关键字热度', dataIndex: 'popularity'},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
                     <a title="加入我的关键字" onClick={(event)=>this.showUpdateModal(true, event)} value={record.name}><Icon type="plus" value={record.name}/></a>
@@ -309,7 +307,7 @@ class RecommendationPage extends React.Component {
 
         return (
             <Card style={{marginTop: 15, marginLeft:15}} title={
-                <span>关键字推荐,更新于: {time.replace(/'/g, '')}</span>
+                <span>关键字推荐,更新于: {date}</span>
             }>
 
                 <Table dataSource={keyword} columns={columns}/>

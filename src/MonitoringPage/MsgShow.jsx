@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Icon, Popover, Button, List } from 'antd';
+import { Collapse, Icon, Popover, List } from 'antd';
 import { connect } from 'react-redux';
 import {openNotificationWithIcon} from "../_helpers";
 import {OneMsgPage} from "./OneMsgPage";
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import { Pagination } from 'antd';
 import { MsgActions } from '../_actions';
@@ -85,7 +84,7 @@ class MsgShow extends React.Component {
             isLoading: true,
         }));
 
-        const {user,keyword,dispatch} = this.props;
+        const {user,keyword} = this.props;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
@@ -203,6 +202,7 @@ class MsgShow extends React.Component {
         event.stopPropagation();
     };
 
+    // 清除功能，体验不好就删了
     // fresh = (event) => {
     //     this.setState(
     //         preState => ({

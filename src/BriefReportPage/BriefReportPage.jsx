@@ -2,19 +2,11 @@ import React from 'react';
 import { Button } from 'antd';
 import {serverIP} from '../_helpers';
 import { connect } from 'react-redux';
-import { openNotificationWithIcon } from "../_helpers";
-import {errorProcess} from "../_helpers/error";
-import { history } from '../_helpers';
+// import { openNotificationWithIcon } from "../_helpers";
+// import {errorProcess} from "../_helpers/error";
+// import { history } from '../_helpers';
 
 class BriefReportPage extends React.Component {
-
-    state = {
-
-    };
-
-    componentDidMount() {
-
-    }
 
     exportReport = () => {
         const {user} = this.props;

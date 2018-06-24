@@ -1,12 +1,12 @@
 import React from 'react';
 import {ShowTablePage} from "./ShowTablePage";
 import { connect } from 'react-redux';
-import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
+//import {serverIP} from '../_helpers';
+//import { history } from '../_helpers';
 import { Popover } from 'antd';
-import { openNotificationWithIcon } from "../_helpers";
-import { cmpTime } from '../_helpers';
-import {errorProcess} from "../_helpers/error";
+// import { openNotificationWithIcon } from "../_helpers";
+// import { cmpTime } from '../_helpers';
+// import {errorProcess} from "../_helpers/error";
 
 class SearchPage extends React.Component {
 
@@ -84,7 +84,6 @@ class SearchPage extends React.Component {
 
     componentDidMount(){
         // window.alert('mount');
-        const {user, dispatch} = this.props;
         let value;
         if (typeof(this.props.location.state) !== "undefined") {
             value = this.props.location.state.value;

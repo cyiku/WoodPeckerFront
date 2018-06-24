@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
-import {userActions} from "../_actions/user.actions";
-import {alertActions} from "../_actions/alert.actions";
+//import { history } from '../_helpers';
+//import {userActions} from "../_actions/user.actions";
+//import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
@@ -109,7 +109,7 @@ class PublishNumPage extends React.Component {
     };
 
     getData = () => {
-        const { currentKwd, dispatch } = this.props;
+        const { currentKwd } = this.props;
 
         console.log(currentKwd + ' getting publish data...');
         if (currentKwd !== undefined) {

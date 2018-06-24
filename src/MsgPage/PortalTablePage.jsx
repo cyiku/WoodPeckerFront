@@ -3,14 +3,14 @@ import {ShowTablePage} from "./ShowTablePage";
 import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { keywordActions } from '../_actions';
-import { history } from '../_helpers';
+// import { history } from '../_helpers';
 import {Button} from 'antd';
 import { Link } from 'react-router-dom';
 import { Popover } from 'antd';
-import { openNotificationWithIcon } from "../_helpers";
-import { cmpTime } from '../_helpers';
-import {errorProcess} from "../_helpers/error";
-import {serverIP} from '../_helpers';
+// import { openNotificationWithIcon } from "../_helpers";
+// import { cmpTime } from '../_helpers';
+// import {errorProcess} from "../_helpers/error";
+// import {serverIP} from '../_helpers';
 
 class PortalTablePage extends React.Component {
 
@@ -44,7 +44,7 @@ class PortalTablePage extends React.Component {
 
     clickKeyword = (event) => {
         let newKwd = event.target.getAttribute("value");
-        if (newKwd == this.state.currentKwd || newKwd === null)
+        if (newKwd === this.state.currentKwd || newKwd === null)
             return;
 
         let targets = document.getElementsByClassName("keyword");

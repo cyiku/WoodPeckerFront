@@ -4,7 +4,7 @@ import { Table } from 'antd';
 import { Card, Icon } from 'antd';
 import { CSVLink } from 'react-csv';
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
+// import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 

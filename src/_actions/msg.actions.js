@@ -1,9 +1,9 @@
 import { MsgConstants } from "../_constants/";
-import { alertActions } from './';
-import { history } from '../_helpers';
-import { openNotificationWithIcon } from "../_helpers";
-import {userActions} from '../_actions';
-import {errorProcess} from "../_helpers/error";
+// import { alertActions } from './';
+// import { history } from '../_helpers';
+// import { openNotificationWithIcon } from "../_helpers";
+// import {userActions} from '../_actions';
+// import {errorProcess} from "../_helpers/error";
 
 export const MsgActions = {
     getMsg,

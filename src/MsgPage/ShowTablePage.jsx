@@ -5,35 +5,44 @@ import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
 import { openNotificationWithIcon } from "../_helpers";
 import {serverIP} from "../_helpers/serverIP";
-import { history } from '../_helpers';
+// import { history } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 
+// 修改极性的提示框
 const RadioGroup = Radio.Group;
+
 class ShowTablePage extends React.Component {
 
     constructor(props) {
         super(props);
+
+        // 获取keyword
         const {keyword} = this.props;
 
         this.state = {
-            // 修改极性
+            // 修改极性页面是否显示
             visible: false,
-            unmodified_polarity: "",
+            // 修改前的极性，打开修改极性页面时获得
+            before_modify_polarity: "",
+            // 要修改的极性，点击修改极性页面时获得
             modify_polarity: "",
+            // 修改的消息属于哪一个来源(小)，方便寻找
             modify_source: "",
+            // 要修改的消息的id
             modify_id: "",
             // 表格
             data: [],
             pagination: {},
             loading: true,
             keyword: keyword,
-            //更改后，记录更改的值
+            //记录所有改过的msg的情感极性，key：id，value：正，负，中
             modify_msg: {}
         };
     };
 
     componentDidMount () {
         const {keyword} = this.state;
+        // 刚加载完页面，若keyword不为空，则获取该keyword的第一页数据
         if (keyword !== '' && keyword !== undefined) {
             this.getData(keyword, 1);
         }
@@ -41,7 +50,8 @@ class ShowTablePage extends React.Component {
 
     componentDidUpdate () {
         const {keyword} = this.props;
-        if (keyword !== '' && keyword !== undefined && keyword !== this.state.keyword) { // 更换关键字时用
+        // 关键字更改时，重置表格，重新获取数据
+        if (keyword !== '' && keyword !== undefined && keyword !== this.state.keyword) {
             const pager = { ...this.state.pagination };
             pager.current = 1;
             this.setState(preState => ({
@@ -88,18 +98,11 @@ class ShowTablePage extends React.Component {
      */
     collectionOneRow = (event, data, iconID) => {
 
-        /**
-         * user: 为了发送请求时后台辨识用户
-         * dispatch: react-redux
-         * type: collection是Json, key为type, 添加和删除时, 加入type, 方便增删
-         * typeCollection: 相关类型的收藏, 为list
-         */
         const {user, dispatch, type} = this.props;
 
         let icon = document.getElementById(iconID);
         if (icon.getAttribute("class") === "anticon anticon-star-o") {
             // 收藏
-
             dispatch(collectionActions.addCollection(user, data, type));
             icon.setAttribute("class", "anticon anticon-star"); // 更换图标
 
@@ -111,9 +114,20 @@ class ShowTablePage extends React.Component {
     };
 
     showModal = (record) => {
+        const msgId = record._id;
+
+        // TODO：这里存在一个BUG，record.sentiment = 0的情况，即该消息还未进行分类，在网站上
+        // 默认为中，这时修改消息的极性，假设修改的还为中，则此时sentiment=1，极性也就发生了变化，
+        // 不会报未检测到改动的错误。
+
+        // 根据id查看该消息是否修改过，获取该消息修改前对应的情感
+        let before_modify_polarity = record.sentiment;
+        if (this.state.modify_msg[msgId] !== undefined) {
+            before_modify_polarity = this.state.modify_msg[msgId];
+        }
         this.setState({
             visible: true,
-            unmodified_polarity: record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"),
+            before_modify_polarity: before_modify_polarity,
             modify_id:record._id,
             modify_source:record.source,
         });
@@ -121,7 +135,12 @@ class ShowTablePage extends React.Component {
 
     handleOk = (e) => {
         // 发送给服务端
-        if (this.state.unmodified_polarity === this.state.modify_polarity) {
+        // alert(this.state.before_modify_polarity);
+        // alert(this.state.modify_polarity);
+        // 若该消息的情感未检测到更改
+        // console.log('before: ' + this.state.before_modify_polarity);
+        // console.log('modify: ' + this.state.modify_polarity);
+        if (this.state.before_modify_polarity === this.state.modify_polarity) {
             openNotificationWithIcon("error", "未检测到改动");
             return;
         }
@@ -149,6 +168,8 @@ class ShowTablePage extends React.Component {
         );
         
         let {modify_msg} = this.state;
+        // console.log(this.state.modify_id);
+        // console.log(this.state.modify_polarity);
         modify_msg[this.state.modify_id] = this.state.modify_polarity;
 
         this.setState({
@@ -169,12 +190,15 @@ class ShowTablePage extends React.Component {
         });
     };
 
+    // 点击修改极性页面的正，负，中时触发
     onChange = (e) => {
+        //let toInt = parseInt(e.target.value);
         this.setState({
             modify_polarity: e.target.value,
         });
     }
 
+    // 更改页数时，重新根据页数来请求数据
     handleTableChange = (pagination, filters, sorter) => {
         const pager = { ...this.state.pagination };
         pager.current = pagination.current;
@@ -187,7 +211,7 @@ class ShowTablePage extends React.Component {
 
     getData = (keyword, page) => {
         const {type} = this.props;
-        let secondIp = '', title = '';
+        let title = '';
         if (type === 'agency') {
             title = '培训机构';
         } else if (type === 'portal') {
@@ -227,6 +251,7 @@ class ShowTablePage extends React.Component {
                         openNotificationWithIcon("success", "获取" + title + "消息成功");
                     } else {
                         openNotificationWithIcon("error", ans.message);
+                        // 用户体验差，故不强制登出
                         //if (ans.status === -1)
                         //    history.push("/login");
                     }
@@ -236,19 +261,20 @@ class ShowTablePage extends React.Component {
         }
     };
 
+    // record中sentiment属性是3 2 1，改成正，负，中
     getPolarity(record) {
         const {modify_msg} = this.state;
         const id = record._id;
-        console.log('id: ' + id);
-        console.log('modify_msg: ' + modify_msg);
-        if (modify_msg[id] !== undefined)
+        // 如果该消息是更改过的，则极性从modify_msg中读，否则读默认的属性
+        // 这里由于数据类型不同，所以不能用=== 或者 === “3”
+        if (modify_msg[id] !== undefined) {
             return modify_msg[id] == 3 ? "正" : (modify_msg[id] == 2 ? "负": "中");
+        }
         else
             return record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中");
     }
 
     render() {
-
         const {collection, title} = this.props;
         let { columns } = this.props;
         let { data } = this.state;

@@ -55,7 +55,7 @@ class KwAnalysisPage extends React.Component {
 
         let newKwd = event.target.getAttribute("value");
         // 如果此时keyword没变化，则无需反复请求
-        if (newKwd == this.state.currentKwd || newKwd == null)
+        if (newKwd === this.state.currentKwd || newKwd === null)
             return;
 
         let targets = document.getElementsByClassName("keyword");

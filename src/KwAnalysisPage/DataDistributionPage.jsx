@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
+//import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-import {userActions} from "../_actions/user.actions";
-import {alertActions} from "../_actions/alert.actions";
+//import {userActions} from "../_actions/user.actions";
+//import {alertActions} from "../_actions/alert.actions";
 import {errorProcess} from "../_helpers/error";
 
 class DataDistributionPage extends React.Component {
@@ -65,7 +65,7 @@ class DataDistributionPage extends React.Component {
 
         console.log(currentKwd + ' getting pie data...');
         if (currentKwd !== undefined) {
-            const {user, dispatch} = this.props;
+            const {user} = this.props;
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
