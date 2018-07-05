@@ -136,6 +136,64 @@ class CollectionNewsPage extends React.Component {
             )},
         ],
         portalData: [],
+
+        businessColumns: [
+            {title: '标题', dataIndex: 'title'},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                    <Popover content={
+                        <div style={{width: 400}}>
+                            <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        </div>
+                    } title="全文内容">
+                        <p>{record.content}</p>
+                    </Popover>)},
+            {title: '来源', dataIndex: 'source'},
+            {title: '发表时间', dataIndex: 'time',},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
+            {title: '操作', key: 'action', render: (record) => (
+                    <span>
+                    <CSVLink data={this.objToJSON(record)}
+                             filename={new Date().toLocaleString() + '.csv'}
+                             target="_blank"
+                             title="导出">
+                        <Icon type="download" />
+                    </CSVLink>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
+                </span>
+                )},
+        ],
+        businessData: [],
+
+        industryColumns: [
+            {title: '标题', dataIndex: 'title'},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                    <Popover content={
+                        <div style={{width: 400}}>
+                            <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        </div>
+                    } title="全文内容">
+                        <p>{record.content}</p>
+                    </Popover>)},
+            {title: '来源', dataIndex: 'source'},
+            {title: '发表时间', dataIndex: 'time',},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
+            {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
+            {title: '操作', key: 'action', render: (record) => (
+                    <span>
+                    <CSVLink data={this.objToJSON(record)}
+                             filename={new Date().toLocaleString() + '.csv'}
+                             target="_blank"
+                             title="导出">
+                        <Icon type="download" />
+                    </CSVLink>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
+                </span>
+                )},
+        ],
+        industryData: [],
     };
 
     componentDidMount() {
@@ -283,6 +341,46 @@ class CollectionNewsPage extends React.Component {
                     </div>
                 } style={{marginBottom: 50}}>
                     <Table columns={this.state.agencyColumns} dataSource={agencyCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={agencyCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
+                {/*商务资讯展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的商务资讯</span>
+                    </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.businessColumns} dataSource={agencyCollection}/>
+
+                    {/*功能*/}
+                    <div style={{marginTop: 15}}>
+                        <CSVLink data={agencyCollection}
+                                 filename={new Date().toLocaleString() + '.csv'}
+                                 target="_blank"
+                                 title="导出"
+                        >
+                            <Icon type="download" />导出
+                        </CSVLink>
+                    </div>
+                </Card>
+
+                {/*行业动态展示*/}
+                <Card title={
+                    <div>
+                        <span style={{fontWeight:800}}>收藏的行业动态</span>
+                    </div>
+                } style={{marginBottom: 50}}>
+                    <Table columns={this.state.industryColumns} dataSource={agencyCollection}/>
 
                     {/*功能*/}
                     <div style={{marginTop: 15}}>
