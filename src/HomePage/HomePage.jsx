@@ -20,6 +20,7 @@ import {RecommendationPage} from "../RecommendationPage";
 import {BriefReportPage} from "../BriefReportPage";
 
 import './HomePage.css'
+import {BusinessTablePage} from "../MsgPage/BusinessTablePage";
 
 const Search = Input.Search;
 const { SubMenu } = Menu;
@@ -138,6 +139,8 @@ class HomePage extends React.Component {
                                 <Menu.Item key="forumMsg"><Link to="/forumMsg">相关论坛</Link></Menu.Item>
                                 <Menu.Item key="portalMsg"><Link to="/portalMsg">门户网站</Link></Menu.Item>
                                 <Menu.Item key="agencyMsg"><Link to="/agencyMsg">培训机构</Link></Menu.Item>
+                                <Menu.Item key="businessMsg"><Link to="/businessMsg">商务资讯</Link></Menu.Item>
+                                <Menu.Item key="industryMsg"><Link to="/industryMsg">行业动态</Link></Menu.Item>
                                 {/* <Menu.Item key="searchMsg"><Link to="/searchMsg">全局搜索</Link></Menu.Item> */}
                             </SubMenu>
 
@@ -173,6 +176,7 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}forumMsg`} exact component={ForumTablePage} />
                             <Route path={`${this.props.match.path}searchMsg`} exact component={SearchPage} />
                             <Route path={`${this.props.match.path}brief`} exact component={BriefReportPage} />
+                            <Route path={`${this.props.match.path}businessMsg`} exact component={BusinessTablePage} />
                             <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>
