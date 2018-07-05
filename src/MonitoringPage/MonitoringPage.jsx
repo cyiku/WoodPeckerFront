@@ -29,6 +29,12 @@ class MonitoringPage extends React.Component {
         if (collection['agency'] === null) {
             dispatch(collectionActions.getCollection(user, "agency"));
         }
+        if (collection['business'] === null) {
+            dispatch(collectionActions.getCollection(user, "business"));
+        }
+        if (collection['industry'] === null) {
+            dispatch(collectionActions.getCollection(user, "industry"));
+        }
     }
 
     render() {

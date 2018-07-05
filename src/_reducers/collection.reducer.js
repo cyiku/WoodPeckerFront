@@ -5,6 +5,8 @@ let initialCollection = {
     'portal': null,
     'agency': null,
     'forum': null,
+    'business': null,
+    'industry': null,
     'pieChart': null,
     'lineChart': null,
     'regionChart': null,

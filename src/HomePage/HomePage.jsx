@@ -21,6 +21,7 @@ import {BriefReportPage} from "../BriefReportPage";
 
 import './HomePage.css'
 import {BusinessTablePage} from "../MsgPage/BusinessTablePage";
+import {IndustryTablePage} from "../MsgPage/IndustryTablePage"; 
 
 const Search = Input.Search;
 const { SubMenu } = Menu;
@@ -177,6 +178,7 @@ class HomePage extends React.Component {
                             <Route path={`${this.props.match.path}searchMsg`} exact component={SearchPage} />
                             <Route path={`${this.props.match.path}brief`} exact component={BriefReportPage} />
                             <Route path={`${this.props.match.path}businessMsg`} exact component={BusinessTablePage} />
+                            <Route path={`${this.props.match.path}industryMsg`} exact component={IndustryTablePage} />
                             <Route path={`${this.props.match.path}`}  component={BlankPage} />
                         </Switch>
                     </Layout>

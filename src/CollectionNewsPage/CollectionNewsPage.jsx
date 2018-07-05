@@ -160,7 +160,7 @@ class CollectionNewsPage extends React.Component {
                              title="导出">
                         <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'business')}/></a>
                 </span>
                 )},
         ],
@@ -189,7 +189,7 @@ class CollectionNewsPage extends React.Component {
                              title="导出">
                         <Icon type="download" />
                     </CSVLink>
-                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'portal')}/></a>
+                    <a href="javascript:void(0);" title="删除" style={{marginLeft:5}}><Icon type="delete" onClick={event => this.deleteCollection(event, record._id, 'industry')}/></a>
                 </span>
                 )},
         ],
@@ -210,6 +210,12 @@ class CollectionNewsPage extends React.Component {
         }
         if (collection['agency'] === null) {
             dispatch(collectionActions.getCollection(user, "agency"));
+        }
+        if (collection['industry'] === null) {
+            dispatch(collectionActions.getCollection(user, "industry"));
+        }
+        if (collection['business'] === null) {
+            dispatch(collectionActions.getCollection(user, "business"));
         }
 
     }
@@ -266,6 +272,8 @@ class CollectionNewsPage extends React.Component {
         let forumCollection = (collection['forum'] === null ? []: collection['forum']);
         let portalCollection = (collection['portal'] === null ? []: collection['portal']);
         let agencyCollection = (collection['agency'] === null ? []: collection['agency']);
+        let businessCollection = (collection['business'] === null ? []: collection['business']);
+        let industryCollection = (collection['industry'] === null ? []: collection['industry']);
 
 
         return (
@@ -360,7 +368,7 @@ class CollectionNewsPage extends React.Component {
                         <span style={{fontWeight:800}}>收藏的商务资讯</span>
                     </div>
                 } style={{marginBottom: 50}}>
-                    <Table columns={this.state.businessColumns} dataSource={agencyCollection}/>
+                    <Table columns={this.state.businessColumns} dataSource={businessCollection}/>
 
                     {/*功能*/}
                     <div style={{marginTop: 15}}>
@@ -380,7 +388,7 @@ class CollectionNewsPage extends React.Component {
                         <span style={{fontWeight:800}}>收藏的行业动态</span>
                     </div>
                 } style={{marginBottom: 50}}>
-                    <Table columns={this.state.industryColumns} dataSource={agencyCollection}/>
+                    <Table columns={this.state.industryColumns} dataSource={industryCollection}/>
 
                     {/*功能*/}
                     <div style={{marginTop: 15}}>

@@ -38,8 +38,8 @@ class BusinessTablePage extends React.Component {
         const {user, dispatch, keyword} = this.props;
         if (keyword === null)
             dispatch(keywordActions.getKws(user));
-        if (this.props.collection['agency'] === null) {
-            dispatch(collectionActions.getCollection(user, 'agency'));
+        if (this.props.collection['business'] === null) {
+            dispatch(collectionActions.getCollection(user, 'business'));
         }
     }
 
@@ -70,7 +70,6 @@ class BusinessTablePage extends React.Component {
         this.setState(preState => ({
             ...preState,
             currentKwd: newKwd,
-            agencyData: null,
         }));
 
     };
@@ -102,10 +101,10 @@ class BusinessTablePage extends React.Component {
             }
         }
 
-        const type = "agency";
+        const type = "business";
         const columns = this.state.businessColumns;
         const title = " 商务资讯";
-        const collection = this.props.collection['agency'];
+        const collection = this.props.collection['business'];
         return (
             <div style={{marginLeft:15, marginTop:15}}>
                 <div>

@@ -69,8 +69,8 @@ class KeywordsPage extends React.Component {
                             type('门户网站', ans.result.portal),
                             type('微博', ans.result.weibo),
                             type('培训机构', ans.result.agency),
-                            type('商务资讯', ans.result.agency),
-                            type('行业动态', ans.result.agency),
+                            type('商务资讯', ans.result.business),
+                            type('行业动态', ans.result.industry),
                         ]
                     }));
                 } else {

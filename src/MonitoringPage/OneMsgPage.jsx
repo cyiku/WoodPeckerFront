@@ -115,7 +115,7 @@ class OneMsgPage extends React.Component {
                     <p style={{fontSize:15}} dangerouslySetInnerHTML={{__html: this.markKeyword(showContent, content.keyword)}} className={'text'}/>
                     <span style={{fontSize:14}}>转发({content.n_forward}) 评论({content.n_comment}) 赞({content.n_like})</span>
                 </div>;
-        else if (contentType === 'portal')
+        else if (contentType === 'portal' || contentType === 'business' || contentType === 'industry')
             showMsg =
                 <div style={{display:'flex', flexDirection: 'column', justifyContent: 'space-around'}} onMouseMove={this.newToOld}>
                     <div>

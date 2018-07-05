@@ -94,6 +94,22 @@ class SearchPage extends React.Component {
             {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
         ],
 
+        industryColumns: [
+            {title: '标题', dataIndex: 'title', width: "20%"},
+            {title: '正文', className: 'content', width: "40%", render: (record) => (
+                    <Popover content={
+                        <div style={{width: 400}}>
+                            <p dangerouslySetInnerHTML={{__html: this.markKeyword(record.content, record.keyword)}}/>
+                        </div>
+                    } title="全文内容">
+                        <p>{record.content}</p>
+                    </Popover>)},
+            {title: '来源', dataIndex: 'source'},
+            {title: '时间', dataIndex: 'time'},
+            {title: '关键字', dataIndex: 'keyword'},
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
+        ],
+
         searchContent: undefined,
         lastSearch: '',
     };
@@ -179,12 +195,22 @@ class SearchPage extends React.Component {
                                    collection={this.props.collection['agency']}
                                    keyword={searchContent}/>
                 </div>
+
                 <div style={{marginTop:15}}>
                     <ShowTablePage
                         columns={this.state.businessColumns}
-                        type={"agency"}
+                        type={"business"}
                         title={" 商务资讯"}
-                        collection={this.props.collection['agency']}
+                        collection={this.props.collection['business']}
+                        keyword={searchContent}/>
+                </div>
+
+                <div style={{marginTop:15}}>
+                    <ShowTablePage
+                        columns={this.state.businessColumns}
+                        type={"industry"}
+                        title={" 行业动态"}
+                        collection={this.props.collection['industry']}
                         keyword={searchContent}/>
                 </div>
             </div>
