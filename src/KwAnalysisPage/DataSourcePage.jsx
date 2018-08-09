@@ -2,13 +2,11 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import {serverIP} from '../_helpers';
-import { history } from '../_helpers';
-import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
 class DataSourcePage extends React.Component {
-
+    // 四个方框
     state = {
         keyword: '',
         forum: 0,

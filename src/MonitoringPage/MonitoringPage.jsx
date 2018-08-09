@@ -4,13 +4,13 @@ import { Row, Col } from 'antd';
 import { keywordActions } from '../_actions';
 import {collectionActions} from "../_actions";
 import {KwsList} from "./KwsList";
-import {MsgShow} from "./MsgShow";
+import {KeywordMsgShow} from "./KeywordMsgShow";
 
 import './MonitoringPage.css'
 
 
 class MonitoringPage extends React.Component {
-
+    // 监控页面
     componentDidMount(){
         // 刚打开监控页面时，获取关注的所有关键字，获取用户所有的收藏
         const { user, dispatch, keyword, collection } = this.props;
@@ -50,7 +50,7 @@ class MonitoringPage extends React.Component {
                     <Row gutter={16}>
                         {
                             keyword.map(
-                                (keyword, index)=><Col span={8}><MsgShow keyword={keyword}  key={index} index={index}/></Col>
+                                (keyword, index)=><Col span={8}><KeywordMsgShow keyword={keyword}  key={index} index={index}/></Col>
                             )
                         }
                     </Row>

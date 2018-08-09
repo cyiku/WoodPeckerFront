@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
-/**
- * 该类为监控页面的所有关注的关键字展示
- */
 class KwsList extends React.Component {
-
+    // 该类为监控页面的所有关注的关键字展示
     render() {
         return (
             <div>

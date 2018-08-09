@@ -8,10 +8,6 @@ import 'echarts/lib/component/toolbox'
 
 export default class LineReact extends React.Component {
   
-  constructor(props) {
-    super(props);
-  }
-  
   initPie = () => {
     const { option={} } = this.props; //外部传入的data数据
     let myChart = echarts.init(this.ID); //初始化echarts

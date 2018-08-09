@@ -1,15 +1,10 @@
 import React from 'react';
 import {ShowTablePage} from "./ShowTablePage";
 import { connect } from 'react-redux';
-//import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
 import { Popover } from 'antd';
-// import { openNotificationWithIcon } from "../_helpers";
-// import { cmpTime } from '../_helpers';
-// import {errorProcess} from "../_helpers/error";
 
 class SearchPage extends React.Component {
-
+    // 搜索页面
     state = {
         weiboColumns: [
             {title: '发布者', dataIndex: 'authid'} ,
@@ -115,7 +110,6 @@ class SearchPage extends React.Component {
     };
 
     componentDidMount(){
-        // window.alert('mount');
         let value;
         if (typeof(this.props.location.state) !== "undefined") {
             value = this.props.location.state.value;
@@ -128,7 +122,6 @@ class SearchPage extends React.Component {
 
     componentDidUpdate(){
         let value;
-        // window.alert('update');
         if (typeof(this.props.location.state) !== "undefined") {
             value = this.props.location.state.value;
         }
@@ -145,12 +138,9 @@ class SearchPage extends React.Component {
     markSearch = (content, search) => {
         // 分割search
         const search_list = search.split('_');
-
         for (let i = 0; i < search_list.length; ++i) {
-            //content.replace(search_list[i], '<span style="color: red">'+search_list[i]+'</span>')
             content = content.replace(new RegExp(search_list[i], "gm"), '<span style="color: red">'+search_list[i]+'</span>');
         }
-        //console.log(content);
         return content;
     };
 

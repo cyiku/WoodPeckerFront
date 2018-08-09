@@ -28,7 +28,8 @@ const { SubMenu } = Menu;
 const { Sider, Header } = Layout;
 
 class HomePage extends React.Component {
-
+    // 主页
+    
     constructor(props){
         super(props);
         this.state = {

@@ -5,14 +5,13 @@ import { collectionActions } from '../_actions';
 import { connect } from 'react-redux';
 import { openNotificationWithIcon } from "../_helpers";
 import {serverIP} from "../_helpers/serverIP";
-// import { history } from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 
 // 修改极性的提示框
 const RadioGroup = Radio.Group;
 
 class ShowTablePage extends React.Component {
-
+    // 每个表格
     constructor(props) {
         super(props);
 
@@ -251,9 +250,6 @@ class ShowTablePage extends React.Component {
                         openNotificationWithIcon("success", "获取" + title + "消息成功");
                     } else {
                         openNotificationWithIcon("error", ans.message);
-                        // 用户体验差，故不强制登出
-                        //if (ans.status === -1)
-                        //    history.push("/login");
                     }
                 },
                 error => errorProcess(error)

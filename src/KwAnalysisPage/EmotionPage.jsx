@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
-//import {userActions} from "../_actions/user.actions";
-//import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
 class EmotionPage extends React.Component {
+    // 情感折线图
 
     state = {
         keyword: '',
@@ -21,7 +19,6 @@ class EmotionPage extends React.Component {
         },
 
         calculable : true,
-
 
         xAxis : [
             {

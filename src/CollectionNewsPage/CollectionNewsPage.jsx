@@ -4,16 +4,14 @@ import { Table, Card, Icon } from 'antd';
 import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { Popover } from 'antd';
-
 // 导入css
 import './CollectionNewsPage.css';
 
 class CollectionNewsPage extends React.Component {
-
+    // 收藏页面
     state = {
         weiboColumns: [
             {title: '发布者', dataIndex: 'authid'} ,
-            //{title: '正文', sorter: (a, b) => a.content.length - b.content.length, render: (record) => <div dangerouslySetInnerHTML={{__html: record.content}}> </div>},
             {title: '正文', className:'content', width: "40%",render: (record) => (
                 <Popover content={
                     <div style={{width: 400}}>
@@ -22,14 +20,12 @@ class CollectionNewsPage extends React.Component {
                 } title="全文内容">
                     <p>{record.content}</p>
                 </Popover>)},
-            //{title: '正文',  width: 500, sorter: (a, b) => a.content.length - b.content.length, render: (record) => <p>艺术家Michael 讲旧钥匙打造成各种美丽的工艺品，并且出售，单品售价在200加元左右，真是变废为宝。 u200b艺术家Michael 讲旧钥匙打造成各种美丽的工艺品，并且出售，单品售价在200加</p>},
             {title: '点赞量', dataIndex: 'n_like', sorter: (a, b) => a.n_like - b.n_like,},
             {title: '评论量', dataIndex: 'n_comment', sorter: (a, b) => a.n_comment - b.n_comment,},
             {title: '转发量', dataIndex: 'n_forward', sorter: (a, b) => a.n_forward - b.n_forward,},
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
-            },
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
             {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
@@ -59,8 +55,7 @@ class CollectionNewsPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
-            },
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
             {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
@@ -91,8 +86,7 @@ class CollectionNewsPage extends React.Component {
             {title: '来源', dataIndex: 'source'},
             {title: '发表时间', dataIndex: 'time',},
             {title: '关键字', dataIndex: 'keyword'},
-            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)
-            },
+            {title: '原文', key: 'url', render: (record) => (<a href={record.url} target={"_blank"}>原文</a>)},
             {title: '正负面', render: (record) => (record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中"))},
             {title: '操作', key: 'action', render: (record) => (
                 <span>
@@ -221,14 +215,12 @@ class CollectionNewsPage extends React.Component {
     }
 
     markKeyword = (content, keywords) => {
+        // keyword标注红色
         // 分割keywords
         const keyword_list = keywords.split('_');
-        //console.log(keyword_list);
         for (let i = 0; i < keyword_list.length; ++i) {
-            //content.replace(keyword_list[i], '<span style="color: red">'+keyword_list[i]+'</span>')
             content = content.replace(new RegExp(keyword_list[i], "gm"), '<span style="color: red">'+keyword_list[i]+'</span>');
         }
-        //console.log(content);
         return content;
     };
 
@@ -261,6 +253,7 @@ class CollectionNewsPage extends React.Component {
     };
 
     deleteCollection = (event, id, type) => {
+        // 删除单条收藏
         const {user, dispatch} = this.props;
         dispatch(collectionActions.delCollection(user, [id], type));
     };
@@ -268,6 +261,7 @@ class CollectionNewsPage extends React.Component {
     render() {
 
         const {collection} = this.props;
+        // 初次打开，如果collection没有获取成功时，此时等于null
         let weiboCollection = (collection['weibo'] === null ? []: collection['weibo']);
         let forumCollection = (collection['forum'] === null ? []: collection['forum']);
         let portalCollection = (collection['portal'] === null ? []: collection['portal']);

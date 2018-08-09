@@ -3,19 +3,18 @@ import { Modal, Input } from 'antd';
 import { Checkbox, Button, Icon, Table } from 'antd';
 import { connect } from 'react-redux';
 import { keywordActions } from '../_actions';
-import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
+import { serverIP } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-import {errorProcess} from "../_helpers/error";
-
+import { errorProcess } from "../_helpers/error";
 
 const CheckboxGroup = Checkbox.Group;
-
-function type(name, subsites) {
+ 
+function newType(name, subsites) {
+    // 生成几大类站点
     const type = {};
     type.name = name;
     type.subsites = subsites;
-    type.indeterminate = true;
+    type.indeterminate = true;  // 实现全选效果
     type.checkAll = false;
     type.checkedList = [];
     return type;
@@ -34,18 +33,18 @@ class KeywordsPage extends React.Component {
         title: '',
         deleteVisible: false,
         deleteIndex: null,
-        // checkbox, 从服务器读
         types: [
-            type('贴吧', []),
-            type('门户网站', []),
-            type('微博', []),
-            type('培训机构', []),
-            type('商务资讯', []),
-            type('行业动态', []),
+            newType('贴吧', []),
+            newType('门户网站', []),
+            newType('微博', []),
+            newType('培训机构', []),
+            newType('商务资讯', []),
+            newType('行业动态', []),
         ],
     };
 
     getTypes = () => {
+        // 获取所有大类包含的站点
         const {user} = this.props;
         const requestOptions = {
             method: 'POST',
@@ -65,19 +64,16 @@ class KeywordsPage extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         types: [
-                            type('论坛', ans.result.forum),
-                            type('门户网站', ans.result.portal),
-                            type('微博', ans.result.weibo),
-                            type('培训机构', ans.result.agency),
-                            type('商务资讯', ans.result.business),
-                            type('行业动态', ans.result.industry),
+                            newType('论坛', ans.result.forum),
+                            newType('门户网站', ans.result.portal),
+                            newType('微博', ans.result.weibo),
+                            newType('培训机构', ans.result.agency),
+                            newType('商务资讯', ans.result.business),
+                            newType('行业动态', ans.result.industry),
                         ]
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    // 用户体验差，故不强制登出
-                    //if (ans.status === -1)
-                    //    history.push("/login");
                 }
             },
             error => errorProcess(error)
@@ -86,20 +82,15 @@ class KeywordsPage extends React.Component {
 
     componentDidMount(){
         const { user, dispatch, keyword } = this.props;
+        // 刚打开页面时，获取所关注的关键字
         if (keyword === null)
             dispatch(keywordActions.getKws(user));
         this.getTypes();
     }
 
-    // 删除
-    // showConfirm = (event, index) => {
-    //     this.setState({
-    //         deleteVisible: true,
-    //         deleteIndex: index,
-    //     });
-    // };
-
     showConfirm = (event, name) => {
+        // 要删除关键字时的提示框
+        // name: 要删除的关键字的名称
         const {keyword} = this.props;
         let index = -1;
         for (let i = 0; i < keyword.length; ++i) {
@@ -112,17 +103,15 @@ class KeywordsPage extends React.Component {
         });
     };
 
-
-    // 管理关键字对话框
     showUpdateModal = (isUpdated, keyword, event) => {
-
+        // 更新或新加关键字时显示的对话框
+        // keyword: 要删除的关键字
+        // isUpdated: 是否更新，即是更新还是新添操作
         // 用于更新this.state.sites
         const newTypes = this.state.types;
         // 用于更新this.modelKw
         let modelKw = "关键字名称";
-
         let title = '';
-
         var updatedIndex = null;
 
         if (isUpdated) {
@@ -134,7 +123,6 @@ class KeywordsPage extends React.Component {
                 if (allkwd[i].name === modelKw)
                     updatedIndex = i;
             }
-
             for (let i = 0; i < newTypes.length; ++i) {
                 newTypes[i].indeterminate = true;
                 newTypes[i].checkAll = false;
@@ -150,7 +138,6 @@ class KeywordsPage extends React.Component {
                 newTypes[i].checkedList = [];
             }
         }
-
         this.setState(preState => ({
             ...preState,
             updatedIndex: updatedIndex,
@@ -162,16 +149,11 @@ class KeywordsPage extends React.Component {
         }));
     };
 
-    // ok按钮
     handleOk = () => {
-        // this.setState({
-        //     confirmLoading: true,
-        // });
+        // 点击ok按钮
         const {user, dispatch, keyword} = this.props;
-
         // 获取新的keyword
         let postKw = this.state.modelKw;
-
         if (this.state.isUpdated) {
             // 更新操作
             let kwList = [];
@@ -184,12 +166,11 @@ class KeywordsPage extends React.Component {
             dispatch(keywordActions.updKws(user, newkeyword, updatedIndex, updatedID));
 
         } else {
+            // 添加操作
             if (postKw === '') {
                 openNotificationWithIcon("error", "关键字不能为空");
                 return;
             }
-
-            // 添加操作
             for (let i = 0; i < this.props.keyword.length; ++i) {
                 if (this.props.keyword[i].name === postKw) {
                     openNotificationWithIcon("error", "关键字已存在");
@@ -199,7 +180,6 @@ class KeywordsPage extends React.Component {
                     return;
                 }
             }
-
             let kwList = [];
             for (let i = 0; i < this.state.types.length; ++i) {
                 kwList = kwList.concat(this.state.types[i].checkedList);
@@ -209,13 +189,10 @@ class KeywordsPage extends React.Component {
                 openNotificationWithIcon("error", "监控站点不能为空");
                 return;
             }
-
             const newkeyword = {'name': postKw, 'sites': kwList};
-
             dispatch(keywordActions.addKws(user, newkeyword));
         }
-
-
+        // 动画效果
         setTimeout(() => {
             this.setState({
                 updateVisible: false,
@@ -224,22 +201,21 @@ class KeywordsPage extends React.Component {
         }, 1000);
     };
 
-    // 取消按钮
     handleCancel = () => {
+        // 取消按钮
         this.setState({
             updateVisible: false,
         });
     };
 
-    // 处理输入
     handleChange = (e) => {
+        // 处理输入
         const { value } = e.target;
         this.setState({ modelKw: value });
     };
 
-    // CheckboxGroup
     onChange = (checkedList, index) => {
-
+        // CheckboxGroup
         const newSites = this.state.types;
 
         newSites[index].checkedList = checkedList;
@@ -252,9 +228,9 @@ class KeywordsPage extends React.Component {
         }));
     };
 
-    // Checkbox
-    onCheckAllChange = (index,event) => {
-
+    
+    onCheckAllChange = (index, event) => {
+        // Checkbox
         const newSites = this.state.types;
 
         newSites[index].checkedList = event.target.checked ? this.state.types[index].subsites : [];
@@ -269,6 +245,7 @@ class KeywordsPage extends React.Component {
     };
 
     handleDeleteOk = (e) => {
+        // 点击删除页面的ok按钮
         const {user, dispatch, keyword} = this.props;
         const {deleteIndex} = this.state;
         dispatch(keywordActions.delKws(user, keyword, deleteIndex));
@@ -278,6 +255,7 @@ class KeywordsPage extends React.Component {
     };
 
     handleDeleteCancel = (e) => {
+        // 点击删除页面的取消按钮
         this.setState({
             deleteVisible: false,
         });

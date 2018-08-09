@@ -4,15 +4,11 @@ import { connect } from 'react-redux';
 import { collectionActions } from '../_actions';
 import { Link } from 'react-router-dom';
 import { keywordActions } from '../_actions';
-// import {serverIP} from '../_helpers';
 import { Button } from 'antd';
 import { Popover } from 'antd';
-// import { openNotificationWithIcon } from "../_helpers";
-// import { cmpTime } from '../_helpers';
-// import {errorProcess} from "../_helpers/error";
 
 class WeiboTablePage extends React.Component {
-
+    // 消息展示之微博消息
     state = {
         weiboColumns: [
             {title: '发布者', dataIndex: 'authid'} ,
@@ -34,7 +30,7 @@ class WeiboTablePage extends React.Component {
     };
 
     componentDidMount(){
-        //这里应该获取关键字对应的全部的微博数据
+        //这里应该获取用户收藏的，有关该关键字对应的全部的微博收藏
         const {user, dispatch, keyword} = this.props;
         if (this.props.collection['weibo'] === null)
             dispatch(collectionActions.getCollection(user, 'weibo'));
@@ -42,38 +38,34 @@ class WeiboTablePage extends React.Component {
             dispatch(keywordActions.getKws(user));
     }
 
-    // 讲消息中的keyword标记为红色
     markKeyword = (content, keywords) => {
+        // 将消息中的keyword标记为红色
         // 分割keywords
         const keyword_list = keywords.split('_');
         //console.log(keyword_list);
         for (let i = 0; i < keyword_list.length; ++i) {
-            //content.replace(keyword_list[i], '<span style="color: red">'+keyword_list[i]+'</span>')
             content = content.replace(new RegExp(keyword_list[i], "gm"), '<span style="color: red">'+keyword_list[i]+'</span>');
         }
-        //console.log(content);
         return content;
     };
 
     clickKeyword = (event) => {
-
+        // 点击关键字按钮
         let newKwd = event.target.getAttribute("value");
+        // 如果点击的关键字跟显示的相同，即没有切换
         if (newKwd === this.state.currentKwd || newKwd === null)
             return;
-            
+        // 此时点击的是不同的关键字
         let targets = document.getElementsByClassName("keyword");
-
         for (let i = 0; i < targets.length; ++i) {
             targets[i].setAttribute("type", "default");
         }
         event.target.setAttribute("type", "primary");
-
         this.setState(preState => ({
             ...preState,
             currentKwd: newKwd,
             weiboData: null,
         }));
-
     };
 
     render() {

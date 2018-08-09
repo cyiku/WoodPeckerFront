@@ -11,7 +11,7 @@ import {errorProcess} from "../_helpers/error";
 
 const CheckboxGroup = Checkbox.Group;
 
-function type(name, subsites) {
+function newType(name, subsites) {
     const type = {};
     type.name = name;
     type.subsites = subsites;
@@ -22,6 +22,7 @@ function type(name, subsites) {
 }
 
 class RecommendationPage extends React.Component {
+    // 关键字推荐页面，详情参考关键字页面KeywordsPage
 
     state = {
         // modal是否显示
@@ -34,16 +35,12 @@ class RecommendationPage extends React.Component {
         title: '',
         // checkbox, 从服务器读
         types: [
-            type('贴吧', []),
-            type('门户网站', []),
-            type('微博', []),
-            type('培训机构', []),
+            newType('贴吧', []),
+            newType('门户网站', []),
+            newType('微博', []),
+            newType('培训机构', []),
         ],
-        keyword: [
-            // {"name": "贾跃亭", "popularity": "30%"},
-            // {"name": "比特币", "popularity": "20%"},
-            // {"name": "苏炳添", "popularity": "15%"}
-        ],
+        keyword: [],
         date: "",
     };
 
@@ -78,10 +75,10 @@ class RecommendationPage extends React.Component {
                     this.setState(preState => ({
                         ...preState,
                         types: [
-                            type('贴吧', ans.result.forum),
-                            type('门户网站', ans.result.portal),
-                            type('微博', ans.result.weibo),
-                            type('培训机构', ans.result.agency),
+                            newType('贴吧', ans.result.forum),
+                            newType('门户网站', ans.result.portal),
+                            newType('微博', ans.result.weibo),
+                            newType('培训机构', ans.result.agency),
                         ]
                     }));
                 } else {

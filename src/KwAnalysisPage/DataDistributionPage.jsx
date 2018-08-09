@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
 import { openNotificationWithIcon } from "../_helpers";
-//import {userActions} from "../_actions/user.actions";
-//import {alertActions} from "../_actions/alert.actions";
 import {errorProcess} from "../_helpers/error";
 
 class DataDistributionPage extends React.Component {
-
+    // 饼状图
     state = {
         keyword: '',
         title : {

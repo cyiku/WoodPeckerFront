@@ -2,12 +2,9 @@ import React from 'react';
 import { Button } from 'antd';
 import {serverIP} from '../_helpers';
 import { connect } from 'react-redux';
-// import { openNotificationWithIcon } from "../_helpers";
-// import {errorProcess} from "../_helpers/error";
-// import { history } from '../_helpers';
 
 class BriefReportPage extends React.Component {
-
+    // 剪报夹页面
     exportReport = () => {
         const {user} = this.props;
         const requestOptions = {
@@ -32,7 +29,6 @@ class BriefReportPage extends React.Component {
             <div style={{marginTop: 15, marginLeft:15}}>
                 <h3>简报夹功能，将为您生成最新的关键字报告</h3>
                 <Button type="primary" size="middle" style={{marginTop: 15}} onClick={this.exportReport}>一键导出简报夹</Button>
-                {/*<a href={serverIP + '/briefReport'}>下载</a>*/}
             </div>
         );
     }

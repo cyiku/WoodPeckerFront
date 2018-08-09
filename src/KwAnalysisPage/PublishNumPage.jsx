@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {ShowPicPage} from "./ShowPicPage";
 import {serverIP} from '../_helpers';
-//import { history } from '../_helpers';
-//import {userActions} from "../_actions/user.actions";
-//import {alertActions} from "../_actions/alert.actions";
 import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
 class PublishNumPage extends React.Component {
-
+    // 发布量折线图
     state = {
         keyword: '',
         backgroundColor: '#FBFBFB',
@@ -21,7 +18,6 @@ class PublishNumPage extends React.Component {
         },
 
         calculable : true,
-
 
         xAxis : [
             {

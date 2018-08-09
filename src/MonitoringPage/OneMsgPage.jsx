@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 const maxDisplayCharacter = 100;
 
 class OneMsgPage extends React.Component {
-
+    // 负责展示单条消息
     state = {
-        iconType: "star-o",
-        id: '',
+        iconType: "star-o",   // 收藏图标
+        id: '',  // 消息Id
     }
 
     componentDidMount () {
@@ -26,6 +26,7 @@ class OneMsgPage extends React.Component {
     }
 
     initIcon = () => {
+        // 判断该消息是否收藏，初始化收藏图标
         const {content, contentType, collection} = this.props;
         const typeCollection = collection[contentType];
         let iconType = "star-o";
@@ -44,6 +45,7 @@ class OneMsgPage extends React.Component {
     }
 
     markKeyword = (content, keywords) => {
+        // 将keyword标红
         // 分割keywords
         const keyword_list = keywords.split('_');
         for (let i = 0; i < keyword_list.length; ++i) {
@@ -66,7 +68,7 @@ class OneMsgPage extends React.Component {
     };
 
     collectionOneRow = (event, data, iconID) => {
-
+        // 收藏或取消收藏
         const {user, dispatch} = this.props;
         let icon = document.getElementById(iconID);
         let iconType;
@@ -88,9 +90,8 @@ class OneMsgPage extends React.Component {
 
         const {content, contentType} = this.props;
         const newTime = this.timeTransfer(content.time);
-        //const {collectionType, collectionInner} = this.hasCollected(content._id, collection[contentType]);
         
-        // 如果是新的则提示
+        // 如果是新消息，则在消息框右上角显示New的标志
         let newContent = '';
         if (this.props.isNew) {
             newContent = 'New';
@@ -103,7 +104,7 @@ class OneMsgPage extends React.Component {
             </div>
         );
 
-        // 每条消息最多显示的字符数
+        // 每条消息最多显示的字符数(主要针对那些门户消息)，新浪微博和百度搜索由于字数少不做限制
         let showContent = content.content;
         if (content.source !=='新浪微博' && content.source !=='百度搜索' && content.content.length > maxDisplayCharacter) {
             showContent = content.content.slice(0, maxDisplayCharacter) + '...';

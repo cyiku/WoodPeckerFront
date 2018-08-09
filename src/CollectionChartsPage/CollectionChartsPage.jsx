@@ -7,8 +7,7 @@ import { publishNumOption } from '../_helpers/options';
 const LineReact = asyncComponent(() => import(/* webpackChunkName: "LineReact" */'../Echarts/LineReact')); //折线图组件
 
 class CollectionChartsPage extends React.Component {
-
-
+    // Abandon
 
     clickChart = (event) => {
         /*

@@ -9,7 +9,7 @@ import { openNotificationWithIcon } from "../_helpers";
 import {errorProcess} from "../_helpers/error";
 
 class ClusteringPage extends React.Component {
-
+    // 话题聚类页面
     state = {
         columns : [
             {title: '话题ID', dataIndex: 'id', width: 200},
@@ -29,8 +29,6 @@ class ClusteringPage extends React.Component {
             headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + user.token },
             body: JSON.stringify({})
         };
-        //console.log(requestOptions);
-        console.log("getting clustering data...");
         fetch(serverIP + '/getClustering', requestOptions).then(
             response => {
                 if (!response.ok) {
@@ -41,7 +39,6 @@ class ClusteringPage extends React.Component {
         ).then(
             ans => {
                 if(ans.status === 1) {
-                    //console.log(ans.result);
                     this.setState(preState => ({
                         ...preState,
                         content: ans.result.topic,
@@ -49,8 +46,6 @@ class ClusteringPage extends React.Component {
                     }));
                 } else {
                     openNotificationWithIcon("error", ans.message);
-                    //if (ans.status === -1)
-                    //    history.push("/login");
                 }
             },
             error => errorProcess(error)

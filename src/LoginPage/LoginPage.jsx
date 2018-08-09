@@ -1,3 +1,4 @@
+// 用户登录
 import React from 'react';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
@@ -9,10 +10,8 @@ class LoginPage extends React.Component {
 
     constructor(props) {
         super(props);
-
         // reset login status
         this.props.dispatch(userActions.logout());
-
         this.state = {
             username: '',
             password: '',
@@ -67,7 +66,8 @@ class LoginPage extends React.Component {
                                 </div>
                             </div>
                         </form>
-
+                        
+                        {/* 注册功能，暂时不提供 */}
                         {/*<div className="text-center" style={{marginTop: 50}}>*/}
 						    {/*<span className="txt1">*/}
 							    {/*Don’t have an account?*/}

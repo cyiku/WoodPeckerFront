@@ -8,21 +8,18 @@ import {serverIP} from '../_helpers';
 import {errorProcess} from "../_helpers/error";
 import { Pagination } from 'antd';
 import { MsgActions } from '../_actions';
-//import {getNowFormatDate} from '../_helpers';
 // 导入css
 import './MonitoringPage.css';
 
-
-const Panel = Collapse.Panel;
-const pageSize = 5;
+const Panel = Collapse.Panel;  // 消息换页的组件，参考ant design，换页的目的是为了不那么卡
+const pageSize = 5;  // 每页的数量
 const intervalTime = 20 * 1000;  // 每次请求间隔时间
-const containerHeight = 651;
-const maxDisplay = 25;
+const containerHeight = 651;  // 每个消息框的高度
+const maxDisplay = 25;  // 每个关键字最多显示的消息的数目
 const keywordIntervalTime = 5 * 1000; // 关键字之间间隔时间
 
-class MsgShow extends React.Component {
-    // 负责展示该关键字下的所有消息
-
+class KeywordMsgShow extends React.Component {
+    // 负责展示特定关键字下的所有消息
     constructor(props) {
         super(props);
         this.state = {
@@ -37,12 +34,14 @@ class MsgShow extends React.Component {
     }
 
     componentDidMount(){
-        // 加载该关键字存储到全局state里的消息(该消息通常在离开监控页面时存储)。
+        // 打开监控页面时有两种情况，一是用户刚进网站跳转到监控页面，二是用户从其他页面跳回监控页面。
+        // 如果是情况二，由于用户首次离开监控页面时，网站已经存储了该关键字的一些消息，\
+        // 则加载该关键字的预存的消息到全局state里的消息。
         const {keyword, msg} = this.props;
-        let message = msg[keyword.name];
+        let message = msg[keyword.name]; // 看全局state里有没有存该消息
         let isFirst = true;
         if (message !== undefined && message.length !== 0) {
-            isFirst = false;
+            isFirst = false;  // 存了，则显示该消息
             let messageIsNew = {};
             for (let i = 0; i < message.length; ++i) {
                 messageIsNew[message[i]._id] = false; // 原本有的就不是新的
@@ -61,8 +60,8 @@ class MsgShow extends React.Component {
     }
 
     componentWillUnmount(){
+        // 用户离开监控页面时，保留打开页面期间收到的消息。
         const {user, keyword, dispatch} = this.props;
-        
         dispatch(MsgActions.updMsg(user, keyword.name, this.state.message));
         // 清除定时任务
         clearInterval(this.interval);
@@ -70,6 +69,8 @@ class MsgShow extends React.Component {
     }
 
     StartTimingTask = (isFirst) => {
+        // 开启定时任务，定时任务声明后并不是立即执行，而是要等时间间隔之后才第一次执行
+        // 所以要是第一次打开该页面，为了防止一直没消息看的尴尬，先执行一次任务，再声明定时任务
         if (isFirst === true)
             this.monitor(true); // 第一次登陆
         this.interval = setInterval(_ => {
@@ -78,7 +79,8 @@ class MsgShow extends React.Component {
     }
 
     monitor = (isFirst) => {
-
+        // 获取监控的消息，isFirst为true时为第一次登陆，此时获取最新的前20条消息
+        // isFirst为false时则获取最新20s内的消息。
         this.setState(preState => ({
             ...preState,
             isLoading: true,
@@ -116,6 +118,7 @@ class MsgShow extends React.Component {
 
                     // 为了更新state
                     let newMessage = JSON.parse(JSON.stringify(this.state.message));
+                    console.log(ans.result.data);
                     // let newMessageIsNew = JSON.parse(JSON.stringify(this.state.messageIsNew));
 
                     //let newMessage = this.state.message;
@@ -179,9 +182,8 @@ class MsgShow extends React.Component {
         )
     };
 
-    // 暂停接受或重新接受
     play = (event) => {
-
+        // 暂停接受或重新接受
         const {keyword} = this.props;
 
         let type = event.target.getAttribute("class");
@@ -215,8 +217,8 @@ class MsgShow extends React.Component {
     //     event.stopPropagation();
     // };
 
-    // 换页
     pageChange = (page) => {
+        // 换页
         this.setState(preState => ({
             ...preState,
             showMessage: this.state.message.slice((page - 1) * pageSize, page * pageSize),
@@ -316,5 +318,5 @@ function mapStateToProps(state, ownProps) {
     return {user, keyword, index, msg};
 }
 
-const connectedMsgShow = connect(mapStateToProps)(MsgShow);
-export { connectedMsgShow as MsgShow };
+const connectedKeywordMsgShow = connect(mapStateToProps)(KeywordMsgShow);
+export { connectedKeywordMsgShow as KeywordMsgShow };

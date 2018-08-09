@@ -5,6 +5,7 @@ import { userActions } from '../_actions';
 
 
 class RegisterPage extends React.Component {
+    // Abandon
     constructor(props) {
         super(props);
 
