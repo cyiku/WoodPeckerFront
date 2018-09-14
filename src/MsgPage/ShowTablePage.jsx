@@ -219,6 +219,10 @@ class ShowTablePage extends React.Component {
             title = '微博';
         } else if (type === 'forum') {
             title = '论坛';
+        } else if (type === 'business') {
+            title = '商务资讯';
+        } else if (type === 'industry') {
+            title = '行业动态';
         }
         if (keyword !== undefined && keyword !== '' && page >= 1) {
             console.log(keyword + ' getting source data...');
@@ -257,17 +261,17 @@ class ShowTablePage extends React.Component {
         }
     };
 
-    // record中sentiment属性是3 2 1，改成正，负，中
+    // record中sentiment属性是3 2 1，改成正，中，负
     getPolarity(record) {
         const {modify_msg} = this.state;
         const id = record._id;
         // 如果该消息是更改过的，则极性从modify_msg中读，否则读默认的属性
         // 这里由于数据类型不同，所以不能用=== 或者 === “3”
         if (modify_msg[id] !== undefined) {
-            return modify_msg[id] == 3 ? "正" : (modify_msg[id] == 2 ? "负": "中");
+            return modify_msg[id] == 3 ? "正" : (modify_msg[id] == 1 ? "负": "中");
         }
         else
-            return record.sentiment == 3 ? "正" : (record.sentiment == 2 ? "负": "中");
+            return record.sentiment == 3 ? "正" : (record.sentiment == 1 ? "负": "中");
     }
 
     render() {
@@ -324,8 +328,8 @@ class ShowTablePage extends React.Component {
                 >
                     <RadioGroup onChange={this.onChange} value={this.state.modify_polarity}>
                         <Radio style={radioStyle} value="3">正</Radio>
-                        <Radio style={radioStyle} value="2">负</Radio>
-                        <Radio style={radioStyle} value="1">中</Radio>
+                        <Radio style={radioStyle} value="2">中</Radio>
+                        <Radio style={radioStyle} value="1">负</Radio>
                     </RadioGroup>
                 </Modal>
             </div>

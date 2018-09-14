@@ -15,7 +15,8 @@ class EmotionPage extends React.Component {
             trigger: 'axis'
         },
         legend: {
-            data:['正面','中面','负面']
+            // data:['正面','中面','负面']
+            data:['正面', '负面']
         },
 
         calculable : true,
@@ -66,14 +67,14 @@ class EmotionPage extends React.Component {
                 color:['#ffc107'],
                 data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             },
-            {
-                name:'中面',
-                type:'line',
-                symbol:'none',
-                smooth: 0.2,
-                color:['#868e96'],
-                data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            },
+            // {
+            //     name:'中面',
+            //     type:'line',
+            //     symbol:'none',
+            //     smooth: 0.2,
+            //     color:['#868e96'],
+            //     data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            // },
             {
                 name:'负面',
                 type:'line',
@@ -147,14 +148,14 @@ class EmotionPage extends React.Component {
                                     color:['#ffc107'],
                                     data: ans.result.num.positive
                                 },
-                                {
-                                    name:'中面',
-                                    type:'line',
-                                    symbol:'none',
-                                    smooth: 0.2,
-                                    color:['#868e96'],
-                                    data: ans.result.num.neutral
-                                },
+                                // {
+                                //     name:'中面',
+                                //     type:'line',
+                                //     symbol:'none',
+                                //     smooth: 0.2,
+                                //     color:['#868e96'],
+                                //     data: ans.result.num.neutral
+                                // },
                                 {
                                     name:'负面',
                                     type:'line',

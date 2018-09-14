@@ -102,7 +102,7 @@ class KeywordMsgShow extends React.Component {
             // 以后则请求近20s内的新消息
             requestIP = serverIP + '/monitor';
         }
-
+        console.log(requestIP);
         console.log(keyword.name + ' post monitor request');
 
         fetch(requestIP, requestOptions).then(
